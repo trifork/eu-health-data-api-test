@@ -1,0 +1,14 @@
+{
+  "name": "eu-health-data-api-itb",
+  "private": true,
+  "type": "module",
+  "engines": { "node": ">=22" },
+  "scripts": {
+    "compile": "node compile.mjs",
+    "setup": "node setup.mjs"
+  },
+  "dependencies": {
+    "@opentestbed/otb-gherkin": "0.5.0",
+    "@opentestbed/dialect-fhir-validator": "2.0.0"
+  }
+}

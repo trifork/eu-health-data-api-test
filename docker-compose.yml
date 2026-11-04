@@ -1,0 +1,62 @@
+name: eu-health-data-api-itb
+
+services:
+  gitb-redis:
+    image: isaitb/gitb-redis:1.30.2@sha256:a507e0d78b97f1def4227614d83bc5b02c57802373a7871e264de0e0e4a68777
+    restart: unless-stopped
+  gitb-mysql:
+    image: isaitb/gitb-mysql:1.30.2@sha256:f8a72f290077833f283daa4b52dd74a9a211da41b87e0521625b7b174cc58a02
+    restart: unless-stopped
+    volumes:
+      - gitb-dbdata:/var/lib/mysql
+    healthcheck:
+      test: '/usr/bin/mysql --user=root --password=$$MYSQL_ROOT_PASSWORD --execute "SHOW DATABASES;"'
+      interval: 3s
+      timeout: 5s
+      retries: 50
+  gitb-srv:
+    image: isaitb/gitb-srv:1.30.2@sha256:ef75168433f1fae53f663679cd3b0e61d65701a15515c66473dbfd2bb26dc238
+    restart: unless-stopped
+    environment:
+      CALLBACK_ROOT_URL: http://localhost:${ITB_CALLBACK_PORT:-8080}/itbsrv
+    ports:
+      - "127.0.0.1:${ITB_CALLBACK_PORT:-8080}:8080"
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
+  gitb-ui:
+    image: isaitb/gitb-ui:1.30.2@sha256:e7f017dd83d142d56f0b2d8acd729f1a14bbe5bcb2bdfa2f8f4759b42866b8d9
+    restart: unless-stopped
+    environment:
+      THEME: ec
+      AUTOMATION_API_ENABLED: "true"
+      AUTOMATION_API_MASTER_KEY: ${ITB_AUTOMATION_API_MASTER_KEY:?Run ./itb/start.sh first}
+    ports:
+      - "127.0.0.1:${ITB_PORT:-9000}:9000"
+    volumes:
+      - gitb-repo:/gitb-repository
+    depends_on:
+      gitb-redis:
+        condition: service_started
+      gitb-mysql:
+        condition: service_healthy
+      gitb-srv:
+        condition: service_started
+  fhir-validator:
+    image: eu-health-data-api-fhir-validator:local
+    build: ./itb/validator
+    restart: unless-stopped
+    environment:
+      JAVA_TOOL_OPTIONS: -Xmx4g
+    volumes:
+      - fhir-cache:/root/.fhir
+    healthcheck:
+      test: [CMD, bash, -c, "exec 3<>/dev/tcp/127.0.0.1/8080; printf 'GET /itb/fhir/getModuleDefinition HTTP/1.0\\r\\n\\r\\n' >&3; head -1 <&3 | grep -q '200'"]
+      interval: 10s
+      timeout: 5s
+      start_period: 90s
+      retries: 30
+
+volumes:
+  gitb-dbdata:
+  gitb-repo:
+  fhir-cache:

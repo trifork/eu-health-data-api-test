@@ -37,3 +37,17 @@ Every scenario declares the profile and elements it covers (`@profile:`, `@cover
 The executable test cases live under `input/testing/gherkin/`. They ship **as Gherkin, not as a FHIR resource**: the `path-test` parameter mirrors the test tree into the published package under `package/tests/gherkin/`, which is what a test runner consumes. `TestPlan.suite.input.file` names the file, and each `suite.test` matches a `Scenario:` by its identifier.
 
 The Binary resources on this site exist only so the scripts render as syntax-highlighted pages; removing them changes nothing for a runner.
+
+### Running a local Interoperability Test Bed
+
+The source repository includes `itb/start.sh` and `docker-compose.yml` to start
+the European Commission's ITB with a FHIR validator. From the repository root,
+run `./itb/start.sh`; this compiles each feature into its own GITB TDL suite and
+loads all six suites (67 cases) into ITB at `http://localhost:9000`.
+
+Sign in as `eu-api-test@itb` using the generated password in `itb/.users.json`,
+then open the conformance statements for **Implementation under test**. The
+repository's `itb/README.md` explains setup, implementation endpoints, callback
+addresses and everyday commands. Real tokens and reference data are required
+to execute the applicable cases. Importing the suites alone is not evidence of
+implementation conformance.

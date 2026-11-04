@@ -28,6 +28,15 @@ python _package.py    # sushi + package only, no publisher -> dist/package.tgz
 _genonce.sh           # or _genonce.bat: the full IG Publisher build
 ```
 
+### Running the European ITB locally
+
+Run `./itb/start.sh` to start ITB and its FHIR validator, compile all six feature
+files from `input/testing/gherkin/`, and import their 67 test cases. Open
+http://localhost:9000 and sign in as `eu-api-test@itb` using the generated password
+in `itb/.users.json`. See [the local ITB guide](itb/README.md) for prerequisites,
+implementation configuration, verification and restart commands. Importing the
+tests does not execute them or establish conformance.
+
 ### If the publisher refuses this IG's FHIR version
 
 This IG targets `6.0.0-snapshot1`, which the current
