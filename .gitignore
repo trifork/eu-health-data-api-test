@@ -32,3 +32,5 @@ itb/**/build/
 itb/.env
 itb/.state.json
 itb/.users.json
+itb/eir
+_package.py
