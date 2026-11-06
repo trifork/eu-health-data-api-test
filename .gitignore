@@ -28,7 +28,7 @@ dist
 
 # Local ITB runtime, credentials and compiled suites
 itb/node_modules/
-itb/build/
+itb/**/build/
 itb/.env
 itb/.state.json
 itb/.users.json

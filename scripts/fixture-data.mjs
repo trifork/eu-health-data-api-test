@@ -114,7 +114,16 @@ export function checkSearch(bundle, check, bindings) {
   }
 }
 
-export async function verifyFixtures(base, authorization, bindings = defaultBindings) {
+export async function readBinaryContent({ base, authorization, resource }) {
+  const response = await fetch(endpoint(base, `Binary/${resource.id}`), {
+    headers: { Accept: resource.contentType, ...(authorization ? { Authorization: authorization } : {}) },
+    signal: AbortSignal.timeout(120000),
+  });
+  return { response, method: 'native content negotiation' };
+}
+
+export async function verifyFixtures(base, authorization, bindings = defaultBindings,
+  { binaryContentReader = readBinaryContent } = {}) {
   const inputs = fixtureInputs(bindings);
   const referenceMap = new Map(Object.entries(manifest.resources).map(([key, r]) => [`${r.resourceType}/${r.id}`, `${r.resourceType}/${bindings.resourceIds[key]}`]));
   for (const entry of bundle.entry) referenceMap.set(entry.fullUrl, referenceMap.get(`${entry.resource.resourceType}/${entry.resource.id}`));
@@ -126,17 +135,13 @@ export async function verifyFixtures(base, authorization, bindings = defaultBind
     delete expected.meta; // Loader tags and server-maintained metadata are not clinical facts.
     const actual = await request(endpoint(base, `${resource.resourceType}/${expected.id}`), authorization);
     if (resource.resourceType === 'Binary' && actual.data == null) {
-      // Some servers externalize Binary.data and serve it through content negotiation.
-      const externalized = actual._data?.extension?.some(e => e.url === 'http://hapifhir.io/fhir/StructureDefinition/externalized-binary-id');
-      const contentPath = `Binary/${expected.id}${externalized ? '/$binary-access-read' : ''}`;
-      const content = await fetch(endpoint(base, contentPath), {
-        headers: { Accept: expected.contentType, ...(authorization ? { Authorization: authorization } : {}) },
-        signal: AbortSignal.timeout(120000),
-      });
+      // Default to standard content negotiation; adapters may supply a reader.
+      // Validate returned bytes and content type regardless of the reader used.
+      const { response: content, method } = await binaryContentReader({ base, authorization, resource: expected, actual });
       assert.ok(content.ok, `${key}: binary content HTTP ${content.status}`);
       assert.equal(content.headers.get('content-type')?.split(';')[0], expected.contentType, `${key}: content type`);
       assert.deepEqual(Buffer.from(await content.arrayBuffer()), Buffer.from(expected.data, 'base64'), `${key}: document bytes`);
-      binaryRetrieval[key] = externalized ? '$binary-access-read (storage verification only; does not prove standard Binary retrieval)' : 'native content negotiation';
+      binaryRetrieval[key] = method;
       delete expected.data;
     } else if (resource.resourceType === 'Binary') binaryRetrieval[key] = 'Binary.data';
     assertFixture(actual, expected, referenceMap);

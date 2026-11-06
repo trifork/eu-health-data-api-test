@@ -3,7 +3,7 @@
 A demonstration IG that declares, as TestPlan resources and Gherkin feature files, the conformance tests for the six actors of the EU Health Data API IG (EHDS Annex II): Document Publisher, Document Access Provider (with the Document Submission Option), Document Consumer, grouped Document Publisher/Access Provider, Resource Access Provider and Resource Consumer. The IG states its requirements as capabilitystatement-expectation extensions rather than profile obligations, so every test case is traceable to the CapabilityStatement expectation it tests.
 
 <blockquote class="stu-note">
-<strong>This is not an approved HL7 Europe test specification. Provider scenarios have been exercised against local EIR with synthetic data and security disabled; this does not establish conformance.</strong>
+<strong>This is not an approved HL7 Europe test specification. Successful test execution does not establish conformance; this guide exists to exercise the tooling.</strong>
 The guide publishes actor-scoped TestPlans, executable Gherkin, and a versioned synthetic fixture contract.
 </blockquote>
 

@@ -1,9 +1,6 @@
-**Status: provider scenarios exercised against a local EIR development server on
-2026-11-06.** The run used synthetic fixtures and disabled security: 41 of 48
-provider cases passed; the seven authorization-rejection cases failed as expected.
-The remaining 19 client cases still need client implementations. This is runtime
-validation of the test tooling, not a conformance claim. See the
-[runtime findings](../../../docs/eu-api-itb-runtime-findings.md).
+**Status: demonstration test tooling, not an approved conformance specification.**
+The checks below cover compilation, fixture validation and assertion behavior.
+Implementation-specific execution results do not establish general conformance.
 
 ### 1. Scope
 
@@ -56,7 +53,6 @@ from those expectations by hand; each scenario names what it tests in `@covers:`
 | `otb-gherkin compile` on all six features | clean: 6, errors: 0 (17, 6, 13, 6, 18, 7 test cases) |
 | Selftest against the spec's own examples | **not run**: no obligations, so no generated assertions; the IG's DocumentReference examples were not run against these features |
 | HL7 validator on published provider-v1 fixtures | 27 resources against core R4 plus both EU Core Patient profiles: 0 errors, 4 warnings; external terminology disabled (`-tx n/a`), no slicing-error suppression |
-| Run on stock ITB 1.30.2 | 48 provider cases against EIR: 41 passed, 7 authorization failures with security disabled; local compatibility adapter required |
 | Search assertion regression probes | 140 passed against the live FHIRPath service, including empty and wrong-patient responses |
 
 ### 4. Not covered
@@ -78,9 +74,9 @@ node scripts/build-test-ig.mjs public/data/eu-api-test-ig.json --package
 The TestPlan IG now ships `tests/fixtures/provider-v1/`: a 27-resource R4
 conditional transaction, an assigned-ID bindings template, a manifest for all
 67 cases and a human-readable contract. Fixtures may be entered/imported through
-any supported route. The local EIR runner uses the same published bundle; its
-preflight checks 27 resource reads and 19 searches. Repeat transactions preserve
-assigned IDs. Wrong-patient controls and a same-patient laboratory document make
+any supported route. The shared verifier checks 27 resource reads and 19 searches
+using supplied ID bindings. Conditional transactions reuse matching resources;
+import responses provide the actual assigned IDs. Wrong-patient controls and a same-patient laboratory document make
 ignored filters observable. The source files are in `app/public/fixtures/eu-api/`;
 `testAssets` copies them into the generated IG and packaging mirrors all of
 `input/testing`, rather than only its Gherkin subdirectory.
@@ -94,9 +90,7 @@ API package for profile validation; metadata, authorization and core FHIRPath
 checks do not. Loading profiles into the validator does not load fixtures into
 the SUT.
 
-The fixture verifier detects EIR's externalized Binary extension and checks the
-bytes through `$binary-access-read`. This is recorded as storage verification,
-not proof of standard Binary retrieval. Current Gherkin Binary cases still only
-check nonempty response bodies. The manifest distinguishes the expected fixture
+The shared fixture verifier checks Binary data or standard content negotiation.
+Current Gherkin Binary cases still only check nonempty response bodies. The manifest distinguishes the expected fixture
 contract from the assertions the current Gherkin actually executes. Client cases
 use the canned data in their features; these provider fixtures are not a client.

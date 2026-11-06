@@ -1,7 +1,8 @@
 // Evaluate the source feature's assertions using the real FHIRPath service.
+// Uses shared synthetic resources; no implementation under test is contacted.
 import fs from 'node:fs';
 import assert from 'node:assert/strict';
-import { clinicalFixtures } from './eir-fixtures.mjs';
+import { clinicalFixtures } from '../scripts/lib/clinical-resources.mjs';
 
 const source = fs.readFileSync(new URL('../input/testing/gherkin/eu-api-resource-access-provider.feature', import.meta.url), 'utf8');
 const endpoint = process.env.FHIR_VALIDATOR_URL || 'http://fhir-validator:8080';

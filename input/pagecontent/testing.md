@@ -43,8 +43,8 @@ For a test server supporting transactions and conditional create, POST `bundle.j
 The repository helper can load and verify the complete dataset:
 
 ```sh
-FHIR_BASE_URL=http://localhost:8082/fhir node scripts/fixture-data.mjs load itb/build/fixture-bindings.json
-FHIR_BASE_URL=http://localhost:8082/fhir node scripts/fixture-data.mjs verify itb/build/fixture-bindings.json
+FHIR_BASE_URL=https://your-test-server/fhir node scripts/fixture-data.mjs load itb/build/fixture-bindings.json
+FHIR_BASE_URL=https://your-test-server/fhir node scripts/fixture-data.mjs verify itb/build/fixture-bindings.json
 # For manually imported data with different IDs:
 FHIR_BASE_URL=https://your-test-server/fhir node scripts/fixture-data.mjs verify /path/to/bindings.json
 ```
@@ -138,11 +138,11 @@ Document search for the target patient includes the target summary and target la
 
 #### What this establishes
 
-The manifest expresses the fixture contract; its `assertions` list records what the existing Gherkin actually checks. The generic Gherkin cases are not yet assertions of every fixture field. For example, a Patient read currently checks profile conformance, whereas the fixture verifier also checks the declared demographic values. The current Gherkin profile checks ignore slicing errors. The separate fixture validation command validates all 27 resources against core R4 and both patients against EU Core Patient without suppressing slicing errors; external terminology is disabled and its warnings are reported. This fixture set does not claim MHD Minimal metadata or IPS document-content conformance. When Binary data is externalized with the HAPI extension, the fixture checker verifies stored bytes using `$binary-access-read` and reports this explicitly; this does not prove standard Binary content retrieval. The fixture checker verifies data and search membership; it does not replace a FHIR profile validator or the authorization tests.
+The manifest expresses the fixture contract; its `assertions` list records what the existing Gherkin actually checks. The generic Gherkin cases are not yet assertions of every fixture field. For example, a Patient read currently checks profile conformance, whereas the fixture verifier also checks the declared demographic values. The current Gherkin profile checks ignore slicing errors. The separate fixture validation command validates all 27 resources against core R4 and both patients against EU Core Patient without suppressing slicing errors; external terminology is disabled and its warnings are reported. This fixture set does not claim MHD Minimal metadata or IPS document-content conformance. The fixture checker verifies Binary data or standard content negotiation. The fixture checker verifies data and search membership; it does not replace a FHIR profile validator or the authorization tests.
 
 The 19 client cases use embedded requests/responses and operator-driven workflows from their features. This provider dataset is not an executable client implementation. CapabilityStatement, TLS and token/scope behavior are external prerequisites, not properties a transaction bundle can install.
 
-R4 fixtures travel under `package/tests/fixtures/provider-v1/`, not as R6 examples or resources in this TestPlan IG. Generate/check with `node scripts/build-fixtures.mjs` / `node scripts/build-fixtures.mjs --check`. The local EIR runner loads this same bundle and uses these bindings.
+R4 fixtures travel under `package/tests/fixtures/provider-v1/`, not as R6 examples or resources in this TestPlan IG. Generate/check with `node scripts/build-fixtures.mjs` / `node scripts/build-fixtures.mjs --check`.
 
 <a name="gherkin"> </a>
 

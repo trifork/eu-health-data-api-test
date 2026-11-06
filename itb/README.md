@@ -6,6 +6,18 @@ following the Compose and REST bootstrap approach in
 It imports every `input/testing/gherkin/*.feature` as its own suite: currently
 six suites and 67 cases. The original features remain the source of truth.
 
+The core scripts, validator, UI adaptation and regression checks are independent
+of the implementation under test. The bootstrap provenance above does not imply
+a dependency on a particular FHIR server.
+
+- [Fixture campaign proposal](fixture-campaign-proposal.md): general guidance for discussion about central ITB deployments; not implemented campaign functionality.
+- [Published fixture contract](../input/testing/fixtures/provider-v1/README.md): shared data, ID bindings and expected results for provider tests.
+
+Keep implementation-specific endpoints, provisioning instructions and workarounds
+in their adapter directory. Shared scripts should import reusable fixture modules
+directly, and general proposals should describe behavior without depending on an
+adapter's runner or deployment.
+
 ## Start and sign in
 
 Prerequisites: Docker with Compose, Node.js 22 or newer, npm, Python 3.9 or newer and OpenSSL.
@@ -159,56 +171,24 @@ The validator's package cache and the ITB database/repository use named volumes.
 | `setup.mjs` | REST bootstrap, suite import and actor assignment |
 | `users.mjs` | Local login provisioning and UI access verification |
 | `smoke.mjs`, `tests/smoke.feature` | Positive and negative engine integration checks |
+| `test-search-assertions.mjs` | Server-independent FHIRPath regression checks using shared fixtures |
 | `validator/Dockerfile` | Checksum-pinned FHIR validator REST service |
+| `fixture-campaign-proposal.md` | General central-deployment proposal for discussion |
 | `.env`, `.state.json`, `.users.json` | Ignored local configuration and credentials |
 
-## Exercise the provider scenarios against EIR
+## Shared fixture and assertion checks
 
-For the proposed shared-instance workflow, see [Fixture campaigns for a central
-ITB installation](fixture-campaign-proposal.md). It distinguishes the existing
-local ID mapping from the campaign lifecycle still needing discussion.
+These checks exercise the published data and test assertions independently of
+which FHIR server is used as the implementation under test. Starting ITB does
+not provision data in that implementation. Load or enter the applicable fixtures
+and supply the actual server-assigned IDs to the test inputs as described in the
+[fixture contract](../input/testing/fixtures/provider-v1/README.md).
 
-The optional EIR setup uses a pinned server image, an in-memory database and the
-`dev,disable-security` profiles. It listens only on `localhost:8082`; restarting
-the server clears its FHIR data. This is an execution check, not a secured EHDS
-conformance deployment.
-
-```sh
-./itb/start.sh
-docker compose -f itb/eir-compose.yml up -d
-# Wait until http://localhost:8082/fhir/metadata responds.
-node --env-file=itb/.env itb/eir-run.mjs
-```
-
-The runner seeds two synthetic patients, all ten clinical resource types for each
-patient, and Binary/DocumentReference fixtures. It runs all 48 Document Access Provider, Grouped Provider and Resource
-Access Provider cases. It creates a separate **EIR development server** system
-and **EU API — EIR development run** specification, visible to the same test user.
-Consumer and publisher cases need a client implementation and are not run.
-
-The source features and assertions remain unchanged. Copies of the compiled suites
-target `http://host.docker.internal:8082/fhir` and add a two-minute input timeout:
-ITB otherwise automatically completes REST-launched input forms with empty inputs.
-The runner answers those forms through the UI API. Tokens are explicit dummy
-values because EIR security is disabled; authorization rejection cases are
-expected to fail. The ten clinical search cases require matching entries of the
+The ten clinical search cases require matching entries of the
 expected resource type, a patient reference on every match, and the requested
 patient ID on all matches. Explicit `_include` entries are excluded from these
 checks; missing search metadata is treated as a match. Target and control
 fixtures use the same filters so a server ignoring the patient filter is caught.
-
-Results, session IDs and XML reports are saved under `itb/build/eir/`, with the
-latest run summarized in `results.json`. An optional regular expression selects
-cases, for example `node --env-file=itb/.env itb/eir-run.mjs 'rap-005|dap-015'`.
-Every run loads the published transaction from
-`input/testing/fixtures/provider-v1/bundle.json`, records the server-assigned IDs,
-and checks 27 resources and 19 searches before running ITB cases. All fixtures,
-including Binary and DocumentReference, use conditional create. Results are in
-`fixture-bindings.json` and `fixture-verification.json` under `itb/build/eir/`.
-The fixture contract and per-case expectations are in the fixture directory's
-README and manifest. The helper can also verify manually imported data with
-different IDs. Stop this optional stack with
-`docker compose -f itb/eir-compose.yml stop`.
 
 Only `dap-012`, `grp-012`, `rap-004`, `pub-003` and `pub-004` load the EU API IG
 into the validator: they validate against its dependency profiles. Core Bundle
@@ -227,8 +207,7 @@ The last command uses the pinned validator image and existing cache in an isolat
 JVM with external terminology disabled (`-tx n/a`). It validates all resources
 and both EU Core Patient profiles without ignoring slicing errors. Reports are
 under `itb/build/fixture-validation/`; it is not evidence of complete terminology
-validation. EIR's externalized Binary bytes are verified using `$binary-access-read`
-and recorded as such, not counted as proof of standard Binary content retrieval.
+validation.
 
 Run the 140 positive/negative FHIRPath regression checks from the repository root:
 
