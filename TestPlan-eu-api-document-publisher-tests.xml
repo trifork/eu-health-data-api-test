@@ -1,0 +1,231 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<TestPlan xmlns="http://hl7.org/fhir" resourceDefinition="http://hl7.org/fhir/StructureDefinition/TestPlan|0.1.0-snapshot1">
+  <id value="eu-api-document-publisher-tests"/>
+  <text>
+    <status value="generated"/><div xmlns="http://www.w3.org/1999/xhtml"><p class="res-header-id"><b>Generated Narrative: TestPlan eu-api-document-publisher-tests</b></p><a name="eu-api-document-publisher-tests"> </a><a name="hceu-api-document-publisher-tests"> </a><p><b>Scopes</b></p><table class="grid"><tr><td><b>Reference</b></td><td><b>Description</b></td></tr><tr><td><code>http://hl7.eu/fhir/health-data-api/ActorDefinition/document-publisher-actor-eu-api</code></td><td>The Document Publisher, a client that obtains a SMART Backend Services token, looks the patient up and publishes documents by Simplified Publish [ITI-105], is the system under test. The test bed plays the Access Provider.</td></tr></table><p><b>1 Suite: SMART Backend Services authorization</b></p><p>Rule: SMART Backend Services authorization — the scenarios grouped under it in the feature file.</p><p><b>Inputs</b></p><table class="grid"><tr><td><b>Name</b></td><td><b>File</b></td></tr><tr><td>gherkin-script</td><td>eu-api-document-publisher.feature</td></tr></table><p><b>Tests</b></p><table class="grid"><tr><td><b>Name</b></td><td><b>Description</b></td><td><b>Operation</b></td></tr><tr><td>pub-001 The SUT authenticates with a signed JWT client assertion (RFC 7523)</td><td>Fixture contract: fixtures/provider-v1/manifest.json, cases.pub-001 (input bindings and expected data). Covers security.smart-backend-services.</td><td>gherkin/Scenario</td></tr></table><hr/><p><b>2 Suite: Patient lookup [ITI-78]</b></p><p>Rule: Patient lookup [ITI-78] — the scenarios grouped under it in the feature file.</p><p><b>Inputs</b></p><table class="grid"><tr><td><b>Name</b></td><td><b>File</b></td></tr><tr><td>gherkin-script</td><td>eu-api-document-publisher.feature</td></tr></table><p><b>Tests</b></p><table class="grid"><tr><td><b>Name</b></td><td><b>Description</b></td><td><b>Operation</b></td></tr><tr><td>pub-002 The SUT looks the patient up by identifier with a bearer token</td><td>Fixture contract: fixtures/provider-v1/manifest.json, cases.pub-002 (input bindings and expected data). Covers Patient.search-type, Patient.search.identifier.</td><td>gherkin/Scenario</td></tr></table><hr/><p><b>3 Suite: Simplified Publish [ITI-105]</b></p><p>Rule: Simplified Publish [ITI-105] — the scenarios grouped under it in the feature file.</p><p><b>Inputs</b></p><table class="grid"><tr><td><b>Name</b></td><td><b>File</b></td></tr><tr><td>gherkin-script</td><td>eu-api-document-publisher.feature</td></tr></table><p><b>Tests</b></p><table class="grid"><tr><td><b>Name</b></td><td><b>Description</b></td><td><b>Operation</b></td></tr><tr><td>pub-003 The SUT creates a DocumentReference with the document embedded</td><td>Fixture contract: fixtures/provider-v1/manifest.json, cases.pub-003 (input bindings and expected data). Covers DocumentReference.create.</td><td>gherkin/Scenario</td></tr><tr><td>pub-004 The SUT publishes only the minimal metadata profile it claims</td><td>Fixture contract: fixtures/provider-v1/manifest.json, cases.pub-004 (input bindings and expected data). Covers DocumentReference.create.</td><td>gherkin/Scenario</td></tr><tr><td>pub-005 After a 401 the SUT obtains a fresh token before retrying</td><td>Fixture contract: fixtures/provider-v1/manifest.json, cases.pub-005 (input bindings and expected data). Covers security.authorization.</td><td>gherkin/Scenario</td></tr></table><hr/><p><b>4 Suite: Transport security</b></p><p>Rule: Transport security — the scenarios grouped under it in the feature file.</p><p><b>Inputs</b></p><table class="grid"><tr><td><b>Name</b></td><td><b>File</b></td></tr><tr><td>gherkin-script</td><td>eu-api-document-publisher.feature</td></tr></table><p><b>Tests</b></p><table class="grid"><tr><td><b>Name</b></td><td><b>Description</b></td><td><b>Operation</b></td></tr><tr><td>pub-006 TLS 1.2 or higher is used for all communications</td><td>Fixture contract: fixtures/provider-v1/manifest.json, cases.pub-006 (input bindings and expected data). Covers security.tls.</td><td>gherkin/Scenario</td></tr></table></div>
+  </text>
+  <url value="http://example.com/fhir/hl7.fhir.eu.health-data-api.test/TestPlan/eu-api-document-publisher-tests"/>
+  <version value="0.1.0"/>
+  <name value="DocumentPublisherTestPlan"/>
+  <title value="Document Publisher Test Plan"/>
+  <status value="draft"/>
+  <experimental value="true"/>
+  <date value="2026-11-06"/>
+  <publisher value="Jens Kristian Villadsen"/>
+  <contact>
+    <name value="Jens Kristian Villadsen"/>
+    <telecom>
+      <system value="url"/>
+      <value value="https://trifork.com"/>
+    </telecom>
+  </contact>
+  <description value="Test plan for the **Document Publisher** actor of [EU Health Data API, 1.0.0-ballot](https://build.fhir.org/ig/euridice-org/eu-health-data-api/).&#xA;The SUT obtains a token, finds the patient, and publishes a document with embedded content.&#xA;Each `suite` below is a `Rule:` of the Gherkin feature named by `suite.input.file`, and each `suite.test` one of its `Scenario:` lines, matched by the scenario's identifier. The assertions are the scenario's `Then` steps, verbatim.&#xA;The tests declare which specification obligations they cover (7 requirement paths named by the feature tags).&#xA;Fixture prerequisites, input bindings and expected data are in tests/fixtures/provider-v1/manifest.json, keyed by scenario ID. See the Testing page, Fixture contract and expected results. Provider fixtures are R4; client workflows use the canned data embedded in their feature."/>
+  <jurisdiction>
+    <coding>
+      <system value="http://unstats.un.org/unsd/methods/m49/m49.htm"/>
+      <code value="001"/>
+      <display value="World"/>
+    </coding>
+  </jurisdiction>
+  <purpose value="To declare, in a machine-readable and runnable form, which behaviours a system claiming conformance to the Document Publisher actor must demonstrate."/>
+  <scope>
+    <reference value="http://hl7.eu/fhir/health-data-api/ActorDefinition/document-publisher-actor-eu-api"/>
+    <description value="The Document Publisher, a client that obtains a SMART Backend Services token, looks the patient up and publishes documents by Simplified Publish [ITI-105], is the system under test. The test bed plays the Access Provider."/>
+  </scope>
+  <runner value="https://www.itb.ec.europa.eu/docs/guides/latest/"/>
+  <suite>
+    <name value="SMART Backend Services authorization"/>
+    <description value="Rule: SMART Backend Services authorization — the scenarios grouped under it in the feature file."/>
+    <input>
+      <name value="gherkin-script"/>
+      <file value="eu-api-document-publisher.feature"/>
+    </input>
+    <test>
+      <name value="pub-001 The SUT authenticates with a signed JWT client assertion (RFC 7523)"/>
+      <description value="Fixture contract: fixtures/provider-v1/manifest.json, cases.pub-001 (input bindings and expected data). Covers security.smart-backend-services."/>
+      <operation value="gherkin/Scenario"/>
+      <assertion>
+        <severity value="error"/>
+        <human value="$received.method should be &quot;POST&quot;"/>
+      </assertion>
+      <assertion>
+        <severity value="error"/>
+        <human value="$received.body should contain &quot;grant_type=client_credentials&quot;"/>
+      </assertion>
+      <assertion>
+        <severity value="error"/>
+        <human value="$received.body should contain &quot;client_assertion_type=urn%3Aietf%3Aparams%3Aoauth%3Aclient-assertion-type%3Ajwt-bearer&quot;"/>
+      </assertion>
+      <assertion>
+        <severity value="error"/>
+        <human value="$received.body should match &quot;client_assertion=[A-Za-z0-9_-]+[.][A-Za-z0-9_-]+[.][A-Za-z0-9_-]+([&amp;]|$)&quot;"/>
+      </assertion>
+      <assertion>
+        <severity value="error"/>
+        <human value="$received.body should contain &quot;scope=&quot;"/>
+      </assertion>
+      <assertion>
+        <severity value="error"/>
+        <human value="AccessProvider replies to DocumentPublisher with status 200 and:"/>
+      </assertion>
+    </test>
+  </suite>
+  <suite>
+    <name value="Patient lookup [ITI-78]"/>
+    <description value="Rule: Patient lookup [ITI-78] — the scenarios grouped under it in the feature file."/>
+    <input>
+      <name value="gherkin-script"/>
+      <file value="eu-api-document-publisher.feature"/>
+    </input>
+    <test>
+      <name value="pub-002 The SUT looks the patient up by identifier with a bearer token"/>
+      <description value="Fixture contract: fixtures/provider-v1/manifest.json, cases.pub-002 (input bindings and expected data). Covers Patient.search-type, Patient.search.identifier."/>
+      <operation value="gherkin/Scenario"/>
+      <assertion>
+        <severity value="error"/>
+        <human value="$received.method should be &quot;GET&quot;"/>
+      </assertion>
+      <assertion>
+        <severity value="error"/>
+        <human value="$received.path should contain &quot;/Patient&quot;"/>
+      </assertion>
+      <assertion>
+        <severity value="error"/>
+        <human value="$received.path should contain &quot;identifier=&quot;"/>
+      </assertion>
+      <assertion>
+        <severity value="error"/>
+        <human value="$received.headers.Authorization should contain &quot;Bearer&quot;"/>
+      </assertion>
+      <assertion>
+        <severity value="error"/>
+        <human value="AccessProvider replies to DocumentPublisher with status 200 and:"/>
+      </assertion>
+    </test>
+  </suite>
+  <suite>
+    <name value="Simplified Publish [ITI-105]"/>
+    <description value="Rule: Simplified Publish [ITI-105] — the scenarios grouped under it in the feature file."/>
+    <input>
+      <name value="gherkin-script"/>
+      <file value="eu-api-document-publisher.feature"/>
+    </input>
+    <test>
+      <name value="pub-003 The SUT creates a DocumentReference with the document embedded"/>
+      <description value="Fixture contract: fixtures/provider-v1/manifest.json, cases.pub-003 (input bindings and expected data). Covers DocumentReference.create."/>
+      <operation value="gherkin/Scenario"/>
+      <assertion>
+        <severity value="error"/>
+        <human value="$received.method should be &quot;POST&quot;"/>
+      </assertion>
+      <assertion>
+        <severity value="error"/>
+        <human value="$received.path should contain &quot;/DocumentReference&quot;"/>
+      </assertion>
+      <assertion>
+        <severity value="error"/>
+        <human value="$received.headers.Authorization should contain &quot;Bearer&quot;"/>
+      </assertion>
+      <assertion>
+        <severity value="error"/>
+        <human value="$received.body at &quot;DocumentReference.resourceType&quot; should be &quot;DocumentReference&quot;"/>
+      </assertion>
+      <assertion>
+        <severity value="error"/>
+        <human value="$received.body at &quot;DocumentReference.content.attachment.data.exists()&quot; should be true"/>
+      </assertion>
+      <assertion>
+        <severity value="error"/>
+        <human value="$received.body at &quot;DocumentReference.subject.exists()&quot; should be true"/>
+      </assertion>
+      <assertion>
+        <severity value="error"/>
+        <human value="$received.body should conform to &quot;https://profiles.ihe.net/ITI/MHD/StructureDefinition/IHE.MHD.SimplifiedPublish.DocumentReference&quot; ignoring slicing errors"/>
+      </assertion>
+      <assertion>
+        <severity value="error"/>
+        <human value="AccessProvider replies to DocumentPublisher with status 201 and:"/>
+      </assertion>
+    </test>
+    <test>
+      <name value="pub-004 The SUT publishes only the minimal metadata profile it claims"/>
+      <description value="Fixture contract: fixtures/provider-v1/manifest.json, cases.pub-004 (input bindings and expected data). Covers DocumentReference.create."/>
+      <operation value="gherkin/Scenario"/>
+      <assertion>
+        <severity value="error"/>
+        <human value="$received.body should conform to &quot;https://profiles.ihe.net/ITI/MHD/StructureDefinition/IHE.MHD.Minimal.DocumentReference&quot; ignoring slicing errors"/>
+      </assertion>
+      <assertion>
+        <severity value="error"/>
+        <human value="AccessProvider replies to DocumentPublisher with status 201 and:"/>
+      </assertion>
+    </test>
+    <test>
+      <name value="pub-005 After a 401 the SUT obtains a fresh token before retrying"/>
+      <description value="Fixture contract: fixtures/provider-v1/manifest.json, cases.pub-005 (input bindings and expected data). Covers security.authorization."/>
+      <operation value="gherkin/Scenario"/>
+      <assertion>
+        <severity value="error"/>
+        <human value="$received.method should be &quot;POST&quot;"/>
+      </assertion>
+      <assertion>
+        <severity value="error"/>
+        <human value="$received.path should contain &quot;/DocumentReference&quot;"/>
+      </assertion>
+      <assertion>
+        <severity value="error"/>
+        <human value="AccessProvider replies to DocumentPublisher with status 401 and:"/>
+      </assertion>
+      <assertion>
+        <severity value="error"/>
+        <human value="$received.method should be &quot;POST&quot;"/>
+      </assertion>
+      <assertion>
+        <severity value="error"/>
+        <human value="$received.body should contain &quot;grant_type=client_credentials&quot;"/>
+      </assertion>
+      <assertion>
+        <severity value="error"/>
+        <human value="$received.body should match &quot;client_assertion=[A-Za-z0-9_-]+[.][A-Za-z0-9_-]+[.][A-Za-z0-9_-]+([&amp;]|$)&quot;"/>
+      </assertion>
+      <assertion>
+        <severity value="error"/>
+        <human value="AccessProvider replies to DocumentPublisher with status 200 and:"/>
+      </assertion>
+      <assertion>
+        <severity value="error"/>
+        <human value="$received.method should be &quot;POST&quot;"/>
+      </assertion>
+      <assertion>
+        <severity value="error"/>
+        <human value="$received.path should contain &quot;/DocumentReference&quot;"/>
+      </assertion>
+      <assertion>
+        <severity value="error"/>
+        <human value="$received.headers.Authorization should contain &quot;otb-fresh-token&quot;"/>
+      </assertion>
+      <assertion>
+        <severity value="error"/>
+        <human value="AccessProvider replies to DocumentPublisher with status 201 and:"/>
+      </assertion>
+    </test>
+  </suite>
+  <suite>
+    <name value="Transport security"/>
+    <description value="Rule: Transport security — the scenarios grouped under it in the feature file."/>
+    <input>
+      <name value="gherkin-script"/>
+      <file value="eu-api-document-publisher.feature"/>
+    </input>
+    <test>
+      <name value="pub-006 TLS 1.2 or higher is used for all communications"/>
+      <description value="Fixture contract: fixtures/provider-v1/manifest.json, cases.pub-006 (input bindings and expected data). Covers security.tls."/>
+      <operation value="gherkin/Scenario"/>
+      <assertion>
+        <severity value="error"/>
+        <human value="TLS &gt;= 1.2 — DocumentPublisher confirms each of these is accepted for &quot;the connection&quot;"/>
+      </assertion>
+    </test>
+  </suite>
+</TestPlan>

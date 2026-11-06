@@ -1,0 +1,21 @@
+{
+  "url" : "http://example.com/fhir/hl7.fhir.eu.health-data-api.test/ImplementationGuide/hl7.fhir.eu.health-data-api.test",
+  "name" : "EUHealthDataApiTesting",
+  "title" : "EU Health Data API: TestPlans and Gherkin for the EEHRxF API actors",
+  "description" : "A demonstration IG that declares, as TestPlan resources and Gherkin feature files, the conformance tests for the six actors of the EU Health Data API IG (EHDS Annex II): Document Publisher, Document Access Provider (with the Document Submission Option), Document Consumer, grouped Document Publisher/Access Provider, Resource Access Provider and Resource Consumer. The IG states its requirements as capabilitystatement-expectation extensions rather than profile obligations, so every test case is traceable to the CapabilityStatement expectation it tests.",
+  "ig-date" : "2026-10-30",
+  "status" : "active",
+  "package-id" : "hl7.fhir.eu.health-data-api.test",
+  "ig-ver" : "0.1.0",
+  "date" : "Fri, 06 Nov, 2026 19:37:25 +0000",
+  "dateISO8601" : "2026-11-06T19:37:25+00:00",
+  "errs" : 0,
+  "warnings" : 100,
+  "hints" : 8,
+  "broken-links" : 7,
+  "suppressed-hints" : 0,
+  "suppressed-warnings" : 0,
+  "version" : "6.0.0-snapshot1",
+  "tool" : "6.0.0-snapshot1 (3)",
+  "maxMemory" : 868317312
+}

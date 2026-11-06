@@ -1,0 +1,548 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<TestPlan xmlns="http://hl7.org/fhir" resourceDefinition="http://hl7.org/fhir/StructureDefinition/TestPlan|0.1.0-snapshot1">
+  <id value="eu-api-resource-access-provider-tests"/>
+  <language value="en"/>
+  <text>
+    <status value="generated"/><div xmlns="http://www.w3.org/1999/xhtml"><p class="res-header-id"><b>Generated Narrative: TestPlan eu-api-resource-access-provider-tests</b></p><a name="eu-api-resource-access-provider-tests"> </a><a name="hceu-api-resource-access-provider-tests"> </a><p><b>Scopes</b></p><table class="grid"><tr><td><b>Reference</b></td><td><b>Description</b></td></tr><tr><td><code>http://hl7.eu/fhir/health-data-api/ActorDefinition/resource-access-provider-actor-eu-api</code></td><td>The Resource Access Provider, a server offering read and search of Patient and clinical resources under the IPA server capabilities, is the system under test.</td></tr></table><p><b>1 Suite: The server declares what the actor requires</b></p><p>Rule: The server declares what the actor requires — the scenarios grouped under it in the feature file.</p><p><b>Inputs</b></p><table class="grid"><tr><td><b>Name</b></td><td><b>File</b></td></tr><tr><td>gherkin-script</td><td>eu-api-resource-access-provider.feature</td></tr></table><p><b>Tests</b></p><table class="grid"><tr><td><b>Name</b></td><td><b>Description</b></td><td><b>Operation</b></td></tr><tr><td>rap-001 The CapabilityStatement declares Patient read and search and SMART security</td><td>Fixture contract: fixtures/provider-v1/manifest.json, cases.rap-001 (input bindings and expected data). Covers CapabilityStatement.rest.resource.Patient.</td><td>gherkin/Scenario</td></tr></table><hr/><p><b>2 Suite: Authorization is required</b></p><p>Rule: Authorization is required — the scenarios grouped under it in the feature file.</p><p><b>Inputs</b></p><table class="grid"><tr><td><b>Name</b></td><td><b>File</b></td></tr><tr><td>gherkin-script</td><td>eu-api-resource-access-provider.feature</td></tr></table><p><b>Tests</b></p><table class="grid"><tr><td><b>Name</b></td><td><b>Description</b></td><td><b>Operation</b></td></tr><tr><td>rap-002 A request without a token is refused</td><td>Fixture contract: fixtures/provider-v1/manifest.json, cases.rap-002 (input bindings and expected data). Covers security.authorization.</td><td>gherkin/Scenario</td></tr><tr><td>rap-003 A token with no usable scope is refused</td><td>Fixture contract: fixtures/provider-v1/manifest.json, cases.rap-003 (input bindings and expected data). Covers security.scope.</td><td>gherkin/Scenario</td></tr></table><hr/><p><b>3 Suite: Patient read and search</b></p><p>Rule: Patient read and search — the scenarios grouped under it in the feature file.</p><p><b>Inputs</b></p><table class="grid"><tr><td><b>Name</b></td><td><b>File</b></td></tr><tr><td>gherkin-script</td><td>eu-api-resource-access-provider.feature</td></tr></table><p><b>Tests</b></p><table class="grid"><tr><td><b>Name</b></td><td><b>Description</b></td><td><b>Operation</b></td></tr><tr><td>rap-004 Read the patient and conform to patient-eu-core</td><td>Fixture contract: fixtures/provider-v1/manifest.json, cases.rap-004 (input bindings and expected data). Covers Patient.read.</td><td>gherkin/Scenario</td></tr><tr><td>rap-005 Search Patient by identifier and by _id</td><td>Fixture contract: fixtures/provider-v1/manifest.json, cases.rap-005 (input bindings and expected data). Covers Patient.search.identifier, Patient.search.id.</td><td>gherkin/Scenario</td></tr><tr><td>rap-006 Search Patient by the demographics the reference patient carries</td><td>Fixture contract: fixtures/provider-v1/manifest.json, cases.rap-006 (input bindings and expected data). Covers Patient.search.family, Patient.search.given, Patient.search.birthdate, Patient.search.gender, Patient.search.active.</td><td>gherkin/Scenario</td></tr></table><hr/><p><b>4 Suite: Search by patient for each clinical resource type</b></p><p>Rule: Search by patient for each clinical resource type — the scenarios grouped under it in the feature file.</p><p><b>Inputs</b></p><table class="grid"><tr><td><b>Name</b></td><td><b>File</b></td></tr><tr><td>gherkin-script</td><td>eu-api-resource-access-provider.feature</td></tr></table><p><b>Tests</b></p><table class="grid"><tr><td><b>Name</b></td><td><b>Description</b></td><td><b>Operation</b></td></tr><tr><td>rap-007 Search Condition by patient returns a searchset of Condition</td><td>Fixture contract: fixtures/provider-v1/manifest.json, cases.rap-007 (input bindings and expected data). Covers Condition.search-type, Condition.search.patient.</td><td>gherkin/Scenario</td></tr><tr><td>rap-008 Search AllergyIntolerance by patient returns a searchset of AllergyIntolerance</td><td>Fixture contract: fixtures/provider-v1/manifest.json, cases.rap-008 (input bindings and expected data). Covers AllergyIntolerance.search-type, AllergyIntolerance.search.patient.</td><td>gherkin/Scenario</td></tr><tr><td>rap-009 Search Observation by patient returns a searchset of Observation</td><td>Fixture contract: fixtures/provider-v1/manifest.json, cases.rap-009 (input bindings and expected data). Covers Observation.search-type, Observation.search.patient.</td><td>gherkin/Scenario</td></tr><tr><td>rap-010 Search DiagnosticReport by patient returns a searchset of DiagnosticReport</td><td>Fixture contract: fixtures/provider-v1/manifest.json, cases.rap-010 (input bindings and expected data). Covers DiagnosticReport.search-type, DiagnosticReport.search.patient.</td><td>gherkin/Scenario</td></tr><tr><td>rap-011 Search ImagingStudy by patient returns a searchset of ImagingStudy</td><td>Fixture contract: fixtures/provider-v1/manifest.json, cases.rap-011 (input bindings and expected data). Covers ImagingStudy.search-type, ImagingStudy.search.patient.</td><td>gherkin/Scenario</td></tr><tr><td>rap-012 Search MedicationRequest by patient returns a searchset of MedicationRequest</td><td>Fixture contract: fixtures/provider-v1/manifest.json, cases.rap-012 (input bindings and expected data). Covers MedicationRequest.search-type, MedicationRequest.search.patient.</td><td>gherkin/Scenario</td></tr><tr><td>rap-013 Search MedicationDispense by patient returns a searchset of MedicationDispense</td><td>Fixture contract: fixtures/provider-v1/manifest.json, cases.rap-013 (input bindings and expected data). Covers MedicationDispense.search-type, MedicationDispense.search.patient.</td><td>gherkin/Scenario</td></tr><tr><td>rap-014 Search Immunization by patient returns a searchset of Immunization</td><td>Fixture contract: fixtures/provider-v1/manifest.json, cases.rap-014 (input bindings and expected data). Covers Immunization.search-type, Immunization.search.patient.</td><td>gherkin/Scenario</td></tr><tr><td>rap-015 Search MedicationStatement by patient returns a searchset of MedicationStatement</td><td>Fixture contract: fixtures/provider-v1/manifest.json, cases.rap-015 (input bindings and expected data). Covers MedicationStatement.search-type, MedicationStatement.search.patient.</td><td>gherkin/Scenario</td></tr><tr><td>rap-016 Search Encounter by patient returns a searchset of Encounter</td><td>Fixture contract: fixtures/provider-v1/manifest.json, cases.rap-016 (input bindings and expected data). Covers Encounter.search-type, Encounter.search.patient.</td><td>gherkin/Scenario</td></tr></table><hr/><p><b>5 Suite: Read by id</b></p><p>Rule: Read by id — the scenarios grouped under it in the feature file.</p><p><b>Inputs</b></p><table class="grid"><tr><td><b>Name</b></td><td><b>File</b></td></tr><tr><td>gherkin-script</td><td>eu-api-resource-access-provider.feature</td></tr></table><p><b>Tests</b></p><table class="grid"><tr><td><b>Name</b></td><td><b>Description</b></td><td><b>Operation</b></td></tr><tr><td>rap-017 A found resource can be read back by its id</td><td>Fixture contract: fixtures/provider-v1/manifest.json, cases.rap-017 (input bindings and expected data). Covers Observation.read, Condition.read.</td><td>gherkin/Scenario</td></tr><tr><td>rap-018 An unknown id gives 404 and an OperationOutcome</td><td>Fixture contract: fixtures/provider-v1/manifest.json, cases.rap-018 (input bindings and expected data). Covers Patient.read.</td><td>gherkin/Scenario</td></tr></table></div>
+  </text>
+  <url value="http://example.com/fhir/hl7.fhir.eu.health-data-api.test/TestPlan/eu-api-resource-access-provider-tests"/>
+  <version value="0.1.0"/>
+  <name value="ResourceAccessProviderTestPlan"/>
+  <title value="Resource Access Provider Test Plan"/>
+  <status value="draft"/>
+  <experimental value="true"/>
+  <date value="2026-11-06"/>
+  <publisher value="Jens Kristian Villadsen"/>
+  <contact>
+    <name value="Jens Kristian Villadsen"/>
+    <telecom>
+      <system value="url"/>
+      <value value="https://trifork.com"/>
+    </telecom>
+  </contact>
+  <description value="Test plan for the **Resource Access Provider** actor of [EU Health Data API, 1.0.0-ballot](https://build.fhir.org/ig/euridice-org/eu-health-data-api/).&#xA;The SUT serves individual FHIR resources for a patient, behind SMART Backend Services.&#xA;Each `suite` below is a `Rule:` of the Gherkin feature named by `suite.input.file`, and each `suite.test` one of its `Scenario:` lines, matched by the scenario's identifier. The assertions are the scenario's `Then` steps, verbatim.&#xA;The tests declare which specification obligations they cover (34 requirement paths named by the feature tags).&#xA;Fixture prerequisites, input bindings and expected data are in tests/fixtures/provider-v1/manifest.json, keyed by scenario ID. See the Testing page, Fixture contract and expected results. Provider fixtures are R4; client workflows use the canned data embedded in their feature."/>
+  <jurisdiction>
+    <coding>
+      <system value="http://unstats.un.org/unsd/methods/m49/m49.htm"/>
+      <code value="001"/>
+      <display value="World"/>
+    </coding>
+  </jurisdiction>
+  <purpose value="To declare, in a machine-readable and runnable form, which behaviours a system claiming conformance to the Resource Access Provider actor must demonstrate."/>
+  <scope>
+    <reference value="http://hl7.eu/fhir/health-data-api/ActorDefinition/resource-access-provider-actor-eu-api"/>
+    <description value="The Resource Access Provider, a server offering read and search of Patient and clinical resources under the IPA server capabilities, is the system under test."/>
+  </scope>
+  <runner value="https://www.itb.ec.europa.eu/docs/guides/latest/"/>
+  <suite>
+    <name value="The server declares what the actor requires"/>
+    <description value="Rule: The server declares what the actor requires — the scenarios grouped under it in the feature file."/>
+    <input>
+      <name value="gherkin-script"/>
+      <file value="eu-api-resource-access-provider.feature"/>
+    </input>
+    <test>
+      <name value="rap-001 The CapabilityStatement declares Patient read and search and SMART security"/>
+      <description value="Fixture contract: fixtures/provider-v1/manifest.json, cases.rap-001 (input bindings and expected data). Covers CapabilityStatement.rest.resource.Patient."/>
+      <operation value="gherkin/Scenario"/>
+      <assertion>
+        <severity value="error"/>
+        <human value="$response.status should be 200"/>
+      </assertion>
+      <assertion>
+        <severity value="error"/>
+        <human value="$capability at &quot;CapabilityStatement.rest.where(mode='server').resource.where(type='Patient').interaction.where(code='read').exists()&quot; should be true"/>
+      </assertion>
+      <assertion>
+        <severity value="error"/>
+        <human value="$capability at &quot;CapabilityStatement.rest.where(mode='server').resource.where(type='Patient').interaction.where(code='search-type').exists()&quot; should be true"/>
+      </assertion>
+      <assertion>
+        <severity value="error"/>
+        <human value="$capability at &quot;CapabilityStatement.rest.where(mode='server').security.service.coding.where(code='SMART-on-FHIR').exists()&quot; should be true"/>
+      </assertion>
+    </test>
+  </suite>
+  <suite>
+    <name value="Authorization is required"/>
+    <description value="Rule: Authorization is required — the scenarios grouped under it in the feature file."/>
+    <input>
+      <name value="gherkin-script"/>
+      <file value="eu-api-resource-access-provider.feature"/>
+    </input>
+    <test>
+      <name value="rap-002 A request without a token is refused"/>
+      <description value="Fixture contract: fixtures/provider-v1/manifest.json, cases.rap-002 (input bindings and expected data). Covers security.authorization."/>
+      <operation value="gherkin/Scenario"/>
+      <assertion>
+        <severity value="error"/>
+        <human value="$response.status should be 401"/>
+      </assertion>
+    </test>
+    <test>
+      <name value="rap-003 A token with no usable scope is refused"/>
+      <description value="Fixture contract: fixtures/provider-v1/manifest.json, cases.rap-003 (input bindings and expected data). Covers security.scope."/>
+      <operation value="gherkin/Scenario"/>
+      <assertion>
+        <severity value="error"/>
+        <human value="$response.status should be one of &quot;401, 403&quot;"/>
+      </assertion>
+    </test>
+  </suite>
+  <suite>
+    <name value="Patient read and search"/>
+    <description value="Rule: Patient read and search — the scenarios grouped under it in the feature file."/>
+    <input>
+      <name value="gherkin-script"/>
+      <file value="eu-api-resource-access-provider.feature"/>
+    </input>
+    <test>
+      <name value="rap-004 Read the patient and conform to patient-eu-core"/>
+      <description value="Fixture contract: fixtures/provider-v1/manifest.json, cases.rap-004 (input bindings and expected data). Covers Patient.read."/>
+      <operation value="gherkin/Scenario"/>
+      <assertion>
+        <severity value="error"/>
+        <human value="$response.status should be 200"/>
+      </assertion>
+      <assertion>
+        <severity value="error"/>
+        <human value="$patient should conform to &quot;http://hl7.eu/fhir/base/StructureDefinition/patient-eu-core&quot; ignoring slicing errors"/>
+      </assertion>
+    </test>
+    <test>
+      <name value="rap-005 Search Patient by identifier and by _id"/>
+      <description value="Fixture contract: fixtures/provider-v1/manifest.json, cases.rap-005 (input bindings and expected data). Covers Patient.search.identifier, Patient.search.id."/>
+      <operation value="gherkin/Scenario"/>
+      <assertion>
+        <severity value="error"/>
+        <human value="$response.status should be 200"/>
+      </assertion>
+      <assertion>
+        <severity value="error"/>
+        <human value="$byIdentifier at &quot;Bundle.type&quot; should be &quot;searchset&quot;"/>
+      </assertion>
+      <assertion>
+        <severity value="error"/>
+        <human value="$byIdentifier at &quot;Bundle.entry.resource.ofType(Patient).count() &gt;= 1&quot; should be true"/>
+      </assertion>
+      <assertion>
+        <severity value="error"/>
+        <human value="$byIdentifier at &quot;Bundle.entry.resource.ofType(Patient).id.distinct().single()&quot; should be &quot;$patientId&quot;"/>
+      </assertion>
+      <assertion>
+        <severity value="error"/>
+        <human value="$response.status should be 200"/>
+      </assertion>
+      <assertion>
+        <severity value="error"/>
+        <human value="$byId at &quot;Bundle.entry.resource.ofType(Patient).count() = 1&quot; should be true"/>
+      </assertion>
+    </test>
+    <test>
+      <name value="rap-006 Search Patient by the demographics the reference patient carries"/>
+      <description value="Fixture contract: fixtures/provider-v1/manifest.json, cases.rap-006 (input bindings and expected data). Covers Patient.search.family, Patient.search.given, Patient.search.birthdate, Patient.search.gender, Patient.search.active."/>
+      <operation value="gherkin/Scenario"/>
+      <assertion>
+        <severity value="error"/>
+        <human value="$response.status should be 200"/>
+      </assertion>
+      <assertion>
+        <severity value="error"/>
+        <human value="extract &quot;/name/0/family&quot; from $response.body as $family"/>
+      </assertion>
+      <assertion>
+        <severity value="error"/>
+        <human value="extract &quot;/gender&quot; from $response.body as $gender"/>
+      </assertion>
+      <assertion>
+        <severity value="error"/>
+        <human value="extract &quot;/birthDate&quot; from $response.body as $birthdate"/>
+      </assertion>
+      <assertion>
+        <severity value="error"/>
+        <human value="$response.status should be 200"/>
+      </assertion>
+      <assertion>
+        <severity value="error"/>
+        <human value="$byFamily at &quot;Bundle.entry.resource.ofType(Patient).exists()&quot; should be true"/>
+      </assertion>
+      <assertion>
+        <severity value="error"/>
+        <human value="$byFamily at &quot;Bundle.entry.resource.ofType(Patient).id.join(',')&quot; should contain $patientId"/>
+      </assertion>
+      <assertion>
+        <severity value="error"/>
+        <human value="$response.status should be 200"/>
+      </assertion>
+      <assertion>
+        <severity value="error"/>
+        <human value="$byGender at &quot;Bundle.entry.resource.ofType(Patient).exists()&quot; should be true"/>
+      </assertion>
+      <assertion>
+        <severity value="error"/>
+        <human value="$byGender at &quot;Bundle.entry.resource.ofType(Patient).id.join(',')&quot; should contain $patientId"/>
+      </assertion>
+      <assertion>
+        <severity value="error"/>
+        <human value="$response.status should be 200"/>
+      </assertion>
+      <assertion>
+        <severity value="error"/>
+        <human value="$byBirth at &quot;Bundle.entry.resource.ofType(Patient).exists()&quot; should be true"/>
+      </assertion>
+      <assertion>
+        <severity value="error"/>
+        <human value="$byBirth at &quot;Bundle.entry.resource.ofType(Patient).id.join(',')&quot; should contain $patientId"/>
+      </assertion>
+      <assertion>
+        <severity value="error"/>
+        <human value="$response.status should be 200"/>
+      </assertion>
+      <assertion>
+        <severity value="error"/>
+        <human value="$byActive at &quot;Bundle.type&quot; should be &quot;searchset&quot;"/>
+      </assertion>
+    </test>
+  </suite>
+  <suite>
+    <name value="Search by patient for each clinical resource type"/>
+    <description value="Rule: Search by patient for each clinical resource type — the scenarios grouped under it in the feature file."/>
+    <input>
+      <name value="gherkin-script"/>
+      <file value="eu-api-resource-access-provider.feature"/>
+    </input>
+    <test>
+      <name value="rap-007 Search Condition by patient returns a searchset of Condition"/>
+      <description value="Fixture contract: fixtures/provider-v1/manifest.json, cases.rap-007 (input bindings and expected data). Covers Condition.search-type, Condition.search.patient."/>
+      <operation value="gherkin/Scenario"/>
+      <assertion>
+        <severity value="error"/>
+        <human value="$response.status should be 200"/>
+      </assertion>
+      <assertion>
+        <severity value="error"/>
+        <human value="$found at &quot;Bundle.type&quot; should be &quot;searchset&quot;"/>
+      </assertion>
+      <assertion>
+        <severity value="error"/>
+        <human value="$found at &quot;Bundle.entry.where(search.mode.empty() or search.mode != 'include').exists()&quot; should be true"/>
+      </assertion>
+      <assertion>
+        <severity value="error"/>
+        <human value="$found at &quot;Bundle.entry.where(search.mode.empty() or search.mode != 'include').all(resource.ofType(Condition).exists() and resource.subject.reference.exists())&quot; should be true"/>
+      </assertion>
+      <assertion>
+        <severity value="error"/>
+        <human value="$found at &quot;Bundle.entry.where(search.mode.empty() or search.mode != 'include').resource.subject.reference.select(replaceMatches('^(.*/)?Patient/', '').replaceMatches('/_history/.*$', '')).distinct().count() = 1&quot; should be true"/>
+      </assertion>
+      <assertion>
+        <severity value="error"/>
+        <human value="$found at &quot;Bundle.entry.where(search.mode.empty() or search.mode != 'include').resource.subject.reference.select(replaceMatches('^(.*/)?Patient/', '').replaceMatches('/_history/.*$', '')).distinct().single()&quot; should be &quot;$patientId&quot;"/>
+      </assertion>
+    </test>
+    <test>
+      <name value="rap-008 Search AllergyIntolerance by patient returns a searchset of AllergyIntolerance"/>
+      <description value="Fixture contract: fixtures/provider-v1/manifest.json, cases.rap-008 (input bindings and expected data). Covers AllergyIntolerance.search-type, AllergyIntolerance.search.patient."/>
+      <operation value="gherkin/Scenario"/>
+      <assertion>
+        <severity value="error"/>
+        <human value="$response.status should be 200"/>
+      </assertion>
+      <assertion>
+        <severity value="error"/>
+        <human value="$found at &quot;Bundle.type&quot; should be &quot;searchset&quot;"/>
+      </assertion>
+      <assertion>
+        <severity value="error"/>
+        <human value="$found at &quot;Bundle.entry.where(search.mode.empty() or search.mode != 'include').exists()&quot; should be true"/>
+      </assertion>
+      <assertion>
+        <severity value="error"/>
+        <human value="$found at &quot;Bundle.entry.where(search.mode.empty() or search.mode != 'include').all(resource.ofType(AllergyIntolerance).exists() and resource.patient.reference.exists())&quot; should be true"/>
+      </assertion>
+      <assertion>
+        <severity value="error"/>
+        <human value="$found at &quot;Bundle.entry.where(search.mode.empty() or search.mode != 'include').resource.patient.reference.select(replaceMatches('^(.*/)?Patient/', '').replaceMatches('/_history/.*$', '')).distinct().count() = 1&quot; should be true"/>
+      </assertion>
+      <assertion>
+        <severity value="error"/>
+        <human value="$found at &quot;Bundle.entry.where(search.mode.empty() or search.mode != 'include').resource.patient.reference.select(replaceMatches('^(.*/)?Patient/', '').replaceMatches('/_history/.*$', '')).distinct().single()&quot; should be &quot;$patientId&quot;"/>
+      </assertion>
+    </test>
+    <test>
+      <name value="rap-009 Search Observation by patient returns a searchset of Observation"/>
+      <description value="Fixture contract: fixtures/provider-v1/manifest.json, cases.rap-009 (input bindings and expected data). Covers Observation.search-type, Observation.search.patient."/>
+      <operation value="gherkin/Scenario"/>
+      <assertion>
+        <severity value="error"/>
+        <human value="$response.status should be 200"/>
+      </assertion>
+      <assertion>
+        <severity value="error"/>
+        <human value="$found at &quot;Bundle.type&quot; should be &quot;searchset&quot;"/>
+      </assertion>
+      <assertion>
+        <severity value="error"/>
+        <human value="$found at &quot;Bundle.entry.where(search.mode.empty() or search.mode != 'include').exists()&quot; should be true"/>
+      </assertion>
+      <assertion>
+        <severity value="error"/>
+        <human value="$found at &quot;Bundle.entry.where(search.mode.empty() or search.mode != 'include').all(resource.ofType(Observation).exists() and resource.subject.reference.exists())&quot; should be true"/>
+      </assertion>
+      <assertion>
+        <severity value="error"/>
+        <human value="$found at &quot;Bundle.entry.where(search.mode.empty() or search.mode != 'include').resource.subject.reference.select(replaceMatches('^(.*/)?Patient/', '').replaceMatches('/_history/.*$', '')).distinct().count() = 1&quot; should be true"/>
+      </assertion>
+      <assertion>
+        <severity value="error"/>
+        <human value="$found at &quot;Bundle.entry.where(search.mode.empty() or search.mode != 'include').resource.subject.reference.select(replaceMatches('^(.*/)?Patient/', '').replaceMatches('/_history/.*$', '')).distinct().single()&quot; should be &quot;$patientId&quot;"/>
+      </assertion>
+    </test>
+    <test>
+      <name value="rap-010 Search DiagnosticReport by patient returns a searchset of DiagnosticReport"/>
+      <description value="Fixture contract: fixtures/provider-v1/manifest.json, cases.rap-010 (input bindings and expected data). Covers DiagnosticReport.search-type, DiagnosticReport.search.patient."/>
+      <operation value="gherkin/Scenario"/>
+      <assertion>
+        <severity value="error"/>
+        <human value="$response.status should be 200"/>
+      </assertion>
+      <assertion>
+        <severity value="error"/>
+        <human value="$found at &quot;Bundle.type&quot; should be &quot;searchset&quot;"/>
+      </assertion>
+      <assertion>
+        <severity value="error"/>
+        <human value="$found at &quot;Bundle.entry.where(search.mode.empty() or search.mode != 'include').exists()&quot; should be true"/>
+      </assertion>
+      <assertion>
+        <severity value="error"/>
+        <human value="$found at &quot;Bundle.entry.where(search.mode.empty() or search.mode != 'include').all(resource.ofType(DiagnosticReport).exists() and resource.subject.reference.exists())&quot; should be true"/>
+      </assertion>
+      <assertion>
+        <severity value="error"/>
+        <human value="$found at &quot;Bundle.entry.where(search.mode.empty() or search.mode != 'include').resource.subject.reference.select(replaceMatches('^(.*/)?Patient/', '').replaceMatches('/_history/.*$', '')).distinct().count() = 1&quot; should be true"/>
+      </assertion>
+      <assertion>
+        <severity value="error"/>
+        <human value="$found at &quot;Bundle.entry.where(search.mode.empty() or search.mode != 'include').resource.subject.reference.select(replaceMatches('^(.*/)?Patient/', '').replaceMatches('/_history/.*$', '')).distinct().single()&quot; should be &quot;$patientId&quot;"/>
+      </assertion>
+    </test>
+    <test>
+      <name value="rap-011 Search ImagingStudy by patient returns a searchset of ImagingStudy"/>
+      <description value="Fixture contract: fixtures/provider-v1/manifest.json, cases.rap-011 (input bindings and expected data). Covers ImagingStudy.search-type, ImagingStudy.search.patient."/>
+      <operation value="gherkin/Scenario"/>
+      <assertion>
+        <severity value="error"/>
+        <human value="$response.status should be 200"/>
+      </assertion>
+      <assertion>
+        <severity value="error"/>
+        <human value="$found at &quot;Bundle.type&quot; should be &quot;searchset&quot;"/>
+      </assertion>
+      <assertion>
+        <severity value="error"/>
+        <human value="$found at &quot;Bundle.entry.where(search.mode.empty() or search.mode != 'include').exists()&quot; should be true"/>
+      </assertion>
+      <assertion>
+        <severity value="error"/>
+        <human value="$found at &quot;Bundle.entry.where(search.mode.empty() or search.mode != 'include').all(resource.ofType(ImagingStudy).exists() and resource.subject.reference.exists())&quot; should be true"/>
+      </assertion>
+      <assertion>
+        <severity value="error"/>
+        <human value="$found at &quot;Bundle.entry.where(search.mode.empty() or search.mode != 'include').resource.subject.reference.select(replaceMatches('^(.*/)?Patient/', '').replaceMatches('/_history/.*$', '')).distinct().count() = 1&quot; should be true"/>
+      </assertion>
+      <assertion>
+        <severity value="error"/>
+        <human value="$found at &quot;Bundle.entry.where(search.mode.empty() or search.mode != 'include').resource.subject.reference.select(replaceMatches('^(.*/)?Patient/', '').replaceMatches('/_history/.*$', '')).distinct().single()&quot; should be &quot;$patientId&quot;"/>
+      </assertion>
+    </test>
+    <test>
+      <name value="rap-012 Search MedicationRequest by patient returns a searchset of MedicationRequest"/>
+      <description value="Fixture contract: fixtures/provider-v1/manifest.json, cases.rap-012 (input bindings and expected data). Covers MedicationRequest.search-type, MedicationRequest.search.patient."/>
+      <operation value="gherkin/Scenario"/>
+      <assertion>
+        <severity value="error"/>
+        <human value="$response.status should be 200"/>
+      </assertion>
+      <assertion>
+        <severity value="error"/>
+        <human value="$found at &quot;Bundle.type&quot; should be &quot;searchset&quot;"/>
+      </assertion>
+      <assertion>
+        <severity value="error"/>
+        <human value="$found at &quot;Bundle.entry.where(search.mode.empty() or search.mode != 'include').exists()&quot; should be true"/>
+      </assertion>
+      <assertion>
+        <severity value="error"/>
+        <human value="$found at &quot;Bundle.entry.where(search.mode.empty() or search.mode != 'include').all(resource.ofType(MedicationRequest).exists() and resource.subject.reference.exists())&quot; should be true"/>
+      </assertion>
+      <assertion>
+        <severity value="error"/>
+        <human value="$found at &quot;Bundle.entry.where(search.mode.empty() or search.mode != 'include').resource.subject.reference.select(replaceMatches('^(.*/)?Patient/', '').replaceMatches('/_history/.*$', '')).distinct().count() = 1&quot; should be true"/>
+      </assertion>
+      <assertion>
+        <severity value="error"/>
+        <human value="$found at &quot;Bundle.entry.where(search.mode.empty() or search.mode != 'include').resource.subject.reference.select(replaceMatches('^(.*/)?Patient/', '').replaceMatches('/_history/.*$', '')).distinct().single()&quot; should be &quot;$patientId&quot;"/>
+      </assertion>
+    </test>
+    <test>
+      <name value="rap-013 Search MedicationDispense by patient returns a searchset of MedicationDispense"/>
+      <description value="Fixture contract: fixtures/provider-v1/manifest.json, cases.rap-013 (input bindings and expected data). Covers MedicationDispense.search-type, MedicationDispense.search.patient."/>
+      <operation value="gherkin/Scenario"/>
+      <assertion>
+        <severity value="error"/>
+        <human value="$response.status should be 200"/>
+      </assertion>
+      <assertion>
+        <severity value="error"/>
+        <human value="$found at &quot;Bundle.type&quot; should be &quot;searchset&quot;"/>
+      </assertion>
+      <assertion>
+        <severity value="error"/>
+        <human value="$found at &quot;Bundle.entry.where(search.mode.empty() or search.mode != 'include').exists()&quot; should be true"/>
+      </assertion>
+      <assertion>
+        <severity value="error"/>
+        <human value="$found at &quot;Bundle.entry.where(search.mode.empty() or search.mode != 'include').all(resource.ofType(MedicationDispense).exists() and resource.subject.reference.exists())&quot; should be true"/>
+      </assertion>
+      <assertion>
+        <severity value="error"/>
+        <human value="$found at &quot;Bundle.entry.where(search.mode.empty() or search.mode != 'include').resource.subject.reference.select(replaceMatches('^(.*/)?Patient/', '').replaceMatches('/_history/.*$', '')).distinct().count() = 1&quot; should be true"/>
+      </assertion>
+      <assertion>
+        <severity value="error"/>
+        <human value="$found at &quot;Bundle.entry.where(search.mode.empty() or search.mode != 'include').resource.subject.reference.select(replaceMatches('^(.*/)?Patient/', '').replaceMatches('/_history/.*$', '')).distinct().single()&quot; should be &quot;$patientId&quot;"/>
+      </assertion>
+    </test>
+    <test>
+      <name value="rap-014 Search Immunization by patient returns a searchset of Immunization"/>
+      <description value="Fixture contract: fixtures/provider-v1/manifest.json, cases.rap-014 (input bindings and expected data). Covers Immunization.search-type, Immunization.search.patient."/>
+      <operation value="gherkin/Scenario"/>
+      <assertion>
+        <severity value="error"/>
+        <human value="$response.status should be 200"/>
+      </assertion>
+      <assertion>
+        <severity value="error"/>
+        <human value="$found at &quot;Bundle.type&quot; should be &quot;searchset&quot;"/>
+      </assertion>
+      <assertion>
+        <severity value="error"/>
+        <human value="$found at &quot;Bundle.entry.where(search.mode.empty() or search.mode != 'include').exists()&quot; should be true"/>
+      </assertion>
+      <assertion>
+        <severity value="error"/>
+        <human value="$found at &quot;Bundle.entry.where(search.mode.empty() or search.mode != 'include').all(resource.ofType(Immunization).exists() and resource.patient.reference.exists())&quot; should be true"/>
+      </assertion>
+      <assertion>
+        <severity value="error"/>
+        <human value="$found at &quot;Bundle.entry.where(search.mode.empty() or search.mode != 'include').resource.patient.reference.select(replaceMatches('^(.*/)?Patient/', '').replaceMatches('/_history/.*$', '')).distinct().count() = 1&quot; should be true"/>
+      </assertion>
+      <assertion>
+        <severity value="error"/>
+        <human value="$found at &quot;Bundle.entry.where(search.mode.empty() or search.mode != 'include').resource.patient.reference.select(replaceMatches('^(.*/)?Patient/', '').replaceMatches('/_history/.*$', '')).distinct().single()&quot; should be &quot;$patientId&quot;"/>
+      </assertion>
+    </test>
+    <test>
+      <name value="rap-015 Search MedicationStatement by patient returns a searchset of MedicationStatement"/>
+      <description value="Fixture contract: fixtures/provider-v1/manifest.json, cases.rap-015 (input bindings and expected data). Covers MedicationStatement.search-type, MedicationStatement.search.patient."/>
+      <operation value="gherkin/Scenario"/>
+      <assertion>
+        <severity value="error"/>
+        <human value="$response.status should be 200"/>
+      </assertion>
+      <assertion>
+        <severity value="error"/>
+        <human value="$found at &quot;Bundle.type&quot; should be &quot;searchset&quot;"/>
+      </assertion>
+      <assertion>
+        <severity value="error"/>
+        <human value="$found at &quot;Bundle.entry.where(search.mode.empty() or search.mode != 'include').exists()&quot; should be true"/>
+      </assertion>
+      <assertion>
+        <severity value="error"/>
+        <human value="$found at &quot;Bundle.entry.where(search.mode.empty() or search.mode != 'include').all(resource.ofType(MedicationStatement).exists() and resource.subject.reference.exists())&quot; should be true"/>
+      </assertion>
+      <assertion>
+        <severity value="error"/>
+        <human value="$found at &quot;Bundle.entry.where(search.mode.empty() or search.mode != 'include').resource.subject.reference.select(replaceMatches('^(.*/)?Patient/', '').replaceMatches('/_history/.*$', '')).distinct().count() = 1&quot; should be true"/>
+      </assertion>
+      <assertion>
+        <severity value="error"/>
+        <human value="$found at &quot;Bundle.entry.where(search.mode.empty() or search.mode != 'include').resource.subject.reference.select(replaceMatches('^(.*/)?Patient/', '').replaceMatches('/_history/.*$', '')).distinct().single()&quot; should be &quot;$patientId&quot;"/>
+      </assertion>
+    </test>
+    <test>
+      <name value="rap-016 Search Encounter by patient returns a searchset of Encounter"/>
+      <description value="Fixture contract: fixtures/provider-v1/manifest.json, cases.rap-016 (input bindings and expected data). Covers Encounter.search-type, Encounter.search.patient."/>
+      <operation value="gherkin/Scenario"/>
+      <assertion>
+        <severity value="error"/>
+        <human value="$response.status should be 200"/>
+      </assertion>
+      <assertion>
+        <severity value="error"/>
+        <human value="$found at &quot;Bundle.type&quot; should be &quot;searchset&quot;"/>
+      </assertion>
+      <assertion>
+        <severity value="error"/>
+        <human value="$found at &quot;Bundle.entry.where(search.mode.empty() or search.mode != 'include').exists()&quot; should be true"/>
+      </assertion>
+      <assertion>
+        <severity value="error"/>
+        <human value="$found at &quot;Bundle.entry.where(search.mode.empty() or search.mode != 'include').all(resource.ofType(Encounter).exists() and resource.subject.reference.exists())&quot; should be true"/>
+      </assertion>
+      <assertion>
+        <severity value="error"/>
+        <human value="$found at &quot;Bundle.entry.where(search.mode.empty() or search.mode != 'include').resource.subject.reference.select(replaceMatches('^(.*/)?Patient/', '').replaceMatches('/_history/.*$', '')).distinct().count() = 1&quot; should be true"/>
+      </assertion>
+      <assertion>
+        <severity value="error"/>
+        <human value="$found at &quot;Bundle.entry.where(search.mode.empty() or search.mode != 'include').resource.subject.reference.select(replaceMatches('^(.*/)?Patient/', '').replaceMatches('/_history/.*$', '')).distinct().single()&quot; should be &quot;$patientId&quot;"/>
+      </assertion>
+    </test>
+  </suite>
+  <suite>
+    <name value="Read by id"/>
+    <description value="Rule: Read by id — the scenarios grouped under it in the feature file."/>
+    <input>
+      <name value="gherkin-script"/>
+      <file value="eu-api-resource-access-provider.feature"/>
+    </input>
+    <test>
+      <name value="rap-017 A found resource can be read back by its id"/>
+      <description value="Fixture contract: fixtures/provider-v1/manifest.json, cases.rap-017 (input bindings and expected data). Covers Observation.read, Condition.read."/>
+      <operation value="gherkin/Scenario"/>
+      <assertion>
+        <severity value="error"/>
+        <human value="$response.status should be 200"/>
+      </assertion>
+      <assertion>
+        <severity value="error"/>
+        <human value="extract &quot;/entry/0/resource/id&quot; from $response.body as $obsId"/>
+      </assertion>
+      <assertion>
+        <severity value="error"/>
+        <human value="$response.status should be 200"/>
+      </assertion>
+      <assertion>
+        <severity value="error"/>
+        <human value="$one at &quot;Observation.id&quot; should be &quot;$obsId&quot;"/>
+      </assertion>
+    </test>
+    <test>
+      <name value="rap-018 An unknown id gives 404 and an OperationOutcome"/>
+      <description value="Fixture contract: fixtures/provider-v1/manifest.json, cases.rap-018 (input bindings and expected data). Covers Patient.read."/>
+      <operation value="gherkin/Scenario"/>
+      <assertion>
+        <severity value="error"/>
+        <human value="$response.status should be 404"/>
+      </assertion>
+      <assertion>
+        <severity value="error"/>
+        <human value="$missing at &quot;OperationOutcome.issue.exists()&quot; should be true"/>
+      </assertion>
+    </test>
+  </suite>
+</TestPlan>

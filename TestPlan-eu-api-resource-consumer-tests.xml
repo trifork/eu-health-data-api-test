@@ -1,0 +1,220 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<TestPlan xmlns="http://hl7.org/fhir" resourceDefinition="http://hl7.org/fhir/StructureDefinition/TestPlan|0.1.0-snapshot1">
+  <id value="eu-api-resource-consumer-tests"/>
+  <text>
+    <status value="generated"/><div xmlns="http://www.w3.org/1999/xhtml"><p class="res-header-id"><b>Generated Narrative: TestPlan eu-api-resource-consumer-tests</b></p><a name="eu-api-resource-consumer-tests"> </a><a name="hceu-api-resource-consumer-tests"> </a><p><b>Scopes</b></p><table class="grid"><tr><td><b>Reference</b></td><td><b>Description</b></td></tr><tr><td><code>http://hl7.eu/fhir/health-data-api/ActorDefinition/resource-consumer-actor-eu-api</code></td><td>The Resource Consumer, a client that reads patient resources from a Resource Access Provider, is the system under test. The test bed plays the provider.</td></tr></table><p><b>1 Suite: SMART Backend Services authorization</b></p><p>Rule: SMART Backend Services authorization — the scenarios grouped under it in the feature file.</p><p><b>Inputs</b></p><table class="grid"><tr><td><b>Name</b></td><td><b>File</b></td></tr><tr><td>gherkin-script</td><td>eu-api-resource-consumer.feature</td></tr></table><p><b>Tests</b></p><table class="grid"><tr><td><b>Name</b></td><td><b>Description</b></td><td><b>Operation</b></td></tr><tr><td>rc-001 The SUT authenticates with a signed JWT client assertion (RFC 7523)</td><td>Fixture contract: fixtures/provider-v1/manifest.json, cases.rc-001 (input bindings and expected data). Covers security.smart-backend-services.</td><td>gherkin/Scenario</td></tr></table><hr/><p><b>2 Suite: Patient lookup</b></p><p>Rule: Patient lookup — the scenarios grouped under it in the feature file.</p><p><b>Inputs</b></p><table class="grid"><tr><td><b>Name</b></td><td><b>File</b></td></tr><tr><td>gherkin-script</td><td>eu-api-resource-consumer.feature</td></tr></table><p><b>Tests</b></p><table class="grid"><tr><td><b>Name</b></td><td><b>Description</b></td><td><b>Operation</b></td></tr><tr><td>rc-002 The SUT searches Patient by the identifier parameter</td><td>Fixture contract: fixtures/provider-v1/manifest.json, cases.rc-002 (input bindings and expected data). Covers Patient.search-type, Patient.search.identifier.</td><td>gherkin/Scenario</td></tr><tr><td>rc-003 The SUT reads the patient by logical id</td><td>Fixture contract: fixtures/provider-v1/manifest.json, cases.rc-003 (input bindings and expected data). Covers Patient.read.</td><td>gherkin/Scenario</td></tr></table><hr/><p><b>3 Suite: Search by patient</b></p><p>Rule: Search by patient — the scenarios grouped under it in the feature file.</p><p><b>Inputs</b></p><table class="grid"><tr><td><b>Name</b></td><td><b>File</b></td></tr><tr><td>gherkin-script</td><td>eu-api-resource-consumer.feature</td></tr></table><p><b>Tests</b></p><table class="grid"><tr><td><b>Name</b></td><td><b>Description</b></td><td><b>Operation</b></td></tr><tr><td>rc-004 The SUT searches Condition by the patient parameter</td><td>Fixture contract: fixtures/provider-v1/manifest.json, cases.rc-004 (input bindings and expected data). Covers Condition.search.patient.</td><td>gherkin/Scenario</td></tr><tr><td>rc-005 The SUT searches Observation by patient and category</td><td>Fixture contract: fixtures/provider-v1/manifest.json, cases.rc-005 (input bindings and expected data). Covers Observation.search.patient, Observation.search.category, Observation.search.code, Observation.search.date.</td><td>gherkin/Scenario</td></tr><tr><td>rc-006 The SUT searches AllergyIntolerance by the patient parameter</td><td>Fixture contract: fixtures/provider-v1/manifest.json, cases.rc-006 (input bindings and expected data). Covers AllergyIntolerance.search.patient.</td><td>gherkin/Scenario</td></tr></table><hr/><p><b>4 Suite: Transport security</b></p><p>Rule: Transport security — the scenarios grouped under it in the feature file.</p><p><b>Inputs</b></p><table class="grid"><tr><td><b>Name</b></td><td><b>File</b></td></tr><tr><td>gherkin-script</td><td>eu-api-resource-consumer.feature</td></tr></table><p><b>Tests</b></p><table class="grid"><tr><td><b>Name</b></td><td><b>Description</b></td><td><b>Operation</b></td></tr><tr><td>rc-007 TLS 1.2 or higher is used for all communications</td><td>Fixture contract: fixtures/provider-v1/manifest.json, cases.rc-007 (input bindings and expected data). Covers security.tls.</td><td>gherkin/Scenario</td></tr></table></div>
+  </text>
+  <url value="http://example.com/fhir/hl7.fhir.eu.health-data-api.test/TestPlan/eu-api-resource-consumer-tests"/>
+  <version value="0.1.0"/>
+  <name value="ResourceConsumerTestPlan"/>
+  <title value="Resource Consumer Test Plan"/>
+  <status value="draft"/>
+  <experimental value="true"/>
+  <date value="2026-11-06"/>
+  <publisher value="Jens Kristian Villadsen"/>
+  <contact>
+    <name value="Jens Kristian Villadsen"/>
+    <telecom>
+      <system value="url"/>
+      <value value="https://trifork.com"/>
+    </telecom>
+  </contact>
+  <description value="Test plan for the **Resource Consumer** actor of [EU Health Data API, 1.0.0-ballot](https://build.fhir.org/ig/euridice-org/eu-health-data-api/).&#xA;The SUT obtains a token, finds the patient and reads that patient's resources.&#xA;Each `suite` below is a `Rule:` of the Gherkin feature named by `suite.input.file`, and each `suite.test` one of its `Scenario:` lines, matched by the scenario's identifier. The assertions are the scenario's `Then` steps, verbatim.&#xA;The tests declare which specification obligations they cover (11 requirement paths named by the feature tags).&#xA;Fixture prerequisites, input bindings and expected data are in tests/fixtures/provider-v1/manifest.json, keyed by scenario ID. See the Testing page, Fixture contract and expected results. Provider fixtures are R4; client workflows use the canned data embedded in their feature."/>
+  <jurisdiction>
+    <coding>
+      <system value="http://unstats.un.org/unsd/methods/m49/m49.htm"/>
+      <code value="001"/>
+      <display value="World"/>
+    </coding>
+  </jurisdiction>
+  <purpose value="To declare, in a machine-readable and runnable form, which behaviours a system claiming conformance to the Resource Consumer actor must demonstrate."/>
+  <scope>
+    <reference value="http://hl7.eu/fhir/health-data-api/ActorDefinition/resource-consumer-actor-eu-api"/>
+    <description value="The Resource Consumer, a client that reads patient resources from a Resource Access Provider, is the system under test. The test bed plays the provider."/>
+  </scope>
+  <runner value="https://www.itb.ec.europa.eu/docs/guides/latest/"/>
+  <suite>
+    <name value="SMART Backend Services authorization"/>
+    <description value="Rule: SMART Backend Services authorization — the scenarios grouped under it in the feature file."/>
+    <input>
+      <name value="gherkin-script"/>
+      <file value="eu-api-resource-consumer.feature"/>
+    </input>
+    <test>
+      <name value="rc-001 The SUT authenticates with a signed JWT client assertion (RFC 7523)"/>
+      <description value="Fixture contract: fixtures/provider-v1/manifest.json, cases.rc-001 (input bindings and expected data). Covers security.smart-backend-services."/>
+      <operation value="gherkin/Scenario"/>
+      <assertion>
+        <severity value="error"/>
+        <human value="$received.method should be &quot;POST&quot;"/>
+      </assertion>
+      <assertion>
+        <severity value="error"/>
+        <human value="$received.body should contain &quot;grant_type=client_credentials&quot;"/>
+      </assertion>
+      <assertion>
+        <severity value="error"/>
+        <human value="$received.body should contain &quot;client_assertion_type=urn%3Aietf%3Aparams%3Aoauth%3Aclient-assertion-type%3Ajwt-bearer&quot;"/>
+      </assertion>
+      <assertion>
+        <severity value="error"/>
+        <human value="$received.body should match &quot;client_assertion=[A-Za-z0-9_-]+[.][A-Za-z0-9_-]+[.][A-Za-z0-9_-]+([&amp;]|$)&quot;"/>
+      </assertion>
+      <assertion>
+        <severity value="error"/>
+        <human value="$received.body should contain &quot;scope=&quot;"/>
+      </assertion>
+      <assertion>
+        <severity value="error"/>
+        <human value="ResourceProvider replies to ResourceConsumer with status 200 and:"/>
+      </assertion>
+    </test>
+  </suite>
+  <suite>
+    <name value="Patient lookup"/>
+    <description value="Rule: Patient lookup — the scenarios grouped under it in the feature file."/>
+    <input>
+      <name value="gherkin-script"/>
+      <file value="eu-api-resource-consumer.feature"/>
+    </input>
+    <test>
+      <name value="rc-002 The SUT searches Patient by the identifier parameter"/>
+      <description value="Fixture contract: fixtures/provider-v1/manifest.json, cases.rc-002 (input bindings and expected data). Covers Patient.search-type, Patient.search.identifier."/>
+      <operation value="gherkin/Scenario"/>
+      <assertion>
+        <severity value="error"/>
+        <human value="$received.method should be &quot;GET&quot;"/>
+      </assertion>
+      <assertion>
+        <severity value="error"/>
+        <human value="$received.path should contain &quot;/Patient&quot;"/>
+      </assertion>
+      <assertion>
+        <severity value="error"/>
+        <human value="$received.path should contain &quot;identifier=&quot;"/>
+      </assertion>
+      <assertion>
+        <severity value="error"/>
+        <human value="$received.headers.Authorization should contain &quot;Bearer&quot;"/>
+      </assertion>
+      <assertion>
+        <severity value="error"/>
+        <human value="ResourceProvider replies to ResourceConsumer with status 200 and:"/>
+      </assertion>
+    </test>
+    <test>
+      <name value="rc-003 The SUT reads the patient by logical id"/>
+      <description value="Fixture contract: fixtures/provider-v1/manifest.json, cases.rc-003 (input bindings and expected data). Covers Patient.read."/>
+      <operation value="gherkin/Scenario"/>
+      <assertion>
+        <severity value="error"/>
+        <human value="$received.method should be &quot;GET&quot;"/>
+      </assertion>
+      <assertion>
+        <severity value="error"/>
+        <human value="$received.path should contain &quot;/Patient/otb-pat-1&quot;"/>
+      </assertion>
+      <assertion>
+        <severity value="error"/>
+        <human value="ResourceProvider replies to ResourceConsumer with status 200 and:"/>
+      </assertion>
+    </test>
+  </suite>
+  <suite>
+    <name value="Search by patient"/>
+    <description value="Rule: Search by patient — the scenarios grouped under it in the feature file."/>
+    <input>
+      <name value="gherkin-script"/>
+      <file value="eu-api-resource-consumer.feature"/>
+    </input>
+    <test>
+      <name value="rc-004 The SUT searches Condition by the patient parameter"/>
+      <description value="Fixture contract: fixtures/provider-v1/manifest.json, cases.rc-004 (input bindings and expected data). Covers Condition.search.patient."/>
+      <operation value="gherkin/Scenario"/>
+      <assertion>
+        <severity value="error"/>
+        <human value="$received.method should be &quot;GET&quot;"/>
+      </assertion>
+      <assertion>
+        <severity value="error"/>
+        <human value="$received.path should contain &quot;/Condition&quot;"/>
+      </assertion>
+      <assertion>
+        <severity value="error"/>
+        <human value="$received.path should match &quot;patient=(Patient(/|%2F))?otb-pat-1([&amp;]|$)&quot;"/>
+      </assertion>
+      <assertion>
+        <severity value="error"/>
+        <human value="$received.headers.Authorization should contain &quot;Bearer&quot;"/>
+      </assertion>
+      <assertion>
+        <severity value="error"/>
+        <human value="ResourceProvider replies to ResourceConsumer with status 200 and:"/>
+      </assertion>
+    </test>
+    <test>
+      <name value="rc-005 The SUT searches Observation by patient and category"/>
+      <description value="Fixture contract: fixtures/provider-v1/manifest.json, cases.rc-005 (input bindings and expected data). Covers Observation.search.patient, Observation.search.category, Observation.search.code, Observation.search.date."/>
+      <operation value="gherkin/Scenario"/>
+      <assertion>
+        <severity value="error"/>
+        <human value="$received.method should be &quot;GET&quot;"/>
+      </assertion>
+      <assertion>
+        <severity value="error"/>
+        <human value="$received.path should contain &quot;/Observation&quot;"/>
+      </assertion>
+      <assertion>
+        <severity value="error"/>
+        <human value="$received.path should match &quot;patient=(Patient(/|%2F))?otb-pat-1([&amp;]|$)&quot;"/>
+      </assertion>
+      <assertion>
+        <severity value="error"/>
+        <human value="$received.path should contain &quot;category=&quot;"/>
+      </assertion>
+      <assertion>
+        <severity value="error"/>
+        <human value="ResourceProvider replies to ResourceConsumer with status 200 and:"/>
+      </assertion>
+    </test>
+    <test>
+      <name value="rc-006 The SUT searches AllergyIntolerance by the patient parameter"/>
+      <description value="Fixture contract: fixtures/provider-v1/manifest.json, cases.rc-006 (input bindings and expected data). Covers AllergyIntolerance.search.patient."/>
+      <operation value="gherkin/Scenario"/>
+      <assertion>
+        <severity value="error"/>
+        <human value="$received.method should be &quot;GET&quot;"/>
+      </assertion>
+      <assertion>
+        <severity value="error"/>
+        <human value="$received.path should contain &quot;/AllergyIntolerance&quot;"/>
+      </assertion>
+      <assertion>
+        <severity value="error"/>
+        <human value="$received.path should match &quot;patient=(Patient(/|%2F))?otb-pat-1([&amp;]|$)&quot;"/>
+      </assertion>
+      <assertion>
+        <severity value="error"/>
+        <human value="ResourceProvider replies to ResourceConsumer with status 200 and:"/>
+      </assertion>
+    </test>
+  </suite>
+  <suite>
+    <name value="Transport security"/>
+    <description value="Rule: Transport security — the scenarios grouped under it in the feature file."/>
+    <input>
+      <name value="gherkin-script"/>
+      <file value="eu-api-resource-consumer.feature"/>
+    </input>
+    <test>
+      <name value="rc-007 TLS 1.2 or higher is used for all communications"/>
+      <description value="Fixture contract: fixtures/provider-v1/manifest.json, cases.rc-007 (input bindings and expected data). Covers security.tls."/>
+      <operation value="gherkin/Scenario"/>
+      <assertion>
+        <severity value="error"/>
+        <human value="TLS &gt;= 1.2 — ResourceConsumer confirms each of these is accepted for &quot;the connection&quot;"/>
+      </assertion>
+    </test>
+  </suite>
+</TestPlan>

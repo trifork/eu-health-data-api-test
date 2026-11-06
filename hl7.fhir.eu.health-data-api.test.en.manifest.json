@@ -1,0 +1,7 @@
+{
+  "version" : "0.1.0",
+  "fhirVersion" : ["6.0.0-snapshot1"],
+  "date" : "20261106193725",
+  "name" : "hl7.fhir.eu.health-data-api.test",
+  "jurisdiction" : "http://unstats.un.org/unsd/methods/m49/m49.htm#001"
+}

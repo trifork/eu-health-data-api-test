@@ -1,0 +1,810 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE HTML>
+<html xml:lang="en" xmlns="http://www.w3.org/1999/xhtml" lang="en" dir="ltr">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html;charset=utf-8"/>
+    <title>Testing - EU Health Data API: TestPlans and Gherkin for the EEHRxF API actors v0.1.0</title>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <meta name="author" content="http://hl7.org/fhir"/>
+
+    <link rel="stylesheet" href="fhir.css"/>
+
+      <!-- Bootstrap core CSS -->
+    <link rel="stylesheet" href="assets/css/bootstrap-fhir.css"/>
+
+      <!-- Project extras -->
+    <link rel="stylesheet" href="assets/css/pygments-manni.css"/>
+    <link rel="stylesheet" href="assets/css/jquery-ui.css"/>
+  	<link rel="stylesheet" href="assets/css/prism.css"/>
+    <link rel="stylesheet" href="assets/css/liquid.css"/>
+    <link rel="stylesheet" href="assets/css/project.css"/>
+  	  <!-- Placeholder for child template CSS declarations -->
+  <!-- <link href="assets/css/hl7.css" rel="stylesheet"/> -->
+<link rel="stylesheet" href="assets/css/hl7eu.css"/>
+
+    <script src="fhir-table-scripts.js" type="text/javascript"> </script>
+    <script src="assets/js/direction-management.js" type="text/javascript"> </script>
+
+      <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+      <!-- [if lt IE 9]>
+    <script src="assets/js/html5shiv.js"></script>
+    <script src="assets/js/respond.min.js"></script>
+    <![endif] -->
+
+      <!-- Favicons -->
+    <link sizes="144x144" rel="fhir-logo" href="assets/ico/icon-fhir-144.png"/>
+    <link sizes="114x114" rel="fhir-logo" href="assets/ico/icon-fhir-114.png"/>
+    <link sizes="72x72" rel="fhir-logo" href="assets/ico/icon-fhir-72.png"/>
+    <link rel="fhir-logo" href="assets/ico/icon-fhir-57.png"/>
+    <link rel="shortcut icon" href="assets/ico/favicon.png"/>
+  </head>
+  <body onload="document.body.style.opacity='1'">
+
+	  <script src="assets/js/prism.js" type="text/javascript"></script>
+	  <script src="assets/js/prism-fhirpath.js" type="text/javascript"></script>
+	  <script src="assets/js/prism-cql.js" type="text/javascript"></script>
+    <script src="assets/js/mermaid-init.js" type="text/javascript"></script>
+    <style type="text/css">h2{--heading-prefix:"2"}
+    h3,h4,h5,h6{--heading-prefix:"2"}</style>
+    <div id="segment-header" class="segment">    <!-- segment-header -->
+      <div class="container">    <!-- container -->
+
+          <!-- Left logo - typically the publisher's logo - project or affiliate -->
+          <!-- <div id="project-nav">
+          <a id="project-logo" no-external="true" href="http://hl7.it">
+            <img height="61" alt="Project home" src="assets/images/hl7-eu-logo.png"/>
+          </a>
+        </div> -->
+
+
+        <div id="project-nav">
+          <a no-external="true" id="project-logo" href="https://hl7.eu/">
+            <img src="assets/images/hl7-eu-logo.png" alt="HL7 Europe website" height="55"/> 
+          </a>
+          <a no-external="true" id="project-logo" href="https://ihe-europe.net/">
+            <img src="assets/images/ihe-eu-logo.drawio.png" alt="IHE Europe website" style="vertical-align: bottom;" height="55"/> 
+          </a>
+        </div>
+
+        <div id="family-nav">
+            <!-- <table style="float: left;" cellpadding="0" cellspacing="0">
+            <tr><td><a id="dicom-family-logo" no-external="true" href="https://dicom.nema.org/standard.htm"><img width="100" alt="HL7 Europe website" src="assets/images/DICOM.png"/> </a>
+</a></td></tr>
+            <tr><td><a id="fhir-family-logo" no-external="true" href="http://hl7.org/fhir"><img width="100"  alt="HL7 Europe website" src="assets/images/fhir-logo-www.png"/></a></td></tr>
+          </table> -->
+          <a no-external="true" id="project-logo" href="https://euridice.org/"><img src="assets/images/EURIDICE-logo-full.png" alt="Euridice website" height="60"/> </a>
+          <a no-external="true" id="fhir-family-logo" href="http://hl7.org/fhir"><img src="assets/images/hl7-fhir-flame.drawio.png" alt="HL7 FHIR website" height="60"/></a>
+        </div>
+
+
+
+
+
+        <div id="ig-status" data-fhir="generated">
+          <p><span style="font-size:12pt;font-weight:bold">EU Health Data API: TestPlans and Gherkin for the EEHRxF API actors</span>
+            <br/>
+            <span style="display:inline-block;">0.1.0 - ci-build
+
+
+
+  <img src="../assets/images/001.svg" alt="International flag" title="International" height="16"/>
+
+
+            </span>
+          </p>
+        </div>
+      </div>   <!-- /container -->
+    </div>    <!-- /segment-header -->
+
+    <div id="segment-navbar" class="segment" data-fhir="generated">    <!-- segment-navbar -->
+      <div id="stripe"> </div>
+      <div class="container">    <!-- container -->
+          <!-- HEADER CONTENT -->
+
+        <nav class="navbar navbar-inverse">
+            <!-- status-bar -->
+          <div class="container">
+
+            <button data-target=".navbar-inverse-collapse" data-toggle="collapse" type="button" class="navbar-toggle">
+              <span class="icon-bar"> </span>
+              <span class="icon-bar"> </span>
+              <span class="icon-bar"> </span>
+            </button>
+            <a href="http://hl7.org/fhir/6.0.0-ballot5/index.html" class="navbar-brand hidden">FHIR</a>
+            <div class="nav-collapse collapse navbar-inverse-collapse">
+                <!-- menu.xml -->
+
+<ul class="nav navbar-nav">
+  <li>
+    <a href="index.html">Home</a>
+  </li>
+  <li>
+    <a href="testing.html">Testing</a>
+  </li>
+  <li>
+    <a href="process.html">Method</a>
+  </li>
+  <li>
+    <a href="artifacts.html">Artifacts</a>
+  </li>
+  <li>
+    <a href="downloads.html">Downloads</a>
+  </li>
+  <li>
+    <a href="changes.html">Changes</a>
+  </li>
+</ul>
+            </div>    <!-- /.nav-collapse -->
+
+              
+
+          </div>    <!-- /.container -->
+        </nav>    <!-- /.navbar -->
+        <!-- /HEADER CONTENT -->
+      </div>    <!-- /container -->
+    </div>    <!-- /segment-navbar -->
+      <!-- status-bar -->
+
+    <div id="segment-breadcrumb" class="segment" data-fhir="generated">    <!-- segment-breadcrumb -->
+      <div class="container">    <!-- container -->
+        <ul class="breadcrumb">
+          <li><a href="toc.html"><b>Table of Contents</b></a></li><li><b>Testing</b></li>
+
+        </ul>
+      </div>    <!-- /container -->
+    </div>    <!-- /segment-breadcrumb -->
+
+    <a name="top"> </a>
+    <div id="segment-content" class="segment">    <!-- segment-content -->
+      <div class="container">    <!-- container -->
+        <div class="row">
+          <div class="inner-wrapper">
+
+<style type="text/css">
+h2:before{color:silver;counter-increment:section;content:var(--heading-prefix) " ";}
+h3:before{color:silver;counter-increment:sub-section;content:var(--heading-prefix) "." counter(sub-section) " ";}
+h4:before{color:silver;counter-increment:composite;content:var(--heading-prefix) "." counter(sub-section) "." counter(composite) " ";}
+h5:before{color:silver;counter-increment:detail;content:var(--heading-prefix) "." counter(sub-section) "." counter(composite) "." counter(detail) " ";}
+h6:before{color:silver;counter-increment:more-detail;content:var(--heading-prefix) "." counter(sub-section) "." counter(composite) "." counter(detail) "." counter(more-detail)" ";}
+</style>
+<div class="col-12">
+    <!-- ReleaseHeader --><p id="publish-box">EU Health Data API: TestPlans and Gherkin for the EEHRxF API actors, published by Jens Kristian Villadsen. This guide is not an authorized publication; it is the continuous build for version 0.1.0  built by the FHIR (HL7&reg; FHIR&reg; Standard) CI Build. This version is based on the current content of <a href="https://github.com/trifork/eu-health-data-api-test/tree/main">https://github.com/trifork/eu-health-data-api-test/tree/main</a> and changes regularly. See the <a href="http://example.com/fhir/hl7.fhir.eu.health-data-api.test/history.html">Directory of published versions</a><br/><span data-smart-ci-extra="1" style="font-size:.85em;">Built from commit <a href="https://github.com/trifork/eu-health-data-api-test/commit/261ad49df653243bf6ae3e587f17719120d708a0"><code>261ad49d</code></a>.</span></p>  <!-- EndReleaseHeader -->
+  <h2>Testing</h2>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <p>  <!-- white space is critical inside of capture --></p>
+<div class="markdown-toc">
+<ul id="markdown-toc">
+  <li><a href="#testing-the-eu-health-data-api-actors" id="markdown-toc-testing-the-eu-health-data-api-actors">Testing the EU Health Data API actors</a></li>
+  <li><a href="#from-requirements-to-cases" id="markdown-toc-from-requirements-to-cases">From requirements to cases</a></li>
+  <li><a href="#fixture-contract-and-expected-results" id="markdown-toc-fixture-contract-and-expected-results">Fixture contract and expected results</a></li>
+  <li><a href="#the-gherkin-feature-files" id="markdown-toc-the-gherkin-feature-files">The Gherkin feature files</a></li>
+</ul>
+
+</div>
+<p><a name="scope"> </a></p>
+
+<h3 id="testing-the-eu-health-data-api-actors">Testing the EU Health Data API actors</h3>
+
+<p>This guide declares its tests with the <a href="https://build.fhir.org/ig/HL7/fhir-testing-ig/en/StructureDefinition-TestPlan.html">TestPlan</a> resource from the <a href="https://build.fhir.org/ig/HL7/fhir-testing-ig/en/">FHIR Testing IG</a> (<code class="language-plaintext highlighter-rouge">hl7.fhir.uv.testing</code>), one plan per actor the specification defines. Each plan's <code class="language-plaintext highlighter-rouge">scope</code> names the actor — what is under test — and each of its tests is one <code class="language-plaintext highlighter-rouge">Scenario:</code> of a Gherkin feature file that the plan points at through <code class="language-plaintext highlighter-rouge">suite.input.file</code>.</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>Test plan</th>
+      <th>Under test</th>
+      <th>Content</th>
+      <th>Feature file</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><a href="TestPlan-eu-api-document-publisher-tests.html">Document Publisher Test Plan</a></td>
+      <td><a href="http://hl7.eu/fhir/health-data-api/ActorDefinition/document-publisher-actor-eu-api">Document Publisher</a></td>
+      <td>6 scenarios, 7 requirement paths named</td>
+      <td><code class="language-plaintext highlighter-rouge">eu-api-document-publisher.feature</code></td>
+    </tr>
+    <tr>
+      <td><a href="TestPlan-eu-api-document-access-provider-tests.html">Document Access Provider Test Plan</a></td>
+      <td><a href="http://hl7.eu/fhir/health-data-api/ActorDefinition/document-access-provider-actor-eu-api">Document Access Provider</a></td>
+      <td>17 scenarios, 24 requirement paths named</td>
+      <td><code class="language-plaintext highlighter-rouge">eu-api-document-access-provider.feature</code></td>
+    </tr>
+    <tr>
+      <td><a href="TestPlan-eu-api-document-consumer-tests.html">Document Consumer Test Plan</a></td>
+      <td><a href="http://hl7.eu/fhir/health-data-api/ActorDefinition/document-consumer-actor-eu-api">Document Consumer</a></td>
+      <td>6 scenarios, 8 requirement paths named</td>
+      <td><code class="language-plaintext highlighter-rouge">eu-api-document-consumer.feature</code></td>
+    </tr>
+    <tr>
+      <td><a href="TestPlan-eu-api-document-publisher-access-provider-tests.html">Grouped Document Publisher/Access Provider Test Plan</a></td>
+      <td><a href="http://hl7.eu/fhir/health-data-api/ActorDefinition/document-publisher-access-provider-actor-eu-api">Grouped Document Publisher/Access Provider</a></td>
+      <td>13 scenarios, 20 requirement paths named</td>
+      <td><code class="language-plaintext highlighter-rouge">eu-api-document-publisher-access-provider.feature</code></td>
+    </tr>
+    <tr>
+      <td><a href="TestPlan-eu-api-resource-access-provider-tests.html">Resource Access Provider Test Plan</a></td>
+      <td><a href="http://hl7.eu/fhir/health-data-api/ActorDefinition/resource-access-provider-actor-eu-api">Resource Access Provider</a></td>
+      <td>18 scenarios, 34 requirement paths named</td>
+      <td><code class="language-plaintext highlighter-rouge">eu-api-resource-access-provider.feature</code></td>
+    </tr>
+    <tr>
+      <td><a href="TestPlan-eu-api-resource-consumer-tests.html">Resource Consumer Test Plan</a></td>
+      <td><a href="http://hl7.eu/fhir/health-data-api/ActorDefinition/resource-consumer-actor-eu-api">Resource Consumer</a></td>
+      <td>7 scenarios, 11 requirement paths named</td>
+      <td><code class="language-plaintext highlighter-rouge">eu-api-resource-consumer.feature</code></td>
+    </tr>
+  </tbody>
+</table>
+
+<p><a name="requirements"> </a></p>
+
+<h3 id="from-requirements-to-cases">From requirements to cases</h3>
+
+<p>The EU Health Data API states actor requirements in CapabilityStatement expectations and narrative. Each scenario names its requirement paths in @covers. These are not profile obligation extensions, and the tags alone do not prove complete coverage.</p>
+
+<p><a name="fixtures"> </a></p>
+
+<h3 id="fixture-contract-and-expected-results">Fixture contract and expected results</h3>
+
+<p><a name="l491">​</a>Download <a href="package.tgz">package.tgz</a> and extract <code class="language-plaintext highlighter-rouge">package/tests/fixtures/provider-v1/</code>. The transaction bundle, bindings template and per-case manifest travel with the tests.</p>
+
+<p>Synthetic FHIR R4 (4.0.1) data, fixture contract version 1.0.0. No real people or clinical records.</p>
+
+<h4 id="files">Files</h4>
+
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">bundle.json</code>: 27 resources in a transaction using conditional POST and internal UUID references.</li>
+  <li><code class="language-plaintext highlighter-rouge">bindings.example.json</code>: maps logical fixture names to IDs in your implementation.</li>
+  <li><code class="language-plaintext highlighter-rouge">manifest.json</code>: all 67 case IDs, per-case prerequisites and inputs, expected fixture outcomes, current Gherkin assertions, and reusable search checks.</li>
+</ul>
+
+<h4 id="load-by-any-supported-method">Load by any supported method</h4>
+
+<p>Use a transaction, an administrative import, or enter equivalent data through the application's normal workflow. Transaction support is <strong>not</strong> a conformance requirement of these tests. Keep the specified identifiers, demographic values, codes, document content, and relationships. The JSON resources are the concrete data specification. If the server assigns IDs, copy the bindings template and replace the IDs; also map all patient and document references when importing. Do not change the business identifiers.</p>
+
+<p>For a test server supporting transactions and conditional create, POST <code class="language-plaintext highlighter-rouge">bundle.json</code> to its FHIR base URL with <code class="language-plaintext highlighter-rouge">Content-Type: application/fhir+json</code>. Conditional creates use the fixture identifiers (and Binary tags) to avoid duplicates on repeat loads. Existing fixtures are not reset: changed data must be reconciled by the operator. Capture each transaction-response location and use its assigned ID in the bindings. Internal UUID references are resolved by the transaction processor; manual imports must preserve the same relationships. Binary content is synthetic plain text, not an IPS clinical document.</p>
+
+<p>The repository helper can load and verify the complete dataset:</p>
+
+<div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">FHIR_BASE_URL</span><span class="o">=</span>https://your-test-server/fhir node scripts/fixture-data.mjs load itb/build/fixture-bindings.json
+<span class="nv">FHIR_BASE_URL</span><span class="o">=</span>https://your-test-server/fhir node scripts/fixture-data.mjs verify itb/build/fixture-bindings.json
+<span class="c"># For manually imported data with different IDs:</span>
+<span class="nv">FHIR_BASE_URL</span><span class="o">=</span>https://your-test-server/fhir node scripts/fixture-data.mjs verify /path/to/bindings.json
+</code></pre></div></div>
+
+<p>Use <code class="language-plaintext highlighter-rouge">FHIR_AUTHORIZATION</code> for the helper's existing authorization header when needed. It is never stored in the fixtures. The helper's full-dataset verification requires read/search access to every supplied type. For a partial implementation, load the applicable subset and use the case-specific requirements in the manifest. Unsupported optional capabilities are not made mandatory by supplying fixtures.</p>
+
+<h4 id="inputs-supplied-to-itb">Inputs supplied to ITB</h4>
+
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">patientIdentifier</code>: <code class="language-plaintext highlighter-rouge">urn:uuid:47df6faa-4581-4545-9f2d-7d8c8db0c3e7|EU-API-PATIENT-TARGET</code></li>
+  <li><code class="language-plaintext highlighter-rouge">patientId</code>: ID mapped by <code class="language-plaintext highlighter-rouge">patient-target</code>.</li>
+  <li><code class="language-plaintext highlighter-rouge">documentId</code>: ID mapped by <code class="language-plaintext highlighter-rouge">document-target</code>.</li>
+  <li><code class="language-plaintext highlighter-rouge">binaryId</code>: ID mapped by <code class="language-plaintext highlighter-rouge">binary-target</code>.</li>
+  <li><code class="language-plaintext highlighter-rouge">submitPatientRef</code>: <code class="language-plaintext highlighter-rouge">Patient/&lt;mapped patient-target ID&gt;</code>.</li>
+  <li><code class="language-plaintext highlighter-rouge">accessToken</code> and <code class="language-plaintext highlighter-rouge">narrowToken</code>: issued by the implementation's authorization system, never sample credentials. The positive token needs the read/search or create permissions used by that case.</li>
+</ul>
+
+<h4 id="expected-results">Expected results</h4>
+
+<p>The reference patient is active, given name Synthetic, family EUAPITestpatient, gender unknown, born 1990-01-01. The control patient has a different identifier, family, gender and birth date. Each has one of each of the ten clinical resource types.</p>
+
+<p>Document search for the target patient includes the target summary and target laboratory document; it excludes the control patient's document. Category Patient-Summaries and type 60591-5 each select the target summary and exclude both the laboratory distractor and control document. Each clinical patient search includes its target fixture and excludes its control fixture. Patient identifier and ID searches identify the target patient. Do not require global exact counts in a populated server; evaluate all pages. <code class="language-plaintext highlighter-rouge">dap-015</code> creates additional matching data.</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>Case</th>
+      <th>Required fixture keys</th>
+      <th>Inputs</th>
+      <th>Expected outcome</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>dap-001</td>
+      <td>None</td>
+      <td>None</td>
+      <td>No fixture or token required. The live server must declare the capabilities named by the assertions.</td>
+    </tr>
+    <tr>
+      <td>dap-002</td>
+      <td>None</td>
+      <td>None</td>
+      <td>No fixture or token required. The live server must declare the capabilities named by the assertions.</td>
+    </tr>
+    <tr>
+      <td>dap-003</td>
+      <td>patient-target</td>
+      <td>patientId</td>
+      <td>Reject the request with the status in the assertions. Authorization and scope configuration are external prerequisites, not fixture resources.</td>
+    </tr>
+    <tr>
+      <td>dap-004</td>
+      <td>patient-target</td>
+      <td>narrowToken, patientId</td>
+      <td>Reject the request with the status in the assertions. Authorization and scope configuration are external prerequisites, not fixture resources.</td>
+    </tr>
+    <tr>
+      <td>dap-005</td>
+      <td>patient-target, document-target, document-laboratory, document-control, binary-target, patient-control, binary-control</td>
+      <td>accessToken, patientId</td>
+      <td>The searches must include and exclude the fixture resources specified in searchChecks. Extra unrelated server data is allowed only if it matches the query.</td>
+    </tr>
+    <tr>
+      <td>dap-006</td>
+      <td>patient-target, document-target, document-control, document-laboratory, binary-target, patient-control, binary-control</td>
+      <td>accessToken, patientId</td>
+      <td>The searches must include and exclude the fixture resources specified in searchChecks. Extra unrelated server data is allowed only if it matches the query.</td>
+    </tr>
+    <tr>
+      <td>dap-007</td>
+      <td>patient-target, document-target, document-control, document-laboratory, binary-target, patient-control, binary-control</td>
+      <td>accessToken, patientId</td>
+      <td>The searches must include and exclude the fixture resources specified in searchChecks. Extra unrelated server data is allowed only if it matches the query.</td>
+    </tr>
+    <tr>
+      <td>dap-008</td>
+      <td>document-target, patient-target, binary-target</td>
+      <td>accessToken, documentId</td>
+      <td>Read the bound target DocumentReference: current, type 60591-5, category Patient-Summaries, subject target patient and attachment URL pointing to the target Binary.</td>
+    </tr>
+    <tr>
+      <td>dap-009</td>
+      <td>None</td>
+      <td>accessToken</td>
+      <td>The reserved otb-no-such-* identifier in the feature must not exist; expect 404 and an OperationOutcome.</td>
+    </tr>
+    <tr>
+      <td>dap-010</td>
+      <td>binary-target, patient-target</td>
+      <td>accessToken, binaryId</td>
+      <td>Read the bound target Binary. Its content type is text/plain and decoded data matches the bundled synthetic target document.</td>
+    </tr>
+    <tr>
+      <td>dap-011</td>
+      <td>patient-target, patient-control</td>
+      <td>accessToken, patientIdentifier</td>
+      <td>The searches must include and exclude the fixture resources specified in searchChecks. Extra unrelated server data is allowed only if it matches the query.</td>
+    </tr>
+    <tr>
+      <td>dap-012</td>
+      <td>patient-target</td>
+      <td>accessToken, patientId</td>
+      <td>Read the bound target patient: active, Synthetic EUAPITestpatient, gender unknown, birth date 1990-01-01, and the declared fixture identifier.</td>
+    </tr>
+    <tr>
+      <td>dap-013</td>
+      <td>patient-target, patient-control</td>
+      <td>accessToken, patientId</td>
+      <td>The searches must include and exclude the fixture resources specified in searchChecks. Extra unrelated server data is allowed only if it matches the query.</td>
+    </tr>
+    <tr>
+      <td>dap-014</td>
+      <td>None</td>
+      <td>None</td>
+      <td>No fixture or token required. The live server must declare the capabilities named by the assertions.</td>
+    </tr>
+    <tr>
+      <td>dap-015</td>
+      <td>patient-target</td>
+      <td>accessToken, submitPatientRef</td>
+      <td>Create a new document for the bound target patient, return 201 and Location. This changes server state; the fixture search expectations are inclusion/exclusion checks, not global exact counts.</td>
+    </tr>
+    <tr>
+      <td>dap-016</td>
+      <td>None</td>
+      <td>accessToken</td>
+      <td>Reject the malformed submission with 400 or 422. No invalid resource is preloaded.</td>
+    </tr>
+    <tr>
+      <td>dap-017</td>
+      <td>None</td>
+      <td>narrowToken</td>
+      <td>Reject the request with the status in the assertions. Authorization and scope configuration are external prerequisites, not fixture resources.</td>
+    </tr>
+    <tr>
+      <td>con-001</td>
+      <td>Embedded client workflow</td>
+      <td>None</td>
+      <td>The test bed supplies the canned responses in the feature; configure the client to perform the requested workflow. Provider preload is not used.</td>
+    </tr>
+    <tr>
+      <td>con-002</td>
+      <td>Embedded client workflow</td>
+      <td>None</td>
+      <td>The test bed supplies the canned responses in the feature; configure the client to perform the requested workflow. Provider preload is not used.</td>
+    </tr>
+    <tr>
+      <td>con-003</td>
+      <td>Embedded client workflow</td>
+      <td>None</td>
+      <td>The test bed supplies the canned responses in the feature; configure the client to perform the requested workflow. Provider preload is not used.</td>
+    </tr>
+    <tr>
+      <td>con-004</td>
+      <td>Embedded client workflow</td>
+      <td>None</td>
+      <td>The test bed supplies the canned responses in the feature; configure the client to perform the requested workflow. Provider preload is not used.</td>
+    </tr>
+    <tr>
+      <td>con-005</td>
+      <td>Embedded client workflow</td>
+      <td>None</td>
+      <td>The test bed supplies the canned responses in the feature; configure the client to perform the requested workflow. Provider preload is not used.</td>
+    </tr>
+    <tr>
+      <td>con-006</td>
+      <td>Embedded client workflow</td>
+      <td>None</td>
+      <td>The test bed supplies the canned responses in the feature; configure the client to perform the requested workflow. Provider preload is not used.</td>
+    </tr>
+    <tr>
+      <td>grp-001</td>
+      <td>None</td>
+      <td>None</td>
+      <td>No fixture or token required. The live server must declare the capabilities named by the assertions.</td>
+    </tr>
+    <tr>
+      <td>grp-002</td>
+      <td>None</td>
+      <td>None</td>
+      <td>No fixture or token required. The live server must declare the capabilities named by the assertions.</td>
+    </tr>
+    <tr>
+      <td>grp-003</td>
+      <td>patient-target</td>
+      <td>patientId</td>
+      <td>Reject the request with the status in the assertions. Authorization and scope configuration are external prerequisites, not fixture resources.</td>
+    </tr>
+    <tr>
+      <td>grp-004</td>
+      <td>patient-target</td>
+      <td>narrowToken, patientId</td>
+      <td>Reject the request with the status in the assertions. Authorization and scope configuration are external prerequisites, not fixture resources.</td>
+    </tr>
+    <tr>
+      <td>grp-005</td>
+      <td>patient-target, document-target, document-laboratory, document-control, binary-target, patient-control, binary-control</td>
+      <td>accessToken, patientId</td>
+      <td>The searches must include and exclude the fixture resources specified in searchChecks. Extra unrelated server data is allowed only if it matches the query.</td>
+    </tr>
+    <tr>
+      <td>grp-006</td>
+      <td>patient-target, document-target, document-control, document-laboratory, binary-target, patient-control, binary-control</td>
+      <td>accessToken, patientId</td>
+      <td>The searches must include and exclude the fixture resources specified in searchChecks. Extra unrelated server data is allowed only if it matches the query.</td>
+    </tr>
+    <tr>
+      <td>grp-007</td>
+      <td>patient-target, document-target, document-control, document-laboratory, binary-target, patient-control, binary-control</td>
+      <td>accessToken, patientId</td>
+      <td>The searches must include and exclude the fixture resources specified in searchChecks. Extra unrelated server data is allowed only if it matches the query.</td>
+    </tr>
+    <tr>
+      <td>grp-008</td>
+      <td>document-target, patient-target, binary-target</td>
+      <td>accessToken, documentId</td>
+      <td>Read the bound target DocumentReference: current, type 60591-5, category Patient-Summaries, subject target patient and attachment URL pointing to the target Binary.</td>
+    </tr>
+    <tr>
+      <td>grp-009</td>
+      <td>None</td>
+      <td>accessToken</td>
+      <td>The reserved otb-no-such-* identifier in the feature must not exist; expect 404 and an OperationOutcome.</td>
+    </tr>
+    <tr>
+      <td>grp-010</td>
+      <td>binary-target, patient-target</td>
+      <td>accessToken, binaryId</td>
+      <td>Read the bound target Binary. Its content type is text/plain and decoded data matches the bundled synthetic target document.</td>
+    </tr>
+    <tr>
+      <td>grp-011</td>
+      <td>patient-target, patient-control</td>
+      <td>accessToken, patientIdentifier</td>
+      <td>The searches must include and exclude the fixture resources specified in searchChecks. Extra unrelated server data is allowed only if it matches the query.</td>
+    </tr>
+    <tr>
+      <td>grp-012</td>
+      <td>patient-target</td>
+      <td>accessToken, patientId</td>
+      <td>Read the bound target patient: active, Synthetic EUAPITestpatient, gender unknown, birth date 1990-01-01, and the declared fixture identifier.</td>
+    </tr>
+    <tr>
+      <td>grp-013</td>
+      <td>patient-target, patient-control</td>
+      <td>accessToken, patientId</td>
+      <td>The searches must include and exclude the fixture resources specified in searchChecks. Extra unrelated server data is allowed only if it matches the query.</td>
+    </tr>
+    <tr>
+      <td>pub-001</td>
+      <td>Embedded client workflow</td>
+      <td>None</td>
+      <td>The test bed supplies the canned responses in the feature; configure the client to perform the requested workflow. Provider preload is not used.</td>
+    </tr>
+    <tr>
+      <td>pub-002</td>
+      <td>Embedded client workflow</td>
+      <td>None</td>
+      <td>The test bed supplies the canned responses in the feature; configure the client to perform the requested workflow. Provider preload is not used.</td>
+    </tr>
+    <tr>
+      <td>pub-003</td>
+      <td>Embedded client workflow</td>
+      <td>None</td>
+      <td>The test bed supplies the canned responses in the feature; configure the client to perform the requested workflow. Provider preload is not used.</td>
+    </tr>
+    <tr>
+      <td>pub-004</td>
+      <td>Embedded client workflow</td>
+      <td>None</td>
+      <td>The test bed supplies the canned responses in the feature; configure the client to perform the requested workflow. Provider preload is not used.</td>
+    </tr>
+    <tr>
+      <td>pub-005</td>
+      <td>Embedded client workflow</td>
+      <td>None</td>
+      <td>The test bed supplies the canned responses in the feature; configure the client to perform the requested workflow. Provider preload is not used.</td>
+    </tr>
+    <tr>
+      <td>pub-006</td>
+      <td>Embedded client workflow</td>
+      <td>None</td>
+      <td>The test bed supplies the canned responses in the feature; configure the client to perform the requested workflow. Provider preload is not used.</td>
+    </tr>
+    <tr>
+      <td>rap-001</td>
+      <td>None</td>
+      <td>None</td>
+      <td>No fixture or token required. The live server must declare the capabilities named by the assertions.</td>
+    </tr>
+    <tr>
+      <td>rap-002</td>
+      <td>patient-target</td>
+      <td>patientIdentifier</td>
+      <td>Reject the request with the status in the assertions. Authorization and scope configuration are external prerequisites, not fixture resources.</td>
+    </tr>
+    <tr>
+      <td>rap-003</td>
+      <td>patient-target</td>
+      <td>narrowToken, patientId</td>
+      <td>Reject the request with the status in the assertions. Authorization and scope configuration are external prerequisites, not fixture resources.</td>
+    </tr>
+    <tr>
+      <td>rap-004</td>
+      <td>patient-target</td>
+      <td>accessToken, patientId</td>
+      <td>Read the bound target patient: active, Synthetic EUAPITestpatient, gender unknown, birth date 1990-01-01, and the declared fixture identifier.</td>
+    </tr>
+    <tr>
+      <td>rap-005</td>
+      <td>patient-target, patient-control</td>
+      <td>accessToken, patientIdentifier, patientId</td>
+      <td>The searches must include and exclude the fixture resources specified in searchChecks. Extra unrelated server data is allowed only if it matches the query.</td>
+    </tr>
+    <tr>
+      <td>rap-006</td>
+      <td>patient-target, patient-control</td>
+      <td>accessToken, patientId</td>
+      <td>The searches must include and exclude the fixture resources specified in searchChecks. Extra unrelated server data is allowed only if it matches the query.</td>
+    </tr>
+    <tr>
+      <td>rap-007</td>
+      <td>patient-target, condition-target, condition-control, patient-control</td>
+      <td>accessToken, patientId</td>
+      <td>The searches must include and exclude the fixture resources specified in searchChecks. Extra unrelated server data is allowed only if it matches the query.</td>
+    </tr>
+    <tr>
+      <td>rap-008</td>
+      <td>patient-target, allergyintolerance-target, allergyintolerance-control, patient-control</td>
+      <td>accessToken, patientId</td>
+      <td>The searches must include and exclude the fixture resources specified in searchChecks. Extra unrelated server data is allowed only if it matches the query.</td>
+    </tr>
+    <tr>
+      <td>rap-009</td>
+      <td>patient-target, observation-target, observation-control, patient-control</td>
+      <td>accessToken, patientId</td>
+      <td>The searches must include and exclude the fixture resources specified in searchChecks. Extra unrelated server data is allowed only if it matches the query.</td>
+    </tr>
+    <tr>
+      <td>rap-010</td>
+      <td>patient-target, diagnosticreport-target, diagnosticreport-control, patient-control</td>
+      <td>accessToken, patientId</td>
+      <td>The searches must include and exclude the fixture resources specified in searchChecks. Extra unrelated server data is allowed only if it matches the query.</td>
+    </tr>
+    <tr>
+      <td>rap-011</td>
+      <td>patient-target, imagingstudy-target, imagingstudy-control, patient-control</td>
+      <td>accessToken, patientId</td>
+      <td>The searches must include and exclude the fixture resources specified in searchChecks. Extra unrelated server data is allowed only if it matches the query.</td>
+    </tr>
+    <tr>
+      <td>rap-012</td>
+      <td>patient-target, medicationrequest-target, medicationrequest-control, patient-control</td>
+      <td>accessToken, patientId</td>
+      <td>The searches must include and exclude the fixture resources specified in searchChecks. Extra unrelated server data is allowed only if it matches the query.</td>
+    </tr>
+    <tr>
+      <td>rap-013</td>
+      <td>patient-target, medicationdispense-target, medicationdispense-control, patient-control</td>
+      <td>accessToken, patientId</td>
+      <td>The searches must include and exclude the fixture resources specified in searchChecks. Extra unrelated server data is allowed only if it matches the query.</td>
+    </tr>
+    <tr>
+      <td>rap-014</td>
+      <td>patient-target, immunization-target, immunization-control, patient-control</td>
+      <td>accessToken, patientId</td>
+      <td>The searches must include and exclude the fixture resources specified in searchChecks. Extra unrelated server data is allowed only if it matches the query.</td>
+    </tr>
+    <tr>
+      <td>rap-015</td>
+      <td>patient-target, medicationstatement-target, medicationstatement-control, patient-control</td>
+      <td>accessToken, patientId</td>
+      <td>The searches must include and exclude the fixture resources specified in searchChecks. Extra unrelated server data is allowed only if it matches the query.</td>
+    </tr>
+    <tr>
+      <td>rap-016</td>
+      <td>patient-target, encounter-target, encounter-control, patient-control</td>
+      <td>accessToken, patientId</td>
+      <td>The searches must include and exclude the fixture resources specified in searchChecks. Extra unrelated server data is allowed only if it matches the query.</td>
+    </tr>
+    <tr>
+      <td>rap-017</td>
+      <td>patient-target, observation-target, observation-control, patient-control</td>
+      <td>accessToken, patientId</td>
+      <td>The searches must include and exclude the fixture resources specified in searchChecks. Extra unrelated server data is allowed only if it matches the query.</td>
+    </tr>
+    <tr>
+      <td>rap-018</td>
+      <td>None</td>
+      <td>accessToken</td>
+      <td>The reserved otb-no-such-* identifier in the feature must not exist; expect 404 and an OperationOutcome.</td>
+    </tr>
+    <tr>
+      <td>rc-001</td>
+      <td>Embedded client workflow</td>
+      <td>None</td>
+      <td>The test bed supplies the canned responses in the feature; configure the client to perform the requested workflow. Provider preload is not used.</td>
+    </tr>
+    <tr>
+      <td>rc-002</td>
+      <td>Embedded client workflow</td>
+      <td>None</td>
+      <td>The test bed supplies the canned responses in the feature; configure the client to perform the requested workflow. Provider preload is not used.</td>
+    </tr>
+    <tr>
+      <td>rc-003</td>
+      <td>Embedded client workflow</td>
+      <td>None</td>
+      <td>The test bed supplies the canned responses in the feature; configure the client to perform the requested workflow. Provider preload is not used.</td>
+    </tr>
+    <tr>
+      <td>rc-004</td>
+      <td>Embedded client workflow</td>
+      <td>None</td>
+      <td>The test bed supplies the canned responses in the feature; configure the client to perform the requested workflow. Provider preload is not used.</td>
+    </tr>
+    <tr>
+      <td>rc-005</td>
+      <td>Embedded client workflow</td>
+      <td>None</td>
+      <td>The test bed supplies the canned responses in the feature; configure the client to perform the requested workflow. Provider preload is not used.</td>
+    </tr>
+    <tr>
+      <td>rc-006</td>
+      <td>Embedded client workflow</td>
+      <td>None</td>
+      <td>The test bed supplies the canned responses in the feature; configure the client to perform the requested workflow. Provider preload is not used.</td>
+    </tr>
+    <tr>
+      <td>rc-007</td>
+      <td>Embedded client workflow</td>
+      <td>None</td>
+      <td>The test bed supplies the canned responses in the feature; configure the client to perform the requested workflow. Provider preload is not used.</td>
+    </tr>
+  </tbody>
+</table>
+
+<h4 id="what-this-establishes">What this establishes</h4>
+
+<p>The manifest expresses the fixture contract; its <code class="language-plaintext highlighter-rouge">assertions</code> list records what the existing Gherkin actually checks. The generic Gherkin cases are not yet assertions of every fixture field. For example, a Patient read currently checks profile conformance, whereas the fixture verifier also checks the declared demographic values. The current Gherkin profile checks ignore slicing errors. The separate fixture validation command validates all 27 resources against core R4 and both patients against EU Core Patient without suppressing slicing errors; external terminology is disabled and its warnings are reported. This fixture set does not claim MHD Minimal metadata or IPS document-content conformance. The fixture checker verifies Binary data or standard content negotiation. The fixture checker verifies data and search membership; it does not replace a FHIR profile validator or the authorization tests.</p>
+
+<p>The 19 client cases use embedded requests/responses and operator-driven workflows from their features. This provider dataset is not an executable client implementation. CapabilityStatement, TLS and token/scope behavior are external prerequisites, not properties a transaction bundle can install.</p>
+
+<p>R4 fixtures travel under <code class="language-plaintext highlighter-rouge">package/tests/fixtures/provider-v1/</code>, not as R6 examples or resources in this TestPlan IG. Generate/check with <code class="language-plaintext highlighter-rouge">node scripts/build-fixtures.mjs</code> / <code class="language-plaintext highlighter-rouge">node scripts/build-fixtures.mjs --check</code>.</p>
+
+<p><a name="gherkin"> </a></p>
+
+<h3 id="the-gherkin-feature-files">The Gherkin feature files</h3>
+
+<p>The executable test cases live under <code class="language-plaintext highlighter-rouge">input/testing/gherkin/</code>. They ship <strong>as Gherkin, not as a FHIR resource</strong>: the <code class="language-plaintext highlighter-rouge">path-test</code> parameter mirrors the test tree into the published package under <code class="language-plaintext highlighter-rouge">package/tests/gherkin/</code>, which is what a test runner consumes. <code class="language-plaintext highlighter-rouge">TestPlan.suite.input.file</code> names the file, and each <code class="language-plaintext highlighter-rouge">suite.test</code> matches a <code class="language-plaintext highlighter-rouge">Scenario:</code> by its identifier.</p>
+
+<p>The Binary resources on this site exist only so the scripts render as syntax-highlighted pages; removing them changes nothing for a runner.</p>
+
+
+
+
+</div>
+        </div>    <!-- /inner-wrapper -->
+      </div>    <!-- /row -->
+    </div>    <!-- /container -->
+  </div>    <!-- /segment-content -->
+
+  <script src="assets/js/jquery.js" type="text/javascript"> </script>       <!-- note keep space here, otherwise it will be transformed to empty tag -> fails -->
+  <script src="assets/js/jquery-ui.min.js" type="text/javascript"> </script>
+  <script src="assets/js/flags.js" type="text/javascript"> </script>
+
+  <script src="assets/js/window-hash.js" type="text/javascript"> </script>
+  <script src="assets/js/togglechanges.js" type="text/javascript"> </script>
+  <script src="assets/js/requirements-table.js" type="text/javascript"> </script>
+  <a name="bottom"> </a>
+  <div igtool="footer" id="segment-footer" class="segment">    <!-- segment-footer -->
+    <div class="container" data-fhir="generated">    <!-- container -->
+
+      <div class="inner-wrapper">
+        <p>
+
+
+
+          IG &copy; 2026+ <a style="color:var(--footer-hyperlink-text-color)" href="https://trifork.com">Jens Kristian Villadsen</a>.  
+          Package hl7.fhir.eu.health-data-api.test#0.1.0 based on <a style="color: var(--footer-hyperlink-text-color)" href="http://hl7.org/fhir/6.0.0-ballot5/">FHIR 6.0.0-snapshot1</a>.
+          Generated 
+  <span title="2026-11-06 19:37:00 +0000">
+    2026-11-06
+  </span>
+
+          <br/>
+          <span style="color: var(--footer-highlight-text-color)">
+            <div style="color: #333333">
+
+  Links: <a style="color: #81BEF7" href="toc.html">Table of Contents</a> |
+  <a style="color: #81BEF7" href="../qa.html">QA Report</a>
+    <!-- <a style="color: #81BEF7" target="_blank" href="http://example.com/fhir/hl7.fhir.eu.health-data-api.test/history.html">Version History <img alt="external" style="vertical-align: baseline" src="external.png"/></a></a> | -->
+  <a rel="license" style="color: #81BEF7" href="http://hl7.org/fhir/6.0.0-ballot5/license.html"><img src="cc0.png" alt="CC0" style="border-style: none;"/></a>
+    <!-- <a style="color: #81BEF7" href="todo.html">Search</a> | -->
+  <a style="color: #81BEF7" href="http://jira.hl7.org" target="_blank">Propose a change<img src="external.png" alt="external" style="vertical-align: baseline"/></a>
+
+  <div>
+  </div>
+
+</div>
+          </span>
+        </p>
+      </div>    <!-- /inner-wrapper -->
+    </div>    <!-- /container -->
+  </div>    <!-- /segment-footer -->
+  
+  <div id="segment-post-footer" class="segment hidden">    <!-- segment-post-footer -->
+    <div class="container">    <!-- container -->
+    </div>    <!-- /container -->
+  </div>    <!-- /segment-post-footer -->
+
+    <!-- JS and analytics only. -->
+    <!-- Bootstrap core JavaScript
+  ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+  <script src="assets/js/bootstrap.min.js" type="text/javascript"> </script>
+  <script src="assets/js/respond.min.js" type="text/javascript"> </script>
+  <script src="assets/js/anchor.min.js" type="text/javascript"> </script>
+  <script src="assets/js/clipboard.min.js" type="text/javascript"> </script>
+  <script src="assets/js/clipboard-btn.js" type="text/javascript"> </script>
+  <script src="assets/js/anchor-hover.js" type="text/javascript"> </script>
+    <!-- Analytics Below
+  ================================================== -->
+  </body>
+</html>

@@ -1,0 +1,49 @@
+[{
+  "id" : "hl7.fhir.eu.health-data-api.test",
+  "type" : "ImplementationGuide",
+  "url" : "http://example.com/fhir/hl7.fhir.eu.health-data-api.test/ImplementationGuide/hl7.fhir.eu.health-data-api.test",
+  "version" : "0.1.0",
+  "name" : "EUHealthDataApiTesting"
+},
+{
+  "id" : "eu-api-document-access-provider-tests",
+  "type" : "TestPlan",
+  "url" : "http://example.com/fhir/hl7.fhir.eu.health-data-api.test/TestPlan/eu-api-document-access-provider-tests",
+  "version" : "0.1.0",
+  "name" : "DocumentAccessProviderTestPlan"
+},
+{
+  "id" : "eu-api-document-consumer-tests",
+  "type" : "TestPlan",
+  "url" : "http://example.com/fhir/hl7.fhir.eu.health-data-api.test/TestPlan/eu-api-document-consumer-tests",
+  "version" : "0.1.0",
+  "name" : "DocumentConsumerTestPlan"
+},
+{
+  "id" : "eu-api-document-publisher-access-provider-tests",
+  "type" : "TestPlan",
+  "url" : "http://example.com/fhir/hl7.fhir.eu.health-data-api.test/TestPlan/eu-api-document-publisher-access-provider-tests",
+  "version" : "0.1.0",
+  "name" : "GroupedDocumentPublisherAccessProviderTestPlan"
+},
+{
+  "id" : "eu-api-document-publisher-tests",
+  "type" : "TestPlan",
+  "url" : "http://example.com/fhir/hl7.fhir.eu.health-data-api.test/TestPlan/eu-api-document-publisher-tests",
+  "version" : "0.1.0",
+  "name" : "DocumentPublisherTestPlan"
+},
+{
+  "id" : "eu-api-resource-access-provider-tests",
+  "type" : "TestPlan",
+  "url" : "http://example.com/fhir/hl7.fhir.eu.health-data-api.test/TestPlan/eu-api-resource-access-provider-tests",
+  "version" : "0.1.0",
+  "name" : "ResourceAccessProviderTestPlan"
+},
+{
+  "id" : "eu-api-resource-consumer-tests",
+  "type" : "TestPlan",
+  "url" : "http://example.com/fhir/hl7.fhir.eu.health-data-api.test/TestPlan/eu-api-resource-consumer-tests",
+  "version" : "0.1.0",
+  "name" : "ResourceConsumerTestPlan"
+}]

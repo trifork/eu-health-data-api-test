@@ -1,0 +1,212 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<TestPlan xmlns="http://hl7.org/fhir" resourceDefinition="http://hl7.org/fhir/StructureDefinition/TestPlan|0.1.0-snapshot1">
+  <id value="eu-api-document-consumer-tests"/>
+  <language value="en"/>
+  <text>
+    <status value="generated"/><div xmlns="http://www.w3.org/1999/xhtml"><p class="res-header-id"><b>Generated Narrative: TestPlan eu-api-document-consumer-tests</b></p><a name="eu-api-document-consumer-tests"> </a><a name="hceu-api-document-consumer-tests"> </a><p><b>Scopes</b></p><table class="grid"><tr><td><b>Reference</b></td><td><b>Description</b></td></tr><tr><td><code>http://hl7.eu/fhir/health-data-api/ActorDefinition/document-consumer-actor-eu-api</code></td><td>The Document Consumer, a client that finds and retrieves documents from an Access Provider, is the system under test. The test bed plays the Access Provider.</td></tr></table><p><b>1 Suite: SMART Backend Services authorization</b></p><p>Rule: SMART Backend Services authorization — the scenarios grouped under it in the feature file.</p><p><b>Inputs</b></p><table class="grid"><tr><td><b>Name</b></td><td><b>File</b></td></tr><tr><td>gherkin-script</td><td>eu-api-document-consumer.feature</td></tr></table><p><b>Tests</b></p><table class="grid"><tr><td><b>Name</b></td><td><b>Description</b></td><td><b>Operation</b></td></tr><tr><td>con-001 The SUT authenticates with a signed JWT client assertion (RFC 7523)</td><td>Fixture contract: fixtures/provider-v1/manifest.json, cases.con-001 (input bindings and expected data). Covers security.smart-backend-services.</td><td>gherkin/Scenario</td></tr></table><hr/><p><b>2 Suite: Patient lookup [ITI-78]</b></p><p>Rule: Patient lookup [ITI-78] — the scenarios grouped under it in the feature file.</p><p><b>Inputs</b></p><table class="grid"><tr><td><b>Name</b></td><td><b>File</b></td></tr><tr><td>gherkin-script</td><td>eu-api-document-consumer.feature</td></tr></table><p><b>Tests</b></p><table class="grid"><tr><td><b>Name</b></td><td><b>Description</b></td><td><b>Operation</b></td></tr><tr><td>con-002 The SUT searches Patient by the identifier parameter</td><td>Fixture contract: fixtures/provider-v1/manifest.json, cases.con-002 (input bindings and expected data). Covers Patient.search-type, Patient.search.identifier.</td><td>gherkin/Scenario</td></tr></table><hr/><p><b>3 Suite: Find Document References [ITI-67]</b></p><p>Rule: Find Document References [ITI-67] — the scenarios grouped under it in the feature file.</p><p><b>Inputs</b></p><table class="grid"><tr><td><b>Name</b></td><td><b>File</b></td></tr><tr><td>gherkin-script</td><td>eu-api-document-consumer.feature</td></tr></table><p><b>Tests</b></p><table class="grid"><tr><td><b>Name</b></td><td><b>Description</b></td><td><b>Operation</b></td></tr><tr><td>con-003 The SUT searches DocumentReference by patient</td><td>Fixture contract: fixtures/provider-v1/manifest.json, cases.con-003 (input bindings and expected data). Covers DocumentReference.search-type.</td><td>gherkin/Scenario</td></tr><tr><td>con-004 The SUT can narrow the search by category or type</td><td>Fixture contract: fixtures/provider-v1/manifest.json, cases.con-004 (input bindings and expected data). Covers DocumentReference.search-type.</td><td>gherkin/Scenario</td></tr></table><hr/><p><b>4 Suite: Retrieve Document [ITI-68]</b></p><p>Rule: Retrieve Document [ITI-68] — the scenarios grouped under it in the feature file.</p><p><b>Inputs</b></p><table class="grid"><tr><td><b>Name</b></td><td><b>File</b></td></tr><tr><td>gherkin-script</td><td>eu-api-document-consumer.feature</td></tr></table><p><b>Tests</b></p><table class="grid"><tr><td><b>Name</b></td><td><b>Description</b></td><td><b>Operation</b></td></tr><tr><td>con-005 The SUT retrieves the document content with a bearer token</td><td>Fixture contract: fixtures/provider-v1/manifest.json, cases.con-005 (input bindings and expected data). Covers Binary.read, DocumentReference.read.</td><td>gherkin/Scenario</td></tr></table><hr/><p><b>5 Suite: Transport security</b></p><p>Rule: Transport security — the scenarios grouped under it in the feature file.</p><p><b>Inputs</b></p><table class="grid"><tr><td><b>Name</b></td><td><b>File</b></td></tr><tr><td>gherkin-script</td><td>eu-api-document-consumer.feature</td></tr></table><p><b>Tests</b></p><table class="grid"><tr><td><b>Name</b></td><td><b>Description</b></td><td><b>Operation</b></td></tr><tr><td>con-006 TLS 1.2 or higher is used for all communications</td><td>Fixture contract: fixtures/provider-v1/manifest.json, cases.con-006 (input bindings and expected data). Covers security.tls.</td><td>gherkin/Scenario</td></tr></table></div>
+  </text>
+  <url value="http://example.com/fhir/hl7.fhir.eu.health-data-api.test/TestPlan/eu-api-document-consumer-tests"/>
+  <version value="0.1.0"/>
+  <name value="DocumentConsumerTestPlan"/>
+  <title value="Document Consumer Test Plan"/>
+  <status value="draft"/>
+  <experimental value="true"/>
+  <date value="2026-11-06"/>
+  <publisher value="Jens Kristian Villadsen"/>
+  <contact>
+    <name value="Jens Kristian Villadsen"/>
+    <telecom>
+      <system value="url"/>
+      <value value="https://trifork.com"/>
+    </telecom>
+  </contact>
+  <description value="Test plan for the **Document Consumer** actor of [EU Health Data API, 1.0.0-ballot](https://build.fhir.org/ig/euridice-org/eu-health-data-api/).&#xA;The SUT obtains a token, finds the patient, finds the documents and retrieves one.&#xA;Each `suite` below is a `Rule:` of the Gherkin feature named by `suite.input.file`, and each `suite.test` one of its `Scenario:` lines, matched by the scenario's identifier. The assertions are the scenario's `Then` steps, verbatim.&#xA;The tests declare which specification obligations they cover (8 requirement paths named by the feature tags).&#xA;Fixture prerequisites, input bindings and expected data are in tests/fixtures/provider-v1/manifest.json, keyed by scenario ID. See the Testing page, Fixture contract and expected results. Provider fixtures are R4; client workflows use the canned data embedded in their feature."/>
+  <jurisdiction>
+    <coding>
+      <system value="http://unstats.un.org/unsd/methods/m49/m49.htm"/>
+      <code value="001"/>
+      <display value="World"/>
+    </coding>
+  </jurisdiction>
+  <purpose value="To declare, in a machine-readable and runnable form, which behaviours a system claiming conformance to the Document Consumer actor must demonstrate."/>
+  <scope>
+    <reference value="http://hl7.eu/fhir/health-data-api/ActorDefinition/document-consumer-actor-eu-api"/>
+    <description value="The Document Consumer, a client that finds and retrieves documents from an Access Provider, is the system under test. The test bed plays the Access Provider."/>
+  </scope>
+  <runner value="https://www.itb.ec.europa.eu/docs/guides/latest/"/>
+  <suite>
+    <name value="SMART Backend Services authorization"/>
+    <description value="Rule: SMART Backend Services authorization — the scenarios grouped under it in the feature file."/>
+    <input>
+      <name value="gherkin-script"/>
+      <file value="eu-api-document-consumer.feature"/>
+    </input>
+    <test>
+      <name value="con-001 The SUT authenticates with a signed JWT client assertion (RFC 7523)"/>
+      <description value="Fixture contract: fixtures/provider-v1/manifest.json, cases.con-001 (input bindings and expected data). Covers security.smart-backend-services."/>
+      <operation value="gherkin/Scenario"/>
+      <assertion>
+        <severity value="error"/>
+        <human value="$received.method should be &quot;POST&quot;"/>
+      </assertion>
+      <assertion>
+        <severity value="error"/>
+        <human value="$received.body should contain &quot;grant_type=client_credentials&quot;"/>
+      </assertion>
+      <assertion>
+        <severity value="error"/>
+        <human value="$received.body should contain &quot;client_assertion_type=urn%3Aietf%3Aparams%3Aoauth%3Aclient-assertion-type%3Ajwt-bearer&quot;"/>
+      </assertion>
+      <assertion>
+        <severity value="error"/>
+        <human value="$received.body should match &quot;client_assertion=[A-Za-z0-9_-]+[.][A-Za-z0-9_-]+[.][A-Za-z0-9_-]+([&amp;]|$)&quot;"/>
+      </assertion>
+      <assertion>
+        <severity value="error"/>
+        <human value="$received.body should contain &quot;scope=&quot;"/>
+      </assertion>
+      <assertion>
+        <severity value="error"/>
+        <human value="AccessProvider replies to DocumentConsumer with status 200 and:"/>
+      </assertion>
+    </test>
+  </suite>
+  <suite>
+    <name value="Patient lookup [ITI-78]"/>
+    <description value="Rule: Patient lookup [ITI-78] — the scenarios grouped under it in the feature file."/>
+    <input>
+      <name value="gherkin-script"/>
+      <file value="eu-api-document-consumer.feature"/>
+    </input>
+    <test>
+      <name value="con-002 The SUT searches Patient by the identifier parameter"/>
+      <description value="Fixture contract: fixtures/provider-v1/manifest.json, cases.con-002 (input bindings and expected data). Covers Patient.search-type, Patient.search.identifier."/>
+      <operation value="gherkin/Scenario"/>
+      <assertion>
+        <severity value="error"/>
+        <human value="$received.method should be &quot;GET&quot;"/>
+      </assertion>
+      <assertion>
+        <severity value="error"/>
+        <human value="$received.path should contain &quot;/Patient&quot;"/>
+      </assertion>
+      <assertion>
+        <severity value="error"/>
+        <human value="$received.path should contain &quot;identifier=&quot;"/>
+      </assertion>
+      <assertion>
+        <severity value="error"/>
+        <human value="$received.headers.Authorization should contain &quot;Bearer&quot;"/>
+      </assertion>
+      <assertion>
+        <severity value="error"/>
+        <human value="AccessProvider replies to DocumentConsumer with status 200 and:"/>
+      </assertion>
+    </test>
+  </suite>
+  <suite>
+    <name value="Find Document References [ITI-67]"/>
+    <description value="Rule: Find Document References [ITI-67] — the scenarios grouped under it in the feature file."/>
+    <input>
+      <name value="gherkin-script"/>
+      <file value="eu-api-document-consumer.feature"/>
+    </input>
+    <test>
+      <name value="con-003 The SUT searches DocumentReference by patient"/>
+      <description value="Fixture contract: fixtures/provider-v1/manifest.json, cases.con-003 (input bindings and expected data). Covers DocumentReference.search-type."/>
+      <operation value="gherkin/Scenario"/>
+      <assertion>
+        <severity value="error"/>
+        <human value="$received.method should be &quot;GET&quot;"/>
+      </assertion>
+      <assertion>
+        <severity value="error"/>
+        <human value="$received.path should contain &quot;/DocumentReference&quot;"/>
+      </assertion>
+      <assertion>
+        <severity value="error"/>
+        <human value="$received.path should match &quot;patient=(Patient(/|%2F))?otb-pat-1([&amp;]|$)&quot;"/>
+      </assertion>
+      <assertion>
+        <severity value="error"/>
+        <human value="$received.headers.Authorization should contain &quot;Bearer&quot;"/>
+      </assertion>
+      <assertion>
+        <severity value="error"/>
+        <human value="AccessProvider replies to DocumentConsumer with status 200 and:"/>
+      </assertion>
+    </test>
+    <test>
+      <name value="con-004 The SUT can narrow the search by category or type"/>
+      <description value="Fixture contract: fixtures/provider-v1/manifest.json, cases.con-004 (input bindings and expected data). Covers DocumentReference.search-type."/>
+      <operation value="gherkin/Scenario"/>
+      <assertion>
+        <severity value="error"/>
+        <human value="$received.method should be &quot;GET&quot;"/>
+      </assertion>
+      <assertion>
+        <severity value="error"/>
+        <human value="$received.path should contain &quot;/DocumentReference&quot;"/>
+      </assertion>
+      <assertion>
+        <severity value="error"/>
+        <human value="$received.path should match &quot;patient=(Patient(/|%2F))?otb-pat-1([&amp;]|$)&quot;"/>
+      </assertion>
+      <assertion>
+        <severity value="error"/>
+        <human value="$received.path should match &quot;[?&amp;](type|category)=&quot;"/>
+      </assertion>
+      <assertion>
+        <severity value="error"/>
+        <human value="AccessProvider replies to DocumentConsumer with status 200 and:"/>
+      </assertion>
+    </test>
+  </suite>
+  <suite>
+    <name value="Retrieve Document [ITI-68]"/>
+    <description value="Rule: Retrieve Document [ITI-68] — the scenarios grouped under it in the feature file."/>
+    <input>
+      <name value="gherkin-script"/>
+      <file value="eu-api-document-consumer.feature"/>
+    </input>
+    <test>
+      <name value="con-005 The SUT retrieves the document content with a bearer token"/>
+      <description value="Fixture contract: fixtures/provider-v1/manifest.json, cases.con-005 (input bindings and expected data). Covers Binary.read, DocumentReference.read."/>
+      <operation value="gherkin/Scenario"/>
+      <assertion>
+        <severity value="error"/>
+        <human value="$received.method should be &quot;GET&quot;"/>
+      </assertion>
+      <assertion>
+        <severity value="error"/>
+        <human value="$received.path should match &quot;Binary/otb-bin-1([?#]|$)&quot;"/>
+      </assertion>
+      <assertion>
+        <severity value="error"/>
+        <human value="$received.headers.Authorization should contain &quot;Bearer&quot;"/>
+      </assertion>
+      <assertion>
+        <severity value="error"/>
+        <human value="AccessProvider replies to DocumentConsumer with status 200 and:"/>
+      </assertion>
+    </test>
+  </suite>
+  <suite>
+    <name value="Transport security"/>
+    <description value="Rule: Transport security — the scenarios grouped under it in the feature file."/>
+    <input>
+      <name value="gherkin-script"/>
+      <file value="eu-api-document-consumer.feature"/>
+    </input>
+    <test>
+      <name value="con-006 TLS 1.2 or higher is used for all communications"/>
+      <description value="Fixture contract: fixtures/provider-v1/manifest.json, cases.con-006 (input bindings and expected data). Covers security.tls."/>
+      <operation value="gherkin/Scenario"/>
+      <assertion>
+        <severity value="error"/>
+        <human value="TLS &gt;= 1.2 — DocumentConsumer confirms each of these is accepted for &quot;the connection&quot;"/>
+      </assertion>
+    </test>
+  </suite>
+</TestPlan>

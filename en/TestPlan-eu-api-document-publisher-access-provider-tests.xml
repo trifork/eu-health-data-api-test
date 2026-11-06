@@ -1,0 +1,315 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<TestPlan xmlns="http://hl7.org/fhir" resourceDefinition="http://hl7.org/fhir/StructureDefinition/TestPlan|0.1.0-snapshot1">
+  <id value="eu-api-document-publisher-access-provider-tests"/>
+  <language value="en"/>
+  <text>
+    <status value="generated"/><div xmlns="http://www.w3.org/1999/xhtml"><p class="res-header-id"><b>Generated Narrative: TestPlan eu-api-document-publisher-access-provider-tests</b></p><a name="eu-api-document-publisher-access-provider-tests"> </a><a name="hceu-api-document-publisher-access-provider-tests"> </a><p><b>Scopes</b></p><table class="grid"><tr><td><b>Reference</b></td><td><b>Description</b></td></tr><tr><td><code>http://hl7.eu/fhir/health-data-api/ActorDefinition/document-publisher-access-provider-actor-eu-api</code></td><td>The grouped Document Publisher/Access Provider, whose externally exposed surface is query and retrieval only, is the system under test.</td></tr></table><p><b>1 Suite: The server declares what the actor requires</b></p><p>Rule: The server declares what the actor requires — the scenarios grouped under it in the feature file.</p><p><b>Inputs</b></p><table class="grid"><tr><td><b>Name</b></td><td><b>File</b></td></tr><tr><td>gherkin-script</td><td>eu-api-document-publisher-access-provider.feature</td></tr></table><p><b>Tests</b></p><table class="grid"><tr><td><b>Name</b></td><td><b>Description</b></td><td><b>Operation</b></td></tr><tr><td>grp-001 The CapabilityStatement declares DocumentReference and Binary</td><td>Fixture contract: fixtures/provider-v1/manifest.json, cases.grp-001 (input bindings and expected data). Covers CapabilityStatement.rest.resource.DocumentReference, CapabilityStatement.rest.resource.Binary.</td><td>gherkin/Scenario</td></tr><tr><td>grp-002 The CapabilityStatement declares SMART on FHIR security</td><td>Fixture contract: fixtures/provider-v1/manifest.json, cases.grp-002 (input bindings and expected data). Covers CapabilityStatement.rest.security.</td><td>gherkin/Scenario</td></tr></table><hr/><p><b>2 Suite: Every transaction requires SMART Backend Services authorization</b></p><p>Rule: Every transaction requires SMART Backend Services authorization — the scenarios grouped under it in the feature file.</p><p><b>Inputs</b></p><table class="grid"><tr><td><b>Name</b></td><td><b>File</b></td></tr><tr><td>gherkin-script</td><td>eu-api-document-publisher-access-provider.feature</td></tr></table><p><b>Tests</b></p><table class="grid"><tr><td><b>Name</b></td><td><b>Description</b></td><td><b>Operation</b></td></tr><tr><td>grp-003 A request without a token is refused</td><td>Fixture contract: fixtures/provider-v1/manifest.json, cases.grp-003 (input bindings and expected data). Covers security.authorization.</td><td>gherkin/Scenario</td></tr><tr><td>grp-004 A token with no usable scope is refused</td><td>Fixture contract: fixtures/provider-v1/manifest.json, cases.grp-004 (input bindings and expected data). Covers security.scope.</td><td>gherkin/Scenario</td></tr></table><hr/><p><b>3 Suite: Find Document References [ITI-67]</b></p><p>Rule: Find Document References [ITI-67] — the scenarios grouped under it in the feature file.</p><p><b>Inputs</b></p><table class="grid"><tr><td><b>Name</b></td><td><b>File</b></td></tr><tr><td>gherkin-script</td><td>eu-api-document-publisher-access-provider.feature</td></tr></table><p><b>Tests</b></p><table class="grid"><tr><td><b>Name</b></td><td><b>Description</b></td><td><b>Operation</b></td></tr><tr><td>grp-005 Search by patient returns a searchset of conformant DocumentReferences</td><td>Fixture contract: fixtures/provider-v1/manifest.json, cases.grp-005 (input bindings and expected data). Covers DocumentReference.search-type.</td><td>gherkin/Scenario</td></tr><tr><td>grp-006 Search by EEHRxF priority category</td><td>Fixture contract: fixtures/provider-v1/manifest.json, cases.grp-006 (input bindings and expected data). Covers DocumentReference.search-type.</td><td>gherkin/Scenario</td></tr><tr><td>grp-007 Search by LOINC document type</td><td>Fixture contract: fixtures/provider-v1/manifest.json, cases.grp-007 (input bindings and expected data). Covers DocumentReference.search-type.</td><td>gherkin/Scenario</td></tr><tr><td>grp-008 Read a DocumentReference by id</td><td>Fixture contract: fixtures/provider-v1/manifest.json, cases.grp-008 (input bindings and expected data). Covers DocumentReference.read.</td><td>gherkin/Scenario</td></tr><tr><td>grp-009 An unknown DocumentReference id gives 404 and an OperationOutcome</td><td>Fixture contract: fixtures/provider-v1/manifest.json, cases.grp-009 (input bindings and expected data). Covers DocumentReference.read.</td><td>gherkin/Scenario</td></tr></table><hr/><p><b>4 Suite: Retrieve Document [ITI-68]</b></p><p>Rule: Retrieve Document [ITI-68] — the scenarios grouped under it in the feature file.</p><p><b>Inputs</b></p><table class="grid"><tr><td><b>Name</b></td><td><b>File</b></td></tr><tr><td>gherkin-script</td><td>eu-api-document-publisher-access-provider.feature</td></tr></table><p><b>Tests</b></p><table class="grid"><tr><td><b>Name</b></td><td><b>Description</b></td><td><b>Operation</b></td></tr><tr><td>grp-010 Read the document content as a Binary</td><td>Fixture contract: fixtures/provider-v1/manifest.json, cases.grp-010 (input bindings and expected data). Covers Binary.read.</td><td>gherkin/Scenario</td></tr></table><hr/><p><b>5 Suite: Patient lookup (PDQm ITI-78) is available when the server offers it</b></p><p>Rule: Patient lookup (PDQm ITI-78) is available when the server offers it — the scenarios grouped under it in the feature file.</p><p><b>Inputs</b></p><table class="grid"><tr><td><b>Name</b></td><td><b>File</b></td></tr><tr><td>gherkin-script</td><td>eu-api-document-publisher-access-provider.feature</td></tr></table><p><b>Tests</b></p><table class="grid"><tr><td><b>Name</b></td><td><b>Description</b></td><td><b>Operation</b></td></tr><tr><td>grp-011 Search Patient by identifier</td><td>Patient is SHOULD on the Access Provider: a server that does not offer it answers 404 or 501 and these scenarios are not applicable to it. A server that does offer it SHALL support all of the search parameters below. Fixture contract: fixtures/provider-v1/manifest.json, cases.grp-011 (input bindings and expected data). Covers Patient.read, Patient.search-type, Patient.search.identifier.</td><td>gherkin/Scenario</td></tr><tr><td>grp-012 Read Patient by id and conform to patient-eu-core</td><td>Fixture contract: fixtures/provider-v1/manifest.json, cases.grp-012 (input bindings and expected data). Covers Patient.read, Patient.search.id.</td><td>gherkin/Scenario</td></tr><tr><td>grp-013 Search Patient by demographics the reference patient has</td><td>Fixture contract: fixtures/provider-v1/manifest.json, cases.grp-013 (input bindings and expected data). Covers Patient.search.family, Patient.search.given, Patient.search.birthdate, Patient.search.gender.</td><td>gherkin/Scenario</td></tr></table></div>
+  </text>
+  <url value="http://example.com/fhir/hl7.fhir.eu.health-data-api.test/TestPlan/eu-api-document-publisher-access-provider-tests"/>
+  <version value="0.1.0"/>
+  <name value="GroupedDocumentPublisherAccessProviderTestPlan"/>
+  <title value="Grouped Document Publisher/Access Provider Test Plan"/>
+  <status value="draft"/>
+  <experimental value="true"/>
+  <date value="2026-11-06"/>
+  <publisher value="Jens Kristian Villadsen"/>
+  <contact>
+    <name value="Jens Kristian Villadsen"/>
+    <telecom>
+      <system value="url"/>
+      <value value="https://trifork.com"/>
+    </telecom>
+  </contact>
+  <description value="Test plan for the **Grouped Document Publisher/Access Provider** actor of [EU Health Data API, 1.0.0-ballot](https://build.fhir.org/ig/euridice-org/eu-health-data-api/).&#xA;The SUT produces and serves its own documents; only the read side is external.&#xA;Each `suite` below is a `Rule:` of the Gherkin feature named by `suite.input.file`, and each `suite.test` one of its `Scenario:` lines, matched by the scenario's identifier. The assertions are the scenario's `Then` steps, verbatim.&#xA;The tests declare which specification obligations they cover (20 requirement paths named by the feature tags).&#xA;Fixture prerequisites, input bindings and expected data are in tests/fixtures/provider-v1/manifest.json, keyed by scenario ID. See the Testing page, Fixture contract and expected results. Provider fixtures are R4; client workflows use the canned data embedded in their feature."/>
+  <jurisdiction>
+    <coding>
+      <system value="http://unstats.un.org/unsd/methods/m49/m49.htm"/>
+      <code value="001"/>
+      <display value="World"/>
+    </coding>
+  </jurisdiction>
+  <purpose value="To declare, in a machine-readable and runnable form, which behaviours a system claiming conformance to the Grouped Document Publisher/Access Provider actor must demonstrate."/>
+  <scope>
+    <reference value="http://hl7.eu/fhir/health-data-api/ActorDefinition/document-publisher-access-provider-actor-eu-api"/>
+    <description value="The grouped Document Publisher/Access Provider, whose externally exposed surface is query and retrieval only, is the system under test."/>
+  </scope>
+  <runner value="https://www.itb.ec.europa.eu/docs/guides/latest/"/>
+  <suite>
+    <name value="The server declares what the actor requires"/>
+    <description value="Rule: The server declares what the actor requires — the scenarios grouped under it in the feature file."/>
+    <input>
+      <name value="gherkin-script"/>
+      <file value="eu-api-document-publisher-access-provider.feature"/>
+    </input>
+    <test>
+      <name value="grp-001 The CapabilityStatement declares DocumentReference and Binary"/>
+      <description value="Fixture contract: fixtures/provider-v1/manifest.json, cases.grp-001 (input bindings and expected data). Covers CapabilityStatement.rest.resource.DocumentReference, CapabilityStatement.rest.resource.Binary."/>
+      <operation value="gherkin/Scenario"/>
+      <assertion>
+        <severity value="error"/>
+        <human value="$response.status should be 200"/>
+      </assertion>
+      <assertion>
+        <severity value="error"/>
+        <human value="$capability at &quot;CapabilityStatement.rest.where(mode='server').resource.where(type='DocumentReference').interaction.where(code='search-type').exists()&quot; should be true"/>
+      </assertion>
+      <assertion>
+        <severity value="error"/>
+        <human value="$capability at &quot;CapabilityStatement.rest.where(mode='server').resource.where(type='DocumentReference').interaction.where(code='read').exists()&quot; should be true"/>
+      </assertion>
+      <assertion>
+        <severity value="error"/>
+        <human value="$capability at &quot;CapabilityStatement.rest.where(mode='server').resource.where(type='Binary').interaction.where(code='read').exists()&quot; should be true"/>
+      </assertion>
+    </test>
+    <test>
+      <name value="grp-002 The CapabilityStatement declares SMART on FHIR security"/>
+      <description value="Fixture contract: fixtures/provider-v1/manifest.json, cases.grp-002 (input bindings and expected data). Covers CapabilityStatement.rest.security."/>
+      <operation value="gherkin/Scenario"/>
+      <assertion>
+        <severity value="error"/>
+        <human value="$response.status should be 200"/>
+      </assertion>
+      <assertion>
+        <severity value="error"/>
+        <human value="$capability at &quot;CapabilityStatement.rest.where(mode='server').security.service.coding.where(code='SMART-on-FHIR').exists()&quot; should be true"/>
+      </assertion>
+    </test>
+  </suite>
+  <suite>
+    <name value="Every transaction requires SMART Backend Services authorization"/>
+    <description value="Rule: Every transaction requires SMART Backend Services authorization — the scenarios grouped under it in the feature file."/>
+    <input>
+      <name value="gherkin-script"/>
+      <file value="eu-api-document-publisher-access-provider.feature"/>
+    </input>
+    <test>
+      <name value="grp-003 A request without a token is refused"/>
+      <description value="Fixture contract: fixtures/provider-v1/manifest.json, cases.grp-003 (input bindings and expected data). Covers security.authorization."/>
+      <operation value="gherkin/Scenario"/>
+      <assertion>
+        <severity value="error"/>
+        <human value="$response.status should be 401"/>
+      </assertion>
+    </test>
+    <test>
+      <name value="grp-004 A token with no usable scope is refused"/>
+      <description value="Fixture contract: fixtures/provider-v1/manifest.json, cases.grp-004 (input bindings and expected data). Covers security.scope."/>
+      <operation value="gherkin/Scenario"/>
+      <assertion>
+        <severity value="error"/>
+        <human value="$response.status should be one of &quot;401, 403&quot;"/>
+      </assertion>
+    </test>
+  </suite>
+  <suite>
+    <name value="Find Document References [ITI-67]"/>
+    <description value="Rule: Find Document References [ITI-67] — the scenarios grouped under it in the feature file."/>
+    <input>
+      <name value="gherkin-script"/>
+      <file value="eu-api-document-publisher-access-provider.feature"/>
+    </input>
+    <test>
+      <name value="grp-005 Search by patient returns a searchset of conformant DocumentReferences"/>
+      <description value="Fixture contract: fixtures/provider-v1/manifest.json, cases.grp-005 (input bindings and expected data). Covers DocumentReference.search-type."/>
+      <operation value="gherkin/Scenario"/>
+      <assertion>
+        <severity value="error"/>
+        <human value="$response.status should be 200"/>
+      </assertion>
+      <assertion>
+        <severity value="error"/>
+        <human value="$found at &quot;Bundle.type&quot; should be &quot;searchset&quot;"/>
+      </assertion>
+      <assertion>
+        <severity value="error"/>
+        <human value="$found at &quot;Bundle.entry.resource.ofType(DocumentReference).exists()&quot; should be true"/>
+      </assertion>
+      <assertion>
+        <severity value="error"/>
+        <human value="$found at &quot;Bundle.entry.resource.ofType(DocumentReference).all(status = 'current' or status = 'superseded' or status = 'entered-in-error')&quot; should be true"/>
+      </assertion>
+      <assertion>
+        <severity value="error"/>
+        <human value="$found at &quot;Bundle.entry.resource.ofType(DocumentReference).all(content.attachment.exists())&quot; should be true"/>
+      </assertion>
+    </test>
+    <test>
+      <name value="grp-006 Search by EEHRxF priority category"/>
+      <description value="Fixture contract: fixtures/provider-v1/manifest.json, cases.grp-006 (input bindings and expected data). Covers DocumentReference.search-type."/>
+      <operation value="gherkin/Scenario"/>
+      <assertion>
+        <severity value="error"/>
+        <human value="$response.status should be 200"/>
+      </assertion>
+      <assertion>
+        <severity value="error"/>
+        <human value="$byCategory at &quot;Bundle.type&quot; should be &quot;searchset&quot;"/>
+      </assertion>
+      <assertion>
+        <severity value="error"/>
+        <human value="$byCategory at &quot;Bundle.entry.resource.ofType(DocumentReference).all(category.coding.where(code='Patient-Summaries').exists())&quot; should be true"/>
+      </assertion>
+    </test>
+    <test>
+      <name value="grp-007 Search by LOINC document type"/>
+      <description value="Fixture contract: fixtures/provider-v1/manifest.json, cases.grp-007 (input bindings and expected data). Covers DocumentReference.search-type."/>
+      <operation value="gherkin/Scenario"/>
+      <assertion>
+        <severity value="error"/>
+        <human value="$response.status should be 200"/>
+      </assertion>
+      <assertion>
+        <severity value="error"/>
+        <human value="$byType at &quot;Bundle.type&quot; should be &quot;searchset&quot;"/>
+      </assertion>
+      <assertion>
+        <severity value="error"/>
+        <human value="$byType at &quot;Bundle.entry.resource.ofType(DocumentReference).all(type.coding.where(system='http://loinc.org' and code='60591-5').exists())&quot; should be true"/>
+      </assertion>
+    </test>
+    <test>
+      <name value="grp-008 Read a DocumentReference by id"/>
+      <description value="Fixture contract: fixtures/provider-v1/manifest.json, cases.grp-008 (input bindings and expected data). Covers DocumentReference.read."/>
+      <operation value="gherkin/Scenario"/>
+      <assertion>
+        <severity value="error"/>
+        <human value="$response.status should be 200"/>
+      </assertion>
+      <assertion>
+        <severity value="error"/>
+        <human value="$docRef at &quot;DocumentReference.id&quot; should be &quot;$documentId&quot;"/>
+      </assertion>
+      <assertion>
+        <severity value="error"/>
+        <human value="$docRef at &quot;DocumentReference.subject.exists()&quot; should be true"/>
+      </assertion>
+      <assertion>
+        <severity value="error"/>
+        <human value="$docRef at &quot;DocumentReference.content.attachment.contentType.exists()&quot; should be true"/>
+      </assertion>
+    </test>
+    <test>
+      <name value="grp-009 An unknown DocumentReference id gives 404 and an OperationOutcome"/>
+      <description value="Fixture contract: fixtures/provider-v1/manifest.json, cases.grp-009 (input bindings and expected data). Covers DocumentReference.read."/>
+      <operation value="gherkin/Scenario"/>
+      <assertion>
+        <severity value="error"/>
+        <human value="$response.status should be 404"/>
+      </assertion>
+      <assertion>
+        <severity value="error"/>
+        <human value="$missing at &quot;OperationOutcome.issue.exists()&quot; should be true"/>
+      </assertion>
+    </test>
+  </suite>
+  <suite>
+    <name value="Retrieve Document [ITI-68]"/>
+    <description value="Rule: Retrieve Document [ITI-68] — the scenarios grouped under it in the feature file."/>
+    <input>
+      <name value="gherkin-script"/>
+      <file value="eu-api-document-publisher-access-provider.feature"/>
+    </input>
+    <test>
+      <name value="grp-010 Read the document content as a Binary"/>
+      <description value="Fixture contract: fixtures/provider-v1/manifest.json, cases.grp-010 (input bindings and expected data). Covers Binary.read."/>
+      <operation value="gherkin/Scenario"/>
+      <assertion>
+        <severity value="error"/>
+        <human value="$response.status should be 200"/>
+      </assertion>
+      <assertion>
+        <severity value="error"/>
+        <human value="$response.body should not be empty"/>
+      </assertion>
+    </test>
+  </suite>
+  <suite>
+    <name value="Patient lookup (PDQm ITI-78) is available when the server offers it"/>
+    <description value="Rule: Patient lookup (PDQm ITI-78) is available when the server offers it — the scenarios grouped under it in the feature file."/>
+    <input>
+      <name value="gherkin-script"/>
+      <file value="eu-api-document-publisher-access-provider.feature"/>
+    </input>
+    <test>
+      <name value="grp-011 Search Patient by identifier"/>
+      <description value="Patient is SHOULD on the Access Provider: a server that does not offer it answers 404 or 501 and these scenarios are not applicable to it. A server that does offer it SHALL support all of the search parameters below. Fixture contract: fixtures/provider-v1/manifest.json, cases.grp-011 (input bindings and expected data). Covers Patient.read, Patient.search-type, Patient.search.identifier."/>
+      <operation value="gherkin/Scenario"/>
+      <assertion>
+        <severity value="error"/>
+        <human value="$response.status should be 200"/>
+      </assertion>
+      <assertion>
+        <severity value="error"/>
+        <human value="$patients at &quot;Bundle.type&quot; should be &quot;searchset&quot;"/>
+      </assertion>
+      <assertion>
+        <severity value="error"/>
+        <human value="$patients at &quot;Bundle.entry.resource.ofType(Patient).count() &gt;= 1&quot; should be true"/>
+      </assertion>
+      <assertion>
+        <severity value="error"/>
+        <human value="$patients at &quot;Bundle.entry.resource.ofType(Patient).id.distinct().single()&quot; should be &quot;$patientId&quot;"/>
+      </assertion>
+      <assertion>
+        <severity value="error"/>
+        <human value="$patients should conform to &quot;http://hl7.org/fhir/StructureDefinition/Bundle&quot; ignoring slicing errors"/>
+      </assertion>
+    </test>
+    <test>
+      <name value="grp-012 Read Patient by id and conform to patient-eu-core"/>
+      <description value="Fixture contract: fixtures/provider-v1/manifest.json, cases.grp-012 (input bindings and expected data). Covers Patient.read, Patient.search.id."/>
+      <operation value="gherkin/Scenario"/>
+      <assertion>
+        <severity value="error"/>
+        <human value="$response.status should be 200"/>
+      </assertion>
+      <assertion>
+        <severity value="error"/>
+        <human value="$patient should conform to &quot;http://hl7.eu/fhir/base/StructureDefinition/patient-eu-core&quot; ignoring slicing errors"/>
+      </assertion>
+    </test>
+    <test>
+      <name value="grp-013 Search Patient by demographics the reference patient has"/>
+      <description value="Fixture contract: fixtures/provider-v1/manifest.json, cases.grp-013 (input bindings and expected data). Covers Patient.search.family, Patient.search.given, Patient.search.birthdate, Patient.search.gender."/>
+      <operation value="gherkin/Scenario"/>
+      <assertion>
+        <severity value="error"/>
+        <human value="$response.status should be 200"/>
+      </assertion>
+      <assertion>
+        <severity value="error"/>
+        <human value="extract &quot;/name/0/family&quot; from $response.body as $family"/>
+      </assertion>
+      <assertion>
+        <severity value="error"/>
+        <human value="extract &quot;/gender&quot; from $response.body as $gender"/>
+      </assertion>
+      <assertion>
+        <severity value="error"/>
+        <human value="$response.status should be 200"/>
+      </assertion>
+      <assertion>
+        <severity value="error"/>
+        <human value="$byFamily at &quot;Bundle.entry.resource.ofType(Patient).exists()&quot; should be true"/>
+      </assertion>
+      <assertion>
+        <severity value="error"/>
+        <human value="$byFamily at &quot;Bundle.entry.resource.ofType(Patient).id.join(',')&quot; should contain $patientId"/>
+      </assertion>
+      <assertion>
+        <severity value="error"/>
+        <human value="$response.status should be 200"/>
+      </assertion>
+      <assertion>
+        <severity value="error"/>
+        <human value="$byGender at &quot;Bundle.entry.resource.ofType(Patient).exists()&quot; should be true"/>
+      </assertion>
+      <assertion>
+        <severity value="error"/>
+        <human value="$byGender at &quot;Bundle.entry.resource.ofType(Patient).id.join(',')&quot; should contain $patientId"/>
+      </assertion>
+    </test>
+  </suite>
+</TestPlan>

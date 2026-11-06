@@ -1,0 +1,209 @@
+@prefix fhir: <http://hl7.org/fhir/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+# - resource -------------------------------------------------------------------
+
+<http://example.com/fhir/hl7.fhir.eu.health-data-api.test/TestPlan/eu-api-document-consumer-tests> a fhir:TestPlan ;
+  fhir:resourceDefinition http://hl7.org/fhir/StructureDefinition/TestPlan|0.1.0-snapshot1 ;
+  fhir:nodeRole fhir:treeRoot ;
+  fhir:id [ fhir:v "eu-api-document-consumer-tests"] ; # 
+  fhir:text [
+     fhir:status [ fhir:v "generated" ] ;
+     fhir:div [ fhir:v "<div xmlns=\"http://www.w3.org/1999/xhtml\"><p class=\"res-header-id\"><b>Generated Narrative: TestPlan eu-api-document-consumer-tests</b></p><a name=\"eu-api-document-consumer-tests\"> </a><a name=\"hceu-api-document-consumer-tests\"> </a><p><b>Scopes</b></p><table class=\"grid\"><tr><td><b>Reference</b></td><td><b>Description</b></td></tr><tr><td><code>http://hl7.eu/fhir/health-data-api/ActorDefinition/document-consumer-actor-eu-api</code></td><td>The Document Consumer, a client that finds and retrieves documents from an Access Provider, is the system under test. The test bed plays the Access Provider.</td></tr></table><p><b>1 Suite: SMART Backend Services authorization</b></p><p>Rule: SMART Backend Services authorization — the scenarios grouped under it in the feature file.</p><p><b>Inputs</b></p><table class=\"grid\"><tr><td><b>Name</b></td><td><b>File</b></td></tr><tr><td>gherkin-script</td><td>eu-api-document-consumer.feature</td></tr></table><p><b>Tests</b></p><table class=\"grid\"><tr><td><b>Name</b></td><td><b>Description</b></td><td><b>Operation</b></td></tr><tr><td>con-001 The SUT authenticates with a signed JWT client assertion (RFC 7523)</td><td>Fixture contract: fixtures/provider-v1/manifest.json, cases.con-001 (input bindings and expected data). Covers security.smart-backend-services.</td><td>gherkin/Scenario</td></tr></table><hr/><p><b>2 Suite: Patient lookup [ITI-78]</b></p><p>Rule: Patient lookup [ITI-78] — the scenarios grouped under it in the feature file.</p><p><b>Inputs</b></p><table class=\"grid\"><tr><td><b>Name</b></td><td><b>File</b></td></tr><tr><td>gherkin-script</td><td>eu-api-document-consumer.feature</td></tr></table><p><b>Tests</b></p><table class=\"grid\"><tr><td><b>Name</b></td><td><b>Description</b></td><td><b>Operation</b></td></tr><tr><td>con-002 The SUT searches Patient by the identifier parameter</td><td>Fixture contract: fixtures/provider-v1/manifest.json, cases.con-002 (input bindings and expected data). Covers Patient.search-type, Patient.search.identifier.</td><td>gherkin/Scenario</td></tr></table><hr/><p><b>3 Suite: Find Document References [ITI-67]</b></p><p>Rule: Find Document References [ITI-67] — the scenarios grouped under it in the feature file.</p><p><b>Inputs</b></p><table class=\"grid\"><tr><td><b>Name</b></td><td><b>File</b></td></tr><tr><td>gherkin-script</td><td>eu-api-document-consumer.feature</td></tr></table><p><b>Tests</b></p><table class=\"grid\"><tr><td><b>Name</b></td><td><b>Description</b></td><td><b>Operation</b></td></tr><tr><td>con-003 The SUT searches DocumentReference by patient</td><td>Fixture contract: fixtures/provider-v1/manifest.json, cases.con-003 (input bindings and expected data). Covers DocumentReference.search-type.</td><td>gherkin/Scenario</td></tr><tr><td>con-004 The SUT can narrow the search by category or type</td><td>Fixture contract: fixtures/provider-v1/manifest.json, cases.con-004 (input bindings and expected data). Covers DocumentReference.search-type.</td><td>gherkin/Scenario</td></tr></table><hr/><p><b>4 Suite: Retrieve Document [ITI-68]</b></p><p>Rule: Retrieve Document [ITI-68] — the scenarios grouped under it in the feature file.</p><p><b>Inputs</b></p><table class=\"grid\"><tr><td><b>Name</b></td><td><b>File</b></td></tr><tr><td>gherkin-script</td><td>eu-api-document-consumer.feature</td></tr></table><p><b>Tests</b></p><table class=\"grid\"><tr><td><b>Name</b></td><td><b>Description</b></td><td><b>Operation</b></td></tr><tr><td>con-005 The SUT retrieves the document content with a bearer token</td><td>Fixture contract: fixtures/provider-v1/manifest.json, cases.con-005 (input bindings and expected data). Covers Binary.read, DocumentReference.read.</td><td>gherkin/Scenario</td></tr></table><hr/><p><b>5 Suite: Transport security</b></p><p>Rule: Transport security — the scenarios grouped under it in the feature file.</p><p><b>Inputs</b></p><table class=\"grid\"><tr><td><b>Name</b></td><td><b>File</b></td></tr><tr><td>gherkin-script</td><td>eu-api-document-consumer.feature</td></tr></table><p><b>Tests</b></p><table class=\"grid\"><tr><td><b>Name</b></td><td><b>Description</b></td><td><b>Operation</b></td></tr><tr><td>con-006 TLS 1.2 or higher is used for all communications</td><td>Fixture contract: fixtures/provider-v1/manifest.json, cases.con-006 (input bindings and expected data). Covers security.tls.</td><td>gherkin/Scenario</td></tr></table></div>"^^rdf:XMLLiteral ]
+  ] ; # 
+  fhir:url [
+     fhir:v "http://example.com/fhir/hl7.fhir.eu.health-data-api.test/TestPlan/eu-api-document-consumer-tests"^^xsd:anyURI ;
+     fhir:l <http://example.com/fhir/hl7.fhir.eu.health-data-api.test/TestPlan/eu-api-document-consumer-tests>
+  ] ; # 
+  fhir:version [ fhir:v "0.1.0"] ; # 
+  fhir:name [ fhir:v "DocumentConsumerTestPlan"] ; # 
+  fhir:title [ fhir:v "Document Consumer Test Plan"] ; # 
+  fhir:status [ fhir:v "draft"] ; # 
+  fhir:experimental [ fhir:v true] ; # 
+  fhir:date [ fhir:v "2026-11-06"^^xsd:date] ; # 
+  fhir:publisher [ fhir:v "Jens Kristian Villadsen"] ; # 
+  fhir:contact ( [
+     fhir:name [ fhir:v "Jens Kristian Villadsen" ] ;
+     fhir:telecom ( [
+       fhir:system [ fhir:v "url" ] ;
+       fhir:value [ fhir:v "https://trifork.com" ]
+     ] )
+  ] ) ; # 
+  fhir:description [ fhir:v "Test plan for the **Document Consumer** actor of [EU Health Data API, 1.0.0-ballot](https://build.fhir.org/ig/euridice-org/eu-health-data-api/).\nThe SUT obtains a token, finds the patient, finds the documents and retrieves one.\nEach `suite` below is a `Rule:` of the Gherkin feature named by `suite.input.file`, and each `suite.test` one of its `Scenario:` lines, matched by the scenario's identifier. The assertions are the scenario's `Then` steps, verbatim.\nThe tests declare which specification obligations they cover (8 requirement paths named by the feature tags).\nFixture prerequisites, input bindings and expected data are in tests/fixtures/provider-v1/manifest.json, keyed by scenario ID. See the Testing page, Fixture contract and expected results. Provider fixtures are R4; client workflows use the canned data embedded in their feature."] ; # 
+  fhir:jurisdiction ( [
+     fhir:coding ( [
+       fhir:system [
+         fhir:v "http://unstats.un.org/unsd/methods/m49/m49.htm"^^xsd:anyURI ;
+         fhir:l <http://unstats.un.org/unsd/methods/m49/m49.htm>
+       ] ;
+       fhir:code [ fhir:v "001" ] ;
+       fhir:display [ fhir:v "World" ]
+     ] )
+  ] ) ; # 
+  fhir:purpose [ fhir:v "To declare, in a machine-readable and runnable form, which behaviours a system claiming conformance to the Document Consumer actor must demonstrate."] ; # 
+  fhir:scope ( [
+     fhir:reference [
+       fhir:v "http://hl7.eu/fhir/health-data-api/ActorDefinition/document-consumer-actor-eu-api"^^xsd:anyURI ;
+       fhir:l <http://hl7.eu/fhir/health-data-api/ActorDefinition/document-consumer-actor-eu-api>
+     ] ;
+     fhir:description [ fhir:v "The Document Consumer, a client that finds and retrieves documents from an Access Provider, is the system under test. The test bed plays the Access Provider." ]
+  ] ) ; # 
+  fhir:runner [
+     fhir:v "https://www.itb.ec.europa.eu/docs/guides/latest/"^^xsd:anyURI ;
+     fhir:l <https://www.itb.ec.europa.eu/docs/guides/latest/>
+  ] ; # 
+  fhir:suite ( [
+     fhir:name [ fhir:v "SMART Backend Services authorization" ] ;
+     fhir:description [ fhir:v "Rule: SMART Backend Services authorization — the scenarios grouped under it in the feature file." ] ;
+     fhir:input ( [
+       fhir:name [ fhir:v "gherkin-script" ] ;
+       fhir:file [ fhir:v "eu-api-document-consumer.feature" ]
+     ] ) ;
+     fhir:test ( [
+       fhir:name [ fhir:v "con-001 The SUT authenticates with a signed JWT client assertion (RFC 7523)" ] ;
+       fhir:description [ fhir:v "Fixture contract: fixtures/provider-v1/manifest.json, cases.con-001 (input bindings and expected data). Covers security.smart-backend-services." ] ;
+       fhir:operation [ fhir:v "gherkin/Scenario" ] ;
+       fhir:assertion ( [
+         fhir:severity [ fhir:v "error" ] ;
+         fhir:human [ fhir:v "$received.method should be \"POST\"" ]
+       ] [
+         fhir:severity [ fhir:v "error" ] ;
+         fhir:human [ fhir:v "$received.body should contain \"grant_type=client_credentials\"" ]
+       ] [
+         fhir:severity [ fhir:v "error" ] ;
+         fhir:human [ fhir:v "$received.body should contain \"client_assertion_type=urn%3Aietf%3Aparams%3Aoauth%3Aclient-assertion-type%3Ajwt-bearer\"" ]
+       ] [
+         fhir:severity [ fhir:v "error" ] ;
+         fhir:human [ fhir:v "$received.body should match \"client_assertion=[A-Za-z0-9_-]+[.][A-Za-z0-9_-]+[.][A-Za-z0-9_-]+([&]|$)\"" ]
+       ] [
+         fhir:severity [ fhir:v "error" ] ;
+         fhir:human [ fhir:v "$received.body should contain \"scope=\"" ]
+       ] [
+         fhir:severity [ fhir:v "error" ] ;
+         fhir:human [ fhir:v "AccessProvider replies to DocumentConsumer with status 200 and:" ]
+       ] )
+     ] )
+  ] [
+     fhir:name [ fhir:v "Patient lookup [ITI-78]" ] ;
+     fhir:description [ fhir:v "Rule: Patient lookup [ITI-78] — the scenarios grouped under it in the feature file." ] ;
+     fhir:input ( [
+       fhir:name [ fhir:v "gherkin-script" ] ;
+       fhir:file [ fhir:v "eu-api-document-consumer.feature" ]
+     ] ) ;
+     fhir:test ( [
+       fhir:name [ fhir:v "con-002 The SUT searches Patient by the identifier parameter" ] ;
+       fhir:description [ fhir:v "Fixture contract: fixtures/provider-v1/manifest.json, cases.con-002 (input bindings and expected data). Covers Patient.search-type, Patient.search.identifier." ] ;
+       fhir:operation [ fhir:v "gherkin/Scenario" ] ;
+       fhir:assertion ( [
+         fhir:severity [ fhir:v "error" ] ;
+         fhir:human [ fhir:v "$received.method should be \"GET\"" ]
+       ] [
+         fhir:severity [ fhir:v "error" ] ;
+         fhir:human [ fhir:v "$received.path should contain \"/Patient\"" ]
+       ] [
+         fhir:severity [ fhir:v "error" ] ;
+         fhir:human [ fhir:v "$received.path should contain \"identifier=\"" ]
+       ] [
+         fhir:severity [ fhir:v "error" ] ;
+         fhir:human [ fhir:v "$received.headers.Authorization should contain \"Bearer\"" ]
+       ] [
+         fhir:severity [ fhir:v "error" ] ;
+         fhir:human [ fhir:v "AccessProvider replies to DocumentConsumer with status 200 and:" ]
+       ] )
+     ] )
+  ] [
+     fhir:name [ fhir:v "Find Document References [ITI-67]" ] ;
+     fhir:description [ fhir:v "Rule: Find Document References [ITI-67] — the scenarios grouped under it in the feature file." ] ;
+     fhir:input ( [
+       fhir:name [ fhir:v "gherkin-script" ] ;
+       fhir:file [ fhir:v "eu-api-document-consumer.feature" ]
+     ] ) ;
+     fhir:test ( [
+       fhir:name [ fhir:v "con-003 The SUT searches DocumentReference by patient" ] ;
+       fhir:description [ fhir:v "Fixture contract: fixtures/provider-v1/manifest.json, cases.con-003 (input bindings and expected data). Covers DocumentReference.search-type." ] ;
+       fhir:operation [ fhir:v "gherkin/Scenario" ] ;
+       fhir:assertion ( [
+         fhir:severity [ fhir:v "error" ] ;
+         fhir:human [ fhir:v "$received.method should be \"GET\"" ]
+       ] [
+         fhir:severity [ fhir:v "error" ] ;
+         fhir:human [ fhir:v "$received.path should contain \"/DocumentReference\"" ]
+       ] [
+         fhir:severity [ fhir:v "error" ] ;
+         fhir:human [ fhir:v "$received.path should match \"patient=(Patient(/|%2F))?otb-pat-1([&]|$)\"" ]
+       ] [
+         fhir:severity [ fhir:v "error" ] ;
+         fhir:human [ fhir:v "$received.headers.Authorization should contain \"Bearer\"" ]
+       ] [
+         fhir:severity [ fhir:v "error" ] ;
+         fhir:human [ fhir:v "AccessProvider replies to DocumentConsumer with status 200 and:" ]
+       ] )
+     ] [
+       fhir:name [ fhir:v "con-004 The SUT can narrow the search by category or type" ] ;
+       fhir:description [ fhir:v "Fixture contract: fixtures/provider-v1/manifest.json, cases.con-004 (input bindings and expected data). Covers DocumentReference.search-type." ] ;
+       fhir:operation [ fhir:v "gherkin/Scenario" ] ;
+       fhir:assertion ( [
+         fhir:severity [ fhir:v "error" ] ;
+         fhir:human [ fhir:v "$received.method should be \"GET\"" ]
+       ] [
+         fhir:severity [ fhir:v "error" ] ;
+         fhir:human [ fhir:v "$received.path should contain \"/DocumentReference\"" ]
+       ] [
+         fhir:severity [ fhir:v "error" ] ;
+         fhir:human [ fhir:v "$received.path should match \"patient=(Patient(/|%2F))?otb-pat-1([&]|$)\"" ]
+       ] [
+         fhir:severity [ fhir:v "error" ] ;
+         fhir:human [ fhir:v "$received.path should match \"[?&](type|category)=\"" ]
+       ] [
+         fhir:severity [ fhir:v "error" ] ;
+         fhir:human [ fhir:v "AccessProvider replies to DocumentConsumer with status 200 and:" ]
+       ] )
+     ] )
+  ] [
+     fhir:name [ fhir:v "Retrieve Document [ITI-68]" ] ;
+     fhir:description [ fhir:v "Rule: Retrieve Document [ITI-68] — the scenarios grouped under it in the feature file." ] ;
+     fhir:input ( [
+       fhir:name [ fhir:v "gherkin-script" ] ;
+       fhir:file [ fhir:v "eu-api-document-consumer.feature" ]
+     ] ) ;
+     fhir:test ( [
+       fhir:name [ fhir:v "con-005 The SUT retrieves the document content with a bearer token" ] ;
+       fhir:description [ fhir:v "Fixture contract: fixtures/provider-v1/manifest.json, cases.con-005 (input bindings and expected data). Covers Binary.read, DocumentReference.read." ] ;
+       fhir:operation [ fhir:v "gherkin/Scenario" ] ;
+       fhir:assertion ( [
+         fhir:severity [ fhir:v "error" ] ;
+         fhir:human [ fhir:v "$received.method should be \"GET\"" ]
+       ] [
+         fhir:severity [ fhir:v "error" ] ;
+         fhir:human [ fhir:v "$received.path should match \"Binary/otb-bin-1([?#]|$)\"" ]
+       ] [
+         fhir:severity [ fhir:v "error" ] ;
+         fhir:human [ fhir:v "$received.headers.Authorization should contain \"Bearer\"" ]
+       ] [
+         fhir:severity [ fhir:v "error" ] ;
+         fhir:human [ fhir:v "AccessProvider replies to DocumentConsumer with status 200 and:" ]
+       ] )
+     ] )
+  ] [
+     fhir:name [ fhir:v "Transport security" ] ;
+     fhir:description [ fhir:v "Rule: Transport security — the scenarios grouped under it in the feature file." ] ;
+     fhir:input ( [
+       fhir:name [ fhir:v "gherkin-script" ] ;
+       fhir:file [ fhir:v "eu-api-document-consumer.feature" ]
+     ] ) ;
+     fhir:test ( [
+       fhir:name [ fhir:v "con-006 TLS 1.2 or higher is used for all communications" ] ;
+       fhir:description [ fhir:v "Fixture contract: fixtures/provider-v1/manifest.json, cases.con-006 (input bindings and expected data). Covers security.tls." ] ;
+       fhir:operation [ fhir:v "gherkin/Scenario" ] ;
+       fhir:assertion ( [
+         fhir:severity [ fhir:v "error" ] ;
+         fhir:human [ fhir:v "TLS >= 1.2 — DocumentConsumer confirms each of these is accepted for \"the connection\"" ]
+       ] )
+     ] )
+  ] ) . # 
+
+# -------------------------------------------------------------------------------------
+
