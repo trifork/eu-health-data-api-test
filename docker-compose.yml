@@ -24,7 +24,8 @@ services:
     extra_hosts:
       - "host.docker.internal:host-gateway"
   gitb-ui:
-    image: isaitb/gitb-ui:1.30.2@sha256:e7f017dd83d142d56f0b2d8acd729f1a14bbe5bcb2bdfa2f8f4759b42866b8d9
+    image: eu-health-data-api-itb-ui:local
+    build: ./itb/ui
     restart: unless-stopped
     environment:
       THEME: ec

@@ -13,12 +13,6 @@ Feature: EEHRxF Document Access Provider — ITI-67, ITI-68 and the Document Sub
     And FHIRValidator is a fhir-validator at "http://fhir-validator:8080"
     And FHIRValidator is loaded with package "hl7.fhir.eu.health-data-api#1.0.0-ballot"
     And set header "Accept" to "application/fhir+json"
-    And Client is asked for $accessToken with "A SMART Backend Services access token for this server, as 'Bearer <token>' (scopes system/DocumentReference.rs, system/Binary.r, system/Patient.rs)"
-    And Client is asked for $narrowToken with "An access token that lacks every system/ scope this server protects, as 'Bearer <token>'"
-    And Client is asked for $patientIdentifier with "The identifier (system|value) of the reference patient who has documents on the server"
-    And Client is asked for $patientId with "The logical id of that patient on the server"
-    And Client is asked for $documentId with "The logical id of a DocumentReference of that patient"
-    And Client is asked for $binaryId with "The logical id of the Binary that DocumentReference points at"
 
   Rule: The server declares what the actor requires
 
@@ -40,12 +34,15 @@ Feature: EEHRxF Document Access Provider — ITI-67, ITI-68 and the Document Sub
 
     @covers:security.authorization
     Scenario: dap-003 A request without a token is refused
+      Given Client is asked for $patientId with "The logical id of the reference patient on the server"
       When Client gets from DocumentAccessProvider at "/DocumentReference?patient=" with id $patientId as $unauth
       Then $response.status should be 401
 
     @covers:security.scope
     Scenario: dap-004 A token with no usable scope is refused
-      Given set header "Authorization" to $narrowToken
+      Given Client is asked for $narrowToken with "An access token that lacks every system/ scope this server protects, as 'Bearer <token>'"
+      And Client is asked for $patientId with "The logical id of the reference patient on the server"
+      And set header "Authorization" to $narrowToken
       When Client gets from DocumentAccessProvider at "/DocumentReference?patient=" with id $patientId as $denied
       Then $response.status should be one of "401, 403"
 
@@ -53,7 +50,9 @@ Feature: EEHRxF Document Access Provider — ITI-67, ITI-68 and the Document Sub
 
     @covers:DocumentReference.search-type
     Scenario: dap-005 Search by patient returns a searchset of conformant DocumentReferences
-      Given set header "Authorization" to $accessToken
+      Given Client is asked for $accessToken with "A SMART Backend Services access token for this server, as 'Bearer <token>' (scopes system/DocumentReference.rs, system/Binary.r, system/Patient.rs)"
+      And Client is asked for $patientId with "The logical id of the reference patient on the server"
+      And set header "Authorization" to $accessToken
       When Client gets from DocumentAccessProvider at "/DocumentReference?patient=" with id $patientId as $found
       Then $response.status should be 200
       And $found at "Bundle.type" should be "searchset"
@@ -63,7 +62,9 @@ Feature: EEHRxF Document Access Provider — ITI-67, ITI-68 and the Document Sub
 
     @covers:DocumentReference.search-type
     Scenario: dap-006 Search by EEHRxF priority category
-      Given set header "Authorization" to $accessToken
+      Given Client is asked for $accessToken with "A SMART Backend Services access token for this server, as 'Bearer <token>' (scopes system/DocumentReference.rs, system/Binary.r, system/Patient.rs)"
+      And Client is asked for $patientId with "The logical id of the reference patient on the server"
+      And set header "Authorization" to $accessToken
       When Client gets from DocumentAccessProvider at "/DocumentReference?category=https://euridice.ec.europa.eu/fhir/eehrxf/CodeSystem/document-priority-category-eu-api|Patient-Summaries&patient=" with id $patientId as $byCategory
       Then $response.status should be 200
       And $byCategory at "Bundle.type" should be "searchset"
@@ -71,7 +72,9 @@ Feature: EEHRxF Document Access Provider — ITI-67, ITI-68 and the Document Sub
 
     @covers:DocumentReference.search-type
     Scenario: dap-007 Search by LOINC document type
-      Given set header "Authorization" to $accessToken
+      Given Client is asked for $accessToken with "A SMART Backend Services access token for this server, as 'Bearer <token>' (scopes system/DocumentReference.rs, system/Binary.r, system/Patient.rs)"
+      And Client is asked for $patientId with "The logical id of the reference patient on the server"
+      And set header "Authorization" to $accessToken
       When Client gets from DocumentAccessProvider at "/DocumentReference?type=http://loinc.org|60591-5&patient=" with id $patientId as $byType
       Then $response.status should be 200
       And $byType at "Bundle.type" should be "searchset"
@@ -79,7 +82,9 @@ Feature: EEHRxF Document Access Provider — ITI-67, ITI-68 and the Document Sub
 
     @covers:DocumentReference.read
     Scenario: dap-008 Read a DocumentReference by id
-      Given set header "Authorization" to $accessToken
+      Given Client is asked for $accessToken with "A SMART Backend Services access token for this server, as 'Bearer <token>' (scopes system/DocumentReference.rs, system/Binary.r, system/Patient.rs)"
+      And Client is asked for $documentId with "The logical id of a reference DocumentReference on the server"
+      And set header "Authorization" to $accessToken
       When Client gets from DocumentAccessProvider at "/DocumentReference/" with id $documentId as $docRef
       Then $response.status should be 200
       And $docRef at "DocumentReference.id" should be "$documentId"
@@ -88,7 +93,8 @@ Feature: EEHRxF Document Access Provider — ITI-67, ITI-68 and the Document Sub
 
     @covers:DocumentReference.read
     Scenario: dap-009 An unknown DocumentReference id gives 404 and an OperationOutcome
-      Given set header "Authorization" to $accessToken
+      Given Client is asked for $accessToken with "A SMART Backend Services access token for this server, as 'Bearer <token>' (scopes system/DocumentReference.rs, system/Binary.r, system/Patient.rs)"
+      And set header "Authorization" to $accessToken
       When Client gets from DocumentAccessProvider at "/DocumentReference/otb-no-such-document-000" as $missing
       Then $response.status should be 404
       And $missing at "OperationOutcome.issue.exists()" should be true
@@ -97,7 +103,9 @@ Feature: EEHRxF Document Access Provider — ITI-67, ITI-68 and the Document Sub
 
     @covers:Binary.read
     Scenario: dap-010 Read the document content as a Binary
-      Given set header "Authorization" to $accessToken
+      Given Client is asked for $accessToken with "A SMART Backend Services access token for this server, as 'Bearer <token>' (scopes system/DocumentReference.rs, system/Binary.r, system/Patient.rs)"
+      And Client is asked for $binaryId with "The logical id of a reference Binary on the server"
+      And set header "Authorization" to $accessToken
       When Client gets from DocumentAccessProvider at "/Binary/" with id $binaryId as $binary
       Then $response.status should be 200
       And $response.body should not be empty
@@ -109,7 +117,9 @@ Feature: EEHRxF Document Access Provider — ITI-67, ITI-68 and the Document Sub
     # that does offer it SHALL support all of the search parameters below.
     @covers:Patient.read,Patient.search-type,Patient.search.identifier
     Scenario: dap-011 Search Patient by identifier
-      Given set header "Authorization" to $accessToken
+      Given Client is asked for $accessToken with "A SMART Backend Services access token for this server, as 'Bearer <token>' (scopes system/DocumentReference.rs, system/Binary.r, system/Patient.rs)"
+      And Client is asked for $patientIdentifier with "The identifier (system|value) of the reference patient who has documents on the server"
+      And set header "Authorization" to $accessToken
       When Client gets from DocumentAccessProvider at "/Patient?identifier=" with id $patientIdentifier as $patients
       Then $response.status should be 200
       And $patients at "Bundle.type" should be "searchset"
@@ -118,14 +128,18 @@ Feature: EEHRxF Document Access Provider — ITI-67, ITI-68 and the Document Sub
 
     @covers:Patient.read,Patient.search.id
     Scenario: dap-012 Read Patient by id and conform to patient-eu-core
-      Given set header "Authorization" to $accessToken
+      Given Client is asked for $accessToken with "A SMART Backend Services access token for this server, as 'Bearer <token>' (scopes system/DocumentReference.rs, system/Binary.r, system/Patient.rs)"
+      And Client is asked for $patientId with "The logical id of the reference patient on the server"
+      And set header "Authorization" to $accessToken
       When Client gets from DocumentAccessProvider at "/Patient/" with id $patientId as $patient
       Then $response.status should be 200
       And $patient should conform to "http://hl7.eu/fhir/base/StructureDefinition/patient-eu-core" ignoring slicing errors
 
     @covers:Patient.search.family,Patient.search.given,Patient.search.birthdate,Patient.search.gender
     Scenario: dap-013 Search Patient by demographics the reference patient has
-      Given set header "Authorization" to $accessToken
+      Given Client is asked for $accessToken with "A SMART Backend Services access token for this server, as 'Bearer <token>' (scopes system/DocumentReference.rs, system/Binary.r, system/Patient.rs)"
+      And Client is asked for $patientId with "The logical id of the reference patient on the server"
+      And set header "Authorization" to $accessToken
       When Client gets from DocumentAccessProvider at "/Patient/" with id $patientId as $ref
       Then $response.status should be 200
       And extract "/name/0/family" from $response.body as $family
@@ -150,7 +164,8 @@ Feature: EEHRxF Document Access Provider — ITI-67, ITI-68 and the Document Sub
 
     @covers:DocumentReference.create
     Scenario: dap-015 A Simplified Publish with embedded content is accepted and then findable
-      Given set header "Authorization" to $accessToken
+      Given Client is asked for $accessToken with "A SMART Backend Services access token for this server, as 'Bearer <token>' (scopes system/DocumentReference.rs, system/Binary.r, system/Patient.rs)"
+      And set header "Authorization" to $accessToken
       And set header "Content-Type" to "application/fhir+json"
       And Client is asked for $submitPatientRef with "A Patient reference the server knows, e.g. Patient/123"
       When Client posts to DocumentAccessProvider at "/DocumentReference" with:
@@ -169,7 +184,8 @@ Feature: EEHRxF Document Access Provider — ITI-67, ITI-68 and the Document Sub
 
     @covers:DocumentReference.create
     Scenario: dap-016 A submission without content is refused
-      Given set header "Authorization" to $accessToken
+      Given Client is asked for $accessToken with "A SMART Backend Services access token for this server, as 'Bearer <token>' (scopes system/DocumentReference.rs, system/Binary.r, system/Patient.rs)"
+      And set header "Authorization" to $accessToken
       And set header "Content-Type" to "application/fhir+json"
       When Client posts to DocumentAccessProvider at "/DocumentReference" with:
         """
@@ -179,7 +195,8 @@ Feature: EEHRxF Document Access Provider — ITI-67, ITI-68 and the Document Sub
 
     @covers:DocumentReference.create
     Scenario: dap-017 A submission with a token that cannot create is refused
-      Given set header "Authorization" to $narrowToken
+      Given Client is asked for $narrowToken with "An access token that lacks every system/ scope this server protects, as 'Bearer <token>'"
+      And set header "Authorization" to $narrowToken
       And set header "Content-Type" to "application/fhir+json"
       When Client posts to DocumentAccessProvider at "/DocumentReference" with:
         """

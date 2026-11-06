@@ -14,7 +14,7 @@ Description: "Test plan for the Resource Access Provider actor of EU Health Data
 * title = "Resource Access Provider Test Plan"
 * status = #draft
 * experimental = true
-* date = "2026-10-30"
+* date = "2026-11-06"
 * publisher = "Jens Kristian Villadsen"
 * contact
   * name = "Jens Kristian Villadsen"
@@ -175,7 +175,16 @@ The tests declare which specification obligations they cover (34 element obligat
       * human = "$found at \"Bundle.type\" should be \"searchset\""
     * assertion[+]
       * severity = #error
-      * human = "$found at \"Bundle.entry.resource.where(resourceType != 'Condition' and search.mode != 'include').empty()\" should be true"
+      * human = "$found at \"Bundle.entry.where(search.mode.empty() or search.mode != 'include').exists()\" should be true"
+    * assertion[+]
+      * severity = #error
+      * human = "$found at \"Bundle.entry.where(search.mode.empty() or search.mode != 'include').all(resource.ofType(Condition).exists() and resource.subject.reference.exists())\" should be true"
+    * assertion[+]
+      * severity = #error
+      * human = "$found at \"Bundle.entry.where(search.mode.empty() or search.mode != 'include').resource.subject.reference.select(replaceMatches('^(.*/)?Patient/', '').replaceMatches('/_history/.*$', '')).distinct().count() = 1\" should be true"
+    * assertion[+]
+      * severity = #error
+      * human = "$found at \"Bundle.entry.where(search.mode.empty() or search.mode != 'include').resource.subject.reference.select(replaceMatches('^(.*/)?Patient/', '').replaceMatches('/_history/.*$', '')).distinct().single()\" should be \"$patientId\""
   * test[+]
     * name = "rap-008 Search AllergyIntolerance by patient returns a searchset of AllergyIntolerance"
     * description = "Covers AllergyIntolerance.search-type, AllergyIntolerance.search.patient."
@@ -188,7 +197,16 @@ The tests declare which specification obligations they cover (34 element obligat
       * human = "$found at \"Bundle.type\" should be \"searchset\""
     * assertion[+]
       * severity = #error
-      * human = "$found at \"Bundle.entry.resource.where(resourceType != 'AllergyIntolerance' and search.mode != 'include').empty()\" should be true"
+      * human = "$found at \"Bundle.entry.where(search.mode.empty() or search.mode != 'include').exists()\" should be true"
+    * assertion[+]
+      * severity = #error
+      * human = "$found at \"Bundle.entry.where(search.mode.empty() or search.mode != 'include').all(resource.ofType(AllergyIntolerance).exists() and resource.patient.reference.exists())\" should be true"
+    * assertion[+]
+      * severity = #error
+      * human = "$found at \"Bundle.entry.where(search.mode.empty() or search.mode != 'include').resource.patient.reference.select(replaceMatches('^(.*/)?Patient/', '').replaceMatches('/_history/.*$', '')).distinct().count() = 1\" should be true"
+    * assertion[+]
+      * severity = #error
+      * human = "$found at \"Bundle.entry.where(search.mode.empty() or search.mode != 'include').resource.patient.reference.select(replaceMatches('^(.*/)?Patient/', '').replaceMatches('/_history/.*$', '')).distinct().single()\" should be \"$patientId\""
   * test[+]
     * name = "rap-009 Search Observation by patient returns a searchset of Observation"
     * description = "Covers Observation.search-type, Observation.search.patient."
@@ -201,7 +219,16 @@ The tests declare which specification obligations they cover (34 element obligat
       * human = "$found at \"Bundle.type\" should be \"searchset\""
     * assertion[+]
       * severity = #error
-      * human = "$found at \"Bundle.entry.resource.where(resourceType != 'Observation' and search.mode != 'include').empty()\" should be true"
+      * human = "$found at \"Bundle.entry.where(search.mode.empty() or search.mode != 'include').exists()\" should be true"
+    * assertion[+]
+      * severity = #error
+      * human = "$found at \"Bundle.entry.where(search.mode.empty() or search.mode != 'include').all(resource.ofType(Observation).exists() and resource.subject.reference.exists())\" should be true"
+    * assertion[+]
+      * severity = #error
+      * human = "$found at \"Bundle.entry.where(search.mode.empty() or search.mode != 'include').resource.subject.reference.select(replaceMatches('^(.*/)?Patient/', '').replaceMatches('/_history/.*$', '')).distinct().count() = 1\" should be true"
+    * assertion[+]
+      * severity = #error
+      * human = "$found at \"Bundle.entry.where(search.mode.empty() or search.mode != 'include').resource.subject.reference.select(replaceMatches('^(.*/)?Patient/', '').replaceMatches('/_history/.*$', '')).distinct().single()\" should be \"$patientId\""
   * test[+]
     * name = "rap-010 Search DiagnosticReport by patient returns a searchset of DiagnosticReport"
     * description = "Covers DiagnosticReport.search-type, DiagnosticReport.search.patient."
@@ -214,7 +241,16 @@ The tests declare which specification obligations they cover (34 element obligat
       * human = "$found at \"Bundle.type\" should be \"searchset\""
     * assertion[+]
       * severity = #error
-      * human = "$found at \"Bundle.entry.resource.where(resourceType != 'DiagnosticReport' and search.mode != 'include').empty()\" should be true"
+      * human = "$found at \"Bundle.entry.where(search.mode.empty() or search.mode != 'include').exists()\" should be true"
+    * assertion[+]
+      * severity = #error
+      * human = "$found at \"Bundle.entry.where(search.mode.empty() or search.mode != 'include').all(resource.ofType(DiagnosticReport).exists() and resource.subject.reference.exists())\" should be true"
+    * assertion[+]
+      * severity = #error
+      * human = "$found at \"Bundle.entry.where(search.mode.empty() or search.mode != 'include').resource.subject.reference.select(replaceMatches('^(.*/)?Patient/', '').replaceMatches('/_history/.*$', '')).distinct().count() = 1\" should be true"
+    * assertion[+]
+      * severity = #error
+      * human = "$found at \"Bundle.entry.where(search.mode.empty() or search.mode != 'include').resource.subject.reference.select(replaceMatches('^(.*/)?Patient/', '').replaceMatches('/_history/.*$', '')).distinct().single()\" should be \"$patientId\""
   * test[+]
     * name = "rap-011 Search ImagingStudy by patient returns a searchset of ImagingStudy"
     * description = "Covers ImagingStudy.search-type, ImagingStudy.search.patient."
@@ -227,7 +263,16 @@ The tests declare which specification obligations they cover (34 element obligat
       * human = "$found at \"Bundle.type\" should be \"searchset\""
     * assertion[+]
       * severity = #error
-      * human = "$found at \"Bundle.entry.resource.where(resourceType != 'ImagingStudy' and search.mode != 'include').empty()\" should be true"
+      * human = "$found at \"Bundle.entry.where(search.mode.empty() or search.mode != 'include').exists()\" should be true"
+    * assertion[+]
+      * severity = #error
+      * human = "$found at \"Bundle.entry.where(search.mode.empty() or search.mode != 'include').all(resource.ofType(ImagingStudy).exists() and resource.subject.reference.exists())\" should be true"
+    * assertion[+]
+      * severity = #error
+      * human = "$found at \"Bundle.entry.where(search.mode.empty() or search.mode != 'include').resource.subject.reference.select(replaceMatches('^(.*/)?Patient/', '').replaceMatches('/_history/.*$', '')).distinct().count() = 1\" should be true"
+    * assertion[+]
+      * severity = #error
+      * human = "$found at \"Bundle.entry.where(search.mode.empty() or search.mode != 'include').resource.subject.reference.select(replaceMatches('^(.*/)?Patient/', '').replaceMatches('/_history/.*$', '')).distinct().single()\" should be \"$patientId\""
   * test[+]
     * name = "rap-012 Search MedicationRequest by patient returns a searchset of MedicationRequest"
     * description = "Covers MedicationRequest.search-type, MedicationRequest.search.patient."
@@ -240,7 +285,16 @@ The tests declare which specification obligations they cover (34 element obligat
       * human = "$found at \"Bundle.type\" should be \"searchset\""
     * assertion[+]
       * severity = #error
-      * human = "$found at \"Bundle.entry.resource.where(resourceType != 'MedicationRequest' and search.mode != 'include').empty()\" should be true"
+      * human = "$found at \"Bundle.entry.where(search.mode.empty() or search.mode != 'include').exists()\" should be true"
+    * assertion[+]
+      * severity = #error
+      * human = "$found at \"Bundle.entry.where(search.mode.empty() or search.mode != 'include').all(resource.ofType(MedicationRequest).exists() and resource.subject.reference.exists())\" should be true"
+    * assertion[+]
+      * severity = #error
+      * human = "$found at \"Bundle.entry.where(search.mode.empty() or search.mode != 'include').resource.subject.reference.select(replaceMatches('^(.*/)?Patient/', '').replaceMatches('/_history/.*$', '')).distinct().count() = 1\" should be true"
+    * assertion[+]
+      * severity = #error
+      * human = "$found at \"Bundle.entry.where(search.mode.empty() or search.mode != 'include').resource.subject.reference.select(replaceMatches('^(.*/)?Patient/', '').replaceMatches('/_history/.*$', '')).distinct().single()\" should be \"$patientId\""
   * test[+]
     * name = "rap-013 Search MedicationDispense by patient returns a searchset of MedicationDispense"
     * description = "Covers MedicationDispense.search-type, MedicationDispense.search.patient."
@@ -253,7 +307,16 @@ The tests declare which specification obligations they cover (34 element obligat
       * human = "$found at \"Bundle.type\" should be \"searchset\""
     * assertion[+]
       * severity = #error
-      * human = "$found at \"Bundle.entry.resource.where(resourceType != 'MedicationDispense' and search.mode != 'include').empty()\" should be true"
+      * human = "$found at \"Bundle.entry.where(search.mode.empty() or search.mode != 'include').exists()\" should be true"
+    * assertion[+]
+      * severity = #error
+      * human = "$found at \"Bundle.entry.where(search.mode.empty() or search.mode != 'include').all(resource.ofType(MedicationDispense).exists() and resource.subject.reference.exists())\" should be true"
+    * assertion[+]
+      * severity = #error
+      * human = "$found at \"Bundle.entry.where(search.mode.empty() or search.mode != 'include').resource.subject.reference.select(replaceMatches('^(.*/)?Patient/', '').replaceMatches('/_history/.*$', '')).distinct().count() = 1\" should be true"
+    * assertion[+]
+      * severity = #error
+      * human = "$found at \"Bundle.entry.where(search.mode.empty() or search.mode != 'include').resource.subject.reference.select(replaceMatches('^(.*/)?Patient/', '').replaceMatches('/_history/.*$', '')).distinct().single()\" should be \"$patientId\""
   * test[+]
     * name = "rap-014 Search Immunization by patient returns a searchset of Immunization"
     * description = "Covers Immunization.search-type, Immunization.search.patient."
@@ -266,7 +329,16 @@ The tests declare which specification obligations they cover (34 element obligat
       * human = "$found at \"Bundle.type\" should be \"searchset\""
     * assertion[+]
       * severity = #error
-      * human = "$found at \"Bundle.entry.resource.where(resourceType != 'Immunization' and search.mode != 'include').empty()\" should be true"
+      * human = "$found at \"Bundle.entry.where(search.mode.empty() or search.mode != 'include').exists()\" should be true"
+    * assertion[+]
+      * severity = #error
+      * human = "$found at \"Bundle.entry.where(search.mode.empty() or search.mode != 'include').all(resource.ofType(Immunization).exists() and resource.patient.reference.exists())\" should be true"
+    * assertion[+]
+      * severity = #error
+      * human = "$found at \"Bundle.entry.where(search.mode.empty() or search.mode != 'include').resource.patient.reference.select(replaceMatches('^(.*/)?Patient/', '').replaceMatches('/_history/.*$', '')).distinct().count() = 1\" should be true"
+    * assertion[+]
+      * severity = #error
+      * human = "$found at \"Bundle.entry.where(search.mode.empty() or search.mode != 'include').resource.patient.reference.select(replaceMatches('^(.*/)?Patient/', '').replaceMatches('/_history/.*$', '')).distinct().single()\" should be \"$patientId\""
   * test[+]
     * name = "rap-015 Search MedicationStatement by patient returns a searchset of MedicationStatement"
     * description = "Covers MedicationStatement.search-type, MedicationStatement.search.patient."
@@ -279,7 +351,16 @@ The tests declare which specification obligations they cover (34 element obligat
       * human = "$found at \"Bundle.type\" should be \"searchset\""
     * assertion[+]
       * severity = #error
-      * human = "$found at \"Bundle.entry.resource.where(resourceType != 'MedicationStatement' and search.mode != 'include').empty()\" should be true"
+      * human = "$found at \"Bundle.entry.where(search.mode.empty() or search.mode != 'include').exists()\" should be true"
+    * assertion[+]
+      * severity = #error
+      * human = "$found at \"Bundle.entry.where(search.mode.empty() or search.mode != 'include').all(resource.ofType(MedicationStatement).exists() and resource.subject.reference.exists())\" should be true"
+    * assertion[+]
+      * severity = #error
+      * human = "$found at \"Bundle.entry.where(search.mode.empty() or search.mode != 'include').resource.subject.reference.select(replaceMatches('^(.*/)?Patient/', '').replaceMatches('/_history/.*$', '')).distinct().count() = 1\" should be true"
+    * assertion[+]
+      * severity = #error
+      * human = "$found at \"Bundle.entry.where(search.mode.empty() or search.mode != 'include').resource.subject.reference.select(replaceMatches('^(.*/)?Patient/', '').replaceMatches('/_history/.*$', '')).distinct().single()\" should be \"$patientId\""
   * test[+]
     * name = "rap-016 Search Encounter by patient returns a searchset of Encounter"
     * description = "Covers Encounter.search-type, Encounter.search.patient."
@@ -292,7 +373,16 @@ The tests declare which specification obligations they cover (34 element obligat
       * human = "$found at \"Bundle.type\" should be \"searchset\""
     * assertion[+]
       * severity = #error
-      * human = "$found at \"Bundle.entry.resource.where(resourceType != 'Encounter' and search.mode != 'include').empty()\" should be true"
+      * human = "$found at \"Bundle.entry.where(search.mode.empty() or search.mode != 'include').exists()\" should be true"
+    * assertion[+]
+      * severity = #error
+      * human = "$found at \"Bundle.entry.where(search.mode.empty() or search.mode != 'include').all(resource.ofType(Encounter).exists() and resource.subject.reference.exists())\" should be true"
+    * assertion[+]
+      * severity = #error
+      * human = "$found at \"Bundle.entry.where(search.mode.empty() or search.mode != 'include').resource.subject.reference.select(replaceMatches('^(.*/)?Patient/', '').replaceMatches('/_history/.*$', '')).distinct().count() = 1\" should be true"
+    * assertion[+]
+      * severity = #error
+      * human = "$found at \"Bundle.entry.where(search.mode.empty() or search.mode != 'include').resource.subject.reference.select(replaceMatches('^(.*/)?Patient/', '').replaceMatches('/_history/.*$', '')).distinct().single()\" should be \"$patientId\""
 
 * suite[+]
   * name = "Read by id"

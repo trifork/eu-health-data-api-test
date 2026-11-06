@@ -42,6 +42,27 @@ Startup compiles, imports and assigns the tests. It does **not** execute the
 67 conformance cases or establish compliance. They are demonstration tests;
 their clinical/specification coverage has not been validated by this integration.
 
+## Inspect response bodies
+
+Response-body dialogs include a **Pretty print JSON** button for valid JSON
+objects and arrays. **Show raw** restores the exact original text; **Copy to
+clipboard** copies the currently displayed version. Formatting changes only the
+viewer, never stored reports, and preserves numeric precision and duplicate keys.
+This also works on historical sessions after refreshing the browser.
+
+The local `gitb-ui` image extends pinned ITB 1.30.2 using `ui/Dockerfile` and a
+guarded asset patch. `./itb/start.sh` builds it automatically. To update only the UI:
+
+```sh
+docker compose --env-file itb/.env up -d --build --no-deps gitb-ui
+node --test itb/ui/json-viewer.test.mjs
+```
+
+Hard-refresh the ITB page after rebuilding. The patch is specific to the pinned
+bundle and fails the build if its component hook changes; review it when upgrading
+ITB. Editable documents, annotated reports, invalid JSON and other formats retain
+their normal viewer.
+
 ## Configure an implementation
 
 The provider features currently use `http://ehr.example.org/fhir`. Replace that
@@ -49,8 +70,11 @@ placeholder in the relevant source feature with your implementation's base URL,
 then rerun `./itb/start.sh`. For a server running on the Docker host, use
 `http://host.docker.internal:<port>/<path>` so the engine can reach it.
 
-Provider cases prompt for SMART access tokens, patient/resource identifiers and
-other reference data. Consumer and publisher cases instruct the operator and
+Provider cases prompt only for the tokens and reference identifiers used by that
+scenario. CapabilityStatement checks (`dap-001`, `dap-002`, `dap-014`, `grp-001`,
+`grp-002`, `rap-001`) need no operator input. Keep input prompts inside their
+scenarios: prompts in `Background` run before every case, including metadata checks.
+Consumer and publisher cases instruct the operator and
 wait for the implementation to call ITB. Configure that implementation with the
 HTTP callback address shown in the session log, of the form:
 
@@ -108,7 +132,13 @@ diagnostics are generated under `itb/build/`; `manifest.json` records all cases.
 
 `normalize.py` adapts generated TDL to stock ITB 1.30.2. It preserves assertions
 while translating incoming HTTP references to `request`, `path` to `uri`,
-timeouts to milliseconds, and substring checks to `ExpressionValidator`.
+timeouts to milliseconds, and substring checks to `ExpressionValidator`. Outgoing
+URIs use `iri-to-uri` to encode characters such as token-search pipes, and response
+header lookups use the lowercase names returned by the HTTP handler.
+Validator calls originate from the simulated test-harness actor, and the user
+lane is named **Test operator**. Compact evaluation/check labels keep FHIRPath
+expressions from dominating the diagram; the full expressions remain in step
+request reports. HTTP responses remain part of the corresponding send report.
 HTTP replies become `receive/result` steps and outputs, preserving the checks
 before the response. It fails on unsupported transformations. This follows the
 [ITB 1.30.2 receive-result contract](https://github.com/ISAITB/gitb/blob/1.30.2/gitb-testbed-service/src/test/resources/tdl/msg/msg-http-receive-result-steps.xml).
@@ -131,3 +161,55 @@ The validator's package cache and the ITB database/repository use named volumes.
 | `smoke.mjs`, `tests/smoke.feature` | Positive and negative engine integration checks |
 | `validator/Dockerfile` | Checksum-pinned FHIR validator REST service |
 | `.env`, `.state.json`, `.users.json` | Ignored local configuration and credentials |
+
+## Exercise the provider scenarios against EIR
+
+The optional EIR setup uses a pinned server image, an in-memory database and the
+`dev,disable-security` profiles. It listens only on `localhost:8082`; restarting
+the server clears its FHIR data. This is an execution check, not a secured EHDS
+conformance deployment.
+
+```sh
+./itb/start.sh
+docker compose -f itb/eir-compose.yml up -d
+# Wait until http://localhost:8082/fhir/metadata responds.
+node --env-file=itb/.env itb/eir-run.mjs
+```
+
+The runner seeds two synthetic patients, all ten clinical resource types for each
+patient, and Binary/DocumentReference fixtures. It runs all 48 Document Access Provider, Grouped Provider and Resource
+Access Provider cases. It creates a separate **EIR development server** system
+and **EU API — EIR development run** specification, visible to the same test user.
+Consumer and publisher cases need a client implementation and are not run.
+
+The source features and assertions remain unchanged. Copies of the compiled suites
+target `http://host.docker.internal:8082/fhir` and add a two-minute input timeout:
+ITB otherwise automatically completes REST-launched input forms with empty inputs.
+The runner answers those forms through the UI API. Tokens are explicit dummy
+values because EIR security is disabled; authorization rejection cases are
+expected to fail. The ten clinical search cases require matching entries of the
+expected resource type, a patient reference on every match, and the requested
+patient ID on all matches. Explicit `_include` entries are excluded from these
+checks; missing search metadata is treated as a match. Target and control
+fixtures use the same filters so a server ignoring the patient filter is caught.
+
+Results, session IDs and XML reports are saved under `itb/build/eir/`, with the
+latest run summarized in `results.json`. An optional regular expression selects
+cases, for example `node --env-file=itb/.env itb/eir-run.mjs 'rap-005|dap-015'`.
+Each run creates new document/Binary fixtures; patients and clinical resources are
+reused via conditional create. Stop this optional stack with
+`docker compose -f itb/eir-compose.yml stop`.
+
+Run the 140 positive/negative FHIRPath regression checks from the repository root:
+
+```sh
+docker run --rm --network eu-health-data-api-itb_default \
+  --mount type=bind,source="$PWD",target=/work,readonly -w /work \
+  node:22-alpine node itb/test-search-assertions.mjs
+```
+
+These evaluate the actual source-feature assertions against the running validator,
+including empty results, wrong types, wrong/mixed patients, missing references,
+explicit includes, and relative/absolute/versioned references. Historical ITB
+sessions retain their original diagrams; open a newly executed session to see
+the corrected mapping and assertions.

@@ -49,9 +49,10 @@ try {
     for (let attempt = 0; attempt < 30; attempt++) {
       status = (await api('POST', '/tests/status', state.organisation,
         { session: [session], withLogs: true })).sessions[0];
-      if (status.result !== 'UNDEFINED') break;
+      if (status && status.result !== 'UNDEFINED') break;
       await new Promise(resolve => setTimeout(resolve, 500));
     }
+    assert.ok(status, `Smoke ${index + 1}: session status was not available after polling`);
     fs.writeFileSync(path.join(out, `result-${index}.json`), JSON.stringify(status, null, 2) + '\n', { mode: 0o600 });
     assert.equal(status.result, expected, `Smoke ${index + 1}: see ${out}/result-${index}.json`);
     if (!index) {

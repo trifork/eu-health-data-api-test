@@ -20,12 +20,44 @@ def tag(name):
 
 
 def normalize(tree):
+    actors = tree.find(tag('actors'))
+    if actors is not None and tree.tag == tag('testcase'):
+        actors.set('userName', 'Test operator')
+        simulated = [a.get('id') for a in actors if a.get('role') == 'SIMULATED'
+                     and a.get('id') != 'FHIRValidator']
+        for send in tree.iter(tag('send')):
+            if send.get('to') == 'FHIRValidator':
+                if len(simulated) != 1:
+                    raise ValueError('Expected one test-harness actor for validator calls')
+                send.set('from', simulated[0])
+                if send.get('desc', '').startswith('FHIRPath '):
+                    send.set('desc', 'Evaluate FHIRPath')
+    for verify in tree.iter(tag('verify')):
+        description = verify.get('desc', '')
+        if description.startswith('$found at Bundle.entry.where('):
+            resource_type = re.search(r'ofType\((\w+)\)', description)
+            if resource_type:
+                verify.set('desc', f'Matches are {resource_type[1]} with patient references')
+            elif '.distinct().count() = 1' in description:
+                verify.set('desc', 'Matches refer to one patient')
+            elif '.distinct().single()' in description:
+                verify.set('desc', 'Matches refer to the requested patient')
+            elif description.endswith('.exists() is true'):
+                verify.set('desc', 'Search returns matching entries')
     # HttpMessagingV2 exposes incoming content below request, with uri rather
     # than path. StringValidator has no contains mode: use an XPath assertion.
     for element in tree.iter():
         if element.text:
             element.text = re.sub(r'\$lastReceived\{(method|path|body|headers)\}',
                 lambda m: '$lastReceived{request}{' + ('uri' if m[1] == 'path' else m[1]) + '}', element.text)
+            # Java HttpClient exposes response header names in lowercase.
+            element.text = re.sub(r'(\$lastRequest\{response\}\{headers\})\{([^{}]+)\}',
+                lambda m: m[1] + '{' + m[2].lower() + '}', element.text)
+        if element.tag == tag('send') and element.get('handler') == 'HttpMessagingV2':
+            uri = element.find(f"{tag('input')}[@name='uri']")
+            if uri is not None and not uri.text.startswith('iri-to-uri('):
+                # Token searches contain pipes; the HTTP handler requires a URI.
+                uri.text = f'iri-to-uri({uri.text})'
         if element.tag == tag('verify') and element.get('handler') == 'StringValidator':
             inputs = {child.get('name'): child for child in element.findall(tag('input'))}
             mode = inputs.get('matchType')
