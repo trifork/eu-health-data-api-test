@@ -52,7 +52,7 @@ Document search for the target patient includes the target summary and target la
 | dap-008 | document-target, patient-target, binary-target | accessToken, documentId | Read the bound target DocumentReference: current, type 60591-5, category Patient-Summaries, subject target patient and attachment URL pointing to the target Binary. |
 | dap-009 | None | accessToken | The reserved otb-no-such-* identifier in the feature must not exist; expect 404 and an OperationOutcome. |
 | dap-010 | binary-target, patient-target | accessToken, binaryId | Read the bound target Binary. Its content type is text/plain and decoded data matches the bundled synthetic target document. |
-| dap-011 | patient-target, patient-control | accessToken, patientIdentifier | The searches must include and exclude the fixture resources specified in searchChecks. Extra unrelated server data is allowed only if it matches the query. |
+| dap-011 | patient-target, patient-control | accessToken, patientIdentifier, patientId | The searches must include and exclude the fixture resources specified in searchChecks. Extra unrelated server data is allowed only if it matches the query. |
 | dap-012 | patient-target | accessToken, patientId | Read the bound target patient: active, Synthetic EUAPITestpatient, gender unknown, birth date 1990-01-01, and the declared fixture identifier. |
 | dap-013 | patient-target, patient-control | accessToken, patientId | The searches must include and exclude the fixture resources specified in searchChecks. Extra unrelated server data is allowed only if it matches the query. |
 | dap-014 | None | None | No fixture or token required. The live server must declare the capabilities named by the assertions. |
@@ -75,7 +75,7 @@ Document search for the target patient includes the target summary and target la
 | grp-008 | document-target, patient-target, binary-target | accessToken, documentId | Read the bound target DocumentReference: current, type 60591-5, category Patient-Summaries, subject target patient and attachment URL pointing to the target Binary. |
 | grp-009 | None | accessToken | The reserved otb-no-such-* identifier in the feature must not exist; expect 404 and an OperationOutcome. |
 | grp-010 | binary-target, patient-target | accessToken, binaryId | Read the bound target Binary. Its content type is text/plain and decoded data matches the bundled synthetic target document. |
-| grp-011 | patient-target, patient-control | accessToken, patientIdentifier | The searches must include and exclude the fixture resources specified in searchChecks. Extra unrelated server data is allowed only if it matches the query. |
+| grp-011 | patient-target, patient-control | accessToken, patientIdentifier, patientId | The searches must include and exclude the fixture resources specified in searchChecks. Extra unrelated server data is allowed only if it matches the query. |
 | grp-012 | patient-target | accessToken, patientId | Read the bound target patient: active, Synthetic EUAPITestpatient, gender unknown, birth date 1990-01-01, and the declared fixture identifier. |
 | grp-013 | patient-target, patient-control | accessToken, patientId | The searches must include and exclude the fixture resources specified in searchChecks. Extra unrelated server data is allowed only if it matches the query. |
 | pub-001 | Embedded client workflow | None | The test bed supplies the canned responses in the feature; configure the client to perform the requested workflow. Provider preload is not used. |

@@ -208,6 +208,9 @@ Fixture prerequisites, input bindings and expected data are in tests/fixtures/pr
       * human = "$patients at \"Bundle.entry.resource.ofType(Patient).count() >= 1\" should be true"
     * assertion[+]
       * severity = #error
+      * human = "$patients at \"Bundle.entry.resource.ofType(Patient).id.distinct().single()\" should be \"$patientId\""
+    * assertion[+]
+      * severity = #error
       * human = "$patients should conform to \"http://hl7.org/fhir/StructureDefinition/Bundle\" ignoring slicing errors"
   * test[+]
     * name = "dap-012 Read Patient by id and conform to patient-eu-core"
@@ -240,10 +243,16 @@ Fixture prerequisites, input bindings and expected data are in tests/fixtures/pr
       * human = "$byFamily at \"Bundle.entry.resource.ofType(Patient).exists()\" should be true"
     * assertion[+]
       * severity = #error
+      * human = "$byFamily at \"Bundle.entry.resource.ofType(Patient).id.join(',')\" should contain $patientId"
+    * assertion[+]
+      * severity = #error
       * human = "$response.status should be 200"
     * assertion[+]
       * severity = #error
       * human = "$byGender at \"Bundle.entry.resource.ofType(Patient).exists()\" should be true"
+    * assertion[+]
+      * severity = #error
+      * human = "$byGender at \"Bundle.entry.resource.ofType(Patient).id.join(',')\" should contain $patientId"
 
 * suite[+]
   * name = "Document Submission Option — Simplified Publish [ITI-105]"
@@ -270,7 +279,25 @@ Fixture prerequisites, input bindings and expected data are in tests/fixtures/pr
       * human = "$response.status should be 201"
     * assertion[+]
       * severity = #error
-      * human = "$response.headers.Location should not be empty"
+      * human = "$response.headers.Location should match \"/DocumentReference/[^/]+\""
+    * assertion[+]
+      * severity = #error
+      * human = "extract \"/id\" from $response.body as $createdId"
+    * assertion[+]
+      * severity = #error
+      * human = "$response.status should be 200"
+    * assertion[+]
+      * severity = #error
+      * human = "$created at \"DocumentReference.subject.reference\" should contain \"$submitPatientRef\""
+    * assertion[+]
+      * severity = #error
+      * human = "$created at \"DocumentReference.content.attachment.contentType.exists()\" should be true"
+    * assertion[+]
+      * severity = #error
+      * human = "$response.status should be 200"
+    * assertion[+]
+      * severity = #error
+      * human = "$findable at \"Bundle.entry.resource.ofType(DocumentReference).count() = 1\" should be true"
   * test[+]
     * name = "dap-016 A submission without content is refused"
     * description = "Fixture contract: fixtures/provider-v1/manifest.json, cases.dap-016 (input bindings and expected data). Covers DocumentReference.create."

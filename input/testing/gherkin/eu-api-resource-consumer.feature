@@ -22,7 +22,7 @@ Feature: EEHRxF Resource Consumer — token, patient lookup and search by patien
       Then $received.method should be "POST"
       And $received.body should contain "grant_type=client_credentials"
       And $received.body should contain "client_assertion_type=urn%3Aietf%3Aparams%3Aoauth%3Aclient-assertion-type%3Ajwt-bearer"
-      And $received.body should contain "client_assertion="
+      And $received.body should match "client_assertion=[A-Za-z0-9_-]+[.][A-Za-z0-9_-]+[.][A-Za-z0-9_-]+([&]|$)"
       And $received.body should contain "scope="
       And ResourceProvider replies to ResourceConsumer with status 200 and:
         """
@@ -72,7 +72,7 @@ Feature: EEHRxF Resource Consumer — token, patient lookup and search by patien
       When ResourceProvider receives a request from ResourceConsumer within 300 seconds
       Then $received.method should be "GET"
       And $received.path should contain "/Condition"
-      And $received.path should contain "patient="
+      And $received.path should match "patient=(Patient(/|%2F))?otb-pat-1([&]|$)"
       And $received.headers.Authorization should contain "Bearer"
       And ResourceProvider replies to ResourceConsumer with status 200 and:
         """
@@ -87,7 +87,7 @@ Feature: EEHRxF Resource Consumer — token, patient lookup and search by patien
       When ResourceProvider receives a request from ResourceConsumer within 300 seconds
       Then $received.method should be "GET"
       And $received.path should contain "/Observation"
-      And $received.path should contain "patient="
+      And $received.path should match "patient=(Patient(/|%2F))?otb-pat-1([&]|$)"
       And $received.path should contain "category="
       And ResourceProvider replies to ResourceConsumer with status 200 and:
         """
@@ -102,7 +102,7 @@ Feature: EEHRxF Resource Consumer — token, patient lookup and search by patien
       When ResourceProvider receives a request from ResourceConsumer within 300 seconds
       Then $received.method should be "GET"
       And $received.path should contain "/AllergyIntolerance"
-      And $received.path should contain "patient="
+      And $received.path should match "patient=(Patient(/|%2F))?otb-pat-1([&]|$)"
       And ResourceProvider replies to ResourceConsumer with status 200 and:
         """
         { "resourceType": "Bundle", "type": "searchset", "total": 0 }

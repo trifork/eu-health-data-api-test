@@ -129,11 +129,13 @@ Feature: EEHRxF Document Access Provider — ITI-67, ITI-68 and the Document Sub
     Scenario: dap-011 Search Patient by identifier
       Given Client is asked for $accessToken with "A SMART Backend Services access token for this server, as 'Bearer <token>' (scopes system/DocumentReference.rs, system/Binary.r, system/Patient.rs)"
       And Client is asked for $patientIdentifier with "The identifier (system|value) of the reference patient who has documents on the server"
+      And Client is asked for $patientId with "The logical id of the reference patient on the server"
       And set header "Authorization" to $accessToken
       When Client gets from DocumentAccessProvider at "/Patient?identifier=" with id $patientIdentifier as $patients
       Then $response.status should be 200
       And $patients at "Bundle.type" should be "searchset"
       And $patients at "Bundle.entry.resource.ofType(Patient).count() >= 1" should be true
+      And $patients at "Bundle.entry.resource.ofType(Patient).id.distinct().single()" should be "$patientId"
       And $patients should conform to "http://hl7.org/fhir/StructureDefinition/Bundle" ignoring slicing errors
 
     @covers:Patient.read,Patient.search.id
@@ -160,9 +162,11 @@ Feature: EEHRxF Document Access Provider — ITI-67, ITI-68 and the Document Sub
       When Client gets from DocumentAccessProvider at "/Patient?family=" with id $family as $byFamily
       Then $response.status should be 200
       And $byFamily at "Bundle.entry.resource.ofType(Patient).exists()" should be true
+      And $byFamily at "Bundle.entry.resource.ofType(Patient).id.join(',')" should contain $patientId
       When Client gets from DocumentAccessProvider at "/Patient?gender=" with id $gender as $byGender
       Then $response.status should be 200
       And $byGender at "Bundle.entry.resource.ofType(Patient).exists()" should be true
+      And $byGender at "Bundle.entry.resource.ofType(Patient).id.join(',')" should contain $patientId
 
   Rule: Document Submission Option — Simplified Publish [ITI-105]
 
@@ -182,6 +186,8 @@ Feature: EEHRxF Document Access Provider — ITI-67, ITI-68 and the Document Sub
       Given Client is asked for $accessToken with "A SMART Backend Services access token for this server, as 'Bearer <token>' (scopes system/DocumentReference.rs, system/Binary.r, system/Patient.rs)"
       And set header "Authorization" to $accessToken
       And set header "Content-Type" to "application/fhir+json"
+      # Asks for the created resource back so its id can be read; a server that ignores Prefer fails at the extract step.
+      And set header "Prefer" to "return=representation"
       And Client is asked for $submitPatientRef with "A Patient reference the server knows, e.g. Patient/123"
       When Client posts to DocumentAccessProvider at "/DocumentReference" with:
         """
@@ -195,7 +201,15 @@ Feature: EEHRxF Document Access Provider — ITI-67, ITI-68 and the Document Sub
         }
         """
       Then $response.status should be 201
-      And $response.headers.Location should not be empty
+      And $response.headers.Location should match "/DocumentReference/[^/]+"
+      And extract "/id" from $response.body as $createdId
+      When Client gets from DocumentAccessProvider at "/DocumentReference/" with id $createdId as $created
+      Then $response.status should be 200
+      And $created at "DocumentReference.subject.reference" should contain "$submitPatientRef"
+      And $created at "DocumentReference.content.attachment.contentType.exists()" should be true
+      When Client gets from DocumentAccessProvider at "/DocumentReference?_id=" with id $createdId as $findable
+      Then $response.status should be 200
+      And $findable at "Bundle.entry.resource.ofType(DocumentReference).count() = 1" should be true
 
     @covers:DocumentReference.create
     # Fixture contract: fixtures/provider-v1/manifest.json, cases.dap-016 (input bindings and expected data).

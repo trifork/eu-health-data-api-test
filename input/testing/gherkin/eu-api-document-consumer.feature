@@ -22,7 +22,7 @@ Feature: EEHRxF Document Consumer — token, patient lookup, find and retrieve d
       Then $received.method should be "POST"
       And $received.body should contain "grant_type=client_credentials"
       And $received.body should contain "client_assertion_type=urn%3Aietf%3Aparams%3Aoauth%3Aclient-assertion-type%3Ajwt-bearer"
-      And $received.body should contain "client_assertion="
+      And $received.body should match "client_assertion=[A-Za-z0-9_-]+[.][A-Za-z0-9_-]+[.][A-Za-z0-9_-]+([&]|$)"
       And $received.body should contain "scope="
       And AccessProvider replies to DocumentConsumer with status 200 and:
         """
@@ -59,7 +59,7 @@ Feature: EEHRxF Document Consumer — token, patient lookup, find and retrieve d
       When AccessProvider receives a request from DocumentConsumer within 300 seconds
       Then $received.method should be "GET"
       And $received.path should contain "/DocumentReference"
-      And $received.path should contain "patient="
+      And $received.path should match "patient=(Patient(/|%2F))?otb-pat-1([&]|$)"
       And $received.headers.Authorization should contain "Bearer"
       And AccessProvider replies to DocumentConsumer with status 200 and:
         """
@@ -79,8 +79,8 @@ Feature: EEHRxF Document Consumer — token, patient lookup, find and retrieve d
       When AccessProvider receives a request from DocumentConsumer within 300 seconds
       Then $received.method should be "GET"
       And $received.path should contain "/DocumentReference"
-      And $received.path should contain "patient="
-      And $received.path should contain "type="
+      And $received.path should match "patient=(Patient(/|%2F))?otb-pat-1([&]|$)"
+      And $received.path should match "[?&](type|category)="
       And AccessProvider replies to DocumentConsumer with status 200 and:
         """
         { "resourceType": "Bundle", "type": "searchset", "total": 0 }
@@ -92,10 +92,10 @@ Feature: EEHRxF Document Consumer — token, patient lookup, find and retrieve d
     # Fixture contract: fixtures/provider-v1/manifest.json, cases.con-005 (input bindings and expected data).
     Scenario: con-005 The SUT retrieves the document content with a bearer token
       Given AccessProvider is listening for DocumentConsumer
-      And DocumentConsumer is informed "Retrieve the content of document otb-doc-1 from the Access Provider configured for this session."
+      And DocumentConsumer is informed "Retrieve the content of document otb-doc-1 from the Access Provider configured for this session. Its DocumentReference content attachment URL is Binary/otb-bin-1."
       When AccessProvider receives a request from DocumentConsumer within 300 seconds
       Then $received.method should be "GET"
-      And $received.path should contain "Binary/"
+      And $received.path should match "Binary/otb-bin-1([?#]|$)"
       And $received.headers.Authorization should contain "Bearer"
       And AccessProvider replies to DocumentConsumer with status 200 and:
         """

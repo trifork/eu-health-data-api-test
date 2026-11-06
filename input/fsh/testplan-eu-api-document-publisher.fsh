@@ -59,7 +59,7 @@ Fixture prerequisites, input bindings and expected data are in tests/fixtures/pr
       * human = "$received.body should contain \"client_assertion_type=urn%3Aietf%3Aparams%3Aoauth%3Aclient-assertion-type%3Ajwt-bearer\""
     * assertion[+]
       * severity = #error
-      * human = "$received.body should contain \"client_assertion=\""
+      * human = "$received.body should match \"client_assertion=[A-Za-z0-9_-]+[.][A-Za-z0-9_-]+[.][A-Za-z0-9_-]+([&]|$)\""
     * assertion[+]
       * severity = #error
       * human = "$received.body should contain \"scope=\""
@@ -146,7 +146,34 @@ Fixture prerequisites, input bindings and expected data are in tests/fixtures/pr
       * human = "$received.method should be \"POST\""
     * assertion[+]
       * severity = #error
+      * human = "$received.path should contain \"/DocumentReference\""
+    * assertion[+]
+      * severity = #error
       * human = "AccessProvider replies to DocumentPublisher with status 401 and:"
+    * assertion[+]
+      * severity = #error
+      * human = "$received.method should be \"POST\""
+    * assertion[+]
+      * severity = #error
+      * human = "$received.body should contain \"grant_type=client_credentials\""
+    * assertion[+]
+      * severity = #error
+      * human = "$received.body should match \"client_assertion=[A-Za-z0-9_-]+[.][A-Za-z0-9_-]+[.][A-Za-z0-9_-]+([&]|$)\""
+    * assertion[+]
+      * severity = #error
+      * human = "AccessProvider replies to DocumentPublisher with status 200 and:"
+    * assertion[+]
+      * severity = #error
+      * human = "$received.method should be \"POST\""
+    * assertion[+]
+      * severity = #error
+      * human = "$received.path should contain \"/DocumentReference\""
+    * assertion[+]
+      * severity = #error
+      * human = "$received.headers.Authorization should contain \"otb-fresh-token\""
+    * assertion[+]
+      * severity = #error
+      * human = "AccessProvider replies to DocumentPublisher with status 201 and:"
 
 * suite[+]
   * name = "Transport security"

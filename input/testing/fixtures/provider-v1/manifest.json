@@ -676,7 +676,8 @@
       ],
       "inputNames": [
         "accessToken",
-        "patientIdentifier"
+        "patientIdentifier",
+        "patientId"
       ],
       "searchChecks": [
         "patient-identifier"
@@ -685,6 +686,7 @@
         "$response.status should be 200",
         "$patients at \"Bundle.type\" should be \"searchset\"",
         "$patients at \"Bundle.entry.resource.ofType(Patient).count() >= 1\" should be true",
+        "$patients at \"Bundle.entry.resource.ofType(Patient).id.distinct().single()\" should be \"$patientId\"",
         "$patients should conform to \"http://hl7.org/fhir/StructureDefinition/Bundle\" ignoring slicing errors"
       ],
       "expected": "The searches must include and exclude the fixture resources specified in searchChecks. Extra unrelated server data is allowed only if it matches the query."
@@ -729,8 +731,10 @@
         "extract \"/gender\" from $response.body as $gender",
         "$response.status should be 200",
         "$byFamily at \"Bundle.entry.resource.ofType(Patient).exists()\" should be true",
+        "$byFamily at \"Bundle.entry.resource.ofType(Patient).id.join(',')\" should contain $patientId",
         "$response.status should be 200",
-        "$byGender at \"Bundle.entry.resource.ofType(Patient).exists()\" should be true"
+        "$byGender at \"Bundle.entry.resource.ofType(Patient).exists()\" should be true",
+        "$byGender at \"Bundle.entry.resource.ofType(Patient).id.join(',')\" should contain $patientId"
       ],
       "expected": "The searches must include and exclude the fixture resources specified in searchChecks. Extra unrelated server data is allowed only if it matches the query."
     },
@@ -761,7 +765,13 @@
       "searchChecks": [],
       "assertions": [
         "$response.status should be 201",
-        "$response.headers.Location should not be empty"
+        "$response.headers.Location should match \"/DocumentReference/[^/]+\"",
+        "extract \"/id\" from $response.body as $createdId",
+        "$response.status should be 200",
+        "$created at \"DocumentReference.subject.reference\" should contain \"$submitPatientRef\"",
+        "$created at \"DocumentReference.content.attachment.contentType.exists()\" should be true",
+        "$response.status should be 200",
+        "$findable at \"Bundle.entry.resource.ofType(DocumentReference).count() = 1\" should be true"
       ],
       "expected": "Create a new document for the bound target patient, return 201 and Location. This changes server state; the fixture search expectations are inclusion/exclusion checks, not global exact counts."
     },
@@ -804,7 +814,7 @@
         "$received.method should be \"POST\"",
         "$received.body should contain \"grant_type=client_credentials\"",
         "$received.body should contain \"client_assertion_type=urn%3Aietf%3Aparams%3Aoauth%3Aclient-assertion-type%3Ajwt-bearer\"",
-        "$received.body should contain \"client_assertion=\"",
+        "$received.body should match \"client_assertion=[A-Za-z0-9_-]+[.][A-Za-z0-9_-]+[.][A-Za-z0-9_-]+([&]|$)\"",
         "$received.body should contain \"scope=\"",
         "AccessProvider replies to DocumentConsumer with status 200 and:"
       ],
@@ -836,7 +846,7 @@
       "assertions": [
         "$received.method should be \"GET\"",
         "$received.path should contain \"/DocumentReference\"",
-        "$received.path should contain \"patient=\"",
+        "$received.path should match \"patient=(Patient(/|%2F))?otb-pat-1([&]|$)\"",
         "$received.headers.Authorization should contain \"Bearer\"",
         "AccessProvider replies to DocumentConsumer with status 200 and:"
       ],
@@ -852,8 +862,8 @@
       "assertions": [
         "$received.method should be \"GET\"",
         "$received.path should contain \"/DocumentReference\"",
-        "$received.path should contain \"patient=\"",
-        "$received.path should contain \"type=\"",
+        "$received.path should match \"patient=(Patient(/|%2F))?otb-pat-1([&]|$)\"",
+        "$received.path should match \"[?&](type|category)=\"",
         "AccessProvider replies to DocumentConsumer with status 200 and:"
       ],
       "expected": "The test bed supplies the canned responses in the feature; configure the client to perform the requested workflow. Provider preload is not used."
@@ -867,7 +877,7 @@
       "searchChecks": [],
       "assertions": [
         "$received.method should be \"GET\"",
-        "$received.path should contain \"Binary/\"",
+        "$received.path should match \"Binary/otb-bin-1([?#]|$)\"",
         "$received.headers.Authorization should contain \"Bearer\"",
         "AccessProvider replies to DocumentConsumer with status 200 and:"
       ],
@@ -1095,7 +1105,8 @@
       ],
       "inputNames": [
         "accessToken",
-        "patientIdentifier"
+        "patientIdentifier",
+        "patientId"
       ],
       "searchChecks": [
         "patient-identifier"
@@ -1104,6 +1115,7 @@
         "$response.status should be 200",
         "$patients at \"Bundle.type\" should be \"searchset\"",
         "$patients at \"Bundle.entry.resource.ofType(Patient).count() >= 1\" should be true",
+        "$patients at \"Bundle.entry.resource.ofType(Patient).id.distinct().single()\" should be \"$patientId\"",
         "$patients should conform to \"http://hl7.org/fhir/StructureDefinition/Bundle\" ignoring slicing errors"
       ],
       "expected": "The searches must include and exclude the fixture resources specified in searchChecks. Extra unrelated server data is allowed only if it matches the query."
@@ -1148,8 +1160,10 @@
         "extract \"/gender\" from $response.body as $gender",
         "$response.status should be 200",
         "$byFamily at \"Bundle.entry.resource.ofType(Patient).exists()\" should be true",
+        "$byFamily at \"Bundle.entry.resource.ofType(Patient).id.join(',')\" should contain $patientId",
         "$response.status should be 200",
-        "$byGender at \"Bundle.entry.resource.ofType(Patient).exists()\" should be true"
+        "$byGender at \"Bundle.entry.resource.ofType(Patient).exists()\" should be true",
+        "$byGender at \"Bundle.entry.resource.ofType(Patient).id.join(',')\" should contain $patientId"
       ],
       "expected": "The searches must include and exclude the fixture resources specified in searchChecks. Extra unrelated server data is allowed only if it matches the query."
     },
@@ -1164,7 +1178,7 @@
         "$received.method should be \"POST\"",
         "$received.body should contain \"grant_type=client_credentials\"",
         "$received.body should contain \"client_assertion_type=urn%3Aietf%3Aparams%3Aoauth%3Aclient-assertion-type%3Ajwt-bearer\"",
-        "$received.body should contain \"client_assertion=\"",
+        "$received.body should match \"client_assertion=[A-Za-z0-9_-]+[.][A-Za-z0-9_-]+[.][A-Za-z0-9_-]+([&]|$)\"",
         "$received.body should contain \"scope=\"",
         "AccessProvider replies to DocumentPublisher with status 200 and:"
       ],
@@ -1227,7 +1241,16 @@
       "searchChecks": [],
       "assertions": [
         "$received.method should be \"POST\"",
-        "AccessProvider replies to DocumentPublisher with status 401 and:"
+        "$received.path should contain \"/DocumentReference\"",
+        "AccessProvider replies to DocumentPublisher with status 401 and:",
+        "$received.method should be \"POST\"",
+        "$received.body should contain \"grant_type=client_credentials\"",
+        "$received.body should match \"client_assertion=[A-Za-z0-9_-]+[.][A-Za-z0-9_-]+[.][A-Za-z0-9_-]+([&]|$)\"",
+        "AccessProvider replies to DocumentPublisher with status 200 and:",
+        "$received.method should be \"POST\"",
+        "$received.path should contain \"/DocumentReference\"",
+        "$received.headers.Authorization should contain \"otb-fresh-token\"",
+        "AccessProvider replies to DocumentPublisher with status 201 and:"
       ],
       "expected": "The test bed supplies the canned responses in the feature; configure the client to perform the requested workflow. Provider preload is not used."
     },
@@ -1330,6 +1353,7 @@
         "$response.status should be 200",
         "$byIdentifier at \"Bundle.type\" should be \"searchset\"",
         "$byIdentifier at \"Bundle.entry.resource.ofType(Patient).count() >= 1\" should be true",
+        "$byIdentifier at \"Bundle.entry.resource.ofType(Patient).id.distinct().single()\" should be \"$patientId\"",
         "$response.status should be 200",
         "$byId at \"Bundle.entry.resource.ofType(Patient).count() = 1\" should be true"
       ],
@@ -1360,10 +1384,13 @@
         "extract \"/birthDate\" from $response.body as $birthdate",
         "$response.status should be 200",
         "$byFamily at \"Bundle.entry.resource.ofType(Patient).exists()\" should be true",
+        "$byFamily at \"Bundle.entry.resource.ofType(Patient).id.join(',')\" should contain $patientId",
         "$response.status should be 200",
         "$byGender at \"Bundle.entry.resource.ofType(Patient).exists()\" should be true",
+        "$byGender at \"Bundle.entry.resource.ofType(Patient).id.join(',')\" should contain $patientId",
         "$response.status should be 200",
         "$byBirth at \"Bundle.entry.resource.ofType(Patient).exists()\" should be true",
+        "$byBirth at \"Bundle.entry.resource.ofType(Patient).id.join(',')\" should contain $patientId",
         "$response.status should be 200",
         "$byActive at \"Bundle.type\" should be \"searchset\""
       ],
@@ -1690,7 +1717,7 @@
         "$received.method should be \"POST\"",
         "$received.body should contain \"grant_type=client_credentials\"",
         "$received.body should contain \"client_assertion_type=urn%3Aietf%3Aparams%3Aoauth%3Aclient-assertion-type%3Ajwt-bearer\"",
-        "$received.body should contain \"client_assertion=\"",
+        "$received.body should match \"client_assertion=[A-Za-z0-9_-]+[.][A-Za-z0-9_-]+[.][A-Za-z0-9_-]+([&]|$)\"",
         "$received.body should contain \"scope=\"",
         "ResourceProvider replies to ResourceConsumer with status 200 and:"
       ],
@@ -1736,7 +1763,7 @@
       "assertions": [
         "$received.method should be \"GET\"",
         "$received.path should contain \"/Condition\"",
-        "$received.path should contain \"patient=\"",
+        "$received.path should match \"patient=(Patient(/|%2F))?otb-pat-1([&]|$)\"",
         "$received.headers.Authorization should contain \"Bearer\"",
         "ResourceProvider replies to ResourceConsumer with status 200 and:"
       ],
@@ -1752,7 +1779,7 @@
       "assertions": [
         "$received.method should be \"GET\"",
         "$received.path should contain \"/Observation\"",
-        "$received.path should contain \"patient=\"",
+        "$received.path should match \"patient=(Patient(/|%2F))?otb-pat-1([&]|$)\"",
         "$received.path should contain \"category=\"",
         "ResourceProvider replies to ResourceConsumer with status 200 and:"
       ],
@@ -1768,7 +1795,7 @@
       "assertions": [
         "$received.method should be \"GET\"",
         "$received.path should contain \"/AllergyIntolerance\"",
-        "$received.path should contain \"patient=\"",
+        "$received.path should match \"patient=(Patient(/|%2F))?otb-pat-1([&]|$)\"",
         "ResourceProvider replies to ResourceConsumer with status 200 and:"
       ],
       "expected": "The test bed supplies the canned responses in the feature; configure the client to perform the requested workflow. Provider preload is not used."

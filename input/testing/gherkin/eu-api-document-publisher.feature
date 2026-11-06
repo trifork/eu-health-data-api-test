@@ -24,7 +24,7 @@ Feature: EEHRxF Document Publisher — token, patient lookup and Simplified Publ
       Then $received.method should be "POST"
       And $received.body should contain "grant_type=client_credentials"
       And $received.body should contain "client_assertion_type=urn%3Aietf%3Aparams%3Aoauth%3Aclient-assertion-type%3Ajwt-bearer"
-      And $received.body should contain "client_assertion="
+      And $received.body should match "client_assertion=[A-Za-z0-9_-]+[.][A-Za-z0-9_-]+[.][A-Za-z0-9_-]+([&]|$)"
       And $received.body should contain "scope="
       And AccessProvider replies to DocumentPublisher with status 200 and:
         """
@@ -89,12 +89,29 @@ Feature: EEHRxF Document Publisher — token, patient lookup and Simplified Publ
     # Fixture contract: fixtures/provider-v1/manifest.json, cases.pub-005 (input bindings and expected data).
     Scenario: pub-005 After a 401 the SUT obtains a fresh token before retrying
       Given AccessProvider is listening for DocumentPublisher
-      And DocumentPublisher is informed "Publish a document to the Access Provider; the test bed will refuse the first attempt with 401. Retry as you normally would."
+      And DocumentPublisher is informed "Publish a document to the Access Provider. The test bed refuses the first attempt with 401, then expects a new token request and a retry that carries the new token. Respond as you normally would."
       When AccessProvider receives a request from DocumentPublisher within 300 seconds
       Then $received.method should be "POST"
+      And $received.path should contain "/DocumentReference"
       And AccessProvider replies to DocumentPublisher with status 401 and:
         """
         { "resourceType": "OperationOutcome", "issue": [{ "severity": "error", "code": "login", "diagnostics": "expired" }] }
+        """
+      When AccessProvider receives a request from DocumentPublisher within 300 seconds
+      Then $received.method should be "POST"
+      And $received.body should contain "grant_type=client_credentials"
+      And $received.body should match "client_assertion=[A-Za-z0-9_-]+[.][A-Za-z0-9_-]+[.][A-Za-z0-9_-]+([&]|$)"
+      And AccessProvider replies to DocumentPublisher with status 200 and:
+        """
+        { "access_token": "otb-fresh-token", "token_type": "Bearer", "expires_in": 300, "scope": "system/DocumentReference.c system/Patient.rs" }
+        """
+      When AccessProvider receives a request from DocumentPublisher within 300 seconds
+      Then $received.method should be "POST"
+      And $received.path should contain "/DocumentReference"
+      And $received.headers.Authorization should contain "otb-fresh-token"
+      And AccessProvider replies to DocumentPublisher with status 201 and:
+        """
+        { "resourceType": "OperationOutcome", "issue": [{ "severity": "information", "code": "informational", "diagnostics": "created" }] }
         """
 
   Rule: Transport security

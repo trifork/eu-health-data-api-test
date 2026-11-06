@@ -127,11 +127,13 @@ Feature: EEHRxF grouped Document Publisher/Access Provider — ITI-67 and ITI-68
     Scenario: grp-011 Search Patient by identifier
       Given Client is asked for $accessToken with "A SMART Backend Services access token for this server, as 'Bearer <token>' (scopes system/DocumentReference.rs, system/Binary.r, system/Patient.rs)"
       And Client is asked for $patientIdentifier with "The identifier (system|value) of the reference patient who has documents on the server"
+      And Client is asked for $patientId with "The logical id of the reference patient on the server"
       And set header "Authorization" to $accessToken
       When Client gets from GroupedProvider at "/Patient?identifier=" with id $patientIdentifier as $patients
       Then $response.status should be 200
       And $patients at "Bundle.type" should be "searchset"
       And $patients at "Bundle.entry.resource.ofType(Patient).count() >= 1" should be true
+      And $patients at "Bundle.entry.resource.ofType(Patient).id.distinct().single()" should be "$patientId"
       And $patients should conform to "http://hl7.org/fhir/StructureDefinition/Bundle" ignoring slicing errors
 
     @covers:Patient.read,Patient.search.id
@@ -158,6 +160,8 @@ Feature: EEHRxF grouped Document Publisher/Access Provider — ITI-67 and ITI-68
       When Client gets from GroupedProvider at "/Patient?family=" with id $family as $byFamily
       Then $response.status should be 200
       And $byFamily at "Bundle.entry.resource.ofType(Patient).exists()" should be true
+      And $byFamily at "Bundle.entry.resource.ofType(Patient).id.join(',')" should contain $patientId
       When Client gets from GroupedProvider at "/Patient?gender=" with id $gender as $byGender
       Then $response.status should be 200
       And $byGender at "Bundle.entry.resource.ofType(Patient).exists()" should be true
+      And $byGender at "Bundle.entry.resource.ofType(Patient).id.join(',')" should contain $patientId

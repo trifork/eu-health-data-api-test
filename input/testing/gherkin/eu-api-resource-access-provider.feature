@@ -67,6 +67,7 @@ Feature: EEHRxF Resource Access Provider — read and search of patient resource
       Then $response.status should be 200
       And $byIdentifier at "Bundle.type" should be "searchset"
       And $byIdentifier at "Bundle.entry.resource.ofType(Patient).count() >= 1" should be true
+      And $byIdentifier at "Bundle.entry.resource.ofType(Patient).id.distinct().single()" should be "$patientId"
       When Client gets from ResourceAccessProvider at "/Patient?_id=" with id $patientId as $byId
       Then $response.status should be 200
       And $byId at "Bundle.entry.resource.ofType(Patient).count() = 1" should be true
@@ -85,12 +86,15 @@ Feature: EEHRxF Resource Access Provider — read and search of patient resource
       When Client gets from ResourceAccessProvider at "/Patient?family=" with id $family as $byFamily
       Then $response.status should be 200
       And $byFamily at "Bundle.entry.resource.ofType(Patient).exists()" should be true
+      And $byFamily at "Bundle.entry.resource.ofType(Patient).id.join(',')" should contain $patientId
       When Client gets from ResourceAccessProvider at "/Patient?gender=" with id $gender as $byGender
       Then $response.status should be 200
       And $byGender at "Bundle.entry.resource.ofType(Patient).exists()" should be true
+      And $byGender at "Bundle.entry.resource.ofType(Patient).id.join(',')" should contain $patientId
       When Client gets from ResourceAccessProvider at "/Patient?birthdate=" with id $birthdate as $byBirth
       Then $response.status should be 200
       And $byBirth at "Bundle.entry.resource.ofType(Patient).exists()" should be true
+      And $byBirth at "Bundle.entry.resource.ofType(Patient).id.join(',')" should contain $patientId
       When Client gets from ResourceAccessProvider at "/Patient?active=true&_id=" with id $patientId as $byActive
       Then $response.status should be 200
       And $byActive at "Bundle.type" should be "searchset"

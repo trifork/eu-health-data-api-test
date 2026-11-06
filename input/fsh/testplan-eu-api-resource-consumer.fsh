@@ -59,7 +59,7 @@ Fixture prerequisites, input bindings and expected data are in tests/fixtures/pr
       * human = "$received.body should contain \"client_assertion_type=urn%3Aietf%3Aparams%3Aoauth%3Aclient-assertion-type%3Ajwt-bearer\""
     * assertion[+]
       * severity = #error
-      * human = "$received.body should contain \"client_assertion=\""
+      * human = "$received.body should match \"client_assertion=[A-Za-z0-9_-]+[.][A-Za-z0-9_-]+[.][A-Za-z0-9_-]+([&]|$)\""
     * assertion[+]
       * severity = #error
       * human = "$received.body should contain \"scope=\""
@@ -124,7 +124,7 @@ Fixture prerequisites, input bindings and expected data are in tests/fixtures/pr
       * human = "$received.path should contain \"/Condition\""
     * assertion[+]
       * severity = #error
-      * human = "$received.path should contain \"patient=\""
+      * human = "$received.path should match \"patient=(Patient(/|%2F))?otb-pat-1([&]|$)\""
     * assertion[+]
       * severity = #error
       * human = "$received.headers.Authorization should contain \"Bearer\""
@@ -143,7 +143,7 @@ Fixture prerequisites, input bindings and expected data are in tests/fixtures/pr
       * human = "$received.path should contain \"/Observation\""
     * assertion[+]
       * severity = #error
-      * human = "$received.path should contain \"patient=\""
+      * human = "$received.path should match \"patient=(Patient(/|%2F))?otb-pat-1([&]|$)\""
     * assertion[+]
       * severity = #error
       * human = "$received.path should contain \"category=\""
@@ -162,7 +162,7 @@ Fixture prerequisites, input bindings and expected data are in tests/fixtures/pr
       * human = "$received.path should contain \"/AllergyIntolerance\""
     * assertion[+]
       * severity = #error
-      * human = "$received.path should contain \"patient=\""
+      * human = "$received.path should match \"patient=(Patient(/|%2F))?otb-pat-1([&]|$)\""
     * assertion[+]
       * severity = #error
       * human = "ResourceProvider replies to ResourceConsumer with status 200 and:"
