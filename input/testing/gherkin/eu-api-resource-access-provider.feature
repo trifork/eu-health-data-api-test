@@ -17,6 +17,7 @@ Feature: EEHRxF Resource Access Provider — read and search of patient resource
   Rule: The server declares what the actor requires
 
     @covers:CapabilityStatement.rest.resource.Patient
+    # Fixture contract: fixtures/provider-v1/manifest.json, cases.rap-001 (input bindings and expected data).
     Scenario: rap-001 The CapabilityStatement declares Patient read and search and SMART security
       When Client gets from ResourceAccessProvider at "/metadata" as $capability
       Then $response.status should be 200
@@ -27,12 +28,14 @@ Feature: EEHRxF Resource Access Provider — read and search of patient resource
   Rule: Authorization is required
 
     @covers:security.authorization
+    # Fixture contract: fixtures/provider-v1/manifest.json, cases.rap-002 (input bindings and expected data).
     Scenario: rap-002 A request without a token is refused
       Given Client is asked for $patientIdentifier with "The identifier (system|value) of the reference patient"
       When Client gets from ResourceAccessProvider at "/Patient?identifier=" with id $patientIdentifier as $unauth
       Then $response.status should be 401
 
     @covers:security.scope
+    # Fixture contract: fixtures/provider-v1/manifest.json, cases.rap-003 (input bindings and expected data).
     Scenario: rap-003 A token with no usable scope is refused
       Given Client is asked for $narrowToken with "An access token that lacks every system/ scope this server protects, as 'Bearer <token>'"
       And Client is asked for $patientId with "The logical id of the reference patient, with at least one matching fixture for each resource type being tested"
@@ -43,8 +46,10 @@ Feature: EEHRxF Resource Access Provider — read and search of patient resource
   Rule: Patient read and search
 
     @covers:Patient.read
+    # Fixture contract: fixtures/provider-v1/manifest.json, cases.rap-004 (input bindings and expected data).
     Scenario: rap-004 Read the patient and conform to patient-eu-core
-      Given Client is asked for $accessToken with "A SMART Backend Services access token for this server, as 'Bearer <token>' (scope system/*.rs)"
+      Given FHIRValidator is loaded with package "hl7.fhir.eu.health-data-api#1.0.0-ballot"
+      And Client is asked for $accessToken with "A SMART Backend Services access token for this server, as 'Bearer <token>' (scope system/*.rs)"
       And Client is asked for $patientId with "The logical id of the reference patient, with at least one matching fixture for each resource type being tested"
       And set header "Authorization" to $accessToken
       When Client gets from ResourceAccessProvider at "/Patient/" with id $patientId as $patient
@@ -52,6 +57,7 @@ Feature: EEHRxF Resource Access Provider — read and search of patient resource
       And $patient should conform to "http://hl7.eu/fhir/base/StructureDefinition/patient-eu-core" ignoring slicing errors
 
     @covers:Patient.search.identifier,Patient.search.id
+    # Fixture contract: fixtures/provider-v1/manifest.json, cases.rap-005 (input bindings and expected data).
     Scenario: rap-005 Search Patient by identifier and by _id
       Given Client is asked for $accessToken with "A SMART Backend Services access token for this server, as 'Bearer <token>' (scope system/*.rs)"
       And Client is asked for $patientIdentifier with "The identifier (system|value) of the reference patient"
@@ -66,6 +72,7 @@ Feature: EEHRxF Resource Access Provider — read and search of patient resource
       And $byId at "Bundle.entry.resource.ofType(Patient).count() = 1" should be true
 
     @covers:Patient.search.family,Patient.search.given,Patient.search.birthdate,Patient.search.gender,Patient.search.active
+    # Fixture contract: fixtures/provider-v1/manifest.json, cases.rap-006 (input bindings and expected data).
     Scenario: rap-006 Search Patient by the demographics the reference patient carries
       Given Client is asked for $accessToken with "A SMART Backend Services access token for this server, as 'Bearer <token>' (scope system/*.rs)"
       And Client is asked for $patientId with "The logical id of the reference patient, with at least one matching fixture for each resource type being tested"
@@ -93,6 +100,7 @@ Feature: EEHRxF Resource Access Provider — read and search of patient resource
   Rule: Search by patient for each clinical resource type
 
     @covers:Condition.search-type,Condition.search.patient
+    # Fixture contract: fixtures/provider-v1/manifest.json, cases.rap-007 (input bindings and expected data).
     Scenario: rap-007 Search Condition by patient returns a searchset of Condition
       Given Client is asked for $accessToken with "A SMART Backend Services access token for this server, as 'Bearer <token>' (scope system/*.rs)"
       And Client is asked for $patientId with "The logical id of the reference patient, with at least one matching fixture for each resource type being tested"
@@ -106,6 +114,7 @@ Feature: EEHRxF Resource Access Provider — read and search of patient resource
       And $found at "Bundle.entry.where(search.mode.empty() or search.mode != 'include').resource.subject.reference.select(replaceMatches('^(.*/)?Patient/', '').replaceMatches('/_history/.*$', '')).distinct().single()" should be "$patientId"
 
     @covers:AllergyIntolerance.search-type,AllergyIntolerance.search.patient
+    # Fixture contract: fixtures/provider-v1/manifest.json, cases.rap-008 (input bindings and expected data).
     Scenario: rap-008 Search AllergyIntolerance by patient returns a searchset of AllergyIntolerance
       Given Client is asked for $accessToken with "A SMART Backend Services access token for this server, as 'Bearer <token>' (scope system/*.rs)"
       And Client is asked for $patientId with "The logical id of the reference patient, with at least one matching fixture for each resource type being tested"
@@ -119,6 +128,7 @@ Feature: EEHRxF Resource Access Provider — read and search of patient resource
       And $found at "Bundle.entry.where(search.mode.empty() or search.mode != 'include').resource.patient.reference.select(replaceMatches('^(.*/)?Patient/', '').replaceMatches('/_history/.*$', '')).distinct().single()" should be "$patientId"
 
     @covers:Observation.search-type,Observation.search.patient
+    # Fixture contract: fixtures/provider-v1/manifest.json, cases.rap-009 (input bindings and expected data).
     Scenario: rap-009 Search Observation by patient returns a searchset of Observation
       Given Client is asked for $accessToken with "A SMART Backend Services access token for this server, as 'Bearer <token>' (scope system/*.rs)"
       And Client is asked for $patientId with "The logical id of the reference patient, with at least one matching fixture for each resource type being tested"
@@ -132,6 +142,7 @@ Feature: EEHRxF Resource Access Provider — read and search of patient resource
       And $found at "Bundle.entry.where(search.mode.empty() or search.mode != 'include').resource.subject.reference.select(replaceMatches('^(.*/)?Patient/', '').replaceMatches('/_history/.*$', '')).distinct().single()" should be "$patientId"
 
     @covers:DiagnosticReport.search-type,DiagnosticReport.search.patient
+    # Fixture contract: fixtures/provider-v1/manifest.json, cases.rap-010 (input bindings and expected data).
     Scenario: rap-010 Search DiagnosticReport by patient returns a searchset of DiagnosticReport
       Given Client is asked for $accessToken with "A SMART Backend Services access token for this server, as 'Bearer <token>' (scope system/*.rs)"
       And Client is asked for $patientId with "The logical id of the reference patient, with at least one matching fixture for each resource type being tested"
@@ -145,6 +156,7 @@ Feature: EEHRxF Resource Access Provider — read and search of patient resource
       And $found at "Bundle.entry.where(search.mode.empty() or search.mode != 'include').resource.subject.reference.select(replaceMatches('^(.*/)?Patient/', '').replaceMatches('/_history/.*$', '')).distinct().single()" should be "$patientId"
 
     @covers:ImagingStudy.search-type,ImagingStudy.search.patient
+    # Fixture contract: fixtures/provider-v1/manifest.json, cases.rap-011 (input bindings and expected data).
     Scenario: rap-011 Search ImagingStudy by patient returns a searchset of ImagingStudy
       Given Client is asked for $accessToken with "A SMART Backend Services access token for this server, as 'Bearer <token>' (scope system/*.rs)"
       And Client is asked for $patientId with "The logical id of the reference patient, with at least one matching fixture for each resource type being tested"
@@ -158,6 +170,7 @@ Feature: EEHRxF Resource Access Provider — read and search of patient resource
       And $found at "Bundle.entry.where(search.mode.empty() or search.mode != 'include').resource.subject.reference.select(replaceMatches('^(.*/)?Patient/', '').replaceMatches('/_history/.*$', '')).distinct().single()" should be "$patientId"
 
     @covers:MedicationRequest.search-type,MedicationRequest.search.patient
+    # Fixture contract: fixtures/provider-v1/manifest.json, cases.rap-012 (input bindings and expected data).
     Scenario: rap-012 Search MedicationRequest by patient returns a searchset of MedicationRequest
       Given Client is asked for $accessToken with "A SMART Backend Services access token for this server, as 'Bearer <token>' (scope system/*.rs)"
       And Client is asked for $patientId with "The logical id of the reference patient, with at least one matching fixture for each resource type being tested"
@@ -171,6 +184,7 @@ Feature: EEHRxF Resource Access Provider — read and search of patient resource
       And $found at "Bundle.entry.where(search.mode.empty() or search.mode != 'include').resource.subject.reference.select(replaceMatches('^(.*/)?Patient/', '').replaceMatches('/_history/.*$', '')).distinct().single()" should be "$patientId"
 
     @covers:MedicationDispense.search-type,MedicationDispense.search.patient
+    # Fixture contract: fixtures/provider-v1/manifest.json, cases.rap-013 (input bindings and expected data).
     Scenario: rap-013 Search MedicationDispense by patient returns a searchset of MedicationDispense
       Given Client is asked for $accessToken with "A SMART Backend Services access token for this server, as 'Bearer <token>' (scope system/*.rs)"
       And Client is asked for $patientId with "The logical id of the reference patient, with at least one matching fixture for each resource type being tested"
@@ -184,6 +198,7 @@ Feature: EEHRxF Resource Access Provider — read and search of patient resource
       And $found at "Bundle.entry.where(search.mode.empty() or search.mode != 'include').resource.subject.reference.select(replaceMatches('^(.*/)?Patient/', '').replaceMatches('/_history/.*$', '')).distinct().single()" should be "$patientId"
 
     @covers:Immunization.search-type,Immunization.search.patient
+    # Fixture contract: fixtures/provider-v1/manifest.json, cases.rap-014 (input bindings and expected data).
     Scenario: rap-014 Search Immunization by patient returns a searchset of Immunization
       Given Client is asked for $accessToken with "A SMART Backend Services access token for this server, as 'Bearer <token>' (scope system/*.rs)"
       And Client is asked for $patientId with "The logical id of the reference patient, with at least one matching fixture for each resource type being tested"
@@ -197,6 +212,7 @@ Feature: EEHRxF Resource Access Provider — read and search of patient resource
       And $found at "Bundle.entry.where(search.mode.empty() or search.mode != 'include').resource.patient.reference.select(replaceMatches('^(.*/)?Patient/', '').replaceMatches('/_history/.*$', '')).distinct().single()" should be "$patientId"
 
     @covers:MedicationStatement.search-type,MedicationStatement.search.patient
+    # Fixture contract: fixtures/provider-v1/manifest.json, cases.rap-015 (input bindings and expected data).
     Scenario: rap-015 Search MedicationStatement by patient returns a searchset of MedicationStatement
       Given Client is asked for $accessToken with "A SMART Backend Services access token for this server, as 'Bearer <token>' (scope system/*.rs)"
       And Client is asked for $patientId with "The logical id of the reference patient, with at least one matching fixture for each resource type being tested"
@@ -210,6 +226,7 @@ Feature: EEHRxF Resource Access Provider — read and search of patient resource
       And $found at "Bundle.entry.where(search.mode.empty() or search.mode != 'include').resource.subject.reference.select(replaceMatches('^(.*/)?Patient/', '').replaceMatches('/_history/.*$', '')).distinct().single()" should be "$patientId"
 
     @covers:Encounter.search-type,Encounter.search.patient
+    # Fixture contract: fixtures/provider-v1/manifest.json, cases.rap-016 (input bindings and expected data).
     Scenario: rap-016 Search Encounter by patient returns a searchset of Encounter
       Given Client is asked for $accessToken with "A SMART Backend Services access token for this server, as 'Bearer <token>' (scope system/*.rs)"
       And Client is asked for $patientId with "The logical id of the reference patient, with at least one matching fixture for each resource type being tested"
@@ -225,6 +242,7 @@ Feature: EEHRxF Resource Access Provider — read and search of patient resource
   Rule: Read by id
 
     @covers:Observation.read,Condition.read
+    # Fixture contract: fixtures/provider-v1/manifest.json, cases.rap-017 (input bindings and expected data).
     Scenario: rap-017 A found resource can be read back by its id
       Given Client is asked for $accessToken with "A SMART Backend Services access token for this server, as 'Bearer <token>' (scope system/*.rs)"
       And Client is asked for $patientId with "The logical id of the reference patient, with at least one matching fixture for each resource type being tested"
@@ -237,6 +255,7 @@ Feature: EEHRxF Resource Access Provider — read and search of patient resource
       And $one at "Observation.id" should be "$obsId"
 
     @covers:Patient.read
+    # Fixture contract: fixtures/provider-v1/manifest.json, cases.rap-018 (input bindings and expected data).
     Scenario: rap-018 An unknown id gives 404 and an OperationOutcome
       Given Client is asked for $accessToken with "A SMART Backend Services access token for this server, as 'Bearer <token>' (scope system/*.rs)"
       And set header "Authorization" to $accessToken

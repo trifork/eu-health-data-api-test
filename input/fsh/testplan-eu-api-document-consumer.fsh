@@ -14,7 +14,7 @@ Description: "Test plan for the Document Consumer actor of EU Health Data API, 1
 * title = "Document Consumer Test Plan"
 * status = #draft
 * experimental = true
-* date = "2026-10-30"
+* date = "2026-11-06"
 * publisher = "Jens Kristian Villadsen"
 * contact
   * name = "Jens Kristian Villadsen"
@@ -26,7 +26,8 @@ Description: "Test plan for the Document Consumer actor of EU Health Data API, 1
 Test plan for the **Document Consumer** actor of [EU Health Data API, 1.0.0-ballot](https://build.fhir.org/ig/euridice-org/eu-health-data-api/).
 The SUT obtains a token, finds the patient, finds the documents and retrieves one.
 Each `suite` below is a `Rule:` of the Gherkin feature named by `suite.input.file`, and each `suite.test` one of its `Scenario:` lines, matched by the scenario's identifier. The assertions are the scenario's `Then` steps, verbatim.
-The tests declare which specification obligations they cover (8 element obligations across the plan); the coverage matrix is checked mechanically against the specification package.
+The tests declare which specification obligations they cover (8 requirement paths named by the feature tags).
+Fixture prerequisites, input bindings and expected data are in tests/fixtures/provider-v1/manifest.json, keyed by scenario ID. See the Testing page, Fixture contract and expected results. Provider fixtures are R4; client workflows use the canned data embedded in their feature.
 """
 * purpose = "To declare, in a machine-readable and runnable form, which behaviours a system claiming conformance to the Document Consumer actor must demonstrate."
 
@@ -45,7 +46,7 @@ The tests declare which specification obligations they cover (8 element obligati
     * file = "eu-api-document-consumer.feature"
   * test[0]
     * name = "con-001 The SUT authenticates with a signed JWT client assertion (RFC 7523)"
-    * description = "Covers security.smart-backend-services."
+    * description = "Fixture contract: fixtures/provider-v1/manifest.json, cases.con-001 (input bindings and expected data). Covers security.smart-backend-services."
     * operation = #gherkin/Scenario
     * assertion[0]
       * severity = #error
@@ -74,7 +75,7 @@ The tests declare which specification obligations they cover (8 element obligati
     * file = "eu-api-document-consumer.feature"
   * test[0]
     * name = "con-002 The SUT searches Patient by the identifier parameter"
-    * description = "Covers Patient.search-type, Patient.search.identifier."
+    * description = "Fixture contract: fixtures/provider-v1/manifest.json, cases.con-002 (input bindings and expected data). Covers Patient.search-type, Patient.search.identifier."
     * operation = #gherkin/Scenario
     * assertion[0]
       * severity = #error
@@ -100,7 +101,7 @@ The tests declare which specification obligations they cover (8 element obligati
     * file = "eu-api-document-consumer.feature"
   * test[0]
     * name = "con-003 The SUT searches DocumentReference by patient"
-    * description = "Covers DocumentReference.search-type."
+    * description = "Fixture contract: fixtures/provider-v1/manifest.json, cases.con-003 (input bindings and expected data). Covers DocumentReference.search-type."
     * operation = #gherkin/Scenario
     * assertion[0]
       * severity = #error
@@ -119,7 +120,7 @@ The tests declare which specification obligations they cover (8 element obligati
       * human = "AccessProvider replies to DocumentConsumer with status 200 and:"
   * test[+]
     * name = "con-004 The SUT can narrow the search by category or type"
-    * description = "Covers DocumentReference.search-type."
+    * description = "Fixture contract: fixtures/provider-v1/manifest.json, cases.con-004 (input bindings and expected data). Covers DocumentReference.search-type."
     * operation = #gherkin/Scenario
     * assertion[0]
       * severity = #error
@@ -145,7 +146,7 @@ The tests declare which specification obligations they cover (8 element obligati
     * file = "eu-api-document-consumer.feature"
   * test[0]
     * name = "con-005 The SUT retrieves the document content with a bearer token"
-    * description = "Covers Binary.read, DocumentReference.read."
+    * description = "Fixture contract: fixtures/provider-v1/manifest.json, cases.con-005 (input bindings and expected data). Covers Binary.read, DocumentReference.read."
     * operation = #gherkin/Scenario
     * assertion[0]
       * severity = #error
@@ -168,7 +169,7 @@ The tests declare which specification obligations they cover (8 element obligati
     * file = "eu-api-document-consumer.feature"
   * test[0]
     * name = "con-006 TLS 1.2 or higher is used for all communications"
-    * description = "Covers security.tls."
+    * description = "Fixture contract: fixtures/provider-v1/manifest.json, cases.con-006 (input bindings and expected data). Covers security.tls."
     * operation = #gherkin/Scenario
     * assertion[0]
       * severity = #error

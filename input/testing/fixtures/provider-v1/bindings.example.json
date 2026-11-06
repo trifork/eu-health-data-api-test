@@ -1,0 +1,32 @@
+{
+  "fixtureSet": "eu-api-provider-v1",
+  "resourceIds": {
+    "patient-target": "eu-api-patient-target",
+    "condition-target": "eu-api-condition-target",
+    "allergyintolerance-target": "eu-api-allergyintolerance-target",
+    "observation-target": "eu-api-observation-target",
+    "diagnosticreport-target": "eu-api-diagnosticreport-target",
+    "imagingstudy-target": "eu-api-imagingstudy-target",
+    "medicationrequest-target": "eu-api-medicationrequest-target",
+    "medicationdispense-target": "eu-api-medicationdispense-target",
+    "immunization-target": "eu-api-immunization-target",
+    "medicationstatement-target": "eu-api-medicationstatement-target",
+    "encounter-target": "eu-api-encounter-target",
+    "binary-target": "eu-api-binary-target",
+    "document-target": "eu-api-document-target",
+    "patient-control": "eu-api-patient-control",
+    "condition-control": "eu-api-condition-control",
+    "allergyintolerance-control": "eu-api-allergyintolerance-control",
+    "observation-control": "eu-api-observation-control",
+    "diagnosticreport-control": "eu-api-diagnosticreport-control",
+    "imagingstudy-control": "eu-api-imagingstudy-control",
+    "medicationrequest-control": "eu-api-medicationrequest-control",
+    "medicationdispense-control": "eu-api-medicationdispense-control",
+    "immunization-control": "eu-api-immunization-control",
+    "medicationstatement-control": "eu-api-medicationstatement-control",
+    "encounter-control": "eu-api-encounter-control",
+    "binary-control": "eu-api-binary-control",
+    "document-control": "eu-api-document-control",
+    "document-laboratory": "eu-api-document-laboratory"
+  }
+}

@@ -9,12 +9,12 @@ Feature: EEHRxF grouped Document Publisher/Access Provider — ITI-67 and ITI-68
     Given GroupedProvider is the system under test at "http://ehr.example.org/fhir" as defined by "http://hl7.eu/fhir/health-data-api/CapabilityStatement/document-publisher-access-provider-eu-api"
     And Client is infrastructure
     And FHIRValidator is a fhir-validator at "http://fhir-validator:8080"
-    And FHIRValidator is loaded with package "hl7.fhir.eu.health-data-api#1.0.0-ballot"
     And set header "Accept" to "application/fhir+json"
 
   Rule: The server declares what the actor requires
 
     @covers:CapabilityStatement.rest.resource.DocumentReference,CapabilityStatement.rest.resource.Binary
+    # Fixture contract: fixtures/provider-v1/manifest.json, cases.grp-001 (input bindings and expected data).
     Scenario: grp-001 The CapabilityStatement declares DocumentReference and Binary
       When Client gets from GroupedProvider at "/metadata" as $capability
       Then $response.status should be 200
@@ -23,6 +23,7 @@ Feature: EEHRxF grouped Document Publisher/Access Provider — ITI-67 and ITI-68
       And $capability at "CapabilityStatement.rest.where(mode='server').resource.where(type='Binary').interaction.where(code='read').exists()" should be true
 
     @covers:CapabilityStatement.rest.security
+    # Fixture contract: fixtures/provider-v1/manifest.json, cases.grp-002 (input bindings and expected data).
     Scenario: grp-002 The CapabilityStatement declares SMART on FHIR security
       When Client gets from GroupedProvider at "/metadata" as $capability
       Then $response.status should be 200
@@ -31,12 +32,14 @@ Feature: EEHRxF grouped Document Publisher/Access Provider — ITI-67 and ITI-68
   Rule: Every transaction requires SMART Backend Services authorization
 
     @covers:security.authorization
+    # Fixture contract: fixtures/provider-v1/manifest.json, cases.grp-003 (input bindings and expected data).
     Scenario: grp-003 A request without a token is refused
       Given Client is asked for $patientId with "The logical id of the reference patient on the server"
       When Client gets from GroupedProvider at "/DocumentReference?patient=" with id $patientId as $unauth
       Then $response.status should be 401
 
     @covers:security.scope
+    # Fixture contract: fixtures/provider-v1/manifest.json, cases.grp-004 (input bindings and expected data).
     Scenario: grp-004 A token with no usable scope is refused
       Given Client is asked for $narrowToken with "An access token that lacks every system/ scope this server protects, as 'Bearer <token>'"
       And Client is asked for $patientId with "The logical id of the reference patient on the server"
@@ -47,6 +50,7 @@ Feature: EEHRxF grouped Document Publisher/Access Provider — ITI-67 and ITI-68
   Rule: Find Document References [ITI-67]
 
     @covers:DocumentReference.search-type
+    # Fixture contract: fixtures/provider-v1/manifest.json, cases.grp-005 (input bindings and expected data).
     Scenario: grp-005 Search by patient returns a searchset of conformant DocumentReferences
       Given Client is asked for $accessToken with "A SMART Backend Services access token for this server, as 'Bearer <token>' (scopes system/DocumentReference.rs, system/Binary.r, system/Patient.rs)"
       And Client is asked for $patientId with "The logical id of the reference patient on the server"
@@ -59,16 +63,18 @@ Feature: EEHRxF grouped Document Publisher/Access Provider — ITI-67 and ITI-68
       And $found at "Bundle.entry.resource.ofType(DocumentReference).all(content.attachment.exists())" should be true
 
     @covers:DocumentReference.search-type
+    # Fixture contract: fixtures/provider-v1/manifest.json, cases.grp-006 (input bindings and expected data).
     Scenario: grp-006 Search by EEHRxF priority category
       Given Client is asked for $accessToken with "A SMART Backend Services access token for this server, as 'Bearer <token>' (scopes system/DocumentReference.rs, system/Binary.r, system/Patient.rs)"
       And Client is asked for $patientId with "The logical id of the reference patient on the server"
       And set header "Authorization" to $accessToken
-      When Client gets from GroupedProvider at "/DocumentReference?category=https://euridice.ec.europa.eu/fhir/eehrxf/CodeSystem/document-priority-category-eu-api|Patient-Summaries&patient=" with id $patientId as $byCategory
+      When Client gets from GroupedProvider at "/DocumentReference?category=http://hl7.eu/fhir/health-data-api/CodeSystem/eehrxf-document-priority-category-cs|Patient-Summaries&patient=" with id $patientId as $byCategory
       Then $response.status should be 200
       And $byCategory at "Bundle.type" should be "searchset"
       And $byCategory at "Bundle.entry.resource.ofType(DocumentReference).all(category.coding.where(code='Patient-Summaries').exists())" should be true
 
     @covers:DocumentReference.search-type
+    # Fixture contract: fixtures/provider-v1/manifest.json, cases.grp-007 (input bindings and expected data).
     Scenario: grp-007 Search by LOINC document type
       Given Client is asked for $accessToken with "A SMART Backend Services access token for this server, as 'Bearer <token>' (scopes system/DocumentReference.rs, system/Binary.r, system/Patient.rs)"
       And Client is asked for $patientId with "The logical id of the reference patient on the server"
@@ -79,6 +85,7 @@ Feature: EEHRxF grouped Document Publisher/Access Provider — ITI-67 and ITI-68
       And $byType at "Bundle.entry.resource.ofType(DocumentReference).all(type.coding.where(system='http://loinc.org' and code='60591-5').exists())" should be true
 
     @covers:DocumentReference.read
+    # Fixture contract: fixtures/provider-v1/manifest.json, cases.grp-008 (input bindings and expected data).
     Scenario: grp-008 Read a DocumentReference by id
       Given Client is asked for $accessToken with "A SMART Backend Services access token for this server, as 'Bearer <token>' (scopes system/DocumentReference.rs, system/Binary.r, system/Patient.rs)"
       And Client is asked for $documentId with "The logical id of a reference DocumentReference on the server"
@@ -90,6 +97,7 @@ Feature: EEHRxF grouped Document Publisher/Access Provider — ITI-67 and ITI-68
       And $docRef at "DocumentReference.content.attachment.contentType.exists()" should be true
 
     @covers:DocumentReference.read
+    # Fixture contract: fixtures/provider-v1/manifest.json, cases.grp-009 (input bindings and expected data).
     Scenario: grp-009 An unknown DocumentReference id gives 404 and an OperationOutcome
       Given Client is asked for $accessToken with "A SMART Backend Services access token for this server, as 'Bearer <token>' (scopes system/DocumentReference.rs, system/Binary.r, system/Patient.rs)"
       And set header "Authorization" to $accessToken
@@ -100,6 +108,7 @@ Feature: EEHRxF grouped Document Publisher/Access Provider — ITI-67 and ITI-68
   Rule: Retrieve Document [ITI-68]
 
     @covers:Binary.read
+    # Fixture contract: fixtures/provider-v1/manifest.json, cases.grp-010 (input bindings and expected data).
     Scenario: grp-010 Read the document content as a Binary
       Given Client is asked for $accessToken with "A SMART Backend Services access token for this server, as 'Bearer <token>' (scopes system/DocumentReference.rs, system/Binary.r, system/Patient.rs)"
       And Client is asked for $binaryId with "The logical id of a reference Binary on the server"
@@ -114,6 +123,7 @@ Feature: EEHRxF grouped Document Publisher/Access Provider — ITI-67 and ITI-68
     # answers 404 or 501 and these scenarios are not applicable to it. A server
     # that does offer it SHALL support all of the search parameters below.
     @covers:Patient.read,Patient.search-type,Patient.search.identifier
+    # Fixture contract: fixtures/provider-v1/manifest.json, cases.grp-011 (input bindings and expected data).
     Scenario: grp-011 Search Patient by identifier
       Given Client is asked for $accessToken with "A SMART Backend Services access token for this server, as 'Bearer <token>' (scopes system/DocumentReference.rs, system/Binary.r, system/Patient.rs)"
       And Client is asked for $patientIdentifier with "The identifier (system|value) of the reference patient who has documents on the server"
@@ -125,8 +135,10 @@ Feature: EEHRxF grouped Document Publisher/Access Provider — ITI-67 and ITI-68
       And $patients should conform to "http://hl7.org/fhir/StructureDefinition/Bundle" ignoring slicing errors
 
     @covers:Patient.read,Patient.search.id
+    # Fixture contract: fixtures/provider-v1/manifest.json, cases.grp-012 (input bindings and expected data).
     Scenario: grp-012 Read Patient by id and conform to patient-eu-core
-      Given Client is asked for $accessToken with "A SMART Backend Services access token for this server, as 'Bearer <token>' (scopes system/DocumentReference.rs, system/Binary.r, system/Patient.rs)"
+      Given FHIRValidator is loaded with package "hl7.fhir.eu.health-data-api#1.0.0-ballot"
+      And Client is asked for $accessToken with "A SMART Backend Services access token for this server, as 'Bearer <token>' (scopes system/DocumentReference.rs, system/Binary.r, system/Patient.rs)"
       And Client is asked for $patientId with "The logical id of the reference patient on the server"
       And set header "Authorization" to $accessToken
       When Client gets from GroupedProvider at "/Patient/" with id $patientId as $patient
@@ -134,6 +146,7 @@ Feature: EEHRxF grouped Document Publisher/Access Provider — ITI-67 and ITI-68
       And $patient should conform to "http://hl7.eu/fhir/base/StructureDefinition/patient-eu-core" ignoring slicing errors
 
     @covers:Patient.search.family,Patient.search.given,Patient.search.birthdate,Patient.search.gender
+    # Fixture contract: fixtures/provider-v1/manifest.json, cases.grp-013 (input bindings and expected data).
     Scenario: grp-013 Search Patient by demographics the reference patient has
       Given Client is asked for $accessToken with "A SMART Backend Services access token for this server, as 'Bearer <token>' (scopes system/DocumentReference.rs, system/Binary.r, system/Patient.rs)"
       And Client is asked for $patientId with "The logical id of the reference patient on the server"

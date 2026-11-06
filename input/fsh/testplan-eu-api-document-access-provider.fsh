@@ -14,7 +14,7 @@ Description: "Test plan for the Document Access Provider actor of EU Health Data
 * title = "Document Access Provider Test Plan"
 * status = #draft
 * experimental = true
-* date = "2026-10-30"
+* date = "2026-11-06"
 * publisher = "Jens Kristian Villadsen"
 * contact
   * name = "Jens Kristian Villadsen"
@@ -26,7 +26,8 @@ Description: "Test plan for the Document Access Provider actor of EU Health Data
 Test plan for the **Document Access Provider** actor of [EU Health Data API, 1.0.0-ballot](https://build.fhir.org/ig/euridice-org/eu-health-data-api/).
 The SUT serves EEHRxF documents to Document Consumers, behind SMART Backend Services.
 Each `suite` below is a `Rule:` of the Gherkin feature named by `suite.input.file`, and each `suite.test` one of its `Scenario:` lines, matched by the scenario's identifier. The assertions are the scenario's `Then` steps, verbatim.
-The tests declare which specification obligations they cover (24 element obligations across the plan); the coverage matrix is checked mechanically against the specification package.
+The tests declare which specification obligations they cover (24 requirement paths named by the feature tags).
+Fixture prerequisites, input bindings and expected data are in tests/fixtures/provider-v1/manifest.json, keyed by scenario ID. See the Testing page, Fixture contract and expected results. Provider fixtures are R4; client workflows use the canned data embedded in their feature.
 """
 * purpose = "To declare, in a machine-readable and runnable form, which behaviours a system claiming conformance to the Document Access Provider actor must demonstrate."
 
@@ -45,7 +46,7 @@ The tests declare which specification obligations they cover (24 element obligat
     * file = "eu-api-document-access-provider.feature"
   * test[0]
     * name = "dap-001 The CapabilityStatement declares DocumentReference and Binary"
-    * description = "Covers CapabilityStatement.rest.resource.DocumentReference, CapabilityStatement.rest.resource.Binary."
+    * description = "Fixture contract: fixtures/provider-v1/manifest.json, cases.dap-001 (input bindings and expected data). Covers CapabilityStatement.rest.resource.DocumentReference, CapabilityStatement.rest.resource.Binary."
     * operation = #gherkin/Scenario
     * assertion[0]
       * severity = #error
@@ -61,7 +62,7 @@ The tests declare which specification obligations they cover (24 element obligat
       * human = "$capability at \"CapabilityStatement.rest.where(mode='server').resource.where(type='Binary').interaction.where(code='read').exists()\" should be true"
   * test[+]
     * name = "dap-002 The CapabilityStatement declares SMART on FHIR security"
-    * description = "Covers CapabilityStatement.rest.security."
+    * description = "Fixture contract: fixtures/provider-v1/manifest.json, cases.dap-002 (input bindings and expected data). Covers CapabilityStatement.rest.security."
     * operation = #gherkin/Scenario
     * assertion[0]
       * severity = #error
@@ -78,14 +79,14 @@ The tests declare which specification obligations they cover (24 element obligat
     * file = "eu-api-document-access-provider.feature"
   * test[0]
     * name = "dap-003 A request without a token is refused"
-    * description = "Covers security.authorization."
+    * description = "Fixture contract: fixtures/provider-v1/manifest.json, cases.dap-003 (input bindings and expected data). Covers security.authorization."
     * operation = #gherkin/Scenario
     * assertion[0]
       * severity = #error
       * human = "$response.status should be 401"
   * test[+]
     * name = "dap-004 A token with no usable scope is refused"
-    * description = "Covers security.scope."
+    * description = "Fixture contract: fixtures/provider-v1/manifest.json, cases.dap-004 (input bindings and expected data). Covers security.scope."
     * operation = #gherkin/Scenario
     * assertion[0]
       * severity = #error
@@ -99,7 +100,7 @@ The tests declare which specification obligations they cover (24 element obligat
     * file = "eu-api-document-access-provider.feature"
   * test[0]
     * name = "dap-005 Search by patient returns a searchset of conformant DocumentReferences"
-    * description = "Covers DocumentReference.search-type."
+    * description = "Fixture contract: fixtures/provider-v1/manifest.json, cases.dap-005 (input bindings and expected data). Covers DocumentReference.search-type."
     * operation = #gherkin/Scenario
     * assertion[0]
       * severity = #error
@@ -118,7 +119,7 @@ The tests declare which specification obligations they cover (24 element obligat
       * human = "$found at \"Bundle.entry.resource.ofType(DocumentReference).all(content.attachment.exists())\" should be true"
   * test[+]
     * name = "dap-006 Search by EEHRxF priority category"
-    * description = "Covers DocumentReference.search-type."
+    * description = "Fixture contract: fixtures/provider-v1/manifest.json, cases.dap-006 (input bindings and expected data). Covers DocumentReference.search-type."
     * operation = #gherkin/Scenario
     * assertion[0]
       * severity = #error
@@ -131,7 +132,7 @@ The tests declare which specification obligations they cover (24 element obligat
       * human = "$byCategory at \"Bundle.entry.resource.ofType(DocumentReference).all(category.coding.where(code='Patient-Summaries').exists())\" should be true"
   * test[+]
     * name = "dap-007 Search by LOINC document type"
-    * description = "Covers DocumentReference.search-type."
+    * description = "Fixture contract: fixtures/provider-v1/manifest.json, cases.dap-007 (input bindings and expected data). Covers DocumentReference.search-type."
     * operation = #gherkin/Scenario
     * assertion[0]
       * severity = #error
@@ -144,7 +145,7 @@ The tests declare which specification obligations they cover (24 element obligat
       * human = "$byType at \"Bundle.entry.resource.ofType(DocumentReference).all(type.coding.where(system='http://loinc.org' and code='60591-5').exists())\" should be true"
   * test[+]
     * name = "dap-008 Read a DocumentReference by id"
-    * description = "Covers DocumentReference.read."
+    * description = "Fixture contract: fixtures/provider-v1/manifest.json, cases.dap-008 (input bindings and expected data). Covers DocumentReference.read."
     * operation = #gherkin/Scenario
     * assertion[0]
       * severity = #error
@@ -160,7 +161,7 @@ The tests declare which specification obligations they cover (24 element obligat
       * human = "$docRef at \"DocumentReference.content.attachment.contentType.exists()\" should be true"
   * test[+]
     * name = "dap-009 An unknown DocumentReference id gives 404 and an OperationOutcome"
-    * description = "Covers DocumentReference.read."
+    * description = "Fixture contract: fixtures/provider-v1/manifest.json, cases.dap-009 (input bindings and expected data). Covers DocumentReference.read."
     * operation = #gherkin/Scenario
     * assertion[0]
       * severity = #error
@@ -177,7 +178,7 @@ The tests declare which specification obligations they cover (24 element obligat
     * file = "eu-api-document-access-provider.feature"
   * test[0]
     * name = "dap-010 Read the document content as a Binary"
-    * description = "Covers Binary.read."
+    * description = "Fixture contract: fixtures/provider-v1/manifest.json, cases.dap-010 (input bindings and expected data). Covers Binary.read."
     * operation = #gherkin/Scenario
     * assertion[0]
       * severity = #error
@@ -194,7 +195,7 @@ The tests declare which specification obligations they cover (24 element obligat
     * file = "eu-api-document-access-provider.feature"
   * test[0]
     * name = "dap-011 Search Patient by identifier"
-    * description = "Patient is SHOULD on the Access Provider: a server that does not offer it answers 404 or 501 and these scenarios are not applicable to it. A server that does offer it SHALL support all of the search parameters below. Covers Patient.read, Patient.search-type, Patient.search.identifier."
+    * description = "Patient is SHOULD on the Access Provider: a server that does not offer it answers 404 or 501 and these scenarios are not applicable to it. A server that does offer it SHALL support all of the search parameters below. Fixture contract: fixtures/provider-v1/manifest.json, cases.dap-011 (input bindings and expected data). Covers Patient.read, Patient.search-type, Patient.search.identifier."
     * operation = #gherkin/Scenario
     * assertion[0]
       * severity = #error
@@ -210,7 +211,7 @@ The tests declare which specification obligations they cover (24 element obligat
       * human = "$patients should conform to \"http://hl7.org/fhir/StructureDefinition/Bundle\" ignoring slicing errors"
   * test[+]
     * name = "dap-012 Read Patient by id and conform to patient-eu-core"
-    * description = "Covers Patient.read, Patient.search.id."
+    * description = "Fixture contract: fixtures/provider-v1/manifest.json, cases.dap-012 (input bindings and expected data). Covers Patient.read, Patient.search.id."
     * operation = #gherkin/Scenario
     * assertion[0]
       * severity = #error
@@ -220,7 +221,7 @@ The tests declare which specification obligations they cover (24 element obligat
       * human = "$patient should conform to \"http://hl7.eu/fhir/base/StructureDefinition/patient-eu-core\" ignoring slicing errors"
   * test[+]
     * name = "dap-013 Search Patient by demographics the reference patient has"
-    * description = "Covers Patient.search.family, Patient.search.given, Patient.search.birthdate, Patient.search.gender."
+    * description = "Fixture contract: fixtures/provider-v1/manifest.json, cases.dap-013 (input bindings and expected data). Covers Patient.search.family, Patient.search.given, Patient.search.birthdate, Patient.search.gender."
     * operation = #gherkin/Scenario
     * assertion[0]
       * severity = #error
@@ -252,7 +253,7 @@ The tests declare which specification obligations they cover (24 element obligat
     * file = "eu-api-document-access-provider.feature"
   * test[0]
     * name = "dap-014 The CapabilityStatement declares create on DocumentReference"
-    * description = "Only for a system that claims the Document Submission Option (CapabilityStatement document-access-provider-submission-option-eu-api). The option adds to the base: everything above still applies. Covers DocumentReference.create."
+    * description = "Only for a system that claims the Document Submission Option (CapabilityStatement document-access-provider-submission-option-eu-api). The option adds to the base: everything above still applies. Fixture contract: fixtures/provider-v1/manifest.json, cases.dap-014 (input bindings and expected data). Covers DocumentReference.create."
     * operation = #gherkin/Scenario
     * assertion[0]
       * severity = #error
@@ -262,7 +263,7 @@ The tests declare which specification obligations they cover (24 element obligat
       * human = "$capability at \"CapabilityStatement.rest.where(mode='server').resource.where(type='DocumentReference').interaction.where(code='create').exists()\" should be true"
   * test[+]
     * name = "dap-015 A Simplified Publish with embedded content is accepted and then findable"
-    * description = "Covers DocumentReference.create."
+    * description = "Fixture contract: fixtures/provider-v1/manifest.json, cases.dap-015 (input bindings and expected data). Covers DocumentReference.create."
     * operation = #gherkin/Scenario
     * assertion[0]
       * severity = #error
@@ -272,14 +273,14 @@ The tests declare which specification obligations they cover (24 element obligat
       * human = "$response.headers.Location should not be empty"
   * test[+]
     * name = "dap-016 A submission without content is refused"
-    * description = "Covers DocumentReference.create."
+    * description = "Fixture contract: fixtures/provider-v1/manifest.json, cases.dap-016 (input bindings and expected data). Covers DocumentReference.create."
     * operation = #gherkin/Scenario
     * assertion[0]
       * severity = #error
       * human = "$response.status should be one of \"400, 422\""
   * test[+]
     * name = "dap-017 A submission with a token that cannot create is refused"
-    * description = "Covers DocumentReference.create."
+    * description = "Fixture contract: fixtures/provider-v1/manifest.json, cases.dap-017 (input bindings and expected data). Covers DocumentReference.create."
     * operation = #gherkin/Scenario
     * assertion[0]
       * severity = #error

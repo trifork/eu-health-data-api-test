@@ -3,9 +3,8 @@
 A demonstration IG that declares, as TestPlan resources and Gherkin feature files, the conformance tests for the six actors of the EU Health Data API IG (EHDS Annex II): Document Publisher, Document Access Provider (with the Document Submission Option), Document Consumer, grouped Document Publisher/Access Provider, Resource Access Provider and Resource Consumer. The IG states its requirements as capabilitystatement-expectation extensions rather than profile obligations, so every test case is traceable to the CapabilityStatement expectation it tests.
 
 <blockquote class="stu-note">
-<strong>This is not an approved HL7 Europe test specification, and these tests have not been executed against any implementation.</strong>
-It exists to exercise the tooling: the TestPlan resource, the Gherkin scripts, the
-mechanical coverage of the specification's obligations, and the packaging of all three.
+<strong>This is not an approved HL7 Europe test specification. Provider scenarios have been exercised against local EIR with synthetic data and security disabled; this does not establish conformance.</strong>
+The guide publishes actor-scoped TestPlans, executable Gherkin, and a versioned synthetic fixture contract.
 </blockquote>
 
 ### What is here
@@ -13,7 +12,7 @@ mechanical coverage of the specification's obligations, and the packaging of all
 
 | | |
 | --- | --- |
-| [Testing](testing.html) | How the test plans are derived from the specification's actors and obligations, how the Gherkin scripts are pointed at and packaged, and how they are rendered here. |
+| [Testing](testing.html) | Test prerequisites, fixtures, input bindings, expected results and executable Gherkin. |
 | [Method](process.html) | The step-by-step record of how these tests were produced and checked. |
 | [Artifacts](artifacts.html) | The six TestPlan resources, one per actor, and the Gherkin scripts they name. |
 | [Downloads](downloads.html) | The published package, including the raw `.feature` files under `tests/gherkin/`. |

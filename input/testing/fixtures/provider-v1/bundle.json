@@ -1,0 +1,1171 @@
+{
+  "resourceType": "Bundle",
+  "id": "eu-api-provider-v1",
+  "type": "transaction",
+  "entry": [
+    {
+      "fullUrl": "urn:uuid:28b90a5e-c6dc-5d5a-a384-896cf36053f5",
+      "resource": {
+        "resourceType": "Patient",
+        "active": true,
+        "name": [
+          {
+            "use": "official",
+            "family": "EUAPITestpatient",
+            "given": [
+              "Synthetic"
+            ]
+          }
+        ],
+        "gender": "unknown",
+        "birthDate": "1990-01-01",
+        "id": "eu-api-patient-target",
+        "identifier": [
+          {
+            "system": "urn:uuid:47df6faa-4581-4545-9f2d-7d8c8db0c3e7",
+            "value": "EU-API-PATIENT-TARGET"
+          }
+        ],
+        "text": {
+          "status": "generated",
+          "div": "<div xmlns=\"http://www.w3.org/1999/xhtml\">Synthetic EU API fixture: patient-target. Not clinical data.</div>"
+        },
+        "meta": {
+          "tag": [
+            {
+              "system": "urn:uuid:47df6faa-4581-4545-9f2d-7d8c8db0c3e7",
+              "code": "EU-API-PATIENT-TARGET"
+            }
+          ]
+        }
+      },
+      "request": {
+        "method": "POST",
+        "url": "Patient",
+        "ifNoneExist": "identifier=urn%3Auuid%3A47df6faa-4581-4545-9f2d-7d8c8db0c3e7%7CEU-API-PATIENT-TARGET"
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:a25b6634-4251-5378-ac8c-39a41625a5fc",
+      "resource": {
+        "resourceType": "Condition",
+        "subject": {
+          "reference": "urn:uuid:28b90a5e-c6dc-5d5a-a384-896cf36053f5"
+        },
+        "code": {
+          "text": "Synthetic test condition"
+        },
+        "clinicalStatus": {
+          "coding": [
+            {
+              "system": "http://terminology.hl7.org/CodeSystem/condition-clinical",
+              "code": "active"
+            }
+          ]
+        },
+        "id": "eu-api-condition-target",
+        "identifier": [
+          {
+            "system": "urn:uuid:47df6faa-4581-4545-9f2d-7d8c8db0c3e7",
+            "value": "EU-API-CONDITION-TARGET"
+          }
+        ],
+        "text": {
+          "status": "generated",
+          "div": "<div xmlns=\"http://www.w3.org/1999/xhtml\">Synthetic EU API fixture: condition-target. Not clinical data.</div>"
+        },
+        "meta": {
+          "tag": [
+            {
+              "system": "urn:uuid:47df6faa-4581-4545-9f2d-7d8c8db0c3e7",
+              "code": "EU-API-CONDITION-TARGET"
+            }
+          ]
+        }
+      },
+      "request": {
+        "method": "POST",
+        "url": "Condition",
+        "ifNoneExist": "identifier=urn%3Auuid%3A47df6faa-4581-4545-9f2d-7d8c8db0c3e7%7CEU-API-CONDITION-TARGET"
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:4ae384b1-2018-593c-aeea-2ae2b2cde344",
+      "resource": {
+        "resourceType": "AllergyIntolerance",
+        "patient": {
+          "reference": "urn:uuid:28b90a5e-c6dc-5d5a-a384-896cf36053f5"
+        },
+        "code": {
+          "text": "Synthetic test allergy"
+        },
+        "clinicalStatus": {
+          "coding": [
+            {
+              "system": "http://terminology.hl7.org/CodeSystem/allergyintolerance-clinical",
+              "code": "active"
+            }
+          ]
+        },
+        "id": "eu-api-allergyintolerance-target",
+        "identifier": [
+          {
+            "system": "urn:uuid:47df6faa-4581-4545-9f2d-7d8c8db0c3e7",
+            "value": "EU-API-ALLERGYINTOLERANCE-TARGET"
+          }
+        ],
+        "text": {
+          "status": "generated",
+          "div": "<div xmlns=\"http://www.w3.org/1999/xhtml\">Synthetic EU API fixture: allergyintolerance-target. Not clinical data.</div>"
+        },
+        "meta": {
+          "tag": [
+            {
+              "system": "urn:uuid:47df6faa-4581-4545-9f2d-7d8c8db0c3e7",
+              "code": "EU-API-ALLERGYINTOLERANCE-TARGET"
+            }
+          ]
+        }
+      },
+      "request": {
+        "method": "POST",
+        "url": "AllergyIntolerance",
+        "ifNoneExist": "identifier=urn%3Auuid%3A47df6faa-4581-4545-9f2d-7d8c8db0c3e7%7CEU-API-ALLERGYINTOLERANCE-TARGET"
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:f0ac93de-f0d5-520d-ab24-168a92e827f6",
+      "resource": {
+        "resourceType": "Observation",
+        "status": "final",
+        "subject": {
+          "reference": "urn:uuid:28b90a5e-c6dc-5d5a-a384-896cf36053f5"
+        },
+        "category": [
+          {
+            "coding": [
+              {
+                "system": "http://terminology.hl7.org/CodeSystem/observation-category",
+                "code": "laboratory"
+              }
+            ]
+          }
+        ],
+        "code": {
+          "coding": [
+            {
+              "system": "http://loinc.org",
+              "code": "718-7"
+            }
+          ]
+        },
+        "effectiveDateTime": "2026-01-01T12:00:00Z",
+        "valueQuantity": {
+          "value": 14,
+          "unit": "g/dL",
+          "system": "http://unitsofmeasure.org",
+          "code": "g/dL"
+        },
+        "id": "eu-api-observation-target",
+        "identifier": [
+          {
+            "system": "urn:uuid:47df6faa-4581-4545-9f2d-7d8c8db0c3e7",
+            "value": "EU-API-OBSERVATION-TARGET"
+          }
+        ],
+        "text": {
+          "status": "generated",
+          "div": "<div xmlns=\"http://www.w3.org/1999/xhtml\">Synthetic EU API fixture: observation-target. Not clinical data.</div>"
+        },
+        "meta": {
+          "tag": [
+            {
+              "system": "urn:uuid:47df6faa-4581-4545-9f2d-7d8c8db0c3e7",
+              "code": "EU-API-OBSERVATION-TARGET"
+            }
+          ]
+        }
+      },
+      "request": {
+        "method": "POST",
+        "url": "Observation",
+        "ifNoneExist": "identifier=urn%3Auuid%3A47df6faa-4581-4545-9f2d-7d8c8db0c3e7%7CEU-API-OBSERVATION-TARGET"
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:4fc92647-42aa-50ed-aeed-7f8aec66eb4e",
+      "resource": {
+        "resourceType": "DiagnosticReport",
+        "status": "final",
+        "subject": {
+          "reference": "urn:uuid:28b90a5e-c6dc-5d5a-a384-896cf36053f5"
+        },
+        "effectiveDateTime": "2026-01-01T12:00:00Z",
+        "category": [
+          {
+            "coding": [
+              {
+                "system": "http://terminology.hl7.org/CodeSystem/v2-0074",
+                "code": "LAB"
+              }
+            ]
+          }
+        ],
+        "code": {
+          "text": "Synthetic test laboratory report"
+        },
+        "id": "eu-api-diagnosticreport-target",
+        "identifier": [
+          {
+            "system": "urn:uuid:47df6faa-4581-4545-9f2d-7d8c8db0c3e7",
+            "value": "EU-API-DIAGNOSTICREPORT-TARGET"
+          }
+        ],
+        "text": {
+          "status": "generated",
+          "div": "<div xmlns=\"http://www.w3.org/1999/xhtml\">Synthetic EU API fixture: diagnosticreport-target. Not clinical data.</div>"
+        },
+        "meta": {
+          "tag": [
+            {
+              "system": "urn:uuid:47df6faa-4581-4545-9f2d-7d8c8db0c3e7",
+              "code": "EU-API-DIAGNOSTICREPORT-TARGET"
+            }
+          ]
+        }
+      },
+      "request": {
+        "method": "POST",
+        "url": "DiagnosticReport",
+        "ifNoneExist": "identifier=urn%3Auuid%3A47df6faa-4581-4545-9f2d-7d8c8db0c3e7%7CEU-API-DIAGNOSTICREPORT-TARGET"
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:f8b863d3-07b0-5ea8-a6ec-ff88b0059f7f",
+      "resource": {
+        "resourceType": "ImagingStudy",
+        "status": "registered",
+        "subject": {
+          "reference": "urn:uuid:28b90a5e-c6dc-5d5a-a384-896cf36053f5"
+        },
+        "id": "eu-api-imagingstudy-target",
+        "identifier": [
+          {
+            "system": "urn:uuid:47df6faa-4581-4545-9f2d-7d8c8db0c3e7",
+            "value": "EU-API-IMAGINGSTUDY-TARGET"
+          }
+        ],
+        "text": {
+          "status": "generated",
+          "div": "<div xmlns=\"http://www.w3.org/1999/xhtml\">Synthetic EU API fixture: imagingstudy-target. Not clinical data.</div>"
+        },
+        "meta": {
+          "tag": [
+            {
+              "system": "urn:uuid:47df6faa-4581-4545-9f2d-7d8c8db0c3e7",
+              "code": "EU-API-IMAGINGSTUDY-TARGET"
+            }
+          ]
+        }
+      },
+      "request": {
+        "method": "POST",
+        "url": "ImagingStudy",
+        "ifNoneExist": "identifier=urn%3Auuid%3A47df6faa-4581-4545-9f2d-7d8c8db0c3e7%7CEU-API-IMAGINGSTUDY-TARGET"
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:f64edd87-41d3-5db1-a210-926963d66e70",
+      "resource": {
+        "resourceType": "MedicationRequest",
+        "status": "active",
+        "intent": "order",
+        "subject": {
+          "reference": "urn:uuid:28b90a5e-c6dc-5d5a-a384-896cf36053f5"
+        },
+        "medicationCodeableConcept": {
+          "text": "Synthetic test medication"
+        },
+        "authoredOn": "2026-01-01T12:00:00Z",
+        "id": "eu-api-medicationrequest-target",
+        "identifier": [
+          {
+            "system": "urn:uuid:47df6faa-4581-4545-9f2d-7d8c8db0c3e7",
+            "value": "EU-API-MEDICATIONREQUEST-TARGET"
+          }
+        ],
+        "text": {
+          "status": "generated",
+          "div": "<div xmlns=\"http://www.w3.org/1999/xhtml\">Synthetic EU API fixture: medicationrequest-target. Not clinical data.</div>"
+        },
+        "meta": {
+          "tag": [
+            {
+              "system": "urn:uuid:47df6faa-4581-4545-9f2d-7d8c8db0c3e7",
+              "code": "EU-API-MEDICATIONREQUEST-TARGET"
+            }
+          ]
+        }
+      },
+      "request": {
+        "method": "POST",
+        "url": "MedicationRequest",
+        "ifNoneExist": "identifier=urn%3Auuid%3A47df6faa-4581-4545-9f2d-7d8c8db0c3e7%7CEU-API-MEDICATIONREQUEST-TARGET"
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:a719171b-03f8-516b-adb0-c953cb7c3945",
+      "resource": {
+        "resourceType": "MedicationDispense",
+        "status": "completed",
+        "subject": {
+          "reference": "urn:uuid:28b90a5e-c6dc-5d5a-a384-896cf36053f5"
+        },
+        "medicationCodeableConcept": {
+          "text": "Synthetic test medication"
+        },
+        "whenHandedOver": "2026-01-01T12:00:00Z",
+        "id": "eu-api-medicationdispense-target",
+        "identifier": [
+          {
+            "system": "urn:uuid:47df6faa-4581-4545-9f2d-7d8c8db0c3e7",
+            "value": "EU-API-MEDICATIONDISPENSE-TARGET"
+          }
+        ],
+        "text": {
+          "status": "generated",
+          "div": "<div xmlns=\"http://www.w3.org/1999/xhtml\">Synthetic EU API fixture: medicationdispense-target. Not clinical data.</div>"
+        },
+        "meta": {
+          "tag": [
+            {
+              "system": "urn:uuid:47df6faa-4581-4545-9f2d-7d8c8db0c3e7",
+              "code": "EU-API-MEDICATIONDISPENSE-TARGET"
+            }
+          ]
+        }
+      },
+      "request": {
+        "method": "POST",
+        "url": "MedicationDispense",
+        "ifNoneExist": "identifier=urn%3Auuid%3A47df6faa-4581-4545-9f2d-7d8c8db0c3e7%7CEU-API-MEDICATIONDISPENSE-TARGET"
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:1288575c-57b4-52ff-abd2-12534e505c64",
+      "resource": {
+        "resourceType": "Immunization",
+        "status": "completed",
+        "patient": {
+          "reference": "urn:uuid:28b90a5e-c6dc-5d5a-a384-896cf36053f5"
+        },
+        "vaccineCode": {
+          "text": "Synthetic test vaccine"
+        },
+        "occurrenceDateTime": "2026-01-01T12:00:00Z",
+        "primarySource": true,
+        "id": "eu-api-immunization-target",
+        "identifier": [
+          {
+            "system": "urn:uuid:47df6faa-4581-4545-9f2d-7d8c8db0c3e7",
+            "value": "EU-API-IMMUNIZATION-TARGET"
+          }
+        ],
+        "text": {
+          "status": "generated",
+          "div": "<div xmlns=\"http://www.w3.org/1999/xhtml\">Synthetic EU API fixture: immunization-target. Not clinical data.</div>"
+        },
+        "meta": {
+          "tag": [
+            {
+              "system": "urn:uuid:47df6faa-4581-4545-9f2d-7d8c8db0c3e7",
+              "code": "EU-API-IMMUNIZATION-TARGET"
+            }
+          ]
+        }
+      },
+      "request": {
+        "method": "POST",
+        "url": "Immunization",
+        "ifNoneExist": "identifier=urn%3Auuid%3A47df6faa-4581-4545-9f2d-7d8c8db0c3e7%7CEU-API-IMMUNIZATION-TARGET"
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:4c7a3500-694b-5b03-a572-5ac285a3cc5e",
+      "resource": {
+        "resourceType": "MedicationStatement",
+        "status": "active",
+        "subject": {
+          "reference": "urn:uuid:28b90a5e-c6dc-5d5a-a384-896cf36053f5"
+        },
+        "medicationCodeableConcept": {
+          "text": "Synthetic test medication"
+        },
+        "effectiveDateTime": "2026-01-01T12:00:00Z",
+        "id": "eu-api-medicationstatement-target",
+        "identifier": [
+          {
+            "system": "urn:uuid:47df6faa-4581-4545-9f2d-7d8c8db0c3e7",
+            "value": "EU-API-MEDICATIONSTATEMENT-TARGET"
+          }
+        ],
+        "text": {
+          "status": "generated",
+          "div": "<div xmlns=\"http://www.w3.org/1999/xhtml\">Synthetic EU API fixture: medicationstatement-target. Not clinical data.</div>"
+        },
+        "meta": {
+          "tag": [
+            {
+              "system": "urn:uuid:47df6faa-4581-4545-9f2d-7d8c8db0c3e7",
+              "code": "EU-API-MEDICATIONSTATEMENT-TARGET"
+            }
+          ]
+        }
+      },
+      "request": {
+        "method": "POST",
+        "url": "MedicationStatement",
+        "ifNoneExist": "identifier=urn%3Auuid%3A47df6faa-4581-4545-9f2d-7d8c8db0c3e7%7CEU-API-MEDICATIONSTATEMENT-TARGET"
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:6f2d164b-d9fb-5138-a591-c02879bea025",
+      "resource": {
+        "resourceType": "Encounter",
+        "status": "finished",
+        "subject": {
+          "reference": "urn:uuid:28b90a5e-c6dc-5d5a-a384-896cf36053f5"
+        },
+        "class": {
+          "system": "http://terminology.hl7.org/CodeSystem/v3-ActCode",
+          "code": "AMB"
+        },
+        "period": {
+          "start": "2026-01-01T12:00:00Z",
+          "end": "2026-01-01T13:00:00Z"
+        },
+        "id": "eu-api-encounter-target",
+        "identifier": [
+          {
+            "system": "urn:uuid:47df6faa-4581-4545-9f2d-7d8c8db0c3e7",
+            "value": "EU-API-ENCOUNTER-TARGET"
+          }
+        ],
+        "text": {
+          "status": "generated",
+          "div": "<div xmlns=\"http://www.w3.org/1999/xhtml\">Synthetic EU API fixture: encounter-target. Not clinical data.</div>"
+        },
+        "meta": {
+          "tag": [
+            {
+              "system": "urn:uuid:47df6faa-4581-4545-9f2d-7d8c8db0c3e7",
+              "code": "EU-API-ENCOUNTER-TARGET"
+            }
+          ]
+        }
+      },
+      "request": {
+        "method": "POST",
+        "url": "Encounter",
+        "ifNoneExist": "identifier=urn%3Auuid%3A47df6faa-4581-4545-9f2d-7d8c8db0c3e7%7CEU-API-ENCOUNTER-TARGET"
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:14f833a4-a5a3-523f-abad-dbe220549a2d",
+      "resource": {
+        "resourceType": "Binary",
+        "contentType": "text/plain",
+        "securityContext": {
+          "reference": "urn:uuid:28b90a5e-c6dc-5d5a-a384-896cf36053f5"
+        },
+        "data": "RVUgQVBJIHRhcmdldCBkb2N1bWVudC4gU3ludGhldGljIHRlc3QgZGF0YSBvbmx5Lgo=",
+        "id": "eu-api-binary-target",
+        "meta": {
+          "tag": [
+            {
+              "system": "urn:uuid:47df6faa-4581-4545-9f2d-7d8c8db0c3e7",
+              "code": "EU-API-BINARY-TARGET"
+            }
+          ]
+        }
+      },
+      "request": {
+        "method": "POST",
+        "url": "Binary",
+        "ifNoneExist": "_tag=urn%3Auuid%3A47df6faa-4581-4545-9f2d-7d8c8db0c3e7%7CEU-API-BINARY-TARGET"
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:74ab3797-b5a8-5147-aa69-1a3c0046c502",
+      "resource": {
+        "resourceType": "DocumentReference",
+        "status": "current",
+        "subject": {
+          "reference": "urn:uuid:28b90a5e-c6dc-5d5a-a384-896cf36053f5"
+        },
+        "type": {
+          "coding": [
+            {
+              "system": "http://loinc.org",
+              "code": "60591-5"
+            }
+          ]
+        },
+        "category": [
+          {
+            "coding": [
+              {
+                "system": "http://hl7.eu/fhir/health-data-api/CodeSystem/eehrxf-document-priority-category-cs",
+                "code": "Patient-Summaries"
+              }
+            ]
+          }
+        ],
+        "content": [
+          {
+            "attachment": {
+              "contentType": "text/plain",
+              "url": "urn:uuid:14f833a4-a5a3-523f-abad-dbe220549a2d"
+            }
+          }
+        ],
+        "id": "eu-api-document-target",
+        "identifier": [
+          {
+            "system": "urn:uuid:47df6faa-4581-4545-9f2d-7d8c8db0c3e7",
+            "value": "EU-API-DOCUMENT-TARGET"
+          }
+        ],
+        "text": {
+          "status": "generated",
+          "div": "<div xmlns=\"http://www.w3.org/1999/xhtml\">Synthetic EU API fixture: document-target. Not clinical data.</div>"
+        },
+        "meta": {
+          "tag": [
+            {
+              "system": "urn:uuid:47df6faa-4581-4545-9f2d-7d8c8db0c3e7",
+              "code": "EU-API-DOCUMENT-TARGET"
+            }
+          ]
+        }
+      },
+      "request": {
+        "method": "POST",
+        "url": "DocumentReference",
+        "ifNoneExist": "identifier=urn%3Auuid%3A47df6faa-4581-4545-9f2d-7d8c8db0c3e7%7CEU-API-DOCUMENT-TARGET"
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:39bcd1f9-fcdd-5d1b-a11f-f756470f428a",
+      "resource": {
+        "resourceType": "Patient",
+        "active": true,
+        "name": [
+          {
+            "use": "official",
+            "family": "EUAPIControlpatient",
+            "given": [
+              "Synthetic"
+            ]
+          }
+        ],
+        "gender": "female",
+        "birthDate": "1980-01-01",
+        "id": "eu-api-patient-control",
+        "identifier": [
+          {
+            "system": "urn:uuid:47df6faa-4581-4545-9f2d-7d8c8db0c3e7",
+            "value": "EU-API-PATIENT-CONTROL"
+          }
+        ],
+        "text": {
+          "status": "generated",
+          "div": "<div xmlns=\"http://www.w3.org/1999/xhtml\">Synthetic EU API fixture: patient-control. Not clinical data.</div>"
+        },
+        "meta": {
+          "tag": [
+            {
+              "system": "urn:uuid:47df6faa-4581-4545-9f2d-7d8c8db0c3e7",
+              "code": "EU-API-PATIENT-CONTROL"
+            }
+          ]
+        }
+      },
+      "request": {
+        "method": "POST",
+        "url": "Patient",
+        "ifNoneExist": "identifier=urn%3Auuid%3A47df6faa-4581-4545-9f2d-7d8c8db0c3e7%7CEU-API-PATIENT-CONTROL"
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:b0e72254-edc4-5cfa-a95e-5cf7fae8cbb1",
+      "resource": {
+        "resourceType": "Condition",
+        "subject": {
+          "reference": "urn:uuid:39bcd1f9-fcdd-5d1b-a11f-f756470f428a"
+        },
+        "code": {
+          "text": "Synthetic test condition"
+        },
+        "clinicalStatus": {
+          "coding": [
+            {
+              "system": "http://terminology.hl7.org/CodeSystem/condition-clinical",
+              "code": "active"
+            }
+          ]
+        },
+        "id": "eu-api-condition-control",
+        "identifier": [
+          {
+            "system": "urn:uuid:47df6faa-4581-4545-9f2d-7d8c8db0c3e7",
+            "value": "EU-API-CONDITION-CONTROL"
+          }
+        ],
+        "text": {
+          "status": "generated",
+          "div": "<div xmlns=\"http://www.w3.org/1999/xhtml\">Synthetic EU API fixture: condition-control. Not clinical data.</div>"
+        },
+        "meta": {
+          "tag": [
+            {
+              "system": "urn:uuid:47df6faa-4581-4545-9f2d-7d8c8db0c3e7",
+              "code": "EU-API-CONDITION-CONTROL"
+            }
+          ]
+        }
+      },
+      "request": {
+        "method": "POST",
+        "url": "Condition",
+        "ifNoneExist": "identifier=urn%3Auuid%3A47df6faa-4581-4545-9f2d-7d8c8db0c3e7%7CEU-API-CONDITION-CONTROL"
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:5774d4aa-af21-5c02-ad90-2e00038f063e",
+      "resource": {
+        "resourceType": "AllergyIntolerance",
+        "patient": {
+          "reference": "urn:uuid:39bcd1f9-fcdd-5d1b-a11f-f756470f428a"
+        },
+        "code": {
+          "text": "Synthetic test allergy"
+        },
+        "clinicalStatus": {
+          "coding": [
+            {
+              "system": "http://terminology.hl7.org/CodeSystem/allergyintolerance-clinical",
+              "code": "active"
+            }
+          ]
+        },
+        "id": "eu-api-allergyintolerance-control",
+        "identifier": [
+          {
+            "system": "urn:uuid:47df6faa-4581-4545-9f2d-7d8c8db0c3e7",
+            "value": "EU-API-ALLERGYINTOLERANCE-CONTROL"
+          }
+        ],
+        "text": {
+          "status": "generated",
+          "div": "<div xmlns=\"http://www.w3.org/1999/xhtml\">Synthetic EU API fixture: allergyintolerance-control. Not clinical data.</div>"
+        },
+        "meta": {
+          "tag": [
+            {
+              "system": "urn:uuid:47df6faa-4581-4545-9f2d-7d8c8db0c3e7",
+              "code": "EU-API-ALLERGYINTOLERANCE-CONTROL"
+            }
+          ]
+        }
+      },
+      "request": {
+        "method": "POST",
+        "url": "AllergyIntolerance",
+        "ifNoneExist": "identifier=urn%3Auuid%3A47df6faa-4581-4545-9f2d-7d8c8db0c3e7%7CEU-API-ALLERGYINTOLERANCE-CONTROL"
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:be388771-f493-5151-a88c-9408403a8b7b",
+      "resource": {
+        "resourceType": "Observation",
+        "status": "final",
+        "subject": {
+          "reference": "urn:uuid:39bcd1f9-fcdd-5d1b-a11f-f756470f428a"
+        },
+        "category": [
+          {
+            "coding": [
+              {
+                "system": "http://terminology.hl7.org/CodeSystem/observation-category",
+                "code": "laboratory"
+              }
+            ]
+          }
+        ],
+        "code": {
+          "coding": [
+            {
+              "system": "http://loinc.org",
+              "code": "718-7"
+            }
+          ]
+        },
+        "effectiveDateTime": "2026-01-01T12:00:00Z",
+        "valueQuantity": {
+          "value": 14,
+          "unit": "g/dL",
+          "system": "http://unitsofmeasure.org",
+          "code": "g/dL"
+        },
+        "id": "eu-api-observation-control",
+        "identifier": [
+          {
+            "system": "urn:uuid:47df6faa-4581-4545-9f2d-7d8c8db0c3e7",
+            "value": "EU-API-OBSERVATION-CONTROL"
+          }
+        ],
+        "text": {
+          "status": "generated",
+          "div": "<div xmlns=\"http://www.w3.org/1999/xhtml\">Synthetic EU API fixture: observation-control. Not clinical data.</div>"
+        },
+        "meta": {
+          "tag": [
+            {
+              "system": "urn:uuid:47df6faa-4581-4545-9f2d-7d8c8db0c3e7",
+              "code": "EU-API-OBSERVATION-CONTROL"
+            }
+          ]
+        }
+      },
+      "request": {
+        "method": "POST",
+        "url": "Observation",
+        "ifNoneExist": "identifier=urn%3Auuid%3A47df6faa-4581-4545-9f2d-7d8c8db0c3e7%7CEU-API-OBSERVATION-CONTROL"
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:b3eac419-5b9e-590d-ad3a-6f9658d457c6",
+      "resource": {
+        "resourceType": "DiagnosticReport",
+        "status": "final",
+        "subject": {
+          "reference": "urn:uuid:39bcd1f9-fcdd-5d1b-a11f-f756470f428a"
+        },
+        "effectiveDateTime": "2026-01-01T12:00:00Z",
+        "category": [
+          {
+            "coding": [
+              {
+                "system": "http://terminology.hl7.org/CodeSystem/v2-0074",
+                "code": "LAB"
+              }
+            ]
+          }
+        ],
+        "code": {
+          "text": "Synthetic test laboratory report"
+        },
+        "id": "eu-api-diagnosticreport-control",
+        "identifier": [
+          {
+            "system": "urn:uuid:47df6faa-4581-4545-9f2d-7d8c8db0c3e7",
+            "value": "EU-API-DIAGNOSTICREPORT-CONTROL"
+          }
+        ],
+        "text": {
+          "status": "generated",
+          "div": "<div xmlns=\"http://www.w3.org/1999/xhtml\">Synthetic EU API fixture: diagnosticreport-control. Not clinical data.</div>"
+        },
+        "meta": {
+          "tag": [
+            {
+              "system": "urn:uuid:47df6faa-4581-4545-9f2d-7d8c8db0c3e7",
+              "code": "EU-API-DIAGNOSTICREPORT-CONTROL"
+            }
+          ]
+        }
+      },
+      "request": {
+        "method": "POST",
+        "url": "DiagnosticReport",
+        "ifNoneExist": "identifier=urn%3Auuid%3A47df6faa-4581-4545-9f2d-7d8c8db0c3e7%7CEU-API-DIAGNOSTICREPORT-CONTROL"
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:142de28f-72e2-5462-a5de-fe363934eaa8",
+      "resource": {
+        "resourceType": "ImagingStudy",
+        "status": "registered",
+        "subject": {
+          "reference": "urn:uuid:39bcd1f9-fcdd-5d1b-a11f-f756470f428a"
+        },
+        "id": "eu-api-imagingstudy-control",
+        "identifier": [
+          {
+            "system": "urn:uuid:47df6faa-4581-4545-9f2d-7d8c8db0c3e7",
+            "value": "EU-API-IMAGINGSTUDY-CONTROL"
+          }
+        ],
+        "text": {
+          "status": "generated",
+          "div": "<div xmlns=\"http://www.w3.org/1999/xhtml\">Synthetic EU API fixture: imagingstudy-control. Not clinical data.</div>"
+        },
+        "meta": {
+          "tag": [
+            {
+              "system": "urn:uuid:47df6faa-4581-4545-9f2d-7d8c8db0c3e7",
+              "code": "EU-API-IMAGINGSTUDY-CONTROL"
+            }
+          ]
+        }
+      },
+      "request": {
+        "method": "POST",
+        "url": "ImagingStudy",
+        "ifNoneExist": "identifier=urn%3Auuid%3A47df6faa-4581-4545-9f2d-7d8c8db0c3e7%7CEU-API-IMAGINGSTUDY-CONTROL"
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:ebe74a08-0d0e-5cb4-a4d9-f2810898df04",
+      "resource": {
+        "resourceType": "MedicationRequest",
+        "status": "active",
+        "intent": "order",
+        "subject": {
+          "reference": "urn:uuid:39bcd1f9-fcdd-5d1b-a11f-f756470f428a"
+        },
+        "medicationCodeableConcept": {
+          "text": "Synthetic test medication"
+        },
+        "authoredOn": "2026-01-01T12:00:00Z",
+        "id": "eu-api-medicationrequest-control",
+        "identifier": [
+          {
+            "system": "urn:uuid:47df6faa-4581-4545-9f2d-7d8c8db0c3e7",
+            "value": "EU-API-MEDICATIONREQUEST-CONTROL"
+          }
+        ],
+        "text": {
+          "status": "generated",
+          "div": "<div xmlns=\"http://www.w3.org/1999/xhtml\">Synthetic EU API fixture: medicationrequest-control. Not clinical data.</div>"
+        },
+        "meta": {
+          "tag": [
+            {
+              "system": "urn:uuid:47df6faa-4581-4545-9f2d-7d8c8db0c3e7",
+              "code": "EU-API-MEDICATIONREQUEST-CONTROL"
+            }
+          ]
+        }
+      },
+      "request": {
+        "method": "POST",
+        "url": "MedicationRequest",
+        "ifNoneExist": "identifier=urn%3Auuid%3A47df6faa-4581-4545-9f2d-7d8c8db0c3e7%7CEU-API-MEDICATIONREQUEST-CONTROL"
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:2573f2a2-24ba-5775-a6e4-66797c5c007c",
+      "resource": {
+        "resourceType": "MedicationDispense",
+        "status": "completed",
+        "subject": {
+          "reference": "urn:uuid:39bcd1f9-fcdd-5d1b-a11f-f756470f428a"
+        },
+        "medicationCodeableConcept": {
+          "text": "Synthetic test medication"
+        },
+        "whenHandedOver": "2026-01-01T12:00:00Z",
+        "id": "eu-api-medicationdispense-control",
+        "identifier": [
+          {
+            "system": "urn:uuid:47df6faa-4581-4545-9f2d-7d8c8db0c3e7",
+            "value": "EU-API-MEDICATIONDISPENSE-CONTROL"
+          }
+        ],
+        "text": {
+          "status": "generated",
+          "div": "<div xmlns=\"http://www.w3.org/1999/xhtml\">Synthetic EU API fixture: medicationdispense-control. Not clinical data.</div>"
+        },
+        "meta": {
+          "tag": [
+            {
+              "system": "urn:uuid:47df6faa-4581-4545-9f2d-7d8c8db0c3e7",
+              "code": "EU-API-MEDICATIONDISPENSE-CONTROL"
+            }
+          ]
+        }
+      },
+      "request": {
+        "method": "POST",
+        "url": "MedicationDispense",
+        "ifNoneExist": "identifier=urn%3Auuid%3A47df6faa-4581-4545-9f2d-7d8c8db0c3e7%7CEU-API-MEDICATIONDISPENSE-CONTROL"
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:419fa2f1-2b72-55ce-a7de-a40c820ed04b",
+      "resource": {
+        "resourceType": "Immunization",
+        "status": "completed",
+        "patient": {
+          "reference": "urn:uuid:39bcd1f9-fcdd-5d1b-a11f-f756470f428a"
+        },
+        "vaccineCode": {
+          "text": "Synthetic test vaccine"
+        },
+        "occurrenceDateTime": "2026-01-01T12:00:00Z",
+        "primarySource": true,
+        "id": "eu-api-immunization-control",
+        "identifier": [
+          {
+            "system": "urn:uuid:47df6faa-4581-4545-9f2d-7d8c8db0c3e7",
+            "value": "EU-API-IMMUNIZATION-CONTROL"
+          }
+        ],
+        "text": {
+          "status": "generated",
+          "div": "<div xmlns=\"http://www.w3.org/1999/xhtml\">Synthetic EU API fixture: immunization-control. Not clinical data.</div>"
+        },
+        "meta": {
+          "tag": [
+            {
+              "system": "urn:uuid:47df6faa-4581-4545-9f2d-7d8c8db0c3e7",
+              "code": "EU-API-IMMUNIZATION-CONTROL"
+            }
+          ]
+        }
+      },
+      "request": {
+        "method": "POST",
+        "url": "Immunization",
+        "ifNoneExist": "identifier=urn%3Auuid%3A47df6faa-4581-4545-9f2d-7d8c8db0c3e7%7CEU-API-IMMUNIZATION-CONTROL"
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:4891e492-150b-5f5c-abb0-01a95f31d417",
+      "resource": {
+        "resourceType": "MedicationStatement",
+        "status": "active",
+        "subject": {
+          "reference": "urn:uuid:39bcd1f9-fcdd-5d1b-a11f-f756470f428a"
+        },
+        "medicationCodeableConcept": {
+          "text": "Synthetic test medication"
+        },
+        "effectiveDateTime": "2026-01-01T12:00:00Z",
+        "id": "eu-api-medicationstatement-control",
+        "identifier": [
+          {
+            "system": "urn:uuid:47df6faa-4581-4545-9f2d-7d8c8db0c3e7",
+            "value": "EU-API-MEDICATIONSTATEMENT-CONTROL"
+          }
+        ],
+        "text": {
+          "status": "generated",
+          "div": "<div xmlns=\"http://www.w3.org/1999/xhtml\">Synthetic EU API fixture: medicationstatement-control. Not clinical data.</div>"
+        },
+        "meta": {
+          "tag": [
+            {
+              "system": "urn:uuid:47df6faa-4581-4545-9f2d-7d8c8db0c3e7",
+              "code": "EU-API-MEDICATIONSTATEMENT-CONTROL"
+            }
+          ]
+        }
+      },
+      "request": {
+        "method": "POST",
+        "url": "MedicationStatement",
+        "ifNoneExist": "identifier=urn%3Auuid%3A47df6faa-4581-4545-9f2d-7d8c8db0c3e7%7CEU-API-MEDICATIONSTATEMENT-CONTROL"
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:94123f98-227d-52d9-a644-508f4edf8535",
+      "resource": {
+        "resourceType": "Encounter",
+        "status": "finished",
+        "subject": {
+          "reference": "urn:uuid:39bcd1f9-fcdd-5d1b-a11f-f756470f428a"
+        },
+        "class": {
+          "system": "http://terminology.hl7.org/CodeSystem/v3-ActCode",
+          "code": "AMB"
+        },
+        "period": {
+          "start": "2026-01-01T12:00:00Z",
+          "end": "2026-01-01T13:00:00Z"
+        },
+        "id": "eu-api-encounter-control",
+        "identifier": [
+          {
+            "system": "urn:uuid:47df6faa-4581-4545-9f2d-7d8c8db0c3e7",
+            "value": "EU-API-ENCOUNTER-CONTROL"
+          }
+        ],
+        "text": {
+          "status": "generated",
+          "div": "<div xmlns=\"http://www.w3.org/1999/xhtml\">Synthetic EU API fixture: encounter-control. Not clinical data.</div>"
+        },
+        "meta": {
+          "tag": [
+            {
+              "system": "urn:uuid:47df6faa-4581-4545-9f2d-7d8c8db0c3e7",
+              "code": "EU-API-ENCOUNTER-CONTROL"
+            }
+          ]
+        }
+      },
+      "request": {
+        "method": "POST",
+        "url": "Encounter",
+        "ifNoneExist": "identifier=urn%3Auuid%3A47df6faa-4581-4545-9f2d-7d8c8db0c3e7%7CEU-API-ENCOUNTER-CONTROL"
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:955bc3fe-bc63-5880-aa16-bf5f22d81c04",
+      "resource": {
+        "resourceType": "Binary",
+        "contentType": "text/plain",
+        "securityContext": {
+          "reference": "urn:uuid:39bcd1f9-fcdd-5d1b-a11f-f756470f428a"
+        },
+        "data": "RVUgQVBJIGNvbnRyb2wgZG9jdW1lbnQuIFN5bnRoZXRpYyB0ZXN0IGRhdGEgb25seS4K",
+        "id": "eu-api-binary-control",
+        "meta": {
+          "tag": [
+            {
+              "system": "urn:uuid:47df6faa-4581-4545-9f2d-7d8c8db0c3e7",
+              "code": "EU-API-BINARY-CONTROL"
+            }
+          ]
+        }
+      },
+      "request": {
+        "method": "POST",
+        "url": "Binary",
+        "ifNoneExist": "_tag=urn%3Auuid%3A47df6faa-4581-4545-9f2d-7d8c8db0c3e7%7CEU-API-BINARY-CONTROL"
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:a48f3a6a-ed9a-5b50-a7aa-1ccd42fab3e6",
+      "resource": {
+        "resourceType": "DocumentReference",
+        "status": "current",
+        "subject": {
+          "reference": "urn:uuid:39bcd1f9-fcdd-5d1b-a11f-f756470f428a"
+        },
+        "type": {
+          "coding": [
+            {
+              "system": "http://loinc.org",
+              "code": "60591-5"
+            }
+          ]
+        },
+        "category": [
+          {
+            "coding": [
+              {
+                "system": "http://hl7.eu/fhir/health-data-api/CodeSystem/eehrxf-document-priority-category-cs",
+                "code": "Patient-Summaries"
+              }
+            ]
+          }
+        ],
+        "content": [
+          {
+            "attachment": {
+              "contentType": "text/plain",
+              "url": "urn:uuid:955bc3fe-bc63-5880-aa16-bf5f22d81c04"
+            }
+          }
+        ],
+        "id": "eu-api-document-control",
+        "identifier": [
+          {
+            "system": "urn:uuid:47df6faa-4581-4545-9f2d-7d8c8db0c3e7",
+            "value": "EU-API-DOCUMENT-CONTROL"
+          }
+        ],
+        "text": {
+          "status": "generated",
+          "div": "<div xmlns=\"http://www.w3.org/1999/xhtml\">Synthetic EU API fixture: document-control. Not clinical data.</div>"
+        },
+        "meta": {
+          "tag": [
+            {
+              "system": "urn:uuid:47df6faa-4581-4545-9f2d-7d8c8db0c3e7",
+              "code": "EU-API-DOCUMENT-CONTROL"
+            }
+          ]
+        }
+      },
+      "request": {
+        "method": "POST",
+        "url": "DocumentReference",
+        "ifNoneExist": "identifier=urn%3Auuid%3A47df6faa-4581-4545-9f2d-7d8c8db0c3e7%7CEU-API-DOCUMENT-CONTROL"
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:0a279f88-aa18-57d3-a27c-40414e808b2f",
+      "resource": {
+        "resourceType": "DocumentReference",
+        "status": "current",
+        "subject": {
+          "reference": "urn:uuid:28b90a5e-c6dc-5d5a-a384-896cf36053f5"
+        },
+        "type": {
+          "coding": [
+            {
+              "system": "http://loinc.org",
+              "code": "11502-2"
+            }
+          ]
+        },
+        "category": [
+          {
+            "coding": [
+              {
+                "system": "http://hl7.eu/fhir/health-data-api/CodeSystem/eehrxf-document-priority-category-cs",
+                "code": "Laboratory-Reports"
+              }
+            ]
+          }
+        ],
+        "content": [
+          {
+            "attachment": {
+              "contentType": "text/plain",
+              "url": "urn:uuid:14f833a4-a5a3-523f-abad-dbe220549a2d"
+            }
+          }
+        ],
+        "id": "eu-api-document-laboratory",
+        "identifier": [
+          {
+            "system": "urn:uuid:47df6faa-4581-4545-9f2d-7d8c8db0c3e7",
+            "value": "EU-API-DOCUMENT-LABORATORY"
+          }
+        ],
+        "text": {
+          "status": "generated",
+          "div": "<div xmlns=\"http://www.w3.org/1999/xhtml\">Synthetic EU API fixture: document-laboratory. Not clinical data.</div>"
+        },
+        "meta": {
+          "tag": [
+            {
+              "system": "urn:uuid:47df6faa-4581-4545-9f2d-7d8c8db0c3e7",
+              "code": "EU-API-DOCUMENT-LABORATORY"
+            }
+          ]
+        }
+      },
+      "request": {
+        "method": "POST",
+        "url": "DocumentReference",
+        "ifNoneExist": "identifier=urn%3Auuid%3A47df6faa-4581-4545-9f2d-7d8c8db0c3e7%7CEU-API-DOCUMENT-LABORATORY"
+      }
+    }
+  ]
+}

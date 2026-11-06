@@ -164,6 +164,10 @@ The validator's package cache and the ITB database/repository use named volumes.
 
 ## Exercise the provider scenarios against EIR
 
+For the proposed shared-instance workflow, see [Fixture campaigns for a central
+ITB installation](fixture-campaign-proposal.md). It distinguishes the existing
+local ID mapping from the campaign lifecycle still needing discussion.
+
 The optional EIR setup uses a pinned server image, an in-memory database and the
 `dev,disable-security` profiles. It listens only on `localhost:8082`; restarting
 the server clears its FHIR data. This is an execution check, not a secured EHDS
@@ -196,9 +200,35 @@ fixtures use the same filters so a server ignoring the patient filter is caught.
 Results, session IDs and XML reports are saved under `itb/build/eir/`, with the
 latest run summarized in `results.json`. An optional regular expression selects
 cases, for example `node --env-file=itb/.env itb/eir-run.mjs 'rap-005|dap-015'`.
-Each run creates new document/Binary fixtures; patients and clinical resources are
-reused via conditional create. Stop this optional stack with
+Every run loads the published transaction from
+`input/testing/fixtures/provider-v1/bundle.json`, records the server-assigned IDs,
+and checks 27 resources and 19 searches before running ITB cases. All fixtures,
+including Binary and DocumentReference, use conditional create. Results are in
+`fixture-bindings.json` and `fixture-verification.json` under `itb/build/eir/`.
+The fixture contract and per-case expectations are in the fixture directory's
+README and manifest. The helper can also verify manually imported data with
+different IDs. Stop this optional stack with
 `docker compose -f itb/eir-compose.yml stop`.
+
+Only `dap-012`, `grp-012`, `rap-004`, `pub-003` and `pub-004` load the EU API IG
+into the validator: they validate against its dependency profiles. Core Bundle
+validation and FHIRPath checks do not require that package load. Loading the IG
+configures the validator; loading the fixture transaction populates the SUT.
+
+Check fixture consistency and run isolated structural/profile validation:
+
+```sh
+node scripts/build-fixtures.mjs --check
+node --test scripts/fixture-data.test.mjs
+node scripts/validate-fixtures.mjs
+```
+
+The last command uses the pinned validator image and existing cache in an isolated
+JVM with external terminology disabled (`-tx n/a`). It validates all resources
+and both EU Core Patient profiles without ignoring slicing errors. Reports are
+under `itb/build/fixture-validation/`; it is not evidence of complete terminology
+validation. EIR's externalized Binary bytes are verified using `$binary-access-read`
+and recorded as such, not counted as proof of standard Binary content retrieval.
 
 Run the 140 positive/negative FHIRPath regression checks from the repository root:
 

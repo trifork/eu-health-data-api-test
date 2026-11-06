@@ -1,5 +1,9 @@
-**Status: authored and compiling. Not yet run.** No system under test exists
-yet, so nothing here is evidence of conformance, only of the tests' shape.
+**Status: provider scenarios exercised against a local EIR development server on
+2026-11-06.** The run used synthetic fixtures and disabled security: 41 of 48
+provider cases passed; the seven authorization-rejection cases failed as expected.
+The remaining 19 client cases still need client implementations. This is runtime
+validation of the test tooling, not a conformance claim. See the
+[runtime findings](../../../docs/eu-api-itb-runtime-findings.md).
 
 ### 1. Scope
 
@@ -27,8 +31,9 @@ from those expectations by hand; each scenario names what it tests in `@covers:`
 
 - **Client-side actors** (Publisher, Consumer, Resource Consumer): the test bed
   plays the provider, receives what the SUT sends, checks it and answers with
-  canned data. **Server-side actors**: the tester pastes a token and the ids of a
-  reference patient, document and binary; the reference data must be loaded first.
+  canned data. **Server-side actors**: each scenario requests only its required token and
+  reference identifiers. CapabilityStatement cases request none. Load matching
+  fixtures before running searches; add a second patient as a filtering control.
 - **Authorization** is a scenario of its own per actor: a request without a token
   gets 401; a token with no usable scope gets 401 or 403; a client's token request
   carries `client_credentials` and a JWT client assertion (RFC 7523).
@@ -50,8 +55,9 @@ from those expectations by hand; each scenario names what it tests in `@covers:`
 |---|---|
 | `otb-gherkin compile` on all six features | clean: 6, errors: 0 (17, 6, 13, 6, 18, 7 test cases) |
 | Selftest against the spec's own examples | **not run**: no obligations, so no generated assertions; the IG's DocumentReference examples were not run against these features |
-| HL7 validator on a reference dataset | **not run**: the IG ships no reference patient dataset |
-| Run on an ITB | **not run**: no system under test |
+| HL7 validator on published provider-v1 fixtures | 27 resources against core R4 plus both EU Core Patient profiles: 0 errors, 4 warnings; external terminology disabled (`-tx n/a`), no slicing-error suppression |
+| Run on stock ITB 1.30.2 | 48 provider cases against EIR: 41 passed, 7 authorization failures with security disabled; local compatibility adapter required |
+| Search assertion regression probes | 140 passed against the live FHIRPath service, including empty and wrong-patient responses |
 
 ### 4. Not covered
 
@@ -65,3 +71,32 @@ MHD `Minimal` profile conformance on server responses; PDQm profile conformance.
 cd app && ITB_ASSET_ROOT=./public npx otb-gherkin compile public/features/eu-api-*.feature --out build
 node scripts/build-test-ig.mjs public/data/eu-api-test-ig.json --package
 ```
+
+
+### 6. Fixture contract (2026-11-06)
+
+The TestPlan IG now ships `tests/fixtures/provider-v1/`: a 27-resource R4
+conditional transaction, an assigned-ID bindings template, a manifest for all
+67 cases and a human-readable contract. Fixtures may be entered/imported through
+any supported route. The local EIR runner uses the same published bundle; its
+preflight checks 27 resource reads and 19 searches. Repeat transactions preserve
+assigned IDs. Wrong-patient controls and a same-patient laboratory document make
+ignored filters observable. The source files are in `app/public/fixtures/eu-api/`;
+`testAssets` copies them into the generated IG and packaging mirrors all of
+`input/testing`, rather than only its Gherkin subdirectory.
+
+The document-category queries now use the canonical actually present in the
+pinned ballot package:
+`http://hl7.eu/fhir/health-data-api/CodeSystem/eehrxf-document-priority-category-cs`.
+The older EURIDICE URI was not known to the validator. Package loading is now
+scenario-local: `dap-012`, `grp-012`, `rap-004`, `pub-003` and `pub-004` load the EU
+API package for profile validation; metadata, authorization and core FHIRPath
+checks do not. Loading profiles into the validator does not load fixtures into
+the SUT.
+
+The fixture verifier detects EIR's externalized Binary extension and checks the
+bytes through `$binary-access-read`. This is recorded as storage verification,
+not proof of standard Binary retrieval. Current Gherkin Binary cases still only
+check nonempty response bodies. The manifest distinguishes the expected fixture
+contract from the assertions the current Gherkin actually executes. Client cases
+use the canned data in their features; these provider fixtures are not a client.

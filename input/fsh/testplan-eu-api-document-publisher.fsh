@@ -14,7 +14,7 @@ Description: "Test plan for the Document Publisher actor of EU Health Data API, 
 * title = "Document Publisher Test Plan"
 * status = #draft
 * experimental = true
-* date = "2026-10-30"
+* date = "2026-11-06"
 * publisher = "Jens Kristian Villadsen"
 * contact
   * name = "Jens Kristian Villadsen"
@@ -26,7 +26,8 @@ Description: "Test plan for the Document Publisher actor of EU Health Data API, 
 Test plan for the **Document Publisher** actor of [EU Health Data API, 1.0.0-ballot](https://build.fhir.org/ig/euridice-org/eu-health-data-api/).
 The SUT obtains a token, finds the patient, and publishes a document with embedded content.
 Each `suite` below is a `Rule:` of the Gherkin feature named by `suite.input.file`, and each `suite.test` one of its `Scenario:` lines, matched by the scenario's identifier. The assertions are the scenario's `Then` steps, verbatim.
-The tests declare which specification obligations they cover (7 element obligations across the plan); the coverage matrix is checked mechanically against the specification package.
+The tests declare which specification obligations they cover (7 requirement paths named by the feature tags).
+Fixture prerequisites, input bindings and expected data are in tests/fixtures/provider-v1/manifest.json, keyed by scenario ID. See the Testing page, Fixture contract and expected results. Provider fixtures are R4; client workflows use the canned data embedded in their feature.
 """
 * purpose = "To declare, in a machine-readable and runnable form, which behaviours a system claiming conformance to the Document Publisher actor must demonstrate."
 
@@ -45,7 +46,7 @@ The tests declare which specification obligations they cover (7 element obligati
     * file = "eu-api-document-publisher.feature"
   * test[0]
     * name = "pub-001 The SUT authenticates with a signed JWT client assertion (RFC 7523)"
-    * description = "Covers security.smart-backend-services."
+    * description = "Fixture contract: fixtures/provider-v1/manifest.json, cases.pub-001 (input bindings and expected data). Covers security.smart-backend-services."
     * operation = #gherkin/Scenario
     * assertion[0]
       * severity = #error
@@ -74,7 +75,7 @@ The tests declare which specification obligations they cover (7 element obligati
     * file = "eu-api-document-publisher.feature"
   * test[0]
     * name = "pub-002 The SUT looks the patient up by identifier with a bearer token"
-    * description = "Covers Patient.search-type, Patient.search.identifier."
+    * description = "Fixture contract: fixtures/provider-v1/manifest.json, cases.pub-002 (input bindings and expected data). Covers Patient.search-type, Patient.search.identifier."
     * operation = #gherkin/Scenario
     * assertion[0]
       * severity = #error
@@ -100,7 +101,7 @@ The tests declare which specification obligations they cover (7 element obligati
     * file = "eu-api-document-publisher.feature"
   * test[0]
     * name = "pub-003 The SUT creates a DocumentReference with the document embedded"
-    * description = "Covers DocumentReference.create."
+    * description = "Fixture contract: fixtures/provider-v1/manifest.json, cases.pub-003 (input bindings and expected data). Covers DocumentReference.create."
     * operation = #gherkin/Scenario
     * assertion[0]
       * severity = #error
@@ -128,7 +129,7 @@ The tests declare which specification obligations they cover (7 element obligati
       * human = "AccessProvider replies to DocumentPublisher with status 201 and:"
   * test[+]
     * name = "pub-004 The SUT publishes only the minimal metadata profile it claims"
-    * description = "Covers DocumentReference.create."
+    * description = "Fixture contract: fixtures/provider-v1/manifest.json, cases.pub-004 (input bindings and expected data). Covers DocumentReference.create."
     * operation = #gherkin/Scenario
     * assertion[0]
       * severity = #error
@@ -138,7 +139,7 @@ The tests declare which specification obligations they cover (7 element obligati
       * human = "AccessProvider replies to DocumentPublisher with status 201 and:"
   * test[+]
     * name = "pub-005 After a 401 the SUT obtains a fresh token before retrying"
-    * description = "Covers security.authorization."
+    * description = "Fixture contract: fixtures/provider-v1/manifest.json, cases.pub-005 (input bindings and expected data). Covers security.authorization."
     * operation = #gherkin/Scenario
     * assertion[0]
       * severity = #error
@@ -155,7 +156,7 @@ The tests declare which specification obligations they cover (7 element obligati
     * file = "eu-api-document-publisher.feature"
   * test[0]
     * name = "pub-006 TLS 1.2 or higher is used for all communications"
-    * description = "Covers security.tls."
+    * description = "Fixture contract: fixtures/provider-v1/manifest.json, cases.pub-006 (input bindings and expected data). Covers security.tls."
     * operation = #gherkin/Scenario
     * assertion[0]
       * severity = #error

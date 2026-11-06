@@ -1,0 +1,1789 @@
+{
+  "fixtureSet": "eu-api-provider-v1",
+  "version": "1.0.0",
+  "fhirVersion": "4.0.1",
+  "bundle": "bundle.json",
+  "bindings": "bindings.example.json",
+  "identifierSystem": "urn:uuid:47df6faa-4581-4545-9f2d-7d8c8db0c3e7",
+  "patientIdentifier": "urn:uuid:47df6faa-4581-4545-9f2d-7d8c8db0c3e7|EU-API-PATIENT-TARGET",
+  "resources": {
+    "patient-target": {
+      "resourceType": "Patient",
+      "id": "eu-api-patient-target",
+      "validationProfiles": [
+        "http://hl7.org/fhir/StructureDefinition/Patient",
+        "http://hl7.eu/fhir/base/StructureDefinition/patient-eu-core"
+      ]
+    },
+    "condition-target": {
+      "resourceType": "Condition",
+      "id": "eu-api-condition-target",
+      "validationProfiles": [
+        "http://hl7.org/fhir/StructureDefinition/Condition"
+      ]
+    },
+    "allergyintolerance-target": {
+      "resourceType": "AllergyIntolerance",
+      "id": "eu-api-allergyintolerance-target",
+      "validationProfiles": [
+        "http://hl7.org/fhir/StructureDefinition/AllergyIntolerance"
+      ]
+    },
+    "observation-target": {
+      "resourceType": "Observation",
+      "id": "eu-api-observation-target",
+      "validationProfiles": [
+        "http://hl7.org/fhir/StructureDefinition/Observation"
+      ]
+    },
+    "diagnosticreport-target": {
+      "resourceType": "DiagnosticReport",
+      "id": "eu-api-diagnosticreport-target",
+      "validationProfiles": [
+        "http://hl7.org/fhir/StructureDefinition/DiagnosticReport"
+      ]
+    },
+    "imagingstudy-target": {
+      "resourceType": "ImagingStudy",
+      "id": "eu-api-imagingstudy-target",
+      "validationProfiles": [
+        "http://hl7.org/fhir/StructureDefinition/ImagingStudy"
+      ]
+    },
+    "medicationrequest-target": {
+      "resourceType": "MedicationRequest",
+      "id": "eu-api-medicationrequest-target",
+      "validationProfiles": [
+        "http://hl7.org/fhir/StructureDefinition/MedicationRequest"
+      ]
+    },
+    "medicationdispense-target": {
+      "resourceType": "MedicationDispense",
+      "id": "eu-api-medicationdispense-target",
+      "validationProfiles": [
+        "http://hl7.org/fhir/StructureDefinition/MedicationDispense"
+      ]
+    },
+    "immunization-target": {
+      "resourceType": "Immunization",
+      "id": "eu-api-immunization-target",
+      "validationProfiles": [
+        "http://hl7.org/fhir/StructureDefinition/Immunization"
+      ]
+    },
+    "medicationstatement-target": {
+      "resourceType": "MedicationStatement",
+      "id": "eu-api-medicationstatement-target",
+      "validationProfiles": [
+        "http://hl7.org/fhir/StructureDefinition/MedicationStatement"
+      ]
+    },
+    "encounter-target": {
+      "resourceType": "Encounter",
+      "id": "eu-api-encounter-target",
+      "validationProfiles": [
+        "http://hl7.org/fhir/StructureDefinition/Encounter"
+      ]
+    },
+    "binary-target": {
+      "resourceType": "Binary",
+      "id": "eu-api-binary-target",
+      "validationProfiles": [
+        "http://hl7.org/fhir/StructureDefinition/Binary"
+      ]
+    },
+    "document-target": {
+      "resourceType": "DocumentReference",
+      "id": "eu-api-document-target",
+      "validationProfiles": [
+        "http://hl7.org/fhir/StructureDefinition/DocumentReference"
+      ]
+    },
+    "patient-control": {
+      "resourceType": "Patient",
+      "id": "eu-api-patient-control",
+      "validationProfiles": [
+        "http://hl7.org/fhir/StructureDefinition/Patient",
+        "http://hl7.eu/fhir/base/StructureDefinition/patient-eu-core"
+      ]
+    },
+    "condition-control": {
+      "resourceType": "Condition",
+      "id": "eu-api-condition-control",
+      "validationProfiles": [
+        "http://hl7.org/fhir/StructureDefinition/Condition"
+      ]
+    },
+    "allergyintolerance-control": {
+      "resourceType": "AllergyIntolerance",
+      "id": "eu-api-allergyintolerance-control",
+      "validationProfiles": [
+        "http://hl7.org/fhir/StructureDefinition/AllergyIntolerance"
+      ]
+    },
+    "observation-control": {
+      "resourceType": "Observation",
+      "id": "eu-api-observation-control",
+      "validationProfiles": [
+        "http://hl7.org/fhir/StructureDefinition/Observation"
+      ]
+    },
+    "diagnosticreport-control": {
+      "resourceType": "DiagnosticReport",
+      "id": "eu-api-diagnosticreport-control",
+      "validationProfiles": [
+        "http://hl7.org/fhir/StructureDefinition/DiagnosticReport"
+      ]
+    },
+    "imagingstudy-control": {
+      "resourceType": "ImagingStudy",
+      "id": "eu-api-imagingstudy-control",
+      "validationProfiles": [
+        "http://hl7.org/fhir/StructureDefinition/ImagingStudy"
+      ]
+    },
+    "medicationrequest-control": {
+      "resourceType": "MedicationRequest",
+      "id": "eu-api-medicationrequest-control",
+      "validationProfiles": [
+        "http://hl7.org/fhir/StructureDefinition/MedicationRequest"
+      ]
+    },
+    "medicationdispense-control": {
+      "resourceType": "MedicationDispense",
+      "id": "eu-api-medicationdispense-control",
+      "validationProfiles": [
+        "http://hl7.org/fhir/StructureDefinition/MedicationDispense"
+      ]
+    },
+    "immunization-control": {
+      "resourceType": "Immunization",
+      "id": "eu-api-immunization-control",
+      "validationProfiles": [
+        "http://hl7.org/fhir/StructureDefinition/Immunization"
+      ]
+    },
+    "medicationstatement-control": {
+      "resourceType": "MedicationStatement",
+      "id": "eu-api-medicationstatement-control",
+      "validationProfiles": [
+        "http://hl7.org/fhir/StructureDefinition/MedicationStatement"
+      ]
+    },
+    "encounter-control": {
+      "resourceType": "Encounter",
+      "id": "eu-api-encounter-control",
+      "validationProfiles": [
+        "http://hl7.org/fhir/StructureDefinition/Encounter"
+      ]
+    },
+    "binary-control": {
+      "resourceType": "Binary",
+      "id": "eu-api-binary-control",
+      "validationProfiles": [
+        "http://hl7.org/fhir/StructureDefinition/Binary"
+      ]
+    },
+    "document-control": {
+      "resourceType": "DocumentReference",
+      "id": "eu-api-document-control",
+      "validationProfiles": [
+        "http://hl7.org/fhir/StructureDefinition/DocumentReference"
+      ]
+    },
+    "document-laboratory": {
+      "resourceType": "DocumentReference",
+      "id": "eu-api-document-laboratory",
+      "validationProfiles": [
+        "http://hl7.org/fhir/StructureDefinition/DocumentReference"
+      ]
+    }
+  },
+  "externalInputs": {
+    "accessToken": "A valid Bearer token for the scenario operations; dap-015/016 require DocumentReference create permission.",
+    "narrowToken": "A valid Bearer token without the scopes required by the negative authorization scenarios."
+  },
+  "searchChecks": {
+    "patient-identifier": {
+      "query": "Patient?identifier=urn:uuid:47df6faa-4581-4545-9f2d-7d8c8db0c3e7|EU-API-PATIENT-TARGET",
+      "resourceType": "Patient",
+      "mustInclude": [
+        "patient-target"
+      ],
+      "mustExclude": [
+        "patient-control"
+      ],
+      "cases": [
+        "dap-011",
+        "grp-011",
+        "rap-005"
+      ]
+    },
+    "patient-id": {
+      "query": "Patient?_id={patientId}",
+      "resourceType": "Patient",
+      "mustInclude": [
+        "patient-target"
+      ],
+      "mustExclude": [
+        "patient-control"
+      ],
+      "cases": [
+        "rap-005"
+      ]
+    },
+    "patient-family": {
+      "query": "Patient?family=EUAPITestpatient",
+      "resourceType": "Patient",
+      "mustInclude": [
+        "patient-target"
+      ],
+      "mustExclude": [
+        "patient-control"
+      ],
+      "cases": [
+        "dap-013",
+        "grp-013",
+        "rap-006"
+      ]
+    },
+    "patient-gender": {
+      "query": "Patient?gender=unknown",
+      "resourceType": "Patient",
+      "mustInclude": [
+        "patient-target"
+      ],
+      "mustExclude": [
+        "patient-control"
+      ],
+      "cases": [
+        "dap-013",
+        "grp-013",
+        "rap-006"
+      ]
+    },
+    "patient-birthdate": {
+      "query": "Patient?birthdate=1990-01-01",
+      "resourceType": "Patient",
+      "mustInclude": [
+        "patient-target"
+      ],
+      "mustExclude": [
+        "patient-control"
+      ],
+      "cases": [
+        "rap-006"
+      ]
+    },
+    "patient-active": {
+      "query": "Patient?active=true&_id={patientId}",
+      "resourceType": "Patient",
+      "mustInclude": [
+        "patient-target"
+      ],
+      "mustExclude": [
+        "patient-control"
+      ],
+      "cases": [
+        "rap-006"
+      ]
+    },
+    "documents-patient": {
+      "query": "DocumentReference?patient={patientId}",
+      "resourceType": "DocumentReference",
+      "mustInclude": [
+        "document-target",
+        "document-laboratory"
+      ],
+      "mustExclude": [
+        "document-control"
+      ],
+      "cases": [
+        "dap-005",
+        "grp-005"
+      ]
+    },
+    "documents-category": {
+      "query": "DocumentReference?category=http://hl7.eu/fhir/health-data-api/CodeSystem/eehrxf-document-priority-category-cs|Patient-Summaries&patient={patientId}",
+      "resourceType": "DocumentReference",
+      "mustInclude": [
+        "document-target"
+      ],
+      "mustExclude": [
+        "document-control",
+        "document-laboratory"
+      ],
+      "cases": [
+        "dap-006",
+        "grp-006"
+      ]
+    },
+    "documents-type": {
+      "query": "DocumentReference?type=http://loinc.org|60591-5&patient={patientId}",
+      "resourceType": "DocumentReference",
+      "mustInclude": [
+        "document-target"
+      ],
+      "mustExclude": [
+        "document-control",
+        "document-laboratory"
+      ],
+      "cases": [
+        "dap-007",
+        "grp-007"
+      ]
+    },
+    "condition-patient": {
+      "query": "Condition?patient={patientId}",
+      "resourceType": "Condition",
+      "mustInclude": [
+        "condition-target"
+      ],
+      "mustExclude": [
+        "condition-control"
+      ],
+      "cases": [
+        "rap-007"
+      ]
+    },
+    "allergyintolerance-patient": {
+      "query": "AllergyIntolerance?patient={patientId}",
+      "resourceType": "AllergyIntolerance",
+      "mustInclude": [
+        "allergyintolerance-target"
+      ],
+      "mustExclude": [
+        "allergyintolerance-control"
+      ],
+      "cases": [
+        "rap-008"
+      ]
+    },
+    "observation-patient": {
+      "query": "Observation?patient={patientId}",
+      "resourceType": "Observation",
+      "mustInclude": [
+        "observation-target"
+      ],
+      "mustExclude": [
+        "observation-control"
+      ],
+      "cases": [
+        "rap-009",
+        "rap-017"
+      ]
+    },
+    "diagnosticreport-patient": {
+      "query": "DiagnosticReport?patient={patientId}",
+      "resourceType": "DiagnosticReport",
+      "mustInclude": [
+        "diagnosticreport-target"
+      ],
+      "mustExclude": [
+        "diagnosticreport-control"
+      ],
+      "cases": [
+        "rap-010"
+      ]
+    },
+    "imagingstudy-patient": {
+      "query": "ImagingStudy?patient={patientId}",
+      "resourceType": "ImagingStudy",
+      "mustInclude": [
+        "imagingstudy-target"
+      ],
+      "mustExclude": [
+        "imagingstudy-control"
+      ],
+      "cases": [
+        "rap-011"
+      ]
+    },
+    "medicationrequest-patient": {
+      "query": "MedicationRequest?patient={patientId}",
+      "resourceType": "MedicationRequest",
+      "mustInclude": [
+        "medicationrequest-target"
+      ],
+      "mustExclude": [
+        "medicationrequest-control"
+      ],
+      "cases": [
+        "rap-012"
+      ]
+    },
+    "medicationdispense-patient": {
+      "query": "MedicationDispense?patient={patientId}",
+      "resourceType": "MedicationDispense",
+      "mustInclude": [
+        "medicationdispense-target"
+      ],
+      "mustExclude": [
+        "medicationdispense-control"
+      ],
+      "cases": [
+        "rap-013"
+      ]
+    },
+    "immunization-patient": {
+      "query": "Immunization?patient={patientId}",
+      "resourceType": "Immunization",
+      "mustInclude": [
+        "immunization-target"
+      ],
+      "mustExclude": [
+        "immunization-control"
+      ],
+      "cases": [
+        "rap-014"
+      ]
+    },
+    "medicationstatement-patient": {
+      "query": "MedicationStatement?patient={patientId}",
+      "resourceType": "MedicationStatement",
+      "mustInclude": [
+        "medicationstatement-target"
+      ],
+      "mustExclude": [
+        "medicationstatement-control"
+      ],
+      "cases": [
+        "rap-015"
+      ]
+    },
+    "encounter-patient": {
+      "query": "Encounter?patient={patientId}",
+      "resourceType": "Encounter",
+      "mustInclude": [
+        "encounter-target"
+      ],
+      "mustExclude": [
+        "encounter-control"
+      ],
+      "cases": [
+        "rap-016"
+      ]
+    }
+  },
+  "cases": {
+    "dap-001": {
+      "title": "dap-001 The CapabilityStatement declares DocumentReference and Binary",
+      "feature": "eu-api-document-access-provider.feature",
+      "fixtureUse": "none",
+      "fixtureKeys": [],
+      "inputNames": [],
+      "searchChecks": [],
+      "assertions": [
+        "$response.status should be 200",
+        "$capability at \"CapabilityStatement.rest.where(mode='server').resource.where(type='DocumentReference').interaction.where(code='search-type').exists()\" should be true",
+        "$capability at \"CapabilityStatement.rest.where(mode='server').resource.where(type='DocumentReference').interaction.where(code='read').exists()\" should be true",
+        "$capability at \"CapabilityStatement.rest.where(mode='server').resource.where(type='Binary').interaction.where(code='read').exists()\" should be true"
+      ],
+      "expected": "No fixture or token required. The live server must declare the capabilities named by the assertions."
+    },
+    "dap-002": {
+      "title": "dap-002 The CapabilityStatement declares SMART on FHIR security",
+      "feature": "eu-api-document-access-provider.feature",
+      "fixtureUse": "none",
+      "fixtureKeys": [],
+      "inputNames": [],
+      "searchChecks": [],
+      "assertions": [
+        "$response.status should be 200",
+        "$capability at \"CapabilityStatement.rest.where(mode='server').security.service.coding.where(code='SMART-on-FHIR').exists()\" should be true"
+      ],
+      "expected": "No fixture or token required. The live server must declare the capabilities named by the assertions."
+    },
+    "dap-003": {
+      "title": "dap-003 A request without a token is refused",
+      "feature": "eu-api-document-access-provider.feature",
+      "fixtureUse": "provider-v1",
+      "fixtureKeys": [
+        "patient-target"
+      ],
+      "inputNames": [
+        "patientId"
+      ],
+      "searchChecks": [],
+      "assertions": [
+        "$response.status should be 401"
+      ],
+      "expected": "Reject the request with the status in the assertions. Authorization and scope configuration are external prerequisites, not fixture resources."
+    },
+    "dap-004": {
+      "title": "dap-004 A token with no usable scope is refused",
+      "feature": "eu-api-document-access-provider.feature",
+      "fixtureUse": "provider-v1",
+      "fixtureKeys": [
+        "patient-target"
+      ],
+      "inputNames": [
+        "narrowToken",
+        "patientId"
+      ],
+      "searchChecks": [],
+      "assertions": [
+        "$response.status should be one of \"401, 403\""
+      ],
+      "expected": "Reject the request with the status in the assertions. Authorization and scope configuration are external prerequisites, not fixture resources."
+    },
+    "dap-005": {
+      "title": "dap-005 Search by patient returns a searchset of conformant DocumentReferences",
+      "feature": "eu-api-document-access-provider.feature",
+      "fixtureUse": "provider-v1",
+      "fixtureKeys": [
+        "patient-target",
+        "document-target",
+        "document-laboratory",
+        "document-control",
+        "binary-target",
+        "patient-control",
+        "binary-control"
+      ],
+      "inputNames": [
+        "accessToken",
+        "patientId"
+      ],
+      "searchChecks": [
+        "documents-patient"
+      ],
+      "assertions": [
+        "$response.status should be 200",
+        "$found at \"Bundle.type\" should be \"searchset\"",
+        "$found at \"Bundle.entry.resource.ofType(DocumentReference).exists()\" should be true",
+        "$found at \"Bundle.entry.resource.ofType(DocumentReference).all(status = 'current' or status = 'superseded' or status = 'entered-in-error')\" should be true",
+        "$found at \"Bundle.entry.resource.ofType(DocumentReference).all(content.attachment.exists())\" should be true"
+      ],
+      "expected": "The searches must include and exclude the fixture resources specified in searchChecks. Extra unrelated server data is allowed only if it matches the query."
+    },
+    "dap-006": {
+      "title": "dap-006 Search by EEHRxF priority category",
+      "feature": "eu-api-document-access-provider.feature",
+      "fixtureUse": "provider-v1",
+      "fixtureKeys": [
+        "patient-target",
+        "document-target",
+        "document-control",
+        "document-laboratory",
+        "binary-target",
+        "patient-control",
+        "binary-control"
+      ],
+      "inputNames": [
+        "accessToken",
+        "patientId"
+      ],
+      "searchChecks": [
+        "documents-category"
+      ],
+      "assertions": [
+        "$response.status should be 200",
+        "$byCategory at \"Bundle.type\" should be \"searchset\"",
+        "$byCategory at \"Bundle.entry.resource.ofType(DocumentReference).all(category.coding.where(code='Patient-Summaries').exists())\" should be true"
+      ],
+      "expected": "The searches must include and exclude the fixture resources specified in searchChecks. Extra unrelated server data is allowed only if it matches the query."
+    },
+    "dap-007": {
+      "title": "dap-007 Search by LOINC document type",
+      "feature": "eu-api-document-access-provider.feature",
+      "fixtureUse": "provider-v1",
+      "fixtureKeys": [
+        "patient-target",
+        "document-target",
+        "document-control",
+        "document-laboratory",
+        "binary-target",
+        "patient-control",
+        "binary-control"
+      ],
+      "inputNames": [
+        "accessToken",
+        "patientId"
+      ],
+      "searchChecks": [
+        "documents-type"
+      ],
+      "assertions": [
+        "$response.status should be 200",
+        "$byType at \"Bundle.type\" should be \"searchset\"",
+        "$byType at \"Bundle.entry.resource.ofType(DocumentReference).all(type.coding.where(system='http://loinc.org' and code='60591-5').exists())\" should be true"
+      ],
+      "expected": "The searches must include and exclude the fixture resources specified in searchChecks. Extra unrelated server data is allowed only if it matches the query."
+    },
+    "dap-008": {
+      "title": "dap-008 Read a DocumentReference by id",
+      "feature": "eu-api-document-access-provider.feature",
+      "fixtureUse": "provider-v1",
+      "fixtureKeys": [
+        "document-target",
+        "patient-target",
+        "binary-target"
+      ],
+      "inputNames": [
+        "accessToken",
+        "documentId"
+      ],
+      "searchChecks": [],
+      "assertions": [
+        "$response.status should be 200",
+        "$docRef at \"DocumentReference.id\" should be \"$documentId\"",
+        "$docRef at \"DocumentReference.subject.exists()\" should be true",
+        "$docRef at \"DocumentReference.content.attachment.contentType.exists()\" should be true"
+      ],
+      "expected": "Read the bound target DocumentReference: current, type 60591-5, category Patient-Summaries, subject target patient and attachment URL pointing to the target Binary."
+    },
+    "dap-009": {
+      "title": "dap-009 An unknown DocumentReference id gives 404 and an OperationOutcome",
+      "feature": "eu-api-document-access-provider.feature",
+      "fixtureUse": "none",
+      "fixtureKeys": [],
+      "inputNames": [
+        "accessToken"
+      ],
+      "searchChecks": [],
+      "assertions": [
+        "$response.status should be 404",
+        "$missing at \"OperationOutcome.issue.exists()\" should be true"
+      ],
+      "expected": "The reserved otb-no-such-* identifier in the feature must not exist; expect 404 and an OperationOutcome."
+    },
+    "dap-010": {
+      "title": "dap-010 Read the document content as a Binary",
+      "feature": "eu-api-document-access-provider.feature",
+      "fixtureUse": "provider-v1",
+      "fixtureKeys": [
+        "binary-target",
+        "patient-target"
+      ],
+      "inputNames": [
+        "accessToken",
+        "binaryId"
+      ],
+      "searchChecks": [],
+      "assertions": [
+        "$response.status should be 200",
+        "$response.body should not be empty"
+      ],
+      "expected": "Read the bound target Binary. Its content type is text/plain and decoded data matches the bundled synthetic target document."
+    },
+    "dap-011": {
+      "title": "dap-011 Search Patient by identifier",
+      "feature": "eu-api-document-access-provider.feature",
+      "fixtureUse": "provider-v1",
+      "fixtureKeys": [
+        "patient-target",
+        "patient-control"
+      ],
+      "inputNames": [
+        "accessToken",
+        "patientIdentifier"
+      ],
+      "searchChecks": [
+        "patient-identifier"
+      ],
+      "assertions": [
+        "$response.status should be 200",
+        "$patients at \"Bundle.type\" should be \"searchset\"",
+        "$patients at \"Bundle.entry.resource.ofType(Patient).count() >= 1\" should be true",
+        "$patients should conform to \"http://hl7.org/fhir/StructureDefinition/Bundle\" ignoring slicing errors"
+      ],
+      "expected": "The searches must include and exclude the fixture resources specified in searchChecks. Extra unrelated server data is allowed only if it matches the query."
+    },
+    "dap-012": {
+      "title": "dap-012 Read Patient by id and conform to patient-eu-core",
+      "feature": "eu-api-document-access-provider.feature",
+      "fixtureUse": "provider-v1",
+      "fixtureKeys": [
+        "patient-target"
+      ],
+      "inputNames": [
+        "accessToken",
+        "patientId"
+      ],
+      "searchChecks": [],
+      "assertions": [
+        "$response.status should be 200",
+        "$patient should conform to \"http://hl7.eu/fhir/base/StructureDefinition/patient-eu-core\" ignoring slicing errors"
+      ],
+      "expected": "Read the bound target patient: active, Synthetic EUAPITestpatient, gender unknown, birth date 1990-01-01, and the declared fixture identifier."
+    },
+    "dap-013": {
+      "title": "dap-013 Search Patient by demographics the reference patient has",
+      "feature": "eu-api-document-access-provider.feature",
+      "fixtureUse": "provider-v1",
+      "fixtureKeys": [
+        "patient-target",
+        "patient-control"
+      ],
+      "inputNames": [
+        "accessToken",
+        "patientId"
+      ],
+      "searchChecks": [
+        "patient-family",
+        "patient-gender"
+      ],
+      "assertions": [
+        "$response.status should be 200",
+        "extract \"/name/0/family\" from $response.body as $family",
+        "extract \"/gender\" from $response.body as $gender",
+        "$response.status should be 200",
+        "$byFamily at \"Bundle.entry.resource.ofType(Patient).exists()\" should be true",
+        "$response.status should be 200",
+        "$byGender at \"Bundle.entry.resource.ofType(Patient).exists()\" should be true"
+      ],
+      "expected": "The searches must include and exclude the fixture resources specified in searchChecks. Extra unrelated server data is allowed only if it matches the query."
+    },
+    "dap-014": {
+      "title": "dap-014 The CapabilityStatement declares create on DocumentReference",
+      "feature": "eu-api-document-access-provider.feature",
+      "fixtureUse": "none",
+      "fixtureKeys": [],
+      "inputNames": [],
+      "searchChecks": [],
+      "assertions": [
+        "$response.status should be 200",
+        "$capability at \"CapabilityStatement.rest.where(mode='server').resource.where(type='DocumentReference').interaction.where(code='create').exists()\" should be true"
+      ],
+      "expected": "No fixture or token required. The live server must declare the capabilities named by the assertions."
+    },
+    "dap-015": {
+      "title": "dap-015 A Simplified Publish with embedded content is accepted and then findable",
+      "feature": "eu-api-document-access-provider.feature",
+      "fixtureUse": "provider-v1",
+      "fixtureKeys": [
+        "patient-target"
+      ],
+      "inputNames": [
+        "accessToken",
+        "submitPatientRef"
+      ],
+      "searchChecks": [],
+      "assertions": [
+        "$response.status should be 201",
+        "$response.headers.Location should not be empty"
+      ],
+      "expected": "Create a new document for the bound target patient, return 201 and Location. This changes server state; the fixture search expectations are inclusion/exclusion checks, not global exact counts."
+    },
+    "dap-016": {
+      "title": "dap-016 A submission without content is refused",
+      "feature": "eu-api-document-access-provider.feature",
+      "fixtureUse": "none",
+      "fixtureKeys": [],
+      "inputNames": [
+        "accessToken"
+      ],
+      "searchChecks": [],
+      "assertions": [
+        "$response.status should be one of \"400, 422\""
+      ],
+      "expected": "Reject the malformed submission with 400 or 422. No invalid resource is preloaded."
+    },
+    "dap-017": {
+      "title": "dap-017 A submission with a token that cannot create is refused",
+      "feature": "eu-api-document-access-provider.feature",
+      "fixtureUse": "none",
+      "fixtureKeys": [],
+      "inputNames": [
+        "narrowToken"
+      ],
+      "searchChecks": [],
+      "assertions": [
+        "$response.status should be one of \"401, 403\""
+      ],
+      "expected": "Reject the request with the status in the assertions. Authorization and scope configuration are external prerequisites, not fixture resources."
+    },
+    "con-001": {
+      "title": "con-001 The SUT authenticates with a signed JWT client assertion (RFC 7523)",
+      "feature": "eu-api-document-consumer.feature",
+      "fixtureUse": "embedded-client-workflow",
+      "fixtureKeys": [],
+      "inputNames": [],
+      "searchChecks": [],
+      "assertions": [
+        "$received.method should be \"POST\"",
+        "$received.body should contain \"grant_type=client_credentials\"",
+        "$received.body should contain \"client_assertion_type=urn%3Aietf%3Aparams%3Aoauth%3Aclient-assertion-type%3Ajwt-bearer\"",
+        "$received.body should contain \"client_assertion=\"",
+        "$received.body should contain \"scope=\"",
+        "AccessProvider replies to DocumentConsumer with status 200 and:"
+      ],
+      "expected": "The test bed supplies the canned responses in the feature; configure the client to perform the requested workflow. Provider preload is not used."
+    },
+    "con-002": {
+      "title": "con-002 The SUT searches Patient by the identifier parameter",
+      "feature": "eu-api-document-consumer.feature",
+      "fixtureUse": "embedded-client-workflow",
+      "fixtureKeys": [],
+      "inputNames": [],
+      "searchChecks": [],
+      "assertions": [
+        "$received.method should be \"GET\"",
+        "$received.path should contain \"/Patient\"",
+        "$received.path should contain \"identifier=\"",
+        "$received.headers.Authorization should contain \"Bearer\"",
+        "AccessProvider replies to DocumentConsumer with status 200 and:"
+      ],
+      "expected": "The test bed supplies the canned responses in the feature; configure the client to perform the requested workflow. Provider preload is not used."
+    },
+    "con-003": {
+      "title": "con-003 The SUT searches DocumentReference by patient",
+      "feature": "eu-api-document-consumer.feature",
+      "fixtureUse": "embedded-client-workflow",
+      "fixtureKeys": [],
+      "inputNames": [],
+      "searchChecks": [],
+      "assertions": [
+        "$received.method should be \"GET\"",
+        "$received.path should contain \"/DocumentReference\"",
+        "$received.path should contain \"patient=\"",
+        "$received.headers.Authorization should contain \"Bearer\"",
+        "AccessProvider replies to DocumentConsumer with status 200 and:"
+      ],
+      "expected": "The test bed supplies the canned responses in the feature; configure the client to perform the requested workflow. Provider preload is not used."
+    },
+    "con-004": {
+      "title": "con-004 The SUT can narrow the search by category or type",
+      "feature": "eu-api-document-consumer.feature",
+      "fixtureUse": "embedded-client-workflow",
+      "fixtureKeys": [],
+      "inputNames": [],
+      "searchChecks": [],
+      "assertions": [
+        "$received.method should be \"GET\"",
+        "$received.path should contain \"/DocumentReference\"",
+        "$received.path should contain \"patient=\"",
+        "$received.path should contain \"type=\"",
+        "AccessProvider replies to DocumentConsumer with status 200 and:"
+      ],
+      "expected": "The test bed supplies the canned responses in the feature; configure the client to perform the requested workflow. Provider preload is not used."
+    },
+    "con-005": {
+      "title": "con-005 The SUT retrieves the document content with a bearer token",
+      "feature": "eu-api-document-consumer.feature",
+      "fixtureUse": "embedded-client-workflow",
+      "fixtureKeys": [],
+      "inputNames": [],
+      "searchChecks": [],
+      "assertions": [
+        "$received.method should be \"GET\"",
+        "$received.path should contain \"Binary/\"",
+        "$received.headers.Authorization should contain \"Bearer\"",
+        "AccessProvider replies to DocumentConsumer with status 200 and:"
+      ],
+      "expected": "The test bed supplies the canned responses in the feature; configure the client to perform the requested workflow. Provider preload is not used."
+    },
+    "con-006": {
+      "title": "con-006 TLS 1.2 or higher is used for all communications",
+      "feature": "eu-api-document-consumer.feature",
+      "fixtureUse": "embedded-client-workflow",
+      "fixtureKeys": [],
+      "inputNames": [],
+      "searchChecks": [],
+      "assertions": [
+        "DocumentConsumer confirms each of these is accepted for \"the connection\":"
+      ],
+      "expected": "The test bed supplies the canned responses in the feature; configure the client to perform the requested workflow. Provider preload is not used."
+    },
+    "grp-001": {
+      "title": "grp-001 The CapabilityStatement declares DocumentReference and Binary",
+      "feature": "eu-api-document-publisher-access-provider.feature",
+      "fixtureUse": "none",
+      "fixtureKeys": [],
+      "inputNames": [],
+      "searchChecks": [],
+      "assertions": [
+        "$response.status should be 200",
+        "$capability at \"CapabilityStatement.rest.where(mode='server').resource.where(type='DocumentReference').interaction.where(code='search-type').exists()\" should be true",
+        "$capability at \"CapabilityStatement.rest.where(mode='server').resource.where(type='DocumentReference').interaction.where(code='read').exists()\" should be true",
+        "$capability at \"CapabilityStatement.rest.where(mode='server').resource.where(type='Binary').interaction.where(code='read').exists()\" should be true"
+      ],
+      "expected": "No fixture or token required. The live server must declare the capabilities named by the assertions."
+    },
+    "grp-002": {
+      "title": "grp-002 The CapabilityStatement declares SMART on FHIR security",
+      "feature": "eu-api-document-publisher-access-provider.feature",
+      "fixtureUse": "none",
+      "fixtureKeys": [],
+      "inputNames": [],
+      "searchChecks": [],
+      "assertions": [
+        "$response.status should be 200",
+        "$capability at \"CapabilityStatement.rest.where(mode='server').security.service.coding.where(code='SMART-on-FHIR').exists()\" should be true"
+      ],
+      "expected": "No fixture or token required. The live server must declare the capabilities named by the assertions."
+    },
+    "grp-003": {
+      "title": "grp-003 A request without a token is refused",
+      "feature": "eu-api-document-publisher-access-provider.feature",
+      "fixtureUse": "provider-v1",
+      "fixtureKeys": [
+        "patient-target"
+      ],
+      "inputNames": [
+        "patientId"
+      ],
+      "searchChecks": [],
+      "assertions": [
+        "$response.status should be 401"
+      ],
+      "expected": "Reject the request with the status in the assertions. Authorization and scope configuration are external prerequisites, not fixture resources."
+    },
+    "grp-004": {
+      "title": "grp-004 A token with no usable scope is refused",
+      "feature": "eu-api-document-publisher-access-provider.feature",
+      "fixtureUse": "provider-v1",
+      "fixtureKeys": [
+        "patient-target"
+      ],
+      "inputNames": [
+        "narrowToken",
+        "patientId"
+      ],
+      "searchChecks": [],
+      "assertions": [
+        "$response.status should be one of \"401, 403\""
+      ],
+      "expected": "Reject the request with the status in the assertions. Authorization and scope configuration are external prerequisites, not fixture resources."
+    },
+    "grp-005": {
+      "title": "grp-005 Search by patient returns a searchset of conformant DocumentReferences",
+      "feature": "eu-api-document-publisher-access-provider.feature",
+      "fixtureUse": "provider-v1",
+      "fixtureKeys": [
+        "patient-target",
+        "document-target",
+        "document-laboratory",
+        "document-control",
+        "binary-target",
+        "patient-control",
+        "binary-control"
+      ],
+      "inputNames": [
+        "accessToken",
+        "patientId"
+      ],
+      "searchChecks": [
+        "documents-patient"
+      ],
+      "assertions": [
+        "$response.status should be 200",
+        "$found at \"Bundle.type\" should be \"searchset\"",
+        "$found at \"Bundle.entry.resource.ofType(DocumentReference).exists()\" should be true",
+        "$found at \"Bundle.entry.resource.ofType(DocumentReference).all(status = 'current' or status = 'superseded' or status = 'entered-in-error')\" should be true",
+        "$found at \"Bundle.entry.resource.ofType(DocumentReference).all(content.attachment.exists())\" should be true"
+      ],
+      "expected": "The searches must include and exclude the fixture resources specified in searchChecks. Extra unrelated server data is allowed only if it matches the query."
+    },
+    "grp-006": {
+      "title": "grp-006 Search by EEHRxF priority category",
+      "feature": "eu-api-document-publisher-access-provider.feature",
+      "fixtureUse": "provider-v1",
+      "fixtureKeys": [
+        "patient-target",
+        "document-target",
+        "document-control",
+        "document-laboratory",
+        "binary-target",
+        "patient-control",
+        "binary-control"
+      ],
+      "inputNames": [
+        "accessToken",
+        "patientId"
+      ],
+      "searchChecks": [
+        "documents-category"
+      ],
+      "assertions": [
+        "$response.status should be 200",
+        "$byCategory at \"Bundle.type\" should be \"searchset\"",
+        "$byCategory at \"Bundle.entry.resource.ofType(DocumentReference).all(category.coding.where(code='Patient-Summaries').exists())\" should be true"
+      ],
+      "expected": "The searches must include and exclude the fixture resources specified in searchChecks. Extra unrelated server data is allowed only if it matches the query."
+    },
+    "grp-007": {
+      "title": "grp-007 Search by LOINC document type",
+      "feature": "eu-api-document-publisher-access-provider.feature",
+      "fixtureUse": "provider-v1",
+      "fixtureKeys": [
+        "patient-target",
+        "document-target",
+        "document-control",
+        "document-laboratory",
+        "binary-target",
+        "patient-control",
+        "binary-control"
+      ],
+      "inputNames": [
+        "accessToken",
+        "patientId"
+      ],
+      "searchChecks": [
+        "documents-type"
+      ],
+      "assertions": [
+        "$response.status should be 200",
+        "$byType at \"Bundle.type\" should be \"searchset\"",
+        "$byType at \"Bundle.entry.resource.ofType(DocumentReference).all(type.coding.where(system='http://loinc.org' and code='60591-5').exists())\" should be true"
+      ],
+      "expected": "The searches must include and exclude the fixture resources specified in searchChecks. Extra unrelated server data is allowed only if it matches the query."
+    },
+    "grp-008": {
+      "title": "grp-008 Read a DocumentReference by id",
+      "feature": "eu-api-document-publisher-access-provider.feature",
+      "fixtureUse": "provider-v1",
+      "fixtureKeys": [
+        "document-target",
+        "patient-target",
+        "binary-target"
+      ],
+      "inputNames": [
+        "accessToken",
+        "documentId"
+      ],
+      "searchChecks": [],
+      "assertions": [
+        "$response.status should be 200",
+        "$docRef at \"DocumentReference.id\" should be \"$documentId\"",
+        "$docRef at \"DocumentReference.subject.exists()\" should be true",
+        "$docRef at \"DocumentReference.content.attachment.contentType.exists()\" should be true"
+      ],
+      "expected": "Read the bound target DocumentReference: current, type 60591-5, category Patient-Summaries, subject target patient and attachment URL pointing to the target Binary."
+    },
+    "grp-009": {
+      "title": "grp-009 An unknown DocumentReference id gives 404 and an OperationOutcome",
+      "feature": "eu-api-document-publisher-access-provider.feature",
+      "fixtureUse": "none",
+      "fixtureKeys": [],
+      "inputNames": [
+        "accessToken"
+      ],
+      "searchChecks": [],
+      "assertions": [
+        "$response.status should be 404",
+        "$missing at \"OperationOutcome.issue.exists()\" should be true"
+      ],
+      "expected": "The reserved otb-no-such-* identifier in the feature must not exist; expect 404 and an OperationOutcome."
+    },
+    "grp-010": {
+      "title": "grp-010 Read the document content as a Binary",
+      "feature": "eu-api-document-publisher-access-provider.feature",
+      "fixtureUse": "provider-v1",
+      "fixtureKeys": [
+        "binary-target",
+        "patient-target"
+      ],
+      "inputNames": [
+        "accessToken",
+        "binaryId"
+      ],
+      "searchChecks": [],
+      "assertions": [
+        "$response.status should be 200",
+        "$response.body should not be empty"
+      ],
+      "expected": "Read the bound target Binary. Its content type is text/plain and decoded data matches the bundled synthetic target document."
+    },
+    "grp-011": {
+      "title": "grp-011 Search Patient by identifier",
+      "feature": "eu-api-document-publisher-access-provider.feature",
+      "fixtureUse": "provider-v1",
+      "fixtureKeys": [
+        "patient-target",
+        "patient-control"
+      ],
+      "inputNames": [
+        "accessToken",
+        "patientIdentifier"
+      ],
+      "searchChecks": [
+        "patient-identifier"
+      ],
+      "assertions": [
+        "$response.status should be 200",
+        "$patients at \"Bundle.type\" should be \"searchset\"",
+        "$patients at \"Bundle.entry.resource.ofType(Patient).count() >= 1\" should be true",
+        "$patients should conform to \"http://hl7.org/fhir/StructureDefinition/Bundle\" ignoring slicing errors"
+      ],
+      "expected": "The searches must include and exclude the fixture resources specified in searchChecks. Extra unrelated server data is allowed only if it matches the query."
+    },
+    "grp-012": {
+      "title": "grp-012 Read Patient by id and conform to patient-eu-core",
+      "feature": "eu-api-document-publisher-access-provider.feature",
+      "fixtureUse": "provider-v1",
+      "fixtureKeys": [
+        "patient-target"
+      ],
+      "inputNames": [
+        "accessToken",
+        "patientId"
+      ],
+      "searchChecks": [],
+      "assertions": [
+        "$response.status should be 200",
+        "$patient should conform to \"http://hl7.eu/fhir/base/StructureDefinition/patient-eu-core\" ignoring slicing errors"
+      ],
+      "expected": "Read the bound target patient: active, Synthetic EUAPITestpatient, gender unknown, birth date 1990-01-01, and the declared fixture identifier."
+    },
+    "grp-013": {
+      "title": "grp-013 Search Patient by demographics the reference patient has",
+      "feature": "eu-api-document-publisher-access-provider.feature",
+      "fixtureUse": "provider-v1",
+      "fixtureKeys": [
+        "patient-target",
+        "patient-control"
+      ],
+      "inputNames": [
+        "accessToken",
+        "patientId"
+      ],
+      "searchChecks": [
+        "patient-family",
+        "patient-gender"
+      ],
+      "assertions": [
+        "$response.status should be 200",
+        "extract \"/name/0/family\" from $response.body as $family",
+        "extract \"/gender\" from $response.body as $gender",
+        "$response.status should be 200",
+        "$byFamily at \"Bundle.entry.resource.ofType(Patient).exists()\" should be true",
+        "$response.status should be 200",
+        "$byGender at \"Bundle.entry.resource.ofType(Patient).exists()\" should be true"
+      ],
+      "expected": "The searches must include and exclude the fixture resources specified in searchChecks. Extra unrelated server data is allowed only if it matches the query."
+    },
+    "pub-001": {
+      "title": "pub-001 The SUT authenticates with a signed JWT client assertion (RFC 7523)",
+      "feature": "eu-api-document-publisher.feature",
+      "fixtureUse": "embedded-client-workflow",
+      "fixtureKeys": [],
+      "inputNames": [],
+      "searchChecks": [],
+      "assertions": [
+        "$received.method should be \"POST\"",
+        "$received.body should contain \"grant_type=client_credentials\"",
+        "$received.body should contain \"client_assertion_type=urn%3Aietf%3Aparams%3Aoauth%3Aclient-assertion-type%3Ajwt-bearer\"",
+        "$received.body should contain \"client_assertion=\"",
+        "$received.body should contain \"scope=\"",
+        "AccessProvider replies to DocumentPublisher with status 200 and:"
+      ],
+      "expected": "The test bed supplies the canned responses in the feature; configure the client to perform the requested workflow. Provider preload is not used."
+    },
+    "pub-002": {
+      "title": "pub-002 The SUT looks the patient up by identifier with a bearer token",
+      "feature": "eu-api-document-publisher.feature",
+      "fixtureUse": "embedded-client-workflow",
+      "fixtureKeys": [],
+      "inputNames": [],
+      "searchChecks": [],
+      "assertions": [
+        "$received.method should be \"GET\"",
+        "$received.path should contain \"/Patient\"",
+        "$received.path should contain \"identifier=\"",
+        "$received.headers.Authorization should contain \"Bearer\"",
+        "AccessProvider replies to DocumentPublisher with status 200 and:"
+      ],
+      "expected": "The test bed supplies the canned responses in the feature; configure the client to perform the requested workflow. Provider preload is not used."
+    },
+    "pub-003": {
+      "title": "pub-003 The SUT creates a DocumentReference with the document embedded",
+      "feature": "eu-api-document-publisher.feature",
+      "fixtureUse": "embedded-client-workflow",
+      "fixtureKeys": [],
+      "inputNames": [],
+      "searchChecks": [],
+      "assertions": [
+        "$received.method should be \"POST\"",
+        "$received.path should contain \"/DocumentReference\"",
+        "$received.headers.Authorization should contain \"Bearer\"",
+        "$received.body at \"DocumentReference.resourceType\" should be \"DocumentReference\"",
+        "$received.body at \"DocumentReference.content.attachment.data.exists()\" should be true",
+        "$received.body at \"DocumentReference.subject.exists()\" should be true",
+        "$received.body should conform to \"https://profiles.ihe.net/ITI/MHD/StructureDefinition/IHE.MHD.SimplifiedPublish.DocumentReference\" ignoring slicing errors",
+        "AccessProvider replies to DocumentPublisher with status 201 and:"
+      ],
+      "expected": "The test bed supplies the canned responses in the feature; configure the client to perform the requested workflow. Provider preload is not used."
+    },
+    "pub-004": {
+      "title": "pub-004 The SUT publishes only the minimal metadata profile it claims",
+      "feature": "eu-api-document-publisher.feature",
+      "fixtureUse": "embedded-client-workflow",
+      "fixtureKeys": [],
+      "inputNames": [],
+      "searchChecks": [],
+      "assertions": [
+        "$received.body should conform to \"https://profiles.ihe.net/ITI/MHD/StructureDefinition/IHE.MHD.Minimal.DocumentReference\" ignoring slicing errors",
+        "AccessProvider replies to DocumentPublisher with status 201 and:"
+      ],
+      "expected": "The test bed supplies the canned responses in the feature; configure the client to perform the requested workflow. Provider preload is not used."
+    },
+    "pub-005": {
+      "title": "pub-005 After a 401 the SUT obtains a fresh token before retrying",
+      "feature": "eu-api-document-publisher.feature",
+      "fixtureUse": "embedded-client-workflow",
+      "fixtureKeys": [],
+      "inputNames": [],
+      "searchChecks": [],
+      "assertions": [
+        "$received.method should be \"POST\"",
+        "AccessProvider replies to DocumentPublisher with status 401 and:"
+      ],
+      "expected": "The test bed supplies the canned responses in the feature; configure the client to perform the requested workflow. Provider preload is not used."
+    },
+    "pub-006": {
+      "title": "pub-006 TLS 1.2 or higher is used for all communications",
+      "feature": "eu-api-document-publisher.feature",
+      "fixtureUse": "embedded-client-workflow",
+      "fixtureKeys": [],
+      "inputNames": [],
+      "searchChecks": [],
+      "assertions": [
+        "DocumentPublisher confirms each of these is accepted for \"the connection\":"
+      ],
+      "expected": "The test bed supplies the canned responses in the feature; configure the client to perform the requested workflow. Provider preload is not used."
+    },
+    "rap-001": {
+      "title": "rap-001 The CapabilityStatement declares Patient read and search and SMART security",
+      "feature": "eu-api-resource-access-provider.feature",
+      "fixtureUse": "none",
+      "fixtureKeys": [],
+      "inputNames": [],
+      "searchChecks": [],
+      "assertions": [
+        "$response.status should be 200",
+        "$capability at \"CapabilityStatement.rest.where(mode='server').resource.where(type='Patient').interaction.where(code='read').exists()\" should be true",
+        "$capability at \"CapabilityStatement.rest.where(mode='server').resource.where(type='Patient').interaction.where(code='search-type').exists()\" should be true",
+        "$capability at \"CapabilityStatement.rest.where(mode='server').security.service.coding.where(code='SMART-on-FHIR').exists()\" should be true"
+      ],
+      "expected": "No fixture or token required. The live server must declare the capabilities named by the assertions."
+    },
+    "rap-002": {
+      "title": "rap-002 A request without a token is refused",
+      "feature": "eu-api-resource-access-provider.feature",
+      "fixtureUse": "provider-v1",
+      "fixtureKeys": [
+        "patient-target"
+      ],
+      "inputNames": [
+        "patientIdentifier"
+      ],
+      "searchChecks": [],
+      "assertions": [
+        "$response.status should be 401"
+      ],
+      "expected": "Reject the request with the status in the assertions. Authorization and scope configuration are external prerequisites, not fixture resources."
+    },
+    "rap-003": {
+      "title": "rap-003 A token with no usable scope is refused",
+      "feature": "eu-api-resource-access-provider.feature",
+      "fixtureUse": "provider-v1",
+      "fixtureKeys": [
+        "patient-target"
+      ],
+      "inputNames": [
+        "narrowToken",
+        "patientId"
+      ],
+      "searchChecks": [],
+      "assertions": [
+        "$response.status should be one of \"401, 403\""
+      ],
+      "expected": "Reject the request with the status in the assertions. Authorization and scope configuration are external prerequisites, not fixture resources."
+    },
+    "rap-004": {
+      "title": "rap-004 Read the patient and conform to patient-eu-core",
+      "feature": "eu-api-resource-access-provider.feature",
+      "fixtureUse": "provider-v1",
+      "fixtureKeys": [
+        "patient-target"
+      ],
+      "inputNames": [
+        "accessToken",
+        "patientId"
+      ],
+      "searchChecks": [],
+      "assertions": [
+        "$response.status should be 200",
+        "$patient should conform to \"http://hl7.eu/fhir/base/StructureDefinition/patient-eu-core\" ignoring slicing errors"
+      ],
+      "expected": "Read the bound target patient: active, Synthetic EUAPITestpatient, gender unknown, birth date 1990-01-01, and the declared fixture identifier."
+    },
+    "rap-005": {
+      "title": "rap-005 Search Patient by identifier and by _id",
+      "feature": "eu-api-resource-access-provider.feature",
+      "fixtureUse": "provider-v1",
+      "fixtureKeys": [
+        "patient-target",
+        "patient-control"
+      ],
+      "inputNames": [
+        "accessToken",
+        "patientIdentifier",
+        "patientId"
+      ],
+      "searchChecks": [
+        "patient-identifier",
+        "patient-id"
+      ],
+      "assertions": [
+        "$response.status should be 200",
+        "$byIdentifier at \"Bundle.type\" should be \"searchset\"",
+        "$byIdentifier at \"Bundle.entry.resource.ofType(Patient).count() >= 1\" should be true",
+        "$response.status should be 200",
+        "$byId at \"Bundle.entry.resource.ofType(Patient).count() = 1\" should be true"
+      ],
+      "expected": "The searches must include and exclude the fixture resources specified in searchChecks. Extra unrelated server data is allowed only if it matches the query."
+    },
+    "rap-006": {
+      "title": "rap-006 Search Patient by the demographics the reference patient carries",
+      "feature": "eu-api-resource-access-provider.feature",
+      "fixtureUse": "provider-v1",
+      "fixtureKeys": [
+        "patient-target",
+        "patient-control"
+      ],
+      "inputNames": [
+        "accessToken",
+        "patientId"
+      ],
+      "searchChecks": [
+        "patient-family",
+        "patient-gender",
+        "patient-birthdate",
+        "patient-active"
+      ],
+      "assertions": [
+        "$response.status should be 200",
+        "extract \"/name/0/family\" from $response.body as $family",
+        "extract \"/gender\" from $response.body as $gender",
+        "extract \"/birthDate\" from $response.body as $birthdate",
+        "$response.status should be 200",
+        "$byFamily at \"Bundle.entry.resource.ofType(Patient).exists()\" should be true",
+        "$response.status should be 200",
+        "$byGender at \"Bundle.entry.resource.ofType(Patient).exists()\" should be true",
+        "$response.status should be 200",
+        "$byBirth at \"Bundle.entry.resource.ofType(Patient).exists()\" should be true",
+        "$response.status should be 200",
+        "$byActive at \"Bundle.type\" should be \"searchset\""
+      ],
+      "expected": "The searches must include and exclude the fixture resources specified in searchChecks. Extra unrelated server data is allowed only if it matches the query."
+    },
+    "rap-007": {
+      "title": "rap-007 Search Condition by patient returns a searchset of Condition",
+      "feature": "eu-api-resource-access-provider.feature",
+      "fixtureUse": "provider-v1",
+      "fixtureKeys": [
+        "patient-target",
+        "condition-target",
+        "condition-control",
+        "patient-control"
+      ],
+      "inputNames": [
+        "accessToken",
+        "patientId"
+      ],
+      "searchChecks": [
+        "condition-patient"
+      ],
+      "assertions": [
+        "$response.status should be 200",
+        "$found at \"Bundle.type\" should be \"searchset\"",
+        "$found at \"Bundle.entry.where(search.mode.empty() or search.mode != 'include').exists()\" should be true",
+        "$found at \"Bundle.entry.where(search.mode.empty() or search.mode != 'include').all(resource.ofType(Condition).exists() and resource.subject.reference.exists())\" should be true",
+        "$found at \"Bundle.entry.where(search.mode.empty() or search.mode != 'include').resource.subject.reference.select(replaceMatches('^(.*/)?Patient/', '').replaceMatches('/_history/.*$', '')).distinct().count() = 1\" should be true",
+        "$found at \"Bundle.entry.where(search.mode.empty() or search.mode != 'include').resource.subject.reference.select(replaceMatches('^(.*/)?Patient/', '').replaceMatches('/_history/.*$', '')).distinct().single()\" should be \"$patientId\""
+      ],
+      "expected": "The searches must include and exclude the fixture resources specified in searchChecks. Extra unrelated server data is allowed only if it matches the query."
+    },
+    "rap-008": {
+      "title": "rap-008 Search AllergyIntolerance by patient returns a searchset of AllergyIntolerance",
+      "feature": "eu-api-resource-access-provider.feature",
+      "fixtureUse": "provider-v1",
+      "fixtureKeys": [
+        "patient-target",
+        "allergyintolerance-target",
+        "allergyintolerance-control",
+        "patient-control"
+      ],
+      "inputNames": [
+        "accessToken",
+        "patientId"
+      ],
+      "searchChecks": [
+        "allergyintolerance-patient"
+      ],
+      "assertions": [
+        "$response.status should be 200",
+        "$found at \"Bundle.type\" should be \"searchset\"",
+        "$found at \"Bundle.entry.where(search.mode.empty() or search.mode != 'include').exists()\" should be true",
+        "$found at \"Bundle.entry.where(search.mode.empty() or search.mode != 'include').all(resource.ofType(AllergyIntolerance).exists() and resource.patient.reference.exists())\" should be true",
+        "$found at \"Bundle.entry.where(search.mode.empty() or search.mode != 'include').resource.patient.reference.select(replaceMatches('^(.*/)?Patient/', '').replaceMatches('/_history/.*$', '')).distinct().count() = 1\" should be true",
+        "$found at \"Bundle.entry.where(search.mode.empty() or search.mode != 'include').resource.patient.reference.select(replaceMatches('^(.*/)?Patient/', '').replaceMatches('/_history/.*$', '')).distinct().single()\" should be \"$patientId\""
+      ],
+      "expected": "The searches must include and exclude the fixture resources specified in searchChecks. Extra unrelated server data is allowed only if it matches the query."
+    },
+    "rap-009": {
+      "title": "rap-009 Search Observation by patient returns a searchset of Observation",
+      "feature": "eu-api-resource-access-provider.feature",
+      "fixtureUse": "provider-v1",
+      "fixtureKeys": [
+        "patient-target",
+        "observation-target",
+        "observation-control",
+        "patient-control"
+      ],
+      "inputNames": [
+        "accessToken",
+        "patientId"
+      ],
+      "searchChecks": [
+        "observation-patient"
+      ],
+      "assertions": [
+        "$response.status should be 200",
+        "$found at \"Bundle.type\" should be \"searchset\"",
+        "$found at \"Bundle.entry.where(search.mode.empty() or search.mode != 'include').exists()\" should be true",
+        "$found at \"Bundle.entry.where(search.mode.empty() or search.mode != 'include').all(resource.ofType(Observation).exists() and resource.subject.reference.exists())\" should be true",
+        "$found at \"Bundle.entry.where(search.mode.empty() or search.mode != 'include').resource.subject.reference.select(replaceMatches('^(.*/)?Patient/', '').replaceMatches('/_history/.*$', '')).distinct().count() = 1\" should be true",
+        "$found at \"Bundle.entry.where(search.mode.empty() or search.mode != 'include').resource.subject.reference.select(replaceMatches('^(.*/)?Patient/', '').replaceMatches('/_history/.*$', '')).distinct().single()\" should be \"$patientId\""
+      ],
+      "expected": "The searches must include and exclude the fixture resources specified in searchChecks. Extra unrelated server data is allowed only if it matches the query."
+    },
+    "rap-010": {
+      "title": "rap-010 Search DiagnosticReport by patient returns a searchset of DiagnosticReport",
+      "feature": "eu-api-resource-access-provider.feature",
+      "fixtureUse": "provider-v1",
+      "fixtureKeys": [
+        "patient-target",
+        "diagnosticreport-target",
+        "diagnosticreport-control",
+        "patient-control"
+      ],
+      "inputNames": [
+        "accessToken",
+        "patientId"
+      ],
+      "searchChecks": [
+        "diagnosticreport-patient"
+      ],
+      "assertions": [
+        "$response.status should be 200",
+        "$found at \"Bundle.type\" should be \"searchset\"",
+        "$found at \"Bundle.entry.where(search.mode.empty() or search.mode != 'include').exists()\" should be true",
+        "$found at \"Bundle.entry.where(search.mode.empty() or search.mode != 'include').all(resource.ofType(DiagnosticReport).exists() and resource.subject.reference.exists())\" should be true",
+        "$found at \"Bundle.entry.where(search.mode.empty() or search.mode != 'include').resource.subject.reference.select(replaceMatches('^(.*/)?Patient/', '').replaceMatches('/_history/.*$', '')).distinct().count() = 1\" should be true",
+        "$found at \"Bundle.entry.where(search.mode.empty() or search.mode != 'include').resource.subject.reference.select(replaceMatches('^(.*/)?Patient/', '').replaceMatches('/_history/.*$', '')).distinct().single()\" should be \"$patientId\""
+      ],
+      "expected": "The searches must include and exclude the fixture resources specified in searchChecks. Extra unrelated server data is allowed only if it matches the query."
+    },
+    "rap-011": {
+      "title": "rap-011 Search ImagingStudy by patient returns a searchset of ImagingStudy",
+      "feature": "eu-api-resource-access-provider.feature",
+      "fixtureUse": "provider-v1",
+      "fixtureKeys": [
+        "patient-target",
+        "imagingstudy-target",
+        "imagingstudy-control",
+        "patient-control"
+      ],
+      "inputNames": [
+        "accessToken",
+        "patientId"
+      ],
+      "searchChecks": [
+        "imagingstudy-patient"
+      ],
+      "assertions": [
+        "$response.status should be 200",
+        "$found at \"Bundle.type\" should be \"searchset\"",
+        "$found at \"Bundle.entry.where(search.mode.empty() or search.mode != 'include').exists()\" should be true",
+        "$found at \"Bundle.entry.where(search.mode.empty() or search.mode != 'include').all(resource.ofType(ImagingStudy).exists() and resource.subject.reference.exists())\" should be true",
+        "$found at \"Bundle.entry.where(search.mode.empty() or search.mode != 'include').resource.subject.reference.select(replaceMatches('^(.*/)?Patient/', '').replaceMatches('/_history/.*$', '')).distinct().count() = 1\" should be true",
+        "$found at \"Bundle.entry.where(search.mode.empty() or search.mode != 'include').resource.subject.reference.select(replaceMatches('^(.*/)?Patient/', '').replaceMatches('/_history/.*$', '')).distinct().single()\" should be \"$patientId\""
+      ],
+      "expected": "The searches must include and exclude the fixture resources specified in searchChecks. Extra unrelated server data is allowed only if it matches the query."
+    },
+    "rap-012": {
+      "title": "rap-012 Search MedicationRequest by patient returns a searchset of MedicationRequest",
+      "feature": "eu-api-resource-access-provider.feature",
+      "fixtureUse": "provider-v1",
+      "fixtureKeys": [
+        "patient-target",
+        "medicationrequest-target",
+        "medicationrequest-control",
+        "patient-control"
+      ],
+      "inputNames": [
+        "accessToken",
+        "patientId"
+      ],
+      "searchChecks": [
+        "medicationrequest-patient"
+      ],
+      "assertions": [
+        "$response.status should be 200",
+        "$found at \"Bundle.type\" should be \"searchset\"",
+        "$found at \"Bundle.entry.where(search.mode.empty() or search.mode != 'include').exists()\" should be true",
+        "$found at \"Bundle.entry.where(search.mode.empty() or search.mode != 'include').all(resource.ofType(MedicationRequest).exists() and resource.subject.reference.exists())\" should be true",
+        "$found at \"Bundle.entry.where(search.mode.empty() or search.mode != 'include').resource.subject.reference.select(replaceMatches('^(.*/)?Patient/', '').replaceMatches('/_history/.*$', '')).distinct().count() = 1\" should be true",
+        "$found at \"Bundle.entry.where(search.mode.empty() or search.mode != 'include').resource.subject.reference.select(replaceMatches('^(.*/)?Patient/', '').replaceMatches('/_history/.*$', '')).distinct().single()\" should be \"$patientId\""
+      ],
+      "expected": "The searches must include and exclude the fixture resources specified in searchChecks. Extra unrelated server data is allowed only if it matches the query."
+    },
+    "rap-013": {
+      "title": "rap-013 Search MedicationDispense by patient returns a searchset of MedicationDispense",
+      "feature": "eu-api-resource-access-provider.feature",
+      "fixtureUse": "provider-v1",
+      "fixtureKeys": [
+        "patient-target",
+        "medicationdispense-target",
+        "medicationdispense-control",
+        "patient-control"
+      ],
+      "inputNames": [
+        "accessToken",
+        "patientId"
+      ],
+      "searchChecks": [
+        "medicationdispense-patient"
+      ],
+      "assertions": [
+        "$response.status should be 200",
+        "$found at \"Bundle.type\" should be \"searchset\"",
+        "$found at \"Bundle.entry.where(search.mode.empty() or search.mode != 'include').exists()\" should be true",
+        "$found at \"Bundle.entry.where(search.mode.empty() or search.mode != 'include').all(resource.ofType(MedicationDispense).exists() and resource.subject.reference.exists())\" should be true",
+        "$found at \"Bundle.entry.where(search.mode.empty() or search.mode != 'include').resource.subject.reference.select(replaceMatches('^(.*/)?Patient/', '').replaceMatches('/_history/.*$', '')).distinct().count() = 1\" should be true",
+        "$found at \"Bundle.entry.where(search.mode.empty() or search.mode != 'include').resource.subject.reference.select(replaceMatches('^(.*/)?Patient/', '').replaceMatches('/_history/.*$', '')).distinct().single()\" should be \"$patientId\""
+      ],
+      "expected": "The searches must include and exclude the fixture resources specified in searchChecks. Extra unrelated server data is allowed only if it matches the query."
+    },
+    "rap-014": {
+      "title": "rap-014 Search Immunization by patient returns a searchset of Immunization",
+      "feature": "eu-api-resource-access-provider.feature",
+      "fixtureUse": "provider-v1",
+      "fixtureKeys": [
+        "patient-target",
+        "immunization-target",
+        "immunization-control",
+        "patient-control"
+      ],
+      "inputNames": [
+        "accessToken",
+        "patientId"
+      ],
+      "searchChecks": [
+        "immunization-patient"
+      ],
+      "assertions": [
+        "$response.status should be 200",
+        "$found at \"Bundle.type\" should be \"searchset\"",
+        "$found at \"Bundle.entry.where(search.mode.empty() or search.mode != 'include').exists()\" should be true",
+        "$found at \"Bundle.entry.where(search.mode.empty() or search.mode != 'include').all(resource.ofType(Immunization).exists() and resource.patient.reference.exists())\" should be true",
+        "$found at \"Bundle.entry.where(search.mode.empty() or search.mode != 'include').resource.patient.reference.select(replaceMatches('^(.*/)?Patient/', '').replaceMatches('/_history/.*$', '')).distinct().count() = 1\" should be true",
+        "$found at \"Bundle.entry.where(search.mode.empty() or search.mode != 'include').resource.patient.reference.select(replaceMatches('^(.*/)?Patient/', '').replaceMatches('/_history/.*$', '')).distinct().single()\" should be \"$patientId\""
+      ],
+      "expected": "The searches must include and exclude the fixture resources specified in searchChecks. Extra unrelated server data is allowed only if it matches the query."
+    },
+    "rap-015": {
+      "title": "rap-015 Search MedicationStatement by patient returns a searchset of MedicationStatement",
+      "feature": "eu-api-resource-access-provider.feature",
+      "fixtureUse": "provider-v1",
+      "fixtureKeys": [
+        "patient-target",
+        "medicationstatement-target",
+        "medicationstatement-control",
+        "patient-control"
+      ],
+      "inputNames": [
+        "accessToken",
+        "patientId"
+      ],
+      "searchChecks": [
+        "medicationstatement-patient"
+      ],
+      "assertions": [
+        "$response.status should be 200",
+        "$found at \"Bundle.type\" should be \"searchset\"",
+        "$found at \"Bundle.entry.where(search.mode.empty() or search.mode != 'include').exists()\" should be true",
+        "$found at \"Bundle.entry.where(search.mode.empty() or search.mode != 'include').all(resource.ofType(MedicationStatement).exists() and resource.subject.reference.exists())\" should be true",
+        "$found at \"Bundle.entry.where(search.mode.empty() or search.mode != 'include').resource.subject.reference.select(replaceMatches('^(.*/)?Patient/', '').replaceMatches('/_history/.*$', '')).distinct().count() = 1\" should be true",
+        "$found at \"Bundle.entry.where(search.mode.empty() or search.mode != 'include').resource.subject.reference.select(replaceMatches('^(.*/)?Patient/', '').replaceMatches('/_history/.*$', '')).distinct().single()\" should be \"$patientId\""
+      ],
+      "expected": "The searches must include and exclude the fixture resources specified in searchChecks. Extra unrelated server data is allowed only if it matches the query."
+    },
+    "rap-016": {
+      "title": "rap-016 Search Encounter by patient returns a searchset of Encounter",
+      "feature": "eu-api-resource-access-provider.feature",
+      "fixtureUse": "provider-v1",
+      "fixtureKeys": [
+        "patient-target",
+        "encounter-target",
+        "encounter-control",
+        "patient-control"
+      ],
+      "inputNames": [
+        "accessToken",
+        "patientId"
+      ],
+      "searchChecks": [
+        "encounter-patient"
+      ],
+      "assertions": [
+        "$response.status should be 200",
+        "$found at \"Bundle.type\" should be \"searchset\"",
+        "$found at \"Bundle.entry.where(search.mode.empty() or search.mode != 'include').exists()\" should be true",
+        "$found at \"Bundle.entry.where(search.mode.empty() or search.mode != 'include').all(resource.ofType(Encounter).exists() and resource.subject.reference.exists())\" should be true",
+        "$found at \"Bundle.entry.where(search.mode.empty() or search.mode != 'include').resource.subject.reference.select(replaceMatches('^(.*/)?Patient/', '').replaceMatches('/_history/.*$', '')).distinct().count() = 1\" should be true",
+        "$found at \"Bundle.entry.where(search.mode.empty() or search.mode != 'include').resource.subject.reference.select(replaceMatches('^(.*/)?Patient/', '').replaceMatches('/_history/.*$', '')).distinct().single()\" should be \"$patientId\""
+      ],
+      "expected": "The searches must include and exclude the fixture resources specified in searchChecks. Extra unrelated server data is allowed only if it matches the query."
+    },
+    "rap-017": {
+      "title": "rap-017 A found resource can be read back by its id",
+      "feature": "eu-api-resource-access-provider.feature",
+      "fixtureUse": "provider-v1",
+      "fixtureKeys": [
+        "patient-target",
+        "observation-target",
+        "observation-control",
+        "patient-control"
+      ],
+      "inputNames": [
+        "accessToken",
+        "patientId"
+      ],
+      "searchChecks": [
+        "observation-patient"
+      ],
+      "assertions": [
+        "$response.status should be 200",
+        "extract \"/entry/0/resource/id\" from $response.body as $obsId",
+        "$response.status should be 200",
+        "$one at \"Observation.id\" should be \"$obsId\""
+      ],
+      "expected": "The searches must include and exclude the fixture resources specified in searchChecks. Extra unrelated server data is allowed only if it matches the query."
+    },
+    "rap-018": {
+      "title": "rap-018 An unknown id gives 404 and an OperationOutcome",
+      "feature": "eu-api-resource-access-provider.feature",
+      "fixtureUse": "none",
+      "fixtureKeys": [],
+      "inputNames": [
+        "accessToken"
+      ],
+      "searchChecks": [],
+      "assertions": [
+        "$response.status should be 404",
+        "$missing at \"OperationOutcome.issue.exists()\" should be true"
+      ],
+      "expected": "The reserved otb-no-such-* identifier in the feature must not exist; expect 404 and an OperationOutcome."
+    },
+    "rc-001": {
+      "title": "rc-001 The SUT authenticates with a signed JWT client assertion (RFC 7523)",
+      "feature": "eu-api-resource-consumer.feature",
+      "fixtureUse": "embedded-client-workflow",
+      "fixtureKeys": [],
+      "inputNames": [],
+      "searchChecks": [],
+      "assertions": [
+        "$received.method should be \"POST\"",
+        "$received.body should contain \"grant_type=client_credentials\"",
+        "$received.body should contain \"client_assertion_type=urn%3Aietf%3Aparams%3Aoauth%3Aclient-assertion-type%3Ajwt-bearer\"",
+        "$received.body should contain \"client_assertion=\"",
+        "$received.body should contain \"scope=\"",
+        "ResourceProvider replies to ResourceConsumer with status 200 and:"
+      ],
+      "expected": "The test bed supplies the canned responses in the feature; configure the client to perform the requested workflow. Provider preload is not used."
+    },
+    "rc-002": {
+      "title": "rc-002 The SUT searches Patient by the identifier parameter",
+      "feature": "eu-api-resource-consumer.feature",
+      "fixtureUse": "embedded-client-workflow",
+      "fixtureKeys": [],
+      "inputNames": [],
+      "searchChecks": [],
+      "assertions": [
+        "$received.method should be \"GET\"",
+        "$received.path should contain \"/Patient\"",
+        "$received.path should contain \"identifier=\"",
+        "$received.headers.Authorization should contain \"Bearer\"",
+        "ResourceProvider replies to ResourceConsumer with status 200 and:"
+      ],
+      "expected": "The test bed supplies the canned responses in the feature; configure the client to perform the requested workflow. Provider preload is not used."
+    },
+    "rc-003": {
+      "title": "rc-003 The SUT reads the patient by logical id",
+      "feature": "eu-api-resource-consumer.feature",
+      "fixtureUse": "embedded-client-workflow",
+      "fixtureKeys": [],
+      "inputNames": [],
+      "searchChecks": [],
+      "assertions": [
+        "$received.method should be \"GET\"",
+        "$received.path should contain \"/Patient/otb-pat-1\"",
+        "ResourceProvider replies to ResourceConsumer with status 200 and:"
+      ],
+      "expected": "The test bed supplies the canned responses in the feature; configure the client to perform the requested workflow. Provider preload is not used."
+    },
+    "rc-004": {
+      "title": "rc-004 The SUT searches Condition by the patient parameter",
+      "feature": "eu-api-resource-consumer.feature",
+      "fixtureUse": "embedded-client-workflow",
+      "fixtureKeys": [],
+      "inputNames": [],
+      "searchChecks": [],
+      "assertions": [
+        "$received.method should be \"GET\"",
+        "$received.path should contain \"/Condition\"",
+        "$received.path should contain \"patient=\"",
+        "$received.headers.Authorization should contain \"Bearer\"",
+        "ResourceProvider replies to ResourceConsumer with status 200 and:"
+      ],
+      "expected": "The test bed supplies the canned responses in the feature; configure the client to perform the requested workflow. Provider preload is not used."
+    },
+    "rc-005": {
+      "title": "rc-005 The SUT searches Observation by patient and category",
+      "feature": "eu-api-resource-consumer.feature",
+      "fixtureUse": "embedded-client-workflow",
+      "fixtureKeys": [],
+      "inputNames": [],
+      "searchChecks": [],
+      "assertions": [
+        "$received.method should be \"GET\"",
+        "$received.path should contain \"/Observation\"",
+        "$received.path should contain \"patient=\"",
+        "$received.path should contain \"category=\"",
+        "ResourceProvider replies to ResourceConsumer with status 200 and:"
+      ],
+      "expected": "The test bed supplies the canned responses in the feature; configure the client to perform the requested workflow. Provider preload is not used."
+    },
+    "rc-006": {
+      "title": "rc-006 The SUT searches AllergyIntolerance by the patient parameter",
+      "feature": "eu-api-resource-consumer.feature",
+      "fixtureUse": "embedded-client-workflow",
+      "fixtureKeys": [],
+      "inputNames": [],
+      "searchChecks": [],
+      "assertions": [
+        "$received.method should be \"GET\"",
+        "$received.path should contain \"/AllergyIntolerance\"",
+        "$received.path should contain \"patient=\"",
+        "ResourceProvider replies to ResourceConsumer with status 200 and:"
+      ],
+      "expected": "The test bed supplies the canned responses in the feature; configure the client to perform the requested workflow. Provider preload is not used."
+    },
+    "rc-007": {
+      "title": "rc-007 TLS 1.2 or higher is used for all communications",
+      "feature": "eu-api-resource-consumer.feature",
+      "fixtureUse": "embedded-client-workflow",
+      "fixtureKeys": [],
+      "inputNames": [],
+      "searchChecks": [],
+      "assertions": [
+        "ResourceConsumer confirms each of these is accepted for \"the connection\":"
+      ],
+      "expected": "The test bed supplies the canned responses in the feature; configure the client to perform the requested workflow. Provider preload is not used."
+    }
+  }
+}

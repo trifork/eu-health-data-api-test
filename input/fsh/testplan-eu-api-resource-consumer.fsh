@@ -14,7 +14,7 @@ Description: "Test plan for the Resource Consumer actor of EU Health Data API, 1
 * title = "Resource Consumer Test Plan"
 * status = #draft
 * experimental = true
-* date = "2026-10-30"
+* date = "2026-11-06"
 * publisher = "Jens Kristian Villadsen"
 * contact
   * name = "Jens Kristian Villadsen"
@@ -26,7 +26,8 @@ Description: "Test plan for the Resource Consumer actor of EU Health Data API, 1
 Test plan for the **Resource Consumer** actor of [EU Health Data API, 1.0.0-ballot](https://build.fhir.org/ig/euridice-org/eu-health-data-api/).
 The SUT obtains a token, finds the patient and reads that patient's resources.
 Each `suite` below is a `Rule:` of the Gherkin feature named by `suite.input.file`, and each `suite.test` one of its `Scenario:` lines, matched by the scenario's identifier. The assertions are the scenario's `Then` steps, verbatim.
-The tests declare which specification obligations they cover (11 element obligations across the plan); the coverage matrix is checked mechanically against the specification package.
+The tests declare which specification obligations they cover (11 requirement paths named by the feature tags).
+Fixture prerequisites, input bindings and expected data are in tests/fixtures/provider-v1/manifest.json, keyed by scenario ID. See the Testing page, Fixture contract and expected results. Provider fixtures are R4; client workflows use the canned data embedded in their feature.
 """
 * purpose = "To declare, in a machine-readable and runnable form, which behaviours a system claiming conformance to the Resource Consumer actor must demonstrate."
 
@@ -45,7 +46,7 @@ The tests declare which specification obligations they cover (11 element obligat
     * file = "eu-api-resource-consumer.feature"
   * test[0]
     * name = "rc-001 The SUT authenticates with a signed JWT client assertion (RFC 7523)"
-    * description = "Covers security.smart-backend-services."
+    * description = "Fixture contract: fixtures/provider-v1/manifest.json, cases.rc-001 (input bindings and expected data). Covers security.smart-backend-services."
     * operation = #gherkin/Scenario
     * assertion[0]
       * severity = #error
@@ -74,7 +75,7 @@ The tests declare which specification obligations they cover (11 element obligat
     * file = "eu-api-resource-consumer.feature"
   * test[0]
     * name = "rc-002 The SUT searches Patient by the identifier parameter"
-    * description = "Covers Patient.search-type, Patient.search.identifier."
+    * description = "Fixture contract: fixtures/provider-v1/manifest.json, cases.rc-002 (input bindings and expected data). Covers Patient.search-type, Patient.search.identifier."
     * operation = #gherkin/Scenario
     * assertion[0]
       * severity = #error
@@ -93,7 +94,7 @@ The tests declare which specification obligations they cover (11 element obligat
       * human = "ResourceProvider replies to ResourceConsumer with status 200 and:"
   * test[+]
     * name = "rc-003 The SUT reads the patient by logical id"
-    * description = "Covers Patient.read."
+    * description = "Fixture contract: fixtures/provider-v1/manifest.json, cases.rc-003 (input bindings and expected data). Covers Patient.read."
     * operation = #gherkin/Scenario
     * assertion[0]
       * severity = #error
@@ -113,7 +114,7 @@ The tests declare which specification obligations they cover (11 element obligat
     * file = "eu-api-resource-consumer.feature"
   * test[0]
     * name = "rc-004 The SUT searches Condition by the patient parameter"
-    * description = "Covers Condition.search.patient."
+    * description = "Fixture contract: fixtures/provider-v1/manifest.json, cases.rc-004 (input bindings and expected data). Covers Condition.search.patient."
     * operation = #gherkin/Scenario
     * assertion[0]
       * severity = #error
@@ -132,7 +133,7 @@ The tests declare which specification obligations they cover (11 element obligat
       * human = "ResourceProvider replies to ResourceConsumer with status 200 and:"
   * test[+]
     * name = "rc-005 The SUT searches Observation by patient and category"
-    * description = "Covers Observation.search.patient, Observation.search.category, Observation.search.code, Observation.search.date."
+    * description = "Fixture contract: fixtures/provider-v1/manifest.json, cases.rc-005 (input bindings and expected data). Covers Observation.search.patient, Observation.search.category, Observation.search.code, Observation.search.date."
     * operation = #gherkin/Scenario
     * assertion[0]
       * severity = #error
@@ -151,7 +152,7 @@ The tests declare which specification obligations they cover (11 element obligat
       * human = "ResourceProvider replies to ResourceConsumer with status 200 and:"
   * test[+]
     * name = "rc-006 The SUT searches AllergyIntolerance by the patient parameter"
-    * description = "Covers AllergyIntolerance.search.patient."
+    * description = "Fixture contract: fixtures/provider-v1/manifest.json, cases.rc-006 (input bindings and expected data). Covers AllergyIntolerance.search.patient."
     * operation = #gherkin/Scenario
     * assertion[0]
       * severity = #error
@@ -174,7 +175,7 @@ The tests declare which specification obligations they cover (11 element obligat
     * file = "eu-api-resource-consumer.feature"
   * test[0]
     * name = "rc-007 TLS 1.2 or higher is used for all communications"
-    * description = "Covers security.tls."
+    * description = "Fixture contract: fixtures/provider-v1/manifest.json, cases.rc-007 (input bindings and expected data). Covers security.tls."
     * operation = #gherkin/Scenario
     * assertion[0]
       * severity = #error

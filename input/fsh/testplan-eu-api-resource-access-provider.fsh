@@ -26,7 +26,8 @@ Description: "Test plan for the Resource Access Provider actor of EU Health Data
 Test plan for the **Resource Access Provider** actor of [EU Health Data API, 1.0.0-ballot](https://build.fhir.org/ig/euridice-org/eu-health-data-api/).
 The SUT serves individual FHIR resources for a patient, behind SMART Backend Services.
 Each `suite` below is a `Rule:` of the Gherkin feature named by `suite.input.file`, and each `suite.test` one of its `Scenario:` lines, matched by the scenario's identifier. The assertions are the scenario's `Then` steps, verbatim.
-The tests declare which specification obligations they cover (34 element obligations across the plan); the coverage matrix is checked mechanically against the specification package.
+The tests declare which specification obligations they cover (34 requirement paths named by the feature tags).
+Fixture prerequisites, input bindings and expected data are in tests/fixtures/provider-v1/manifest.json, keyed by scenario ID. See the Testing page, Fixture contract and expected results. Provider fixtures are R4; client workflows use the canned data embedded in their feature.
 """
 * purpose = "To declare, in a machine-readable and runnable form, which behaviours a system claiming conformance to the Resource Access Provider actor must demonstrate."
 
@@ -45,7 +46,7 @@ The tests declare which specification obligations they cover (34 element obligat
     * file = "eu-api-resource-access-provider.feature"
   * test[0]
     * name = "rap-001 The CapabilityStatement declares Patient read and search and SMART security"
-    * description = "Covers CapabilityStatement.rest.resource.Patient."
+    * description = "Fixture contract: fixtures/provider-v1/manifest.json, cases.rap-001 (input bindings and expected data). Covers CapabilityStatement.rest.resource.Patient."
     * operation = #gherkin/Scenario
     * assertion[0]
       * severity = #error
@@ -68,14 +69,14 @@ The tests declare which specification obligations they cover (34 element obligat
     * file = "eu-api-resource-access-provider.feature"
   * test[0]
     * name = "rap-002 A request without a token is refused"
-    * description = "Covers security.authorization."
+    * description = "Fixture contract: fixtures/provider-v1/manifest.json, cases.rap-002 (input bindings and expected data). Covers security.authorization."
     * operation = #gherkin/Scenario
     * assertion[0]
       * severity = #error
       * human = "$response.status should be 401"
   * test[+]
     * name = "rap-003 A token with no usable scope is refused"
-    * description = "Covers security.scope."
+    * description = "Fixture contract: fixtures/provider-v1/manifest.json, cases.rap-003 (input bindings and expected data). Covers security.scope."
     * operation = #gherkin/Scenario
     * assertion[0]
       * severity = #error
@@ -89,7 +90,7 @@ The tests declare which specification obligations they cover (34 element obligat
     * file = "eu-api-resource-access-provider.feature"
   * test[0]
     * name = "rap-004 Read the patient and conform to patient-eu-core"
-    * description = "Covers Patient.read."
+    * description = "Fixture contract: fixtures/provider-v1/manifest.json, cases.rap-004 (input bindings and expected data). Covers Patient.read."
     * operation = #gherkin/Scenario
     * assertion[0]
       * severity = #error
@@ -99,7 +100,7 @@ The tests declare which specification obligations they cover (34 element obligat
       * human = "$patient should conform to \"http://hl7.eu/fhir/base/StructureDefinition/patient-eu-core\" ignoring slicing errors"
   * test[+]
     * name = "rap-005 Search Patient by identifier and by _id"
-    * description = "Covers Patient.search.identifier, Patient.search.id."
+    * description = "Fixture contract: fixtures/provider-v1/manifest.json, cases.rap-005 (input bindings and expected data). Covers Patient.search.identifier, Patient.search.id."
     * operation = #gherkin/Scenario
     * assertion[0]
       * severity = #error
@@ -118,7 +119,7 @@ The tests declare which specification obligations they cover (34 element obligat
       * human = "$byId at \"Bundle.entry.resource.ofType(Patient).count() = 1\" should be true"
   * test[+]
     * name = "rap-006 Search Patient by the demographics the reference patient carries"
-    * description = "Covers Patient.search.family, Patient.search.given, Patient.search.birthdate, Patient.search.gender, Patient.search.active."
+    * description = "Fixture contract: fixtures/provider-v1/manifest.json, cases.rap-006 (input bindings and expected data). Covers Patient.search.family, Patient.search.given, Patient.search.birthdate, Patient.search.gender, Patient.search.active."
     * operation = #gherkin/Scenario
     * assertion[0]
       * severity = #error
@@ -165,7 +166,7 @@ The tests declare which specification obligations they cover (34 element obligat
     * file = "eu-api-resource-access-provider.feature"
   * test[0]
     * name = "rap-007 Search Condition by patient returns a searchset of Condition"
-    * description = "Covers Condition.search-type, Condition.search.patient."
+    * description = "Fixture contract: fixtures/provider-v1/manifest.json, cases.rap-007 (input bindings and expected data). Covers Condition.search-type, Condition.search.patient."
     * operation = #gherkin/Scenario
     * assertion[0]
       * severity = #error
@@ -187,7 +188,7 @@ The tests declare which specification obligations they cover (34 element obligat
       * human = "$found at \"Bundle.entry.where(search.mode.empty() or search.mode != 'include').resource.subject.reference.select(replaceMatches('^(.*/)?Patient/', '').replaceMatches('/_history/.*$', '')).distinct().single()\" should be \"$patientId\""
   * test[+]
     * name = "rap-008 Search AllergyIntolerance by patient returns a searchset of AllergyIntolerance"
-    * description = "Covers AllergyIntolerance.search-type, AllergyIntolerance.search.patient."
+    * description = "Fixture contract: fixtures/provider-v1/manifest.json, cases.rap-008 (input bindings and expected data). Covers AllergyIntolerance.search-type, AllergyIntolerance.search.patient."
     * operation = #gherkin/Scenario
     * assertion[0]
       * severity = #error
@@ -209,7 +210,7 @@ The tests declare which specification obligations they cover (34 element obligat
       * human = "$found at \"Bundle.entry.where(search.mode.empty() or search.mode != 'include').resource.patient.reference.select(replaceMatches('^(.*/)?Patient/', '').replaceMatches('/_history/.*$', '')).distinct().single()\" should be \"$patientId\""
   * test[+]
     * name = "rap-009 Search Observation by patient returns a searchset of Observation"
-    * description = "Covers Observation.search-type, Observation.search.patient."
+    * description = "Fixture contract: fixtures/provider-v1/manifest.json, cases.rap-009 (input bindings and expected data). Covers Observation.search-type, Observation.search.patient."
     * operation = #gherkin/Scenario
     * assertion[0]
       * severity = #error
@@ -231,7 +232,7 @@ The tests declare which specification obligations they cover (34 element obligat
       * human = "$found at \"Bundle.entry.where(search.mode.empty() or search.mode != 'include').resource.subject.reference.select(replaceMatches('^(.*/)?Patient/', '').replaceMatches('/_history/.*$', '')).distinct().single()\" should be \"$patientId\""
   * test[+]
     * name = "rap-010 Search DiagnosticReport by patient returns a searchset of DiagnosticReport"
-    * description = "Covers DiagnosticReport.search-type, DiagnosticReport.search.patient."
+    * description = "Fixture contract: fixtures/provider-v1/manifest.json, cases.rap-010 (input bindings and expected data). Covers DiagnosticReport.search-type, DiagnosticReport.search.patient."
     * operation = #gherkin/Scenario
     * assertion[0]
       * severity = #error
@@ -253,7 +254,7 @@ The tests declare which specification obligations they cover (34 element obligat
       * human = "$found at \"Bundle.entry.where(search.mode.empty() or search.mode != 'include').resource.subject.reference.select(replaceMatches('^(.*/)?Patient/', '').replaceMatches('/_history/.*$', '')).distinct().single()\" should be \"$patientId\""
   * test[+]
     * name = "rap-011 Search ImagingStudy by patient returns a searchset of ImagingStudy"
-    * description = "Covers ImagingStudy.search-type, ImagingStudy.search.patient."
+    * description = "Fixture contract: fixtures/provider-v1/manifest.json, cases.rap-011 (input bindings and expected data). Covers ImagingStudy.search-type, ImagingStudy.search.patient."
     * operation = #gherkin/Scenario
     * assertion[0]
       * severity = #error
@@ -275,7 +276,7 @@ The tests declare which specification obligations they cover (34 element obligat
       * human = "$found at \"Bundle.entry.where(search.mode.empty() or search.mode != 'include').resource.subject.reference.select(replaceMatches('^(.*/)?Patient/', '').replaceMatches('/_history/.*$', '')).distinct().single()\" should be \"$patientId\""
   * test[+]
     * name = "rap-012 Search MedicationRequest by patient returns a searchset of MedicationRequest"
-    * description = "Covers MedicationRequest.search-type, MedicationRequest.search.patient."
+    * description = "Fixture contract: fixtures/provider-v1/manifest.json, cases.rap-012 (input bindings and expected data). Covers MedicationRequest.search-type, MedicationRequest.search.patient."
     * operation = #gherkin/Scenario
     * assertion[0]
       * severity = #error
@@ -297,7 +298,7 @@ The tests declare which specification obligations they cover (34 element obligat
       * human = "$found at \"Bundle.entry.where(search.mode.empty() or search.mode != 'include').resource.subject.reference.select(replaceMatches('^(.*/)?Patient/', '').replaceMatches('/_history/.*$', '')).distinct().single()\" should be \"$patientId\""
   * test[+]
     * name = "rap-013 Search MedicationDispense by patient returns a searchset of MedicationDispense"
-    * description = "Covers MedicationDispense.search-type, MedicationDispense.search.patient."
+    * description = "Fixture contract: fixtures/provider-v1/manifest.json, cases.rap-013 (input bindings and expected data). Covers MedicationDispense.search-type, MedicationDispense.search.patient."
     * operation = #gherkin/Scenario
     * assertion[0]
       * severity = #error
@@ -319,7 +320,7 @@ The tests declare which specification obligations they cover (34 element obligat
       * human = "$found at \"Bundle.entry.where(search.mode.empty() or search.mode != 'include').resource.subject.reference.select(replaceMatches('^(.*/)?Patient/', '').replaceMatches('/_history/.*$', '')).distinct().single()\" should be \"$patientId\""
   * test[+]
     * name = "rap-014 Search Immunization by patient returns a searchset of Immunization"
-    * description = "Covers Immunization.search-type, Immunization.search.patient."
+    * description = "Fixture contract: fixtures/provider-v1/manifest.json, cases.rap-014 (input bindings and expected data). Covers Immunization.search-type, Immunization.search.patient."
     * operation = #gherkin/Scenario
     * assertion[0]
       * severity = #error
@@ -341,7 +342,7 @@ The tests declare which specification obligations they cover (34 element obligat
       * human = "$found at \"Bundle.entry.where(search.mode.empty() or search.mode != 'include').resource.patient.reference.select(replaceMatches('^(.*/)?Patient/', '').replaceMatches('/_history/.*$', '')).distinct().single()\" should be \"$patientId\""
   * test[+]
     * name = "rap-015 Search MedicationStatement by patient returns a searchset of MedicationStatement"
-    * description = "Covers MedicationStatement.search-type, MedicationStatement.search.patient."
+    * description = "Fixture contract: fixtures/provider-v1/manifest.json, cases.rap-015 (input bindings and expected data). Covers MedicationStatement.search-type, MedicationStatement.search.patient."
     * operation = #gherkin/Scenario
     * assertion[0]
       * severity = #error
@@ -363,7 +364,7 @@ The tests declare which specification obligations they cover (34 element obligat
       * human = "$found at \"Bundle.entry.where(search.mode.empty() or search.mode != 'include').resource.subject.reference.select(replaceMatches('^(.*/)?Patient/', '').replaceMatches('/_history/.*$', '')).distinct().single()\" should be \"$patientId\""
   * test[+]
     * name = "rap-016 Search Encounter by patient returns a searchset of Encounter"
-    * description = "Covers Encounter.search-type, Encounter.search.patient."
+    * description = "Fixture contract: fixtures/provider-v1/manifest.json, cases.rap-016 (input bindings and expected data). Covers Encounter.search-type, Encounter.search.patient."
     * operation = #gherkin/Scenario
     * assertion[0]
       * severity = #error
@@ -392,7 +393,7 @@ The tests declare which specification obligations they cover (34 element obligat
     * file = "eu-api-resource-access-provider.feature"
   * test[0]
     * name = "rap-017 A found resource can be read back by its id"
-    * description = "Covers Observation.read, Condition.read."
+    * description = "Fixture contract: fixtures/provider-v1/manifest.json, cases.rap-017 (input bindings and expected data). Covers Observation.read, Condition.read."
     * operation = #gherkin/Scenario
     * assertion[0]
       * severity = #error
@@ -408,7 +409,7 @@ The tests declare which specification obligations they cover (34 element obligat
       * human = "$one at \"Observation.id\" should be \"$obsId\""
   * test[+]
     * name = "rap-018 An unknown id gives 404 and an OperationOutcome"
-    * description = "Covers Patient.read."
+    * description = "Fixture contract: fixtures/provider-v1/manifest.json, cases.rap-018 (input bindings and expected data). Covers Patient.read."
     * operation = #gherkin/Scenario
     * assertion[0]
       * severity = #error
